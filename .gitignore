@@ -41,6 +41,7 @@ cocos2d/
 proj.*/
 !proj.win32/
 proj.win32/Debug*
+.vs/
 
 # User-specific files
 *.suo
