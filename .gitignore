@@ -39,6 +39,8 @@ local.properties
 # diy
 cocos2d/
 proj.*/
+!proj.win32/
+proj.win32/Debug*
 
 # User-specific files
 *.suo
