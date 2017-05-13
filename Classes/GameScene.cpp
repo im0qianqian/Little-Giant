@@ -4,13 +4,21 @@
 
 USING_NS_CC;
 
-using namespace cocostudio::timeline;
+GameScene::GameScene()
+{
+
+}
+
+GameScene::~GameScene()
+{
+
+}
 
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
 	auto layer = GameScene::create();
-	scene->addChild(layer);
+	scene->addChild(layer);	
 	return scene;
 }
 
@@ -20,5 +28,6 @@ bool GameScene::init()
 	{
 		return false;
 	}
+	
 	return true;
 }

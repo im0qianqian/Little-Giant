@@ -5,13 +5,25 @@
 
 USING_NS_CC;
 
+enum GameState	// сно╥в╢л╛
+{
+	Runing,
+	Pause,
+	Win,
+	Fail,
+	None
+};
+
 class GameScene :public Layer
 {
 public:
-	//GameScene();
-	//~GameScene();
-	static cocos2d::Scene* createScene();
-	virtual bool init();
+	GameScene();
+	~GameScene();
 	CREATE_FUNC(GameScene);
+	virtual bool init();
+	static cocos2d::Scene* createScene();
+private:
+	static GameState _gameState;	// сно╥в╢л╛
+	
 };
 #endif
