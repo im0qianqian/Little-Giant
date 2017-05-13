@@ -24,7 +24,7 @@ Arrow* Arrow::create(void *owner, float power, float speed, float distance, Vec2
 	return arrow;
 }
 
-bool Arrow::init(void *owner, float power, float speed, float distance, Vec2 pos, AttackType attackType, float direction)
+bool Arrow::init(void *owner, float power, float speed, float distance, Vec2 pos, AttackType attackType, float direction)	//111
 {
 	bool flag = false;
 	if (true)
