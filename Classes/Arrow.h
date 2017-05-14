@@ -18,7 +18,7 @@ public:
 	Arrow();
 	~Arrow();
 	/* 创建 */
-	Arrow* create(void *owner, float power, float speed, float distance, Vec2 pos, AttackType attackType, float direction);
+	static Arrow* create(void *owner, float power, float speed, float distance, Vec2 pos, AttackType attackType, float direction);
 	void* getOwner();
 private:
 	/* 初始化方法 */
