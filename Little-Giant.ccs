@@ -3,8 +3,16 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Mesh Name="axe.c3b" />
+        <Image Name="background.jpg" />
+        <Mesh Name="boss.c3b" />
+        <Image Name="CloseNormal.png" />
+        <Project Name="GameScene.csd" Type="Scene" />
         <Image Name="HelloWorld.png" />
         <Project Name="MainScene.csd" Type="Scene" />
+        <TTF Name="Marker Felt.ttf" />
+        <Mesh Name="orc.c3b" />
+        <Mesh Name="ReskinGirl.c3b" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -16,7 +16,7 @@ void Attribute::update(float dt)
 
 }
 
-Attribute* Attribute::create(float attackDamage = 0, float attackRange = 0, float attackSpeed = 0, float movingSpeed = 0, float empiricalAcquisition = 0, float defensiveForce = 0, float restoringAbility = 0, short int temporary = 0, float duration = 0)
+Attribute* Attribute::create(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration)
 {
 	Attribute *attribute = new Attribute();
 	if (attribute&&attribute->init(attackDamage, attackRange, attackSpeed, movingSpeed, empiricalAcquisition, defensiveForce, restoringAbility, temporary, duration))
@@ -87,32 +87,32 @@ void Attribute::addRestoringAbility(float add)
 
 void Attribute::addView()
 {
-	_temporary |= 0x01;
+	_temporary |= Temporary_View;
 }
 
 void Attribute::addSmall()
 {
-	_temporary |= 0x02;
+	_temporary |= Temporary_Small;
 }
 
 void Attribute::addMagnet()
 {
-	_temporary |= 0x04;
+	_temporary |= Temporary_Magnet;
 }
 
 void Attribute::delView()
 {
-	_temporary &= 0xfe;
+	_temporary &= ~Temporary_View;
 }
 
 void Attribute::delSmall()
 {
-	_temporary &= 0xfd;
+	_temporary &= ~Temporary_Small;
 }
 
 void Attribute::delMagnet()
 {
-	_temporary &= 0xfb;
+	_temporary &= ~Temporary_Magnet;
 }
 
 void Attribute::setDuration(float add)

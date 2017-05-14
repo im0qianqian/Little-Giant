@@ -5,6 +5,19 @@
 
 USING_NS_CC;
 
+/*
+* View 最低位
+* Small 中间位
+* Magnet 最高位
+*/
+enum Temporary
+{
+	Temporary_None = 0x00,
+	Temporary_View = 0x01,
+	Temporary_Small = 0x02,
+	Temporary_Magnet = 0x04
+};
+
 /* 属性加成类 */
 class Attribute :public Sprite
 {
@@ -12,7 +25,7 @@ public:
 	Attribute();
 	~Attribute();
 	/* 创建一个属性对象 */
-	static Attribute* create(float attackDamage = 0, float attackRange = 0, float attackSpeed = 0, float movingSpeed = 0, float empiricalAcquisition = 0, float defensiveForce = 0, float restoringAbility = 0, short int temporary = 0, float duration = 0);
+	static Attribute* create(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration);
 	/* 增加攻击力 */
 	void addAttackDamage(float add);
 	/* 增加射程 */
@@ -52,12 +65,6 @@ private:
 	float _empiricalAcquisition;	//经验获取加成
 	float _defensiveForce;			//防御力加成
 	float _restoringAbility;		//恢复能力加成
-	/*
-	 * View 最低位
-	 * Small 中间位
-	 * Magnet 最高位
-	 * 3位二进制表示八种状态 MSV
-	 */
 	short int _temporary;			//临时属性类型
 	float _duration;				//临时能力持续时间
 };

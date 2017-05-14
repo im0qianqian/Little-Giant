@@ -7,11 +7,11 @@ USING_NS_CC;
 
 enum GameState	// сно╥в╢л╛
 {
-	Runing,
-	Pause,
-	Win,
-	Fail,
-	None
+	GameState_Runing,
+	GameState_Pause,
+	GameState_Win,
+	GameState_Fail,
+	GameState_None
 };
 
 class GameScene :public Layer
@@ -24,6 +24,5 @@ public:
 	static cocos2d::Scene* createScene();
 private:
 	static GameState _gameState;	// сно╥в╢л╛
-	
 };
 #endif
