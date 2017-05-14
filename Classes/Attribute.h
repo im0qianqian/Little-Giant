@@ -13,14 +13,14 @@ USING_NS_CC;
  */
 enum Temporary
 {
-	Nothing,		//无临时属性
-	View,			//视野
-	Small,			//人物变小
-	ViewSmall,		//视野+变小
-	Magnet,			//磁石效果
-	MagnetView,		//磁石+视野
-	MagnetSmall,	//磁石+变小
-	MagnetSmallView	//磁石+变小+视野
+	TNothing,		//无临时属性
+	TView,			//视野
+	TSmall,			//人物变小
+	TViewSmall,		//视野+变小
+	TMagnet,			//磁石效果
+	TMagnetView,		//磁石+视野
+	TMagnetSmall,	//磁石+变小
+	TMagnetSmallView	//磁石+变小+视野
 };
 
 /* 属性加成类 */

@@ -7,9 +7,9 @@ USING_NS_CC;
 
 enum AttackType	//攻击类型
 {
-	Straight,	//直线攻击
-	Ring,		//环形攻击
-	Curve		//曲线攻击
+	AStraight,	//直线攻击
+	ARing,		//环形攻击
+	ACurve		//曲线攻击
 };
 
 class Arrow :public Sprite
