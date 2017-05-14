@@ -13,6 +13,7 @@
         <TTF Name="Marker Felt.ttf" />
         <Mesh Name="orc.c3b" />
         <Mesh Name="ReskinGirl.c3b" />
+        <File Name="UserCamera.csb" />
       </RootFolder>
     </Group>
   </SolutionFolder>
