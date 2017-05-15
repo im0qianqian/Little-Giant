@@ -1,3 +1,5 @@
+//角色类：保持玩家的各项游戏属性
+
 #ifndef __CHARACTER_H__
 #define __CHARACTER_H__
 

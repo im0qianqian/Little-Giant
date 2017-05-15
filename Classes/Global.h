@@ -1,3 +1,5 @@
+//游戏全局用具
+
 #ifndef __GLOBAL_H__
 #define __GLOBAL_H__
 

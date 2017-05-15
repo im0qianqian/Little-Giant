@@ -1,3 +1,5 @@
+//属性类：响应人物各项属性的加成
+
 #ifndef __CHARACTER_H__
 #define __CHARACTER_H__
 

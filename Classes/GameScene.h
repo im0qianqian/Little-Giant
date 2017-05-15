@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 
 USING_NS_CC;
+//实现控制各个游戏状态
 
 enum GameState	// 游戏状态
 {

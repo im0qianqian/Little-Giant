@@ -1,3 +1,5 @@
+//实现各类武器的生成与控制
+
 #ifndef __WEAPONS_H__
 #define __WEAPONS_H__
 
