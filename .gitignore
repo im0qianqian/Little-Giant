@@ -42,6 +42,7 @@ proj.*/
 !proj.win32/
 proj.win32/Debug*
 .vs/
+*.vcxproj
 
 # User-specific files
 *.suo

@@ -10,7 +10,7 @@ enum GameState	// сно╥в╢л╛
 	GameState_Runing,
 	GameState_Pause,
 	GameState_Win,
-	GameState_Fail,
+	GameState_Fail
 };
 
 class GameScene :public Layer
