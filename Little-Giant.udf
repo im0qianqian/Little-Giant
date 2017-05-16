@@ -11,8 +11,10 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="GameScene.csd" />
+          <FilePathData Path="Scene3D.csd" />
+          <FilePathData Path="MainScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="GameScene.csd" />
+        <ActiveDocument Path="Scene3D.csd" />
       </Value>
     </Item>
   </Properties>
