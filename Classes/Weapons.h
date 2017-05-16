@@ -8,7 +8,14 @@
 
 USING_NS_CC;
 
-class Weapons :public Sprite
+enum WeaponType
+{
+	kWeaponArrow,
+	kWeaponBomb,
+	kWeaponDart
+};
+
+class Weapons :public Sprite3D
 {
 public:
 	Weapons();
@@ -17,7 +24,7 @@ public:
 	virtual void attack() = 0;
 protected:
 	/* 初始化方法 */
-	bool init(void *owner, float power, float speed, float distance, float angle, Vec2 pos);
+	bool init(void *owner, float power, float speed, float distance, float angle, Vec3 pos);
 private:
 	void update(float dt);
 	void *_owner;			//武器所属人物
@@ -25,7 +32,7 @@ private:
 	float _speed;			//攻击速度
 	float _distance;		//攻击距离
 	float _angle;			//攻击方向
-	Vec2 _pos;				//移动后的坐标
+	Vec3 _pos;				//移动后的坐标
 };
 
 class Arrow :virtual protected Weapons

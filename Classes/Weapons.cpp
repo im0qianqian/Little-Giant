@@ -15,7 +15,7 @@ void Weapons::update(float dt)
 	
 }
 
-bool Weapons::init(void *owner, float power, float speed, float distance, float angle,Vec2 pos)
+bool Weapons::init(void *owner, float power, float speed, float distance, float angle,Vec3 pos)
 {
 	bool flag = false;
 	if (true)
@@ -33,15 +33,15 @@ bool Weapons::init(void *owner, float power, float speed, float distance, float 
 
 void Arrow::attack()
 {
-
+	CCLOG("Arrow attck: %g %g",_position.x, _position.y);
 }
 
 void Bomb::attack()
 {
-
+	CCLOG("Bomb attck: %g %g", _position.x, _position.y);
 }
 
 void Dart::attack()
 {
-
+	CCLOG("Dart attck: %g %g", _position.x, _position.y);
 }
