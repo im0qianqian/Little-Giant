@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "Global.h"
+#include "GameScene.h"
 
 Character::Character():
 	_lifeValue(INITIAL_LIFE_VALUE),
@@ -31,15 +32,7 @@ void Character::addSorce(int add)
 
 void Character::attack()
 {
-	switch (_weaponType)
-	{
-	case kWeaponArrow:
-		break;
-	case kWeaponBomb:
-		break;
-	case kWeaponDart:
-		break;
-	}
+	//GameScene::getWeaponManager()->createWeapon();
 }
 
 void Character::die()

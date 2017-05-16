@@ -1,6 +1,9 @@
 #include "SceneManager.h"
 #include "GameScene.h"
 
+/* 类静态私有变量初始化 */
+SceneManager* SceneManager::s_sceneManager = nullptr;
+
 SceneManager::SceneManager()
 {
 
@@ -11,7 +14,6 @@ SceneManager::~SceneManager()
 
 }
 
-static SceneManager* s_sceneManager = nullptr;		//场景管理者对象
 SceneManager* SceneManager::getInstance()
 {
 	if (!s_sceneManager)
@@ -38,14 +40,13 @@ void SceneManager::changeScene(SceneType sceneType)
 	default:
 		break;
 	}
-	//scene->addChild(_layer);
-	Director::getInstance()->runWithScene(scene);
-	/*if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
+	scene->addChild(_layer);
+	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{
 		Director::getInstance()->replaceScene(scene);	//替换为当前场景
 	}
 	else
 	{
 		Director::getInstance()->runWithScene(scene);	//否则直接显示当前场景
-	}*/
+	}
 }

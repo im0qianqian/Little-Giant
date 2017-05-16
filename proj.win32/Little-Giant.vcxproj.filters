@@ -42,10 +42,10 @@
     <ClCompile Include="..\Classes\CharacterManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Stage.cpp">
+    <ClCompile Include="..\Classes\WeaponManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\WeaponManager.cpp">
+    <ClCompile Include="..\Classes\StageManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,10 +80,10 @@
     <ClInclude Include="..\Classes\CharacterManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Stage.h">
+    <ClInclude Include="..\Classes\WeaponManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\WeaponManager.h">
+    <ClInclude Include="..\Classes\StageManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

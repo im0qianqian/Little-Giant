@@ -3,6 +3,12 @@
 
 USING_NS_CC;
 
+/* 类静态私有变量初始化 */
+GameStateType GameScene::_gameState = kGameStatePause;
+CharacterManager *GameScene::_characterManager = nullptr;
+StageManager *GameScene::_stageManager = nullptr;
+WeaponManager *GameScene::_weaponManager = nullptr;
+
 GameScene::GameScene()
 {
 
@@ -18,20 +24,12 @@ bool GameScene::init()
 	bool flag = false;
 	if (true)
 	{
-		_gameState = kGameStateRuning;
-		_stage = Stage::create();
-		addChild(_stage, 0);
+		GameScene::_gameState = kGameStateRuning;
+		GameScene::_stageManager = StageManager::create();
+		addChild(GameScene::_stageManager, 0);
 		flag = true;
 	}
 	return flag;
-	//auto *sprite = Sprite3D::create("ReskinGirl.c3b");
-	//sprite->setPosition3D(Vec3(300, 100,100));
-	//sprite->setScale(10.f);
-	//auto ani = Animation3D::create("orc.c3b");
-	//auto mat = Animate3D::create(ani);
-	//sprite->runAction(RepeatForever::create(mat));
-	//this->addChild(sprite);
-	//return true;
 }
 
 void GameScene::onEnterTransitionDidFinish()

@@ -25,5 +25,7 @@ public:
 	void changeScene(SceneType sceneType);
 private:
 	Layer* _layer;							//当前场景图层
+	static SceneManager* s_sceneManager;		//场景管理者对象
 };
+
 #endif

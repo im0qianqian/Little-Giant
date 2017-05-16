@@ -158,7 +158,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\Global.cpp" />
     <ClCompile Include="..\Classes\LoadLayer.cpp" />
     <ClCompile Include="..\Classes\SceneManager.cpp" />
-    <ClCompile Include="..\Classes\Stage.cpp" />
+    <ClCompile Include="..\Classes\StageManager.cpp" />
     <ClCompile Include="..\Classes\WeaponManager.cpp" />
     <ClCompile Include="..\Classes\Weapons.cpp" />
     <ClCompile Include="main.cpp" />
@@ -172,7 +172,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\Global.h" />
     <ClInclude Include="..\Classes\LoadLayer.h" />
     <ClInclude Include="..\Classes\SceneManager.h" />
-    <ClInclude Include="..\Classes\Stage.h" />
+    <ClInclude Include="..\Classes\StageManager.h" />
     <ClInclude Include="..\Classes\WeaponManager.h" />
     <ClInclude Include="..\Classes\Weapons.h" />
     <ClInclude Include="main.h" />
