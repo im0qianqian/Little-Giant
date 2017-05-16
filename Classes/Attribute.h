@@ -12,22 +12,22 @@ USING_NS_CC;
 * Small 中间位
 * Magnet 最高位
 */
-enum Temporary
+enum TemporaryType
 {
-	Temporary_None = 0x00,
-	Temporary_View = 0x01,
-	Temporary_Small = 0x02,
-	Temporary_Magnet = 0x04
+	kTemporaryNone = 0x00,
+	kTemporaryView = 0x01,
+	kTemporarySmall = 0x02,
+	kTemporaryMagnet = 0x04
 };
 
 /* 属性加成类 */
-class Attribute :public Sprite
+class Attribute
 {
 public:
 	Attribute();
 	~Attribute();
 	/* 创建一个属性对象 */
-	static Attribute* create(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration);
+	static Attribute* create();
 	/* 增加攻击力 */
 	void addAttackDamage(float add);
 	/* 增加射程 */
@@ -57,9 +57,6 @@ public:
 	/* 更改临时能力持续时间 */
 	void setDuration(float add);
 private:
-	void update(float dt);
-	/* 初始化方法 */
-	bool Attribute::init(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration);
 	float _attackDamage;			//攻击力加成
 	float _attackRange;				//射程加成
 	float _attackSpeed;				//攻击速度加成

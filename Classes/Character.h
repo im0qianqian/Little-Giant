@@ -10,9 +10,9 @@ USING_NS_CC;
 
 enum WeaponType
 {
-	WeaponType_Arrow,
-	WeaponType_Bomb,
-	WeaponType_Dart
+	kWeaponArrow,
+	kWeaponBomb,
+	kWeaponDart
 };
 
 class CharActer :public Sprite

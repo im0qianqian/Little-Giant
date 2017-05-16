@@ -32,4 +32,7 @@ static __TYPE__* create(void *owner, float power, float speed, float distance, f
     } \
 }
 
+const auto SCREEN_WIDTH = 640;
+const auto SCREEN_HEIGHT = 960;
+const auto FORM_NAME = "Arrow.io";
 #endif

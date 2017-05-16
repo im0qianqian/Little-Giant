@@ -1,7 +1,16 @@
 #include "Attribute.h"
 #include "Global.h"
 
-Attribute::Attribute()
+Attribute::Attribute():
+	_attackDamage(0),
+	_attackRange(0),
+	_attackSpeed(0),
+	_movingSpeed(0),
+	_empiricalAcquisition(0),
+	_defensiveForce(0),
+	_restoringAbility(0),
+	_temporary(kTemporaryNone),
+	_duration(0)
 {
 
 }
@@ -11,43 +20,16 @@ Attribute::~Attribute()
 
 }
 
-void Attribute::update(float dt)
-{
-
-}
-
-Attribute* Attribute::create(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration)
+Attribute* Attribute::create()
 {
 	Attribute *attribute = new Attribute();
-	if (attribute&&attribute->init(attackDamage, attackRange, attackSpeed, movingSpeed, empiricalAcquisition, defensiveForce, restoringAbility, temporary, duration))
+	if (!attribute)
 	{
-		attribute->autorelease();
-	}
-	else
-	{
+		CCASSERT(attribute, "Attribute not null!");
 		delete attribute;
 		attribute = NULL;
 	}
 	return attribute;
-}
-
-bool Attribute::init(float attackDamage, float attackRange, float attackSpeed, float movingSpeed, float empiricalAcquisition, float defensiveForce, float restoringAbility, short int temporary, float duration)
-{
-	bool flag = true;
-	if (true)
-	{
-		_attackDamage = attackDamage;
-		_attackRange = attackRange;
-		_attackSpeed = attackSpeed;
-		_movingSpeed = movingSpeed;
-		_empiricalAcquisition = empiricalAcquisition;
-		_defensiveForce = defensiveForce;
-		_restoringAbility = restoringAbility;
-		_temporary = temporary;
-		_duration = duration;
-		flag = true;
-	}
-	return flag;
 }
 
 void Attribute::addAttackDamage(float add)
@@ -87,32 +69,32 @@ void Attribute::addRestoringAbility(float add)
 
 void Attribute::addView()
 {
-	_temporary |= Temporary_View;
+	_temporary |= kTemporaryView;
 }
 
 void Attribute::addSmall()
 {
-	_temporary |= Temporary_Small;
+	_temporary |= kTemporarySmall;
 }
 
 void Attribute::addMagnet()
 {
-	_temporary |= Temporary_Magnet;
+	_temporary |= kTemporaryMagnet;
 }
 
 void Attribute::delView()
 {
-	_temporary &= ~Temporary_View;
+	_temporary &= ~kTemporaryView;
 }
 
 void Attribute::delSmall()
 {
-	_temporary &= ~Temporary_Small;
+	_temporary &= ~kTemporarySmall;
 }
 
 void Attribute::delMagnet()
 {
-	_temporary &= ~Temporary_Magnet;
+	_temporary &= ~kTemporaryMagnet;
 }
 
 void Attribute::setDuration(float add)

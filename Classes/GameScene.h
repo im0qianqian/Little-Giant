@@ -6,12 +6,12 @@
 USING_NS_CC;
 //实现控制各个游戏状态
 
-enum GameState	// 游戏状态
+enum GameStateType	// 游戏状态
 {
-	GameState_Runing,
-	GameState_Pause,
-	GameState_Win,
-	GameState_Fail
+	kGameStateRuning,	//游戏进行
+	kGameStatePause,	//游戏暂停
+	kGameStateWin,		//游戏胜利
+	kGameStateFail		//游戏失败
 };
 
 class GameScene :public Layer
@@ -21,8 +21,9 @@ public:
 	~GameScene();
 	CREATE_FUNC(GameScene);
 	virtual bool init();
-	static cocos2d::Scene* createScene();
+	virtual void onEnterTransitionDidFinish();
+
 private:
-	static GameState _gameState;	// 游戏状态
+	static GameStateType _gameState;	// 游戏状态
 };
 #endif

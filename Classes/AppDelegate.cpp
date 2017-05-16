@@ -27,11 +27,11 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect("Arrow.io", Rect(0, 0, 960, 640));
+        glview = GLViewImpl::createWithRect(FORM_NAME, Rect(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH));
         director->setOpenGLView(glview);
     }
 
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
+    director->getOpenGLView()->setDesignResolutionSize(SCREEN_HEIGHT, SCREEN_WIDTH, ResolutionPolicy::SHOW_ALL);
 
     // turn on display FPS
     director->setDisplayStats(true);
@@ -39,7 +39,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-    FileUtils::getInstance()->addSearchPath("res");
+	// 资源文件检索路径
+    FileUtils::getInstance()->addSearchPath("fonts");
+	FileUtils::getInstance()->addSearchPath("images");
+	FileUtils::getInstance()->addSearchPath("sounds");
 
     // create a scene. it's an autorelease object
     auto scene = GameScene::createScene();
