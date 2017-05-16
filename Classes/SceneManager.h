@@ -19,9 +19,11 @@ class SceneManager
 public:
 	SceneManager();
 	~SceneManager();
+	/* 获取当前场景管理者 */
 	static SceneManager* getInstance();
+	/* 切换场景 */
 	void changeScene(SceneType sceneType);
 private:
-	static SceneManager* _sceneManager;
+	Layer* _layer;							//当前场景图层
 };
 #endif

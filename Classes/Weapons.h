@@ -13,7 +13,7 @@ class Weapons :public Sprite
 public:
 	Weapons();
 	~Weapons();
-	void* getOwner();
+	void* getOwner() { return _owner; }
 	virtual void attack() = 0;
 protected:
 	/* 初始化方法 */
@@ -25,7 +25,7 @@ private:
 	float _speed;			//攻击速度
 	float _distance;		//攻击距离
 	float _angle;			//攻击方向
-	Vec2 _pos;				//武器起始位置
+	Vec2 _pos;				//移动后的坐标
 };
 
 class Arrow :virtual protected Weapons

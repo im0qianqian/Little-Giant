@@ -1,5 +1,6 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
+#include "SceneManager.h"
 
 USING_NS_CC;
 
@@ -44,11 +45,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("images");
 	FileUtils::getInstance()->addSearchPath("sounds");
 
-    // create a scene. it's an autorelease object
-    auto scene = GameScene::createScene();
-
-    // run
-    director->runWithScene(scene);
+    // 从游戏菜单界面加载
+	SceneManager::getInstance()->changeScene(kGameScene);
 
     return true;
 }

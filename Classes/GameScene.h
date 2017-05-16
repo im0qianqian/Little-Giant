@@ -22,6 +22,8 @@ public:
 	CREATE_FUNC(GameScene);
 	virtual bool init();
 	virtual void onEnterTransitionDidFinish();
+	/* 获取当前游戏状态 */
+	static GameStateType getGameState() { return _gameState; }
 
 private:
 	static GameStateType _gameState;	// 游戏状态

@@ -1,6 +1,5 @@
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
-#include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
@@ -28,4 +27,9 @@ bool GameScene::init()
 	sprite->runAction(RepeatForever::create(mat));
 	this->addChild(sprite);
 	return true;
+}
+
+void GameScene::onEnterTransitionDidFinish()
+{
+
 }

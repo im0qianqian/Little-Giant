@@ -32,7 +32,11 @@ static __TYPE__* create(void *owner, float power, float speed, float distance, f
     } \
 }
 
+/* 全局常量设置 */
 const auto SCREEN_WIDTH = 640;
 const auto SCREEN_HEIGHT = 960;
 const auto FORM_NAME = "Arrow.io";
+
+/* 人物初始生命值 */
+const float INITIAL_LIFE_VALUE = 100;
 #endif

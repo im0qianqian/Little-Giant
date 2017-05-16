@@ -10,11 +10,6 @@ Weapons::~Weapons()
 
 }
 
-void *Weapons::getOwner()
-{
-	return _owner;
-}
-
 void Weapons::update(float dt)
 {
 	
