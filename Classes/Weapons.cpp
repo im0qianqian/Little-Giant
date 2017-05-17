@@ -18,7 +18,7 @@ void Weapons::update(float dt)
 bool Weapons::init(void *owner, float power, float speed, float distance, float angle,Vec3 pos)
 {
 	bool flag = false;
-	if (true)
+	do
 	{
 		_owner = owner;
 		_power = power;
@@ -27,7 +27,7 @@ bool Weapons::init(void *owner, float power, float speed, float distance, float 
 		_angle = angle;
 		_pos = pos;
 		flag = true;
-	}
+	} while (false);
 	return flag;
 }
 

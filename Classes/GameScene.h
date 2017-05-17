@@ -5,6 +5,8 @@
 #include "CharacterManager.h"
 #include "WeaponManager.h"
 #include "StageManager.h"
+#include "AwardManager.h"
+#include "AudioManager.h"
 
 USING_NS_CC;
 //实现控制各个游戏状态
@@ -38,6 +40,8 @@ private:
 	static CharacterManager *_characterManager;	//人物管理对象
 	static StageManager *_stageManager;			//地图管理对象
 	static WeaponManager *_weaponManager;		//武器管理对象
+	static AwardManager *_awardManager;			//奖励管理对象
+	static AudioManager *_audioManager;			//声音管理对象
 };
 
 

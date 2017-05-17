@@ -14,17 +14,19 @@ enum SceneType
 	kGameScene		//游戏场景
 };
 
-class SceneManager
+class SceneManager:public Ref
 {
 public:
 	SceneManager();
 	~SceneManager();
+	bool init();
+	CREATE_FUNC(SceneManager);
 	/* 获取当前场景管理者 */
 	static SceneManager* getInstance();
 	/* 切换场景 */
 	void changeScene(SceneType sceneType);
 private:
-	Layer* _layer;							//当前场景图层
+	Layer* _layer;								//当前场景图层
 	static SceneManager* s_sceneManager;		//场景管理者对象
 };
 

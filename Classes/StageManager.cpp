@@ -11,7 +11,7 @@ StageManager::~StageManager()
 bool StageManager::init()
 {
 	bool flag = false;
-	if (true)
+	do
 	{
 		auto sprite = Sprite3D::create("orc.c3b");
 		sprite->setScale(3.0f);
@@ -28,7 +28,7 @@ bool StageManager::init()
 		addChild(_camera);
 		setCameraMask(2);
 		flag = true;
-	}
+	} while (false);
 	return flag;
 }
 

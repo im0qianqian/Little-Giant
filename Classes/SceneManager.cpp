@@ -14,15 +14,19 @@ SceneManager::~SceneManager()
 
 }
 
+bool SceneManager::init()
+{
+	return true;
+}
+
 SceneManager* SceneManager::getInstance()
 {
 	if (!s_sceneManager)
 	{
-		s_sceneManager = new SceneManager();
+		s_sceneManager = SceneManager::create();
 		CCASSERT(s_sceneManager, "FATAL: Not enough memory");
 	}
 	return s_sceneManager;
-	return nullptr;
 }
 
 void SceneManager::changeScene(SceneType sceneType)

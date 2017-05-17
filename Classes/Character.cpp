@@ -60,18 +60,6 @@ Character::Attribute::~Attribute()
 
 }
 
-Character::Attribute* Character::Attribute::create()
-{
-	Character::Attribute *attribute = new Attribute();
-	if (!attribute)
-	{
-		CCASSERT(attribute, "Attribute not null!");
-		delete attribute;
-		attribute = NULL;
-	}
-	return attribute;
-}
-
 void Character::Attribute::addAttackDamage(float add)
 {
 	_attackDamage = max(0.0f, _attackDamage + add);
