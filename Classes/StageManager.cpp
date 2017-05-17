@@ -1,4 +1,5 @@
 #include "StageManager.h"
+#include "DrawNode3D.h"
 
 StageManager::StageManager()
 {
@@ -13,6 +14,22 @@ bool StageManager::init()
 	bool flag = false;
 	do
 	{
+		DrawNode3D* _draw = DrawNode3D::create();
+
+		//draw x
+		for (int j = -20; j <= 20; j++)
+		{
+			_draw->drawLine(Vec3(-100, 0, 5 * j), Vec3(100, 0, 5 * j), Color4F(1, 0, 0, 1));
+		}
+		//draw z
+		for (int j = -20; j <= 20; j++)
+		{
+			_draw->drawLine(Vec3(5 * j, 0, -100), Vec3(5 * j, 0, 100), Color4F(0, 0, 1, 1));
+		}
+		//draw y
+		_draw->drawLine(Vec3(0, 0, 0), Vec3(0, 250, 0), Color4F(0, 1, 0, 1));
+		addChild(_draw);
+
 		auto sprite = Sprite3D::create("orc.c3b");
 		sprite->setScale(3.0f);
 		sprite->setPosition3D(Vec3(0, 0, 0));
