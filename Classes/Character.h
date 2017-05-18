@@ -5,13 +5,14 @@
 
 #include "cocos2d.h"
 #include "Weapons.h"
+#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
-class Character :public Sprite3D
+class Character :public PhysicsSprite3D
 {
 public:
-	class Character::Attribute
+	class Attribute
 	{
 	public:
 		Attribute();
@@ -96,8 +97,5 @@ private:
 	Vec3 _pos;				//人物移动后的坐标
 	bool _isDie;			//人物是否死亡
 };
-
-
-/* 属性加成类 */
 
 #endif

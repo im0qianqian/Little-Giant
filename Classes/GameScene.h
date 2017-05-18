@@ -8,6 +8,7 @@
 #include "AwardManager.h"
 #include "AudioManager.h"
 
+
 USING_NS_CC;
 //实现控制各个游戏状态
 
@@ -25,8 +26,7 @@ public:
 	GameScene();
 	~GameScene();
 	CREATE_FUNC(GameScene);
-	bool init();
-	virtual void onEnterTransitionDidFinish();
+	virtual bool init();
 	/* 获取当前游戏状态 */
 	static GameStateType getGameState() { return _gameState; }
 	/* 获取人物管理对象 */
@@ -35,7 +35,10 @@ public:
 	static StageManager* getStage() { return _stageManager; }
 	/* 获取武器管理对象 */
 	static WeaponManager* getWeaponManager() { return _weaponManager; }
+	/* 获取当前层相机 */
+	static Camera *getCamera() { return _camera; }
 private:
+	static Camera *_camera;
 	static GameStateType _gameState;			//游戏状态
 	static CharacterManager *_characterManager;	//人物管理对象
 	static StageManager *_stageManager;			//地图管理对象

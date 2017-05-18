@@ -18,10 +18,22 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AudioManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AwardManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\Character.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CharacterManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Global.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LoadLayer.cpp">
@@ -30,28 +42,16 @@
     <ClCompile Include="..\Classes\SceneManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Global.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Weapons.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CharacterManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\WeaponManager.cpp">
+    <ClCompile Include="..\Classes\Stage.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StageManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AudioManager.cpp">
+    <ClCompile Include="..\Classes\WeaponManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AwardManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\DrawNode3D.cpp">
+    <ClCompile Include="..\Classes\Weapons.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,10 +62,22 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\AudioManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AwardManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\Character.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CharacterManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Global.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LoadLayer.h">
@@ -74,28 +86,16 @@
     <ClInclude Include="..\Classes\SceneManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Global.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Weapons.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CharacterManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\WeaponManager.h">
+    <ClInclude Include="..\Classes\Stage.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StageManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AudioManager.h">
+    <ClInclude Include="..\Classes\WeaponManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AwardManager.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\DrawNode3D.h">
+    <ClInclude Include="..\Classes\Weapons.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

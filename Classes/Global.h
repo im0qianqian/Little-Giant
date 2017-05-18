@@ -11,8 +11,6 @@ USING_NS_CC;
 #define max(x,y) (x>y?x:y)
 /* 取最小值 */
 #define min(x,y) (x>y?y:x)
-/* 两数交换 */
-#define swap(x,y) {x+=y;y=x-y;x-=y;}
 
 /* 创建一个武器对象 */
 #define CREATE_WEAPON(__TYPE__) \
