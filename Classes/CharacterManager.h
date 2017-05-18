@@ -2,6 +2,7 @@
 #define __CHARACTER_MANAGER_H__
 
 #include "cocos2d.h"
+#include "GameScene.h"
 #include "Character.h"
 #include "physics3d\CCPhysics3D.h"
 
@@ -28,11 +29,11 @@ public:
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
-	/* 创建一个人物 */
+	/* 创建玩家 */
 	Character* createCharacter(CharacterType characterType);
 private:
-	Camera *_camera;
-	Character* _playerCharacter;		//玩家人物
-	Vector<Character*> _enemyCharacter;	//其他人物
+	//EventListenerKeyboard* _listenerKeyboard;	//键盘监听器
+	Character* _playerCharacter;				//玩家人物
+	Vector<Character*> _enemyCharacter;			//其他人物
 };
 #endif // __CHARACTER_MANAGER_H__

@@ -28,7 +28,7 @@ bool StageManager::init()
 		floor->setScaleX(60);
 		floor->setScaleZ(60);
 		this->addChild(floor);
-		floor->setCameraMask((unsigned short)CameraFlag::USER1);
+		//floor->setCameraMask((unsigned short)CameraFlag::USER1);
 		floor->syncNodeToPhysics();
 		//static object sync is not needed
 		floor->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
@@ -56,25 +56,26 @@ bool StageManager::init()
 					sprite->syncNodeToPhysics();
 					sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
 					//sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
-					sprite->setCameraMask((unsigned short)CameraFlag::USER1);
+					//sprite->setCameraMask((unsigned short)CameraFlag::USER1);
 					sprite->setScale(0.8f);
 					this->addChild(sprite);
 				}
 			}
 		}
-
+		/*
 		_camera = Camera::createPerspective(60, (GLfloat)960 / 640, 1, 1000);
 		_camera->setCameraFlag(CameraFlag::USER1);
 		_camera->setPosition3D(Vec3(0, 100, -100));
 		_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
 
 		auto listen = EventListenerTouchAllAtOnce::create();
+		
 		listen->onTouchesMoved = CC_CALLBACK_2(StageManager::onTouchesMoved, this);
 		listen->onTouchesEnded = CC_CALLBACK_2(StageManager::onTouchesEnded,this);
 		listen->onTouchesBegan = CC_CALLBACK_2(StageManager::onTouchesBegan, this);
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(listen, this);
 		addChild(_camera);
-		setCameraMask(2);
+		setCameraMask(2);*/
 		flag = true;
 	} while (false);
 	return flag;

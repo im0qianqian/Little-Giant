@@ -10,7 +10,7 @@ CharacterManager::~CharacterManager()
 
 bool CharacterManager::init()
 {
-	createCharacter(kCharacterEnemy);
+	createCharacter(kCharacterPlayer);
 	return true;
 }
 
@@ -32,16 +32,9 @@ Character* CharacterManager::createCharacter(CharacterType characterType)
 	auto character = Character::create("Sprite3DTest/box.c3t", &des);
 	character->setTexture("images/Icon.png");						//ÉèÖÃ²ÄÖÊ
 	character->setPosition3D(Vec3(0,10,0));
-	character->setScale(1.0f);
+	character->setScale(2.0f);
 	character->syncNodeToPhysics();
-	character->setCameraMask((unsigned int)CameraFlag::USER2);
 	addChild(character);
 
-	_camera = Camera::createPerspective(60, (GLfloat)960 / 640, 1, 1000);
-	_camera->setCameraFlag(CameraFlag::USER2);
-	_camera->setPosition3D(Vec3(0, 100, -100));
-	_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
-	setCameraMask((unsigned int)CameraFlag::USER2);
-	addChild(_camera);
 	return static_cast<Character*> (character);
 }
