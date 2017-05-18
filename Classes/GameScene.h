@@ -35,8 +35,6 @@ public:
 	static StageManager* getStage() { return _stageManager; }
 	/* 获取武器管理对象 */
 	static WeaponManager* getWeaponManager() { return _weaponManager; }
-	/* 获取当前场景摄像机 */
-	static Camera *getCamera() { return _camera; }
 private:
 	static GameStateType _gameState;			//游戏状态
 	static CharacterManager *_characterManager;	//人物管理对象

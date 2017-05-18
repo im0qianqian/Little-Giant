@@ -22,7 +22,7 @@ bool StageManager::init()
 		floor->setScaleX(60);
 		floor->setScaleZ(60);
 		this->addChild(floor);
-		//floor->setCameraMask((unsigned short)CameraFlag::USER1);
+		floor->setCameraMask((unsigned short)CameraFlag::USER1);
 		floor->syncNodeToPhysics();
 		//static object sync is not needed
 		floor->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
@@ -50,7 +50,7 @@ bool StageManager::init()
 					sprite->syncNodeToPhysics();
 					sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
 					//sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
-					//sprite->setCameraMask((unsigned short)CameraFlag::USER1);
+					sprite->setCameraMask((unsigned short)CameraFlag::USER1);
 					sprite->setScale(0.8f);
 					this->addChild(sprite);
 				}
@@ -67,6 +67,7 @@ bool StageManager::init()
 		{
 			_draw->drawLine(Vec3(5 * j, 0, -100), Vec3(5 * j, 0, 100), Color4F(0, 0, 1, 1));
 		}
+<<<<<<< HEAD
 		//draw y
 		_draw->drawLine(Vec3(0, 0, 0), Vec3(0, 250, 0), Color4F(0, 1, 0, 1));
 		addChild(_draw);
@@ -75,13 +76,15 @@ bool StageManager::init()
 		sprite->setScale(3.0f);
 		sprite->setPosition3D(Vec3(0, 0, 0));
 		addChild(sprite);
+=======
+
+>>>>>>> parent of 4ebe0ea... init
 		_camera = Camera::createPerspective(60, (GLfloat)960 / 640, 1, 1000);
 		_camera->setCameraFlag(CameraFlag::USER1);
 		_camera->setPosition3D(Vec3(0, 100, -100));
 		_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
 
 		auto listen = EventListenerTouchAllAtOnce::create();
-		
 		listen->onTouchesMoved = CC_CALLBACK_2(StageManager::onTouchesMoved, this);
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(listen, this);
 		addChild(_camera);

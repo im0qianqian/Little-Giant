@@ -11,7 +11,7 @@ CharacterManager::~CharacterManager()
 <<<<<<< HEAD
 bool CharacterManager::init()
 {
-	createCharacter(kCharacterPlayer);
+	createCharacter(kCharacterEnemy);
 	return true;
 }
 
@@ -36,9 +36,11 @@ void CharacterManager::createCharacter()
 	auto character = Character::create("Sprite3DTest/box.c3t", &des);
 	character->setTexture("images/Icon.png");						//ÉèÖÃ²ÄÖÊ
 	character->setPosition3D(Vec3(0,10,0));
-	character->setScale(2.0f);
+	character->setScale(1.0f);
 	character->syncNodeToPhysics();
+	character->setCameraMask((unsigned int)CameraFlag::USER2);
 	addChild(character);
+<<<<<<< HEAD
 	switch (characterType)
 	{
 	case kCharacterPlayer:
@@ -56,6 +58,15 @@ void CharacterManager::createCharacter()
 	}
 	GameScene::getCamera()->setPosition3D(Vec3(0, 100, -100));
 	GameScene::getCamera()->lookAt(Vec3::ZERO, Vec3::UNIT_Y);
+=======
+
+	_camera = Camera::createPerspective(60, (GLfloat)960 / 640, 1, 1000);
+	_camera->setCameraFlag(CameraFlag::USER2);
+	_camera->setPosition3D(Vec3(0, 100, -100));
+	_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
+	setCameraMask((unsigned int)CameraFlag::USER2);
+	addChild(_camera);
+>>>>>>> parent of 4ebe0ea... init
 	return static_cast<Character*> (character);
 =======
 >>>>>>> parent of e11770a... init

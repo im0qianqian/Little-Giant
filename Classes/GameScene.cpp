@@ -32,9 +32,6 @@ bool GameScene::init()
 		GameScene::_weaponManager = WeaponManager::create();
 		GameScene::_awardManager = AwardManager::create();
 		GameScene::_audioManager = AudioManager::create();
-		/* 场景摄像机创建 */
-		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_HEIGHT / SCREEN_WIDTH, 1, 1000);
-		addChild(_camera);
 		addChild(GameScene::_stageManager, 0);
 		flag = true;
 	} while (false);
