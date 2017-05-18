@@ -67,6 +67,9 @@ void CharacterManager::createCharacter()
 	setCameraMask((unsigned int)CameraFlag::USER2);
 	addChild(_camera);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 4ebe0ea... init
+=======
 >>>>>>> parent of 4ebe0ea... init
 =======
 >>>>>>> parent of 4ebe0ea... init
