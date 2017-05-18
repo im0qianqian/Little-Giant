@@ -23,6 +23,7 @@ public:
 	void resumeGame();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/* 创建玩家 */
 	Character* createCharacter(CharacterType characterType);
 private:
@@ -35,6 +36,14 @@ private:
 	Character* _playerCharacter;		//玩家人物
 	Vector<Character*> _enemyCharacter;	//其他人物
 >>>>>>> parent of e11770a... init
+=======
+	/* 创建一个人物 */
+	Character* createCharacter(CharacterType characterType);
+private:
+	Camera *_camera;
+	Character* _playerCharacter;		//玩家人物
+	Vector<Character*> _enemyCharacter;	//其他人物
+>>>>>>> parent of 4ebe0ea... init
 =======
 	/* 创建一个人物 */
 	Character* createCharacter(CharacterType characterType);

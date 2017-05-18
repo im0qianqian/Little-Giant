@@ -66,6 +66,9 @@ void CharacterManager::createCharacter()
 	_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
 	setCameraMask((unsigned int)CameraFlag::USER2);
 	addChild(_camera);
+<<<<<<< HEAD
+>>>>>>> parent of 4ebe0ea... init
+=======
 >>>>>>> parent of 4ebe0ea... init
 	return static_cast<Character*> (character);
 =======

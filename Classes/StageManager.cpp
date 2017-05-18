@@ -68,6 +68,7 @@ bool StageManager::init()
 			_draw->drawLine(Vec3(5 * j, 0, -100), Vec3(5 * j, 0, 100), Color4F(0, 0, 1, 1));
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 		//draw y
 		_draw->drawLine(Vec3(0, 0, 0), Vec3(0, 250, 0), Color4F(0, 1, 0, 1));
 		addChild(_draw);
@@ -76,6 +77,9 @@ bool StageManager::init()
 		sprite->setScale(3.0f);
 		sprite->setPosition3D(Vec3(0, 0, 0));
 		addChild(sprite);
+=======
+
+>>>>>>> parent of 4ebe0ea... init
 =======
 
 >>>>>>> parent of 4ebe0ea... init
