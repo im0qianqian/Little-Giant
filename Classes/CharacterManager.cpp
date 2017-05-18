@@ -8,12 +8,15 @@ CharacterManager::~CharacterManager()
 {
 }
 
+<<<<<<< HEAD
 bool CharacterManager::init()
 {
 	createCharacter(kCharacterPlayer);
 	return true;
 }
 
+=======
+>>>>>>> parent of e11770a... init
 void CharacterManager::pauseGame()
 {
 }
@@ -22,8 +25,9 @@ void CharacterManager::resumeGame()
 {
 }
 
-Character* CharacterManager::createCharacter(CharacterType characterType)
+void CharacterManager::createCharacter()
 {
+<<<<<<< HEAD
 	CCLOG("Character manager");
 	/* 创建一个刚体 */
 	Physics3DRigidBodyDes des;
@@ -53,4 +57,6 @@ Character* CharacterManager::createCharacter(CharacterType characterType)
 	GameScene::getCamera()->setPosition3D(Vec3(0, 100, -100));
 	GameScene::getCamera()->lookAt(Vec3::ZERO, Vec3::UNIT_Y);
 	return static_cast<Character*> (character);
+=======
+>>>>>>> parent of e11770a... init
 }

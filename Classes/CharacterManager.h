@@ -11,11 +11,6 @@ USING_NS_CC;
 class CharacterManager :public Layer
 {
 public:
-	enum CharacterType
-	{
-		kCharacterPlayer,
-		kCharacterEnemy
-	};
 	CharacterManager();
 	~CharacterManager();
 	CREATE_FUNC(CharacterManager);
@@ -27,11 +22,18 @@ public:
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
+<<<<<<< HEAD
 	/* 创建玩家 */
 	Character* createCharacter(CharacterType characterType);
 private:
 	//EventListenerKeyboard* _listenerKeyboard;	//键盘监听器
 	Character* _playerCharacter;				//玩家人物
 	Vector<Character*> _enemyCharacter;			//其他人物
+=======
+private:
+	void createCharacter();
+	Character* _playerCharacter;		//玩家人物
+	Vector<Character*> _enemyCharacter;	//其他人物
+>>>>>>> parent of e11770a... init
 };
 #endif // __Character_MANAGER_H__
