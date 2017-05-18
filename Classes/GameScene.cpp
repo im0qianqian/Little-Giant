@@ -36,8 +36,6 @@ bool GameScene::init()
 		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_HEIGHT / SCREEN_WIDTH, 1, 1000);
 		addChild(_camera);
 		addChild(GameScene::_stageManager, 0);
-		addChild(GameScene::_characterManager, 1);
-		addChild(GameScene::_weaponManager, 1);
 		flag = true;
 	} while (false);
 	return flag;

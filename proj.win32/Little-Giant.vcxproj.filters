@@ -51,7 +51,7 @@
     <ClCompile Include="..\Classes\AwardManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Stage.cpp">
+    <ClCompile Include="..\Classes\DrawNode3D.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="..\Classes\AwardManager.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Stage.h">
+    <ClInclude Include="..\Classes\DrawNode3D.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

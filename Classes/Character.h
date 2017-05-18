@@ -5,14 +5,13 @@
 
 #include "cocos2d.h"
 #include "Weapons.h"
-#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
-class Character :public PhysicsSprite3D
+class Character :public Sprite3D
 {
 public:
-	class Attribute
+	class Character::Attribute
 	{
 	public:
 		Attribute();
@@ -68,7 +67,6 @@ public:
 		short int _temporary;			//临时属性类型
 		float _duration;				//临时能力持续时间
 	};
-	virtual bool init();
 	Character();
 	~Character();
 	/* 增加/减少生命 */

@@ -35,6 +35,22 @@ Character* CharacterManager::createCharacter(CharacterType characterType)
 	character->setScale(2.0f);
 	character->syncNodeToPhysics();
 	addChild(character);
-
+	switch (characterType)
+	{
+	case kCharacterPlayer:
+		/*_listenerKeyboard = EventListenerKeyboard::create();
+		_listenerKeyboard->onKeyPressed = [=](EventKeyboard::KeyCode keyCode, Event *event)
+		{
+			CCLOG("%g", keyCode);
+		};
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(_listenerKeyboard, this);*/
+		break;
+	case kCharacterEnemy:
+		break;
+	default:
+		break;
+	}
+	GameScene::getCamera()->setPosition3D(Vec3(0, 100, -100));
+	GameScene::getCamera()->lookAt(Vec3::ZERO, Vec3::UNIT_Y);
 	return static_cast<Character*> (character);
 }

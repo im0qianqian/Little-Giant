@@ -4,8 +4,6 @@
 #define __SCENE_MANAGER_H__
 
 #include "cocos2d.h"
-#include "physics3d\CCPhysics3D.h"
-
 
 USING_NS_CC;
 
@@ -21,14 +19,13 @@ class SceneManager:public Ref
 public:
 	SceneManager();
 	~SceneManager();
-	virtual bool init();
+	bool init();
 	CREATE_FUNC(SceneManager);
 	/* 获取当前场景管理者 */
 	static SceneManager* getInstance();
 	/* 切换场景 */
 	void changeScene(SceneType sceneType);
 private:
-	Camera *_camera;							//当前场景照相机
 	Layer* _layer;								//当前场景图层
 	static SceneManager* s_sceneManager;		//场景管理者对象
 };

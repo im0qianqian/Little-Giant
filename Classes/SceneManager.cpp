@@ -31,7 +31,7 @@ SceneManager* SceneManager::getInstance()
 
 void SceneManager::changeScene(SceneType sceneType)
 {
-	auto scene = Scene::createWithPhysics();
+	auto scene = Scene::create();
 	switch (sceneType)
 	{
 	case kMenuScene:
@@ -44,11 +44,6 @@ void SceneManager::changeScene(SceneType sceneType)
 	default:
 		break;
 	}
-	/* 打开物理引擎调试系统 */
-	scene->initWithPhysics();
-	scene->getPhysics3DWorld()->setDebugDrawEnable(true);
-
-
 	scene->addChild(_layer);
 	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{

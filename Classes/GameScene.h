@@ -25,7 +25,7 @@ public:
 	GameScene();
 	~GameScene();
 	CREATE_FUNC(GameScene);
-	virtual bool init();
+	bool init();
 	virtual void onEnterTransitionDidFinish();
 	/* 获取当前游戏状态 */
 	static GameStateType getGameState() { return _gameState; }
@@ -38,7 +38,6 @@ public:
 	/* 获取当前场景摄像机 */
 	static Camera *getCamera() { return _camera; }
 private:
-	static Camera *_camera;						//场景摄像机
 	static GameStateType _gameState;			//游戏状态
 	static CharacterManager *_characterManager;	//人物管理对象
 	static StageManager *_stageManager;			//地图管理对象

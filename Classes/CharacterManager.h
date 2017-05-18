@@ -1,10 +1,9 @@
-#ifndef __CHARACTER_MANAGER_H__
-#define __CHARACTER_MANAGER_H__
+#ifndef __Character_MANAGER_H__
+#define __Character_MANAGER_H__
 
 #include "cocos2d.h"
 #include "GameScene.h"
 #include "Character.h"
-#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
@@ -20,7 +19,6 @@ public:
 	CharacterManager();
 	~CharacterManager();
 	CREATE_FUNC(CharacterManager);
-	virtual bool init();
 	/* 获取玩家人物 */
 	Character* getPlayerCharacter() { return _playerCharacter; }
 	/* 获取其他玩家 */
@@ -36,4 +34,4 @@ private:
 	Character* _playerCharacter;				//玩家人物
 	Vector<Character*> _enemyCharacter;			//其他人物
 };
-#endif // __CHARACTER_MANAGER_H__
+#endif // __Character_MANAGER_H__
