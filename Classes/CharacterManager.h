@@ -1,8 +1,9 @@
-#ifndef __Character_MANAGER_H__
-#define __Character_MANAGER_H__
+#ifndef __CHARACTER_MANAGER_H__
+#define __CHARACTER_MANAGER_H__
 
 #include "cocos2d.h"
 #include "Character.h"
+#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
@@ -10,9 +11,15 @@ USING_NS_CC;
 class CharacterManager :public Layer
 {
 public:
+	enum CharacterType
+	{
+		kCharacterPlayer,
+		kCharacterEnemy
+	};
 	CharacterManager();
 	~CharacterManager();
 	CREATE_FUNC(CharacterManager);
+	virtual bool init();
 	/* 获取玩家人物 */
 	Character* getPlayerCharacter() { return _playerCharacter; }
 	/* 获取其他玩家 */
@@ -21,9 +28,11 @@ public:
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
+	/* 创建一个人物 */
+	Character* createCharacter(CharacterType characterType);
 private:
-	void createCharacter();
+	Camera *_camera;
 	Character* _playerCharacter;		//玩家人物
 	Vector<Character*> _enemyCharacter;	//其他人物
 };
-#endif // __Character_MANAGER_H__
+#endif // __CHARACTER_MANAGER_H__

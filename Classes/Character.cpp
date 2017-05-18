@@ -2,6 +2,11 @@
 #include "Global.h"
 #include "GameScene.h"
 
+bool Character::init()
+{
+	return true;
+}
+
 Character::Character():
 	_lifeValue(INITIAL_LIFE_VALUE),
 	_experience(0),

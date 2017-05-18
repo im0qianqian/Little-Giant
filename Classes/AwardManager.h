@@ -2,7 +2,6 @@
 #define __AWARD_MANAGER_H__
 
 #include "cocos2d.h"
-#include "Weapons.h"
 
 USING_NS_CC;
 

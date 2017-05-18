@@ -12,5 +12,6 @@ AwardManager::~AwardManager()
 
 bool AwardManager::init()
 {
+	
 	return true;
 }

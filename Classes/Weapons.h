@@ -24,7 +24,7 @@ public:
 	virtual void attack() = 0;
 protected:
 	/* 初始化方法 */
-	bool init(void *owner, float power, float speed, float distance, float angle, Vec3 pos);
+	virtual bool init(void *owner, float power, float speed, float distance, float angle, Vec3 pos);
 private:
 	void update(float dt);
 	void *_owner;			//武器所属人物

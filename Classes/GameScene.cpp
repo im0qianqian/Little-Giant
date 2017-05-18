@@ -33,6 +33,8 @@ bool GameScene::init()
 		GameScene::_awardManager = AwardManager::create();
 		GameScene::_audioManager = AudioManager::create();
 		addChild(GameScene::_stageManager, 0);
+		addChild(GameScene::_characterManager, 1);
+		addChild(GameScene::_weaponManager, 1);
 		flag = true;
 	} while (false);
 	return flag;
