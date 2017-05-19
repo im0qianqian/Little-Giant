@@ -17,7 +17,6 @@ StageManager::~StageManager()
 #define ARRAY_SIZE_Z 4
 bool StageManager::init()
 {
-	
 	bool flag = false;
 	do
 	{
@@ -28,7 +27,7 @@ bool StageManager::init()
 		auto floor = PhysicsSprite3D::create("Sprite3DTest/box.c3t", &rbDes);
 		floor->setTexture("Sprite3DTest/plane.png");
 		floor->setScaleX(60);
-		floor->setScaleY(60);
+		floor->setScaleZ(60);
 		addChild(floor);
 		//floor->setCameraMask((unsigned int)CameraFlag::USER1);
 		floor->syncPhysicsToNode();
@@ -55,7 +54,6 @@ bool StageManager::init()
 					sprite->setTexture("images/CyanSquare.png");
 					sprite->setPosition3D(Vec3(x, y, z));
 					sprite->syncNodeToPhysics();
-					//sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
 					sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 					//sprite->setCameraMask((unsigned short)CameraFlag::USER1);
 					sprite->setScale(0.8f);

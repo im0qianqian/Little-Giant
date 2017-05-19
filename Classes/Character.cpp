@@ -45,7 +45,7 @@ Character::Attribute::Attribute() :
 	_attackDamage(0),
 	_attackRange(0),
 	_attackSpeed(0),
-	_movingSpeed(0),
+	_movingSpeed(1),
 	_empiricalAcquisition(0),
 	_defensiveForce(0),
 	_restoringAbility(0),
