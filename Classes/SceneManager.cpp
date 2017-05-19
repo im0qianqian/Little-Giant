@@ -31,7 +31,7 @@ SceneManager* SceneManager::getInstance()
 
 void SceneManager::changeScene(SceneType sceneType)
 {
-	auto scene = Scene::create();
+	auto scene = Scene::createWithPhysics();
 	switch (sceneType)
 	{
 	case kMenuScene:
@@ -44,8 +44,6 @@ void SceneManager::changeScene(SceneType sceneType)
 	default:
 		break;
 	}
-	/* 初始化物理引擎 */
-	scene->initWithPhysics();
 	/* 设置物理世界Debug模式打开*/
 	scene->getPhysics3DWorld()->setDebugDrawEnable(true);
 

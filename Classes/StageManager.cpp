@@ -67,12 +67,12 @@ bool StageManager::init()
 		_camera->setPosition3D(Vec3(0, 100, -100));
 		_camera->lookAt(Vec3(0, 0, 0), Vec3::UNIT_Y);
 		*/
-		auto listen = EventListenerTouchAllAtOnce::create();
+		/*auto listen = EventListenerTouchAllAtOnce::create();
 		
 		listen->onTouchesMoved = CC_CALLBACK_2(StageManager::onTouchesMoved, this);
 		listen->onTouchesEnded = CC_CALLBACK_2(StageManager::onTouchesEnded,this);
 		listen->onTouchesBegan = CC_CALLBACK_2(StageManager::onTouchesBegan, this);
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(listen, this);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(listen, this);*/
 
 		flag = true;
 	} while (false);

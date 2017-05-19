@@ -2,7 +2,7 @@
 #include "Global.h"
 #include "GameScene.h"
 
-Character::Character():
+Character::Character() :
 	_lifeValue(INITIAL_LIFE_VALUE),
 	_experience(0),
 	_sorce(0),
@@ -30,9 +30,11 @@ void Character::addSorce(int add)
 	_sorce += add;
 }
 
-void Character::attack()
+void Character::attack(const Vec3 &pos)
 {
-	//GameScene::getWeaponManager()->createWeapon();
+	CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
+	CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
+	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 }
 
 void Character::die()

@@ -45,6 +45,14 @@ public:
 		void delMagnet();
 		/* 更改临时能力持续时间 */
 		void setDuration(float add);
+		/* GET */
+		float getAttackDamage() { return _attackDamage; }
+		float getAttackRange() { return _attackRange; }
+		float getAttackSpeed() { return _attackSpeed; }
+		float getMovingSpeed() { return _movingSpeed; }
+		float getEmpiricalAcquisition() { return _empiricalAcquisition; }
+		float getDefensiveForce() { return _defensiveForce; }
+		float getRestoringAbility() { return _restoringAbility; }
 	private:
 		float _attackDamage;			//攻击力加成
 		float _attackRange;				//射程加成
@@ -85,7 +93,7 @@ public:
 	/* 获取当前人物属性 */
 	Attribute getAttribute() { return _attribute; }
 	/* 攻击 */
-	void attack();
+	void attack(const Vec3 &pos);
 	/* 死亡 */
 	void die();
 private:

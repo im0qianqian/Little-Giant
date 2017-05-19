@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "Global.h"
+#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
@@ -15,24 +16,32 @@ enum WeaponType
 	kWeaponDart
 };
 
-class Weapons :public Sprite3D
+class Weapons :public PhysicsSprite3D
 {
 public:
 	Weapons();
 	~Weapons();
-	void* getOwner() { return _owner; }
+	/* 获取武器所属人物 */
+	virtual void* getOwner() { return _owner; }
+	/* 获取攻击力 */
+	virtual float getPower() { return _power; }
+	/* 获取攻击速度 */
+	virtual float getSpeed() { return _speed; }
+	/* 获取起始点坐标 */
+	virtual Vec3 getSpos() { return _spos; }
+	/* 获取目标点坐标 */
+	virtual Vec3 getEpos() { return _epos; }
 	virtual void attack() = 0;
 protected:
 	/* 初始化方法 */
-	bool init(void *owner, float power, float speed, float distance, float angle, Vec3 pos);
+	virtual bool init(void *owner, float power, float speed, float distance, Vec3 spos, Vec3 epos);
 private:
-	void update(float dt);
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度
 	float _distance;		//攻击距离
-	float _angle;			//攻击方向
-	Vec3 _pos;				//移动后的坐标
+	Vec3 _spos;				//攻击起始点坐标
+	Vec3 _epos;				//攻击点坐标
 };
 
 class Arrow :virtual protected Weapons
