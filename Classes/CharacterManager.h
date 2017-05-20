@@ -28,11 +28,8 @@ public:
 	/* 创建敌人 */
 	Character* createEnemy();
 
-
-
 	void CharacterManager::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void CharacterManager::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
-	void CharacterManager::shootBox(const cocos2d::Vec3 &des);
 	void CharacterManager::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 private:
 	/* 创建人物 */

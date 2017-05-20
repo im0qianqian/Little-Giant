@@ -34,11 +34,12 @@ bool GameScene::init()
 		addChild(_camera);
 		GameScene::_characterManager = CharacterManager::create();
 		GameScene::_stageManager = StageManager::create();
-		//GameScene::_weaponManager = WeaponManager::create();
+		GameScene::_weaponManager = WeaponManager::create();
 		//GameScene::_awardManager = AwardManager::create();
 		//GameScene::_audioManager = AudioManager::create();
 		addChild(GameScene::_stageManager, 0);
 		addChild(GameScene::_characterManager, 1);
+		addChild(GameScene::_weaponManager, 2);
 		
 		flag = true;
 	} while (false);

@@ -14,10 +14,10 @@ USING_NS_CC;
 
 /* 创建一个武器对象 */
 #define CREATE_WEAPON(__TYPE__) \
-static __TYPE__* create(void *owner, float power, float speed, float distance, Vec3 spos, Vec3 epos) \
+static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 epos) \
 { \
     __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
-    if (pRet && pRet->init(owner,power,speed,distance,spos,epos)) \
+    if (pRet && pRet->init(owner,power,speed,spos,epos)) \
     { \
         pRet->autorelease(); \
         return pRet; \
