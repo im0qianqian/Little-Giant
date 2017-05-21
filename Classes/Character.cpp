@@ -45,8 +45,6 @@ void Character::die()
 
 void Character::move(const Vec3 & pos)
 {
-	atan(90);
-	this->setRotation3D(Vec3(0,90,0));
 	setPosition3D(getPosition3D() + pos);
 }
 
