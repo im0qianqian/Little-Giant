@@ -35,7 +35,6 @@ private:
 	/* 创建人物 */
 	Character* createCharacter();
 	EventListenerKeyboard* _listenerKeyboard;	//键盘监听器
-	bool isKeyboardPress;						//键盘是否被按下
 	Character* _playerCharacter;				//玩家人物
 	Vector<Character*> _enemyCharacter;			//其他人物
 };

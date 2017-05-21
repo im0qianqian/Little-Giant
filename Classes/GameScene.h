@@ -38,7 +38,7 @@ public:
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
 private:
-	static Camera *_camera;
+	static Camera *_camera;						//游戏摄像机
 	static GameStateType _gameState;			//游戏状态
 	static CharacterManager *_characterManager;	//人物管理对象
 	static StageManager *_stageManager;			//地图管理对象

@@ -46,7 +46,6 @@ void SceneManager::changeScene(SceneType sceneType)
 	}
 	/* 设置物理世界Debug模式打开*/
 	scene->getPhysics3DWorld()->setDebugDrawEnable(true);
-
 	scene->addChild(_layer);
 	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{

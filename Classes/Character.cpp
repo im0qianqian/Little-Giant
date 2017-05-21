@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
+#include "Joystick.h"
 
 Character::Character() :
 	_lifeValue(INITIAL_LIFE_VALUE),
@@ -40,6 +41,55 @@ void Character::attack(const Vec3 &pos)
 void Character::die()
 {
 
+}
+
+bool Character::init()
+{
+	CCLOG("init");
+	return true;
+}
+
+Character * Character::create()
+{
+	Physics3DRigidBodyDes des;
+	des.mass = 50.f;			//暂定，人物质量设置为50
+	des.shape = Physics3DShape::createBox(Vec3(1.0f, 2.0f, 1.0f));	//刚体大小
+	auto character = new Character();
+	if (character && character->initWithFile("Sprite3DTest/box.c3t"))
+	{
+		auto obj = Physics3DRigidBody::create(&des);
+		character->_physicsComponent = Physics3DComponent::create(obj);
+		character->addComponent(character->_physicsComponent);
+		character->_contentSize = character->getBoundingBox().size;
+		character->setTexture("images/Icon.png");
+		character->autorelease();
+		character->setPosition3D(Vec3(0, 100, 0));
+		character->setScale(2.0f);
+		character->syncNodeToPhysics();
+		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+	}
+	else
+	{
+		delete character;
+		character = nullptr;
+	}
+	
+	return character;
+}
+
+void Character::update(float dt)
+{
+	CCLOG("update %f", dt);
+	if (Joystick::getKeyW())
+		setPosition3D(getPosition3D() + Vec3(0, 0, -1));
+	if (Joystick::getKeyA())
+		setPosition3D(getPosition3D() + Vec3(-1, 0, 0));
+	if (Joystick::getKeyS())
+		setPosition3D(getPosition3D() + Vec3(0, 0, 1));
+	if (Joystick::getKeyD())
+		setPosition3D(getPosition3D() + Vec3(1, 0, 0));
+	syncNodeToPhysics();
+	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 }
 
 

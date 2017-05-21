@@ -9,7 +9,7 @@
 
 USING_NS_CC;
 
-class Character :public PhysicsSprite3D
+class Character :virtual public PhysicsSprite3D
 {
 public:
 	class Attribute
@@ -84,6 +84,8 @@ public:
 	void addExperience(int add);
 	/* 增加分数 */
 	void addSorce(int add);
+	/* 获取人物所属群落 */
+	int getDept() { return _dept; }
 	/* 获取当前生命值 */
 	float getLifeValue() { return _lifeValue; }
 	/* 获取当前经验值 */
@@ -96,7 +98,11 @@ public:
 	void attack(const Vec3 &pos);
 	/* 死亡 */
 	void die();
+	virtual bool init();
+	static Character* create();
 private:
+	void update(float dt);
+	int _dept;				//人物所属群落
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
 	int _sorce;				//当前得分
