@@ -98,6 +98,8 @@ public:
 	void attack(const Vec3 &pos);
 	/* 死亡 */
 	void die();
+	/* 移动 */
+	void move(const Vec3 &pos);
 	virtual bool init();
 	static Character* create();
 private:
@@ -108,7 +110,6 @@ private:
 	int _sorce;				//当前得分
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
-	Vec3 _pos;				//人物移动后的坐标
 	bool _isDie;			//人物是否死亡
 };
 

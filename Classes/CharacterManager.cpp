@@ -1,6 +1,7 @@
 #include "CharacterManager.h"
 #include "GameScene.h"
 #include "Joystick.h"
+#include "SceneManager.h"
 
 CharacterManager::CharacterManager()
 {
@@ -26,22 +27,20 @@ void CharacterManager::resumeGame()
 Character * CharacterManager::createPlayer()
 {
 	auto character = createCharacter();
-	CCLOG("%p", character);
-	CCASSERT(character, "character null");
-	/*GameScene::getCamera()->setPosition3D(Vec3(150, 150, 150));
-	GameScene::getCamera()->lookAt(Vec3::ZERO, Vec3::UNIT_Y);*/
-
-	/*auto rigidBody = static_cast<Physics3DRigidBody*>(character->getPhysicsObj());
-	rigidBody->setLinearFactor(Vec3::ONE);
-	rigidBody->setLinearVelocity(character);
-	rigidBody->setAngularVelocity(Vec3::ZERO);
-	rigidBody->setCcdMotionThreshold(0.5f);
-	rigidBody->setCcdSweptSphereRadius(0.4f);*/
-
+	GameScene::getCamera()->setPosition3D(Vec3(0,40,40));
+	GameScene::getCamera()->lookAt(Vec3::ZERO);
 	_listenerKeyboard = EventListenerKeyboard::create();
 	_listenerKeyboard->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event *event)
 	{
 		Joystick::setKeyState(keyCode, true);
+		/* 方便调试 设置 Debug 模式*/
+		if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
+		{
+			if (SceneManager::getScene()->getPhysics3DWorld()->isDebugDrawEnabled())
+				SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(false);
+			else SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(true);
+		}
+		/* ----------------------- */
 		log("%d", keyCode);
 	};
 	_listenerKeyboard->onKeyReleased = [&](EventKeyboard::KeyCode keyCode, Event *event)
@@ -93,6 +92,7 @@ void CharacterManager::onTouchesEnded(const std::vector<cocos2d::Touch*>& touche
 
 void CharacterManager::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event)
 {
+	/*
 	if (!touches.empty())
 	{
 		auto touch = touches[0];
@@ -101,13 +101,16 @@ void CharacterManager::onTouchesMoved(const std::vector<cocos2d::Touch*>& touche
 		static float _angley = 0.f;
 		_angle -= CC_DEGREES_TO_RADIANS(delta.x);
 		_angley -= CC_DEGREES_TO_RADIANS(delta.y);
-		Vec3 c = Vec3(200.0f*sinf(_angle), 200.0f*sinf(_angley), 200.0f*cosf(_angle));
+		Vec3 cam = getPlayerCharacter()->getPosition3D();
+		CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
+		Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
 		//Vec3 c = camera->getPosition3D();
-		GameScene::getCamera()->setPosition3D(Vec3(200.0f * sinf(_angle), 200.0f * cosf(_angley), 200.0f * (cosf(_angle) + sinf(_angley))));
+		GameScene::getCamera()->setPosition3D(c);
 		//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
-		GameScene::getCamera()->lookAt(Vec3(0.0f, 0.0f, 0.0f), Vec3::UNIT_Y);
+		GameScene::getCamera()->lookAt(cam, Vec3::UNIT_Y);
 	}
 	event->stopPropagation();
+	*/
 }
 
 

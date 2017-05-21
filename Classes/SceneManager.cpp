@@ -3,6 +3,8 @@
 
 /* 类静态私有变量初始化 */
 SceneManager* SceneManager::s_sceneManager = nullptr;
+Scene* SceneManager::_scene = nullptr;						//当前场景
+Layer* SceneManager::_layer = nullptr;								//当前场景图层
 
 SceneManager::SceneManager()
 {
@@ -31,7 +33,7 @@ SceneManager* SceneManager::getInstance()
 
 void SceneManager::changeScene(SceneType sceneType)
 {
-	auto scene = Scene::createWithPhysics();
+	_scene = Scene::createWithPhysics();
 	switch (sceneType)
 	{
 	case kMenuScene:
@@ -44,15 +46,15 @@ void SceneManager::changeScene(SceneType sceneType)
 	default:
 		break;
 	}
-	/* 设置物理世界Debug模式打开*/
-	scene->getPhysics3DWorld()->setDebugDrawEnable(true);
-	scene->addChild(_layer);
+	/* 设置物理世界Debug相机 */
+	_scene->setPhysics3DDebugCamera(GameScene::getCamera());
+	_scene->addChild(_layer);
 	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{
-		Director::getInstance()->replaceScene(scene);	//替换为当前场景
+		Director::getInstance()->replaceScene(_scene);	//替换为当前场景
 	}
 	else
 	{
-		Director::getInstance()->runWithScene(scene);	//否则直接显示当前场景
+		Director::getInstance()->runWithScene(_scene);	//否则直接显示当前场景
 	}
 }

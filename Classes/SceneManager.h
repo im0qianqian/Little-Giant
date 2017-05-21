@@ -26,8 +26,13 @@ public:
 	static SceneManager* getInstance();
 	/* 切换场景 */
 	void changeScene(SceneType sceneType);
+	/* 获取当前场景 */
+	static Scene* getScene() { return _scene; }
+	/* 获取当前图层 */
+	static Layer* getLayer() { return _layer; }
 private:
-	Layer* _layer;								//当前场景图层
+	static Scene* _scene;						//当前场景
+	static Layer* _layer;						//当前场景图层
 	static SceneManager* s_sceneManager;		//场景管理者对象
 };
 

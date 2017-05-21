@@ -43,6 +43,13 @@ void Character::die()
 
 }
 
+void Character::move(const Vec3 & pos)
+{
+	atan(90);
+	this->setRotation3D(Vec3(0,90,0));
+	setPosition3D(getPosition3D() + pos);
+}
+
 bool Character::init()
 {
 	CCLOG("init");
@@ -53,41 +60,46 @@ Character * Character::create()
 {
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
-	des.shape = Physics3DShape::createBox(Vec3(1.0f, 2.0f, 1.0f));	//刚体大小
+	des.shape = Physics3DShape::createBox(Vec3(2.0f, 4.0f, 2.0f));	//刚体大小
 	auto character = new Character();
-	if (character && character->initWithFile("Sprite3DTest/box.c3t"))
+	
+	if (character && character->initWithFile("images/orc.c3b"))
 	{
 		auto obj = Physics3DRigidBody::create(&des);
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
 		character->_contentSize = character->getBoundingBox().size;
-		character->setTexture("images/Icon.png");
+		//character->setTexture("images/Icon.png");
 		character->autorelease();
 		character->setPosition3D(Vec3(0, 100, 0));
-		character->setScale(2.0f);
+		character->setScale(.3f);
 		character->syncNodeToPhysics();
 		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+		character->setCameraMask((unsigned int)CameraFlag::USER1);
 	}
 	else
 	{
 		delete character;
 		character = nullptr;
 	}
-	
 	return character;
 }
 
 void Character::update(float dt)
 {
 	CCLOG("update %f", dt);
+	Vec3 ret = Vec3::ZERO;
 	if (Joystick::getKeyW())
-		setPosition3D(getPosition3D() + Vec3(0, 0, -1));
+		ret += Vec3(0, 0, -1);
 	if (Joystick::getKeyA())
-		setPosition3D(getPosition3D() + Vec3(-1, 0, 0));
+		ret += Vec3(-1, 0, 0);
 	if (Joystick::getKeyS())
-		setPosition3D(getPosition3D() + Vec3(0, 0, 1));
+		ret += Vec3(0, 0, 1);
 	if (Joystick::getKeyD())
-		setPosition3D(getPosition3D() + Vec3(1, 0, 0));
+		ret += Vec3(1, 0, 0);
+	move(ret*getAttribute().getMovingSpeed());
+	GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ret*getAttribute().getMovingSpeed());
+	GameScene::getCamera()->lookAt(getPosition3D());
 	syncNodeToPhysics();
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 }
@@ -97,7 +109,7 @@ Character::Attribute::Attribute() :
 	_attackDamage(0),
 	_attackRange(0),
 	_attackSpeed(0),
-	_movingSpeed(1),
+	_movingSpeed(0.5f),
 	_empiricalAcquisition(0),
 	_defensiveForce(0),
 	_restoringAbility(0),

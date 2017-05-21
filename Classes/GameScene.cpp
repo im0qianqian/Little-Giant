@@ -30,7 +30,7 @@ bool GameScene::init()
 	{
 		GameScene::_gameState = kGameStateRuning;
 		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_WIDTH / SCREEN_HEIGHT, 1, 1000);
-		_camera->setPosition3D(Vec3(200, 200, 0));
+		_camera->setCameraFlag(CameraFlag::USER1);
 		addChild(_camera);
 		GameScene::_characterManager = CharacterManager::create();
 		GameScene::_stageManager = StageManager::create();

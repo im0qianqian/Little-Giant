@@ -64,7 +64,7 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 	
 	ret->syncNodeToPhysics();											//同步至物理世界
 	ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
-
+	ret->setCameraMask((unsigned int)CameraFlag::USER1);
 	CCLOG("attack success!!!");
 	return ret;
 }
