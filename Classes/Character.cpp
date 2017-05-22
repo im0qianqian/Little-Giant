@@ -1,7 +1,6 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
-#include "Joystick.h"
 
 Character::Character() :
 	_lifeValue(INITIAL_LIFE_VALUE),
@@ -34,7 +33,7 @@ void Character::addSorce(int add)
 void Character::attack(const Vec3 &pos)
 {
 	CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
-	CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
+	//CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
 	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 }
 
@@ -45,6 +44,9 @@ void Character::die()
 
 void Character::move(const Vec3 & pos)
 {
+	/* 上演一场滑冰运动吧~ */
+	//auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
+	//s->setLinearVelocity(s->getLinearVelocity() + pos);
 	setPosition3D(getPosition3D() + pos);
 }
 
@@ -58,19 +60,19 @@ Character * Character::create()
 {
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
-	des.shape = Physics3DShape::createBox(Vec3(2.0f, 4.0f, 2.0f));	//刚体大小
+	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
 	auto character = new Character();
 	
-	if (character && character->initWithFile("images/orc.c3b"))
+	if (character && character->initWithFile("Sprite3DTest/box.c3t"))
 	{
 		auto obj = Physics3DRigidBody::create(&des);
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
 		character->_contentSize = character->getBoundingBox().size;
-		//character->setTexture("images/Icon.png");
+		character->setTexture("images/Icon.png");
 		character->autorelease();
 		character->setPosition3D(Vec3(0, 100, 0));
-		character->setScale(.3f);
+		character->setScale(2.f);
 		character->syncNodeToPhysics();
 		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 		character->setCameraMask((unsigned int)CameraFlag::USER1);
@@ -87,17 +89,16 @@ void Character::update(float dt)
 {
 	CCLOG("update %f", dt);
 	Vec3 ret = Vec3::ZERO;
-	if (Joystick::getKeyW())
+	if (GameScene::getJoystick()->getKeyW())
 		ret += Vec3(0, 0, -1);
-	if (Joystick::getKeyA())
+	if (GameScene::getJoystick()->getKeyA())
 		ret += Vec3(-1, 0, 0);
-	if (Joystick::getKeyS())
+	if (GameScene::getJoystick()->getKeyS())
 		ret += Vec3(0, 0, 1);
-	if (Joystick::getKeyD())
+	if (GameScene::getJoystick()->getKeyD())
 		ret += Vec3(1, 0, 0);
 	move(ret*getAttribute().getMovingSpeed());
 	GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ret*getAttribute().getMovingSpeed());
-	GameScene::getCamera()->lookAt(getPosition3D());
 	syncNodeToPhysics();
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 }

@@ -7,6 +7,7 @@
 #include "StageManager.h"
 #include "AwardManager.h"
 #include "AudioManager.h"
+#include "Joystick.h"
 
 
 USING_NS_CC;
@@ -35,6 +36,12 @@ public:
 	static StageManager* getStage() { return _stageManager; }
 	/* 获取武器管理对象 */
 	static WeaponManager* getWeaponManager() { return _weaponManager; }
+	/* 获取奖励管理对象 */
+	static AwardManager *getAwardManager() { return _awardManager; }
+	/* 获取声音管理对象 */
+	static AudioManager *getAudioManager() { return _audioManager; }
+	/* 获取操作管理对象 */
+	static Joystick *getJoystick() { return _joystick; }
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
 private:
@@ -45,6 +52,7 @@ private:
 	static WeaponManager *_weaponManager;		//武器管理对象
 	static AwardManager *_awardManager;			//奖励管理对象
 	static AudioManager *_audioManager;			//声音管理对象
+	static Joystick *_joystick;					//操作管理对象
 };
 
 

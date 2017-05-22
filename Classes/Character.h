@@ -98,12 +98,12 @@ public:
 	void attack(const Vec3 &pos);
 	/* 死亡 */
 	void die();
-	/* 移动 */
-	void move(const Vec3 &pos);
 	virtual bool init();
 	static Character* create();
 private:
-	void update(float dt);
+	/* 移动 */
+	void move(const Vec3 &pos);
+	virtual void update(float dt);
 	int _dept;				//人物所属群落
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
