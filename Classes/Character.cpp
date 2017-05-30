@@ -1,6 +1,12 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
+#include "3d/CCTerrain.h"
+#include "3d/CCBundle3D.h"
+#include "physics\CCPhysicsBody.h"
+#include "Particle3D/PU/CCPUParticleSystem3D.h"
+
+USING_NS_CC;
 
 Character::Character() :
 	_lifeValue(INITIAL_LIFE_VALUE),
@@ -82,7 +88,18 @@ Character * Character::create()
 
 		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
 				if (!ci.collisionPointList.empty()) {
-					
+					if (ci.objB->getMask() != 0) {
+						auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+						ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
+						ps->setScale(0.05f);
+						ps->startParticleSystem();
+						ps->setCameraMask(2);
+						GameScene::getWeaponManager()->addChild(ps);
+						ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
+							ps->removeFromParent();
+						}), nullptr));
+						ci.objB->setMask(0);
+					}
 					CCLOG("---------------- peng zhuang --------------------");
 				}
 			}

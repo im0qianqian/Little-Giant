@@ -9,6 +9,7 @@
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
+
 using namespace cocos2d::ui;
 
 class Character :virtual public PhysicsSprite3D
