@@ -12,7 +12,7 @@ CharacterManager::~CharacterManager()
 }
 bool CharacterManager::init()
 {
-	startGame(0, 5);
+	startGame(0, 0);
 	return true;
 }
 

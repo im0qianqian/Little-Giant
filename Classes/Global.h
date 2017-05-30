@@ -42,4 +42,11 @@ const auto WORLD_HEIGHT = 1;		//世界高度
 /* 人物初始生命值 */
 const float INITIAL_LIFE_VALUE = 100;
 
+
+enum GlobalType
+{
+	kGlobalStage,
+	kGlobalCharacter,
+	kGlobalWeapon
+};
 #endif

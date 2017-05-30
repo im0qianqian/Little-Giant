@@ -53,6 +53,15 @@ void Character::move(const Vec3 & pos)
 bool Character::init()
 {
 	CCLOG("init");
+	_hpSlider = Slider::create();
+	_hpSlider->loadBarTexture("images/bloodbg.png");
+	_hpSlider->loadProgressBarTexture("images/blood.png");
+	_hpSlider->setTouchEnabled(false);
+	_hpSlider->setScale(.03f);
+	_hpSlider->setPercent(_lifeValue / INITIAL_LIFE_VALUE * 100.0);
+	_hpSlider->setRotation3D(Vec3(-90,0,0));
+	_hpSlider->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
+	addChild(_hpSlider);
 	return true;
 }
 
@@ -62,8 +71,7 @@ Character * Character::create()
 	des.mass = 50.f;			//暂定，人物质量设置为50
 	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
 	auto character = new Character();
-	
-	if (character && character->initWithFile("Sprite3DTest/box.c3t"))
+	if (character && character->initWithFile("Sprite3DTest/box.c3t") &&character->init())
 	{
 		auto obj = Physics3DRigidBody::create(&des);
 		character->_physicsComponent = Physics3DComponent::create(obj);
@@ -71,6 +79,14 @@ Character * Character::create()
 		character->_contentSize = character->getBoundingBox().size;
 		character->setTexture("images/Icon.png");
 		character->autorelease();
+
+		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
+				if (!ci.collisionPointList.empty()) {
+					
+					CCLOG("---------------- peng zhuang --------------------");
+				}
+			}
+		);
 		/* 生成随机数以确定随机位置 */
 		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 100, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
 
@@ -114,10 +130,6 @@ void Character::update(float dt)
 		if (attackTime > 10.f) {
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			attackTime /= 10.f;
-			Vec3 ret = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
-			ret.normalize();
-			move(ret*getAttribute().getMovingSpeed());
-			syncNodeToPhysics();
 		}
 		CCLOG("attack Time : %f", attackTime);
 	}

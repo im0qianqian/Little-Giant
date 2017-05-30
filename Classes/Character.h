@@ -5,9 +5,11 @@
 
 #include "cocos2d.h"
 #include "Weapons.h"
+#include "ui\UISlider.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
+using namespace cocos2d::ui;
 
 class Character :virtual public PhysicsSprite3D
 {
@@ -105,7 +107,9 @@ public:
 private:
 	/* 移动 */
 	void move(const Vec3 &pos);
+	/* 与 update 有关的函数 */
 	virtual void update(float dt);
+
 	int _dept;				//人物所属群落
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
@@ -113,7 +117,8 @@ private:
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
-	bool _isAutoMatic;		//人物是否自动操作
+	
+	Slider* _hpSlider;		//人物血量条
 };
 
 #endif

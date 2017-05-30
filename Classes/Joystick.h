@@ -24,12 +24,17 @@ private:
 	void keyboardListen();
 	/* 触屏监听 */
 	void touchListen();
+	/* 碰撞监听 */
+	void physicsListen();
 	/* 设置当前键盘按键状态 */
 	void setKeyState(EventKeyboard::KeyCode keyCode, bool state);
 	/* 鼠标三种事件 */
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
+
+	/* 碰撞事件 */
+	bool onContactBegin(const PhysicsContact& contact);
 	/* 一些按键 */
 	bool keyW;
 	bool keyA;

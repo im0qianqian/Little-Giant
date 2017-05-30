@@ -20,6 +20,7 @@ bool Joystick::init()
 {
 	keyboardListen();
 	touchListen();
+	physicsListen();
 	return true;
 }
 
@@ -87,7 +88,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 		Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
 		//CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
 		//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
-		Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
+		Vec3 c = Vec3(50.0f * sinf(_angle) + cam.x, 20.0f + cam.y, -50.0f * cosf(_angle) + cam.z);
 		//Vec3 c = camera->getPosition3D();
 		GameScene::getCamera()->setPosition3D(c);
 		//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
@@ -131,4 +132,35 @@ void Joystick::touchListen()
 	_listenerTouch->onTouchesEnded = CC_CALLBACK_2(Joystick::onTouchesEnded, this);
 	_listenerTouch->onTouchesBegan = CC_CALLBACK_2(Joystick::onTouchesBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listenerTouch, this);
+}
+
+void Joystick::physicsListen()
+{
+	auto listener = EventListenerPhysicsContact::create();
+	listener->onContactBegin = [](PhysicsContact& contact)
+	{
+		/*auto spriteA = (Sprite*)contact.getShapeA()->getBody()->getNode();
+		auto spriteB = (Sprite*)contact.getShapeB()->getBody()->getNode();
+
+		if (spriteA && spriteA->getTag() == 1
+			&& spriteB && spriteB->getTag() == 1)
+		{
+			spriteA->setColor(Color3B::YELLOW);
+			spriteB->setColor(Color3B::YELLOW);
+		}
+		*/
+		log("-------------------------------------------------------------");
+		return true;
+	};
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	/*auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(Joystick::onContactBegin, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);*/
+	CCLOG("zhu ce cheng gong");
+}
+
+bool Joystick::onContactBegin(const PhysicsContact& contact)
+{
+	CCLOG("peng zhuang~~~~~~~");
+	return true;
 }
