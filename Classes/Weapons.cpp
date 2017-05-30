@@ -1,5 +1,7 @@
 #include "Weapons.h"
 #include "Character.h"
+#include "GameScene.h"
+#include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Weapons::Weapons() :
 	_owner(nullptr),
@@ -14,6 +16,10 @@ Weapons::Weapons() :
 Weapons::~Weapons()
 {
 
+}
+
+void Weapons::update(float dt)
+{
 }
 
 
@@ -47,12 +53,31 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 		ret->_contentSize = ret->getBoundingBox().size;
 		ret->setTexture("images/Icon.png");
 		ret->autorelease();
+
+		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
+			if (!ci.collisionPointList.empty()) {
+				if (ci.objA->getMask() != 0) {
+					auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+					ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
+					ps->setScale(0.05f);
+					ps->startParticleSystem();
+					ps->setCameraMask((unsigned int)CameraFlag::USER1);
+					GameScene::getWeaponManager()->addChild(ps);
+					ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
+						ps->removeFromParent();
+					}), nullptr));
+					ci.objA->setMask(0);
+				}
+				CCLOG("---------------- peng zhuang --------------------");
+			}
+		}
+		);
 	}
 
 	Vec3 linearVel = ret->getEpos() - ret->getSpos();					//计算攻击方向的向量
 	linearVel.y = 0;													//沿水平方向打出
 	linearVel.normalize();												//单位化向量
-	ret->setPosition3D(ret->getSpos() + linearVel);						//设置箭矢起始点坐标
+	ret->setPosition3D(ret->getSpos() + 2 * linearVel + Vec3::UNIT_Y);						//设置箭矢起始点坐标
 	ret->setScale(0.5f);												//设置缩放大小
 	linearVel *= ret->getSpeed();										//速度向量
 	auto rigidBody = static_cast<Physics3DRigidBody*>(ret->getPhysicsObj());
@@ -61,7 +86,7 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 	rigidBody->setAngularVelocity(Vec3::ZERO);
 	rigidBody->setCcdMotionThreshold(0.5f);
 	rigidBody->setCcdSweptSphereRadius(0.4f);
-	
+
 	ret->syncNodeToPhysics();											//同步至物理世界
 	ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 	ret->setCameraMask((unsigned int)CameraFlag::USER1);

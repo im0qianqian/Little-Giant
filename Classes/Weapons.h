@@ -38,6 +38,7 @@ public:
 	virtual void setSpos(const Vec3 &spos) { _spos = spos; }
 	virtual void setEpos(const Vec3 &epos) { _epos = epos; }
 private:
+	virtual void update(float dt);
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度
