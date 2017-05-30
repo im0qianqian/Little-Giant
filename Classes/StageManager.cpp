@@ -1,5 +1,6 @@
 #include "StageManager.h"
 #include "GameScene.h"
+#include "Global.h"
 
 StageManager::StageManager()
 {
@@ -22,12 +23,12 @@ bool StageManager::init()
 	{
 		Physics3DRigidBodyDes rbDes;
 		rbDes.mass = 0.0f;
-		rbDes.shape = Physics3DShape::createBox(Vec3(1000.0f, 1.0f, 1000.0f));
+		rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, WORLD_HEIGHT, WORLD_WIDTH));
 
 		auto floor = PhysicsSprite3D::create("Sprite3DTest/box.c3t", &rbDes);
 		floor->setTexture("Sprite3DTest/plane.png");
-		floor->setScaleX(1000.0f);
-		floor->setScaleZ(1000.0f);
+		floor->setScaleX(WORLD_LENGTH);
+		floor->setScaleZ(WORLD_WIDTH);
 		addChild(floor);
 		floor->setCameraMask((unsigned int)CameraFlag::USER1);
 		floor->syncNodeToPhysics();
