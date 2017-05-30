@@ -92,7 +92,7 @@ void CharacterManager::onTouchesEnded(const std::vector<cocos2d::Touch*>& touche
 
 void CharacterManager::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event)
 {
-	/*
+	
 	if (!touches.empty())
 	{
 		auto touch = touches[0];
@@ -110,7 +110,7 @@ void CharacterManager::onTouchesMoved(const std::vector<cocos2d::Touch*>& touche
 		GameScene::getCamera()->lookAt(cam, Vec3::UNIT_Y);
 	}
 	event->stopPropagation();
-	*/
+	
 }
 
 

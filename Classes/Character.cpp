@@ -45,7 +45,9 @@ void Character::die()
 
 void Character::move(const Vec3 & pos)
 {
-	setPosition3D(getPosition3D() + pos);
+	auto a = static_cast<Physics3DRigidBody*>(getPhysicsObj());
+	a->setLinearVelocity(a->getLinearVelocity()+pos);
+	//setPosition3D(getPosition3D() + pos);
 }
 
 bool Character::init()
