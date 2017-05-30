@@ -92,6 +92,8 @@ public:
 	int getExperience() { return _experience; }
 	/* 获取当前得分 */
 	int getSorce() { return _sorce; }
+	/* 更改人物群落 */
+	void setDept(int dept) { _dept = dept; }
 	/* 获取当前人物属性 */
 	Attribute getAttribute() { return _attribute; }
 	/* 攻击 */
@@ -111,6 +113,7 @@ private:
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
+	bool _isAutoMatic;		//人物是否自动操作
 };
 
 #endif

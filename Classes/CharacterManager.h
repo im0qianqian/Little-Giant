@@ -19,17 +19,21 @@ public:
 	Character* getPlayerCharacter() { return _playerCharacter; }
 	/* 获取其他玩家 */
 	Vector<Character*> &getEnemyCharacter() { return _enemyCharacter; }
+	/* 开始游戏 创建盟友数量 + 敌人数量 */
+	void startGame(int ally, int enemy);
 	/* 暂停游戏 */
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
-	/* 创建玩家*/
-	Character* createPlayer();
-	/* 创建敌人 */
-	Character* createEnemy();
 private:
+	enum CharacterType
+	{
+		kCharacterPlayer,						//玩家
+		kCharacterAlly,							//盟友
+		kCharacterEnemy							//敌人
+	};
 	/* 创建人物 */
-	Character* createCharacter();
+	Character* createCharacter(CharacterType characterType);
 	Character* _playerCharacter;				//玩家人物
 	Vector<Character*> _enemyCharacter;			//其他人物
 };

@@ -29,6 +29,8 @@ bool GameScene::init()
 	bool flag = false;
 	do
 	{
+		/* 初始化时间种子 */
+		srand((unsigned)time(NULL));
 		/* 游戏状态 */
 		GameScene::_gameState = kGameStateRuning;
 		/* 摄像机 */

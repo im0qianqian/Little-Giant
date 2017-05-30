@@ -35,6 +35,11 @@ const auto SCREEN_WIDTH = 640;
 const auto SCREEN_HEIGHT = 960;
 const auto FORM_NAME = "Arrow.io";
 
+const auto WORLD_LENGTH = 1000;	//世界长度
+const auto WORLD_WIDTH = 1000;	//世界宽度
+const auto WORLD_HEIGHT = 1;		//世界高度
+
 /* 人物初始生命值 */
 const float INITIAL_LIFE_VALUE = 100;
+
 #endif

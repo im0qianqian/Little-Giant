@@ -71,7 +71,9 @@ Character * Character::create()
 		character->_contentSize = character->getBoundingBox().size;
 		character->setTexture("images/Icon.png");
 		character->autorelease();
-		character->setPosition3D(Vec3(0, 100, 0));
+		/* 生成随机数以确定随机位置 */
+		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 100, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
+
 		character->setScale(2.f);
 		character->syncNodeToPhysics();
 		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
@@ -88,19 +90,37 @@ Character * Character::create()
 void Character::update(float dt)
 {
 	CCLOG("update %f", dt);
-	Vec3 ret = Vec3::ZERO;
-	if (GameScene::getJoystick()->getKeyW())
-		ret += Vec3(0, 0, -1);
-	if (GameScene::getJoystick()->getKeyA())
-		ret += Vec3(-1, 0, 0);
-	if (GameScene::getJoystick()->getKeyS())
-		ret += Vec3(0, 0, 1);
-	if (GameScene::getJoystick()->getKeyD())
-		ret += Vec3(1, 0, 0);
-	move(ret*getAttribute().getMovingSpeed());
-	GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ret*getAttribute().getMovingSpeed());
-	syncNodeToPhysics();
-	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+	if (_dept == -1)
+	{
+		Vec3 ret = Vec3::ZERO;
+		if (GameScene::getJoystick()->getKeyW())
+			ret += Vec3(0, 0, -1);
+		if (GameScene::getJoystick()->getKeyA())
+			ret += Vec3(-1, 0, 0);
+		if (GameScene::getJoystick()->getKeyS())
+			ret += Vec3(0, 0, 1);
+		if (GameScene::getJoystick()->getKeyD())
+			ret += Vec3(1, 0, 0);
+		ret.normalize();
+		move(ret*getAttribute().getMovingSpeed());
+		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D() + ret*getAttribute().getMovingSpeed());
+		syncNodeToPhysics();
+		//setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+	}
+	else
+	{
+		static float attackTime = 0;
+		attackTime += dt;
+		if (attackTime > 10.f) {
+			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+			attackTime /= 10.f;
+			Vec3 ret = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+			ret.normalize();
+			move(ret*getAttribute().getMovingSpeed());
+			syncNodeToPhysics();
+		}
+		CCLOG("attack Time : %f", attackTime);
+	}
 }
 
 
