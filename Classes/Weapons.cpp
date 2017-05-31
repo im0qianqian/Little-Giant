@@ -53,7 +53,7 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 		ret->_contentSize = ret->getBoundingBox().size;
 		ret->setTexture("images/Icon.png");
 		ret->autorelease();
-
+		
 		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
 			if (!ci.collisionPointList.empty()) {
 				if (ci.objA->getMask() != 0) {

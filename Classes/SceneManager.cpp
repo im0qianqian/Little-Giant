@@ -37,6 +37,7 @@ void SceneManager::changeScene(SceneType sceneType)
 	switch (sceneType)
 	{
 	case kMenuScene:
+
 		break;
 	case kLoadingScene:
 		break;
