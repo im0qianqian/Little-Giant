@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
+#include "Joystick.h"
 
 USING_NS_CC;
 
@@ -22,6 +23,7 @@ Character::~Character()
 void Character::addLifeValue(float add)
 {
 	_lifeValue += add;
+	_hpSlider->setPercent(_lifeValue);
 }
 
 void Character::addExperience(int add)
@@ -61,7 +63,7 @@ bool Character::init()
 	_hpSlider->loadProgressBarTexture("images/blood.png");
 	_hpSlider->setTouchEnabled(false);
 	_hpSlider->setScale(.03f);
-	_hpSlider->setPercent(_lifeValue / INITIAL_LIFE_VALUE * 100.0);
+	_hpSlider->setPercent(_lifeValue);
 	_hpSlider->setRotation3D(Vec3(-90,0,0));
 	_hpSlider->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
 	addChild(_hpSlider);
@@ -80,6 +82,10 @@ Character * Character::create()
 		auto obj = Physics3DRigidBody::create(&des);
 		// 碰撞检测中会用到
 		obj->setUserData(character);
+		//obj->setUserData("i am a boy");
+
+		// 设置碰撞后的回调函数
+		obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());
 
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
@@ -87,7 +93,6 @@ Character * Character::create()
 		character->setTexture("images/Icon.png");
 		character->autorelease();
 
-		
 		/* 生成随机数以确定随机位置 */
 		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 20, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
 

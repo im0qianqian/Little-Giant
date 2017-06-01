@@ -1,6 +1,7 @@
 #include "Joystick.h"
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Joystick::Joystick() :
 	keyW(false),
@@ -20,7 +21,6 @@ bool Joystick::init()
 {
 	keyboardListen();
 	touchListen();
-	physicsListen();
 	return true;
 }
 
@@ -98,6 +98,84 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 
 }
 
+
+
+std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollision()
+{
+	return [&](const Physics3DCollisionInfo&ci)
+	{
+		if (!ci.collisionPointList.empty()) {
+			if (ci.objA->getMask() != 0) {
+				/* 武器碰撞粒子特效 */
+				auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+				ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
+				ps->setScale(0.05f);
+				ps->startParticleSystem();
+				ps->setCameraMask((unsigned int)CameraFlag::USER1);
+				GameScene::getWeaponManager()->addChild(ps);
+				ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
+					ps->removeFromParent();
+				}), nullptr));
+				ci.objA->setMask(0);
+
+				//CCLOG("user data aa : %s", ci.objA->getUserData());
+				//CCLOG("user data bb : %s", ci.objB->getUserData());
+
+				/* 获取两个碰撞对象 */
+				auto *objA = static_cast<Node*>(ci.objA->getUserData());
+				auto *objB = static_cast<Node*>(ci.objB->getUserData());
+				CCASSERT(objA, "OBJ A NULL");
+				CCASSERT(objB, "OBJ B NULL");
+				if (objA != NULL && objB != NULL)
+				{
+					CCLOG("---------------- weapon stage --------------------");
+					CCLOG("tag aa : %d", objA->Node::getTag());
+					CCLOG("tag bb : %d", objB->Node::getTag());
+					/*
+					* 因为武器对象在从父类图层中删除的时候写成 removeFromParent() 总是会出现内存冲突，
+					* 所以先写成把武器对象移动到看不到的地方骗骗玩家的眼睛
+					* 武器与地面等障碍物碰撞
+					*/
+					if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))
+					{
+						Weapons *weapon;
+						if (objA->Node::getTag() == kGlobalWeapon)
+						{
+							weapon = dynamic_cast<Weapons*>(objA);
+						}
+						else if (objB->Node::getTag() == kGlobalWeapon)
+						{
+							weapon = dynamic_cast<Weapons*>(objB);
+						}
+						// 这里改变武器位置到 (0,-100,0) 这一点
+						weapon->setPosition3D(-Vec3::UNIT_Y * 100);
+						// 同步到物理世界
+						weapon->syncNodeToPhysics();
+					}
+					/* 武器与人物碰撞 */
+					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))
+					{
+						// 如果 A 是武器的话交换，最终结果： A 人物、B 武器
+						if (objA->Node::getTag() == kGlobalWeapon)
+						{
+							swap(objA, objB);
+						}
+						Weapons *weapon = dynamic_cast<Weapons*>(objB);
+						Character *character = dynamic_cast<Character*>(objA);
+						character->addLifeValue(-weapon->getPower()/10.0);
+						cout << "life life -------------------------------> " << character->getLifeValue() << endl;
+						// 这里改变武器位置到 (0,-100,0) 这一点
+						weapon->setPosition3D(-Vec3::UNIT_Y * 100);
+						// 同步到物理世界
+						weapon->syncNodeToPhysics();
+					}
+				}
+				
+			}
+		}
+	};
+}
+
 void Joystick::keyboardListen()
 {
 	/* 创建键盘监听器 */
@@ -134,33 +212,3 @@ void Joystick::touchListen()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listenerTouch, this);
 }
 
-void Joystick::physicsListen()
-{
-	auto listener = EventListenerPhysicsContact::create();
-	listener->onContactBegin = [](PhysicsContact& contact)
-	{
-		/*auto spriteA = (Sprite*)contact.getShapeA()->getBody()->getNode();
-		auto spriteB = (Sprite*)contact.getShapeB()->getBody()->getNode();
-
-		if (spriteA && spriteA->getTag() == 1
-			&& spriteB && spriteB->getTag() == 1)
-		{
-			spriteA->setColor(Color3B::YELLOW);
-			spriteB->setColor(Color3B::YELLOW);
-		}
-		*/
-		log("-------------------------------------------------------------");
-		return true;
-	};
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-	/*auto contactListener = EventListenerPhysicsContact::create();
-	contactListener->onContactBegin = CC_CALLBACK_1(Joystick::onContactBegin, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);*/
-	CCLOG("zhu ce cheng gong");
-}
-
-bool Joystick::onContactBegin(const PhysicsContact& contact)
-{
-	CCLOG("peng zhuang~~~~~~~");
-	return true;
-}

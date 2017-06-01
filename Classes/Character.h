@@ -12,7 +12,7 @@ USING_NS_CC;
 
 using namespace cocos2d::ui;
 
-class Character :virtual public PhysicsSprite3D
+class Character :public PhysicsSprite3D
 {
 public:
 	class Attribute

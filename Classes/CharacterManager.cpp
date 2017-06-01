@@ -13,6 +13,7 @@ CharacterManager::~CharacterManager()
 bool CharacterManager::init()
 {
 	startGame(0, 100);
+	schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
 }
 
@@ -35,6 +36,18 @@ void CharacterManager::pauseGame()
 
 void CharacterManager::resumeGame()
 {
+}
+
+void CharacterManager::update(float dt)
+{
+	for (auto i : getEnemyCharacter())
+	{
+		if (i->getLifeValue() <= 0)
+		{
+			//getEnemyCharacter().erase(i);
+			i->removeFromParent();
+		}
+	}
 }
 
 Character * CharacterManager::createCharacter(CharacterType characterType)

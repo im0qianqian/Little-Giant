@@ -26,6 +26,7 @@ public:
 	/* ¼ÌĞøÓÎÏ· */
 	void resumeGame();
 private:
+	void update(float dt);
 	enum CharacterType
 	{
 		kCharacterPlayer,						//Íæ¼Ò
