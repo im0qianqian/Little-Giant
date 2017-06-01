@@ -1,10 +1,6 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
-#include "3d/CCTerrain.h"
-#include "3d/CCBundle3D.h"
-#include "physics\CCPhysicsBody.h"
-#include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 USING_NS_CC;
 
@@ -86,24 +82,7 @@ Character * Character::create()
 		character->setTexture("images/Icon.png");
 		character->autorelease();
 
-		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
-				if (!ci.collisionPointList.empty()) {
-					if (ci.objB->getMask() != 0) {
-						auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
-						ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
-						ps->setScale(0.05f);
-						ps->startParticleSystem();
-						ps->setCameraMask(2);
-						GameScene::getWeaponManager()->addChild(ps);
-						ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
-							ps->removeFromParent();
-						}), nullptr));
-						ci.objB->setMask(0);
-					}
-					//CCLOG("---------------- peng zhuang --------------------");
-				}
-			}
-		);
+		
 		/* 生成随机数以确定随机位置 */
 		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 100, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
 
@@ -122,7 +101,7 @@ Character * Character::create()
 
 void Character::update(float dt)
 {
-	//CCLOG("update %f", dt);
+	CCLOG("update %f", dt);
 	if (_dept == -1)
 	{
 		Vec3 ret = Vec3::ZERO;
@@ -144,13 +123,8 @@ void Character::update(float dt)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
-		/*Vec3 res = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
-		res.normalize();
-		move(res*getAttribute().getMovingSpeed());
-		syncNodeToPhysics();*/
 		if (attackTime > 10.f) {
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
-			
 			attackTime /= 10.f;
 		}
 		CCLOG("attack Time : %f", attackTime);
