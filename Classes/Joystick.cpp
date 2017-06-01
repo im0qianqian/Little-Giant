@@ -64,7 +64,7 @@ void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos
 		Vec3 dir(farP - nearP);
 		float dist = 0.0f;
 		float ndd = Vec3::dot(Vec3(0, 1, 0), dir);
-		float ndo = Vec3::dot(Vec3(0, 1, 0), nearP);
+		float ndo = Vec3::dot(Vec3(0, 1, 0), nearP);    
 		dist = (0 - ndo) / ndd;
 		Vec3 p = nearP + dist *  dir;
 		//CCLOG("%f %f %f", getPlayerCharacter()->getPosition3D().x, getPlayerCharacter()->getPosition3D().y, getPlayerCharacter()->getPosition3D().z);

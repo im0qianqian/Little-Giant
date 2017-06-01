@@ -100,7 +100,7 @@ Character * Character::create()
 						}), nullptr));
 						ci.objB->setMask(0);
 					}
-					CCLOG("---------------- peng zhuang --------------------");
+					//CCLOG("---------------- peng zhuang --------------------");
 				}
 			}
 		);
@@ -122,7 +122,7 @@ Character * Character::create()
 
 void Character::update(float dt)
 {
-	CCLOG("update %f", dt);
+	//CCLOG("update %f", dt);
 	if (_dept == -1)
 	{
 		Vec3 ret = Vec3::ZERO;
@@ -144,8 +144,13 @@ void Character::update(float dt)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
+		/*Vec3 res = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+		res.normalize();
+		move(res*getAttribute().getMovingSpeed());
+		syncNodeToPhysics();*/
 		if (attackTime > 10.f) {
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+			
 			attackTime /= 10.f;
 		}
 		CCLOG("attack Time : %f", attackTime);
