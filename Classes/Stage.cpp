@@ -31,8 +31,11 @@ Stage* Stage::create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const
 		ret->_contentSize = ret->getBoundingBox().size;
 		ret->setTexture(texture);
 		ret->autorelease();
-		return ret;
 	}
-	CC_SAFE_DELETE(ret);
+	else
+	{
+		delete ret;
+		ret = nullptr;
+	}
 	return ret;
 }

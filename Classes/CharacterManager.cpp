@@ -12,7 +12,7 @@ CharacterManager::~CharacterManager()
 }
 bool CharacterManager::init()
 {
-	startGame(0, 10);
+	startGame(0, 100);
 	return true;
 }
 
@@ -40,19 +40,21 @@ void CharacterManager::resumeGame()
 Character * CharacterManager::createCharacter(CharacterType characterType)
 {
 	auto character = Character::create();
-	addChild(character);
-	if (characterType == kCharacterPlayer)
+	if (character != NULL)
 	{
-		_playerCharacter = character;
-		_playerCharacter->setDept(-1);
-		GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x , 40, character->getPosition3D().z+40));
-		GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x,0, character->getPosition3D().z));
+		if (characterType == kCharacterPlayer)
+		{
+			_playerCharacter = character;
+			_playerCharacter->setDept(-1);
+			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x, 40, character->getPosition3D().z + 40));
+			GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x, 0, character->getPosition3D().z));
+		}
+		else
+		{
+			_enemyCharacter.pushBack(character);
+		}
+		addChild(character);
 	}
-	else
-	{
-		_enemyCharacter.pushBack(character);
-	}
-	//character->setTag(characterType);
 	return character;
 }
 

@@ -45,7 +45,7 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 	rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
 
 	auto ret = new Arrow(owner, spos, epos);							//创建一枚箭矢
-	CCLOG("arrow tag: %d", ret->getTag());
+	CCLOG("arrow ads: %d", ret);
 
 	if (ret && ret->initWithFile("Sprite3DTest/box.c3t"))
 	{
@@ -59,10 +59,11 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 		ret->_contentSize = ret->getBoundingBox().size;
 		ret->setTexture("images/Icon.png");
 		ret->autorelease();
-		
+
 		obj->setCollisionCallback([&](const Physics3DCollisionInfo &ci) {
 			if (!ci.collisionPointList.empty()) {
 				if (ci.objA->getMask() != 0) {
+					/* 武器碰撞粒子特效 */
 					auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
 					ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
 					ps->setScale(0.05f);
@@ -72,64 +73,66 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 					ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
 						ps->removeFromParent();
 					}), nullptr));
-					
-					try
+
+					/* 获取两个碰撞对象 */
+					auto *objA = static_cast<Node*>(ci.objA->getUserData());
+					auto *objB = static_cast<Node*>(ci.objB->getUserData());
+					CCASSERT(objA, "OBJ A NULL");
+					CCASSERT(objB, "OBJ B NULL");
+					if (objA != NULL && objB != NULL)
 					{
-						auto *objA = static_cast<Node*>(ci.objA->getUserData());
-						auto *objB = static_cast<Node*>(ci.objB->getUserData());
-
-						CCASSERT(objA, "OBJ A NULL");
-						CCASSERT(objB, "OBJ B NULL");
-						if (objA&&objB)
+						CCLOG("---------------- weapon stage --------------------");
+						CCLOG("tag aa : %d", objA->Node::getTag());
+						CCLOG("tag bb : %d", objB->Node::getTag());
+						/*
+						 * 因为武器对象在从父类图层中删除的时候写成 removeFromParent() 总是会出现内存冲突，
+						 * 所以先写成把武器对象移动到看不到的地方骗骗玩家的眼睛
+						 */
+						if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))
 						{
-							CCLOG("tag aa : %d", objA->Node::getTag());
-							CCLOG("tag bb : %d", objB->Node::getTag());
-
-							if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))
+							Weapons *weapon;
+							if (objA->Node::getTag() == kGlobalWeapon)
 							{
-								if (objA->Node::getTag() == kGlobalStage)
-									swap(objA, objB);
-								objA->removeFromParent();
-								cout << "============================" << endl;
+								weapon = dynamic_cast<Weapons*>(objA);
 							}
-							else
+							else if(objB->Node::getTag() == kGlobalWeapon)
 							{
-								cout << "++++++++++++++++++++++++++++++++" << endl;
+								weapon = dynamic_cast<Weapons*>(objB);
 							}
+							// 这里改变武器位置到 (0,-100,0) 这一点
+							weapon->setPosition3D(-Vec3::UNIT_Y * 100);
+							// 同步到物理世界
+							weapon->syncNodeToPhysics();
 						}
 					}
-					catch (const std::exception&)
-					{
-						
-					}
-					
-					//CCLOG("user data a: %s", ci.objA->getUserData());
-					
-					CCLOG("---------------- peng zhuang --------------------");
 					ci.objA->setMask(0);
 				}
 			}
-		}
-		);
+		});
+
+		Vec3 linearVel = ret->getEpos() - ret->getSpos();					//计算攻击方向的向量
+		linearVel.y = 0;													//沿水平方向打出
+		linearVel.normalize();												//单位化向量
+		ret->setPosition3D(ret->getSpos() + 2 * linearVel + Vec3::UNIT_Y);						//设置箭矢起始点坐标
+		ret->setScale(0.5f);												//设置缩放大小
+		linearVel *= ret->getSpeed();										//速度向量
+		auto rigidBody = static_cast<Physics3DRigidBody*>(ret->getPhysicsObj());
+		rigidBody->setLinearFactor(Vec3::ONE);
+		rigidBody->setLinearVelocity(linearVel);
+		rigidBody->setAngularVelocity(Vec3::ZERO);
+		rigidBody->setCcdMotionThreshold(0.5f);
+		rigidBody->setCcdSweptSphereRadius(0.4f);
+
+		ret->syncNodeToPhysics();											//同步至物理世界
+		ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+		ret->setCameraMask((unsigned int)CameraFlag::USER1);
+
 	}
-
-	Vec3 linearVel = ret->getEpos() - ret->getSpos();					//计算攻击方向的向量
-	linearVel.y = 0;													//沿水平方向打出
-	linearVel.normalize();												//单位化向量
-	ret->setPosition3D(ret->getSpos() + 2 * linearVel + Vec3::UNIT_Y);						//设置箭矢起始点坐标
-	ret->setScale(0.5f);												//设置缩放大小
-	linearVel *= ret->getSpeed();										//速度向量
-	auto rigidBody = static_cast<Physics3DRigidBody*>(ret->getPhysicsObj());
-	rigidBody->setLinearFactor(Vec3::ONE);
-	rigidBody->setLinearVelocity(linearVel);
-	rigidBody->setAngularVelocity(Vec3::ZERO);
-	rigidBody->setCcdMotionThreshold(0.5f);
-	rigidBody->setCcdSweptSphereRadius(0.4f);
-
-	ret->syncNodeToPhysics();											//同步至物理世界
-	ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
-	ret->setCameraMask((unsigned int)CameraFlag::USER1);
-	//CCLOG("attack success!!!");
+	else
+	{
+		delete ret;
+		ret = nullptr;
+	}
 	return ret;
 }
 

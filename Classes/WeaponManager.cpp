@@ -10,12 +10,12 @@ WeaponManager::~WeaponManager()
 
 bool WeaponManager::init()
 {
+	schedule(schedule_selector(WeaponManager::update), 1.f);
 	return true;
 }
 
 void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos)
 {
-	CCLOG("create success!");
 	Weapons *weapon = nullptr;
 	switch (weaponType)
 	{
@@ -31,5 +31,21 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 	default:
 		break;
 	}
-	addChild(weapon);
+	if (weapon != NULL)
+	{
+		addChild(weapon);
+	}
+}
+
+void WeaponManager::update(float dt)
+{
+	cout << "-----------------> children countL " << getChildrenCount() << endl;
+	for (auto i : getChildren())
+	{
+		CCASSERT(i, "NULL");
+		if (i->getPosition3D().y < 0)
+		{
+			i->removeFromParent();
+		}
+	}
 }

@@ -44,7 +44,6 @@ private:
 	float _speed;			//攻击速度
 	Vec3 _spos;				//攻击起始点坐标
 	Vec3 _epos;				//攻击点坐标
-	
 };
 
 class Arrow :public Weapons

@@ -51,15 +51,7 @@ enum GlobalType
 };
 
 /* 判断 a 与 b 是否分别属于某两种对象 */
-inline bool gObjectEqual(const int &a,const int &b, const GlobalType &_a, const GlobalType &_b)
-{
-	bool flag = false;
-	if ((a == _a&&b == _b) || (a == _b&&b == _a))
-	{
-		flag = true;
-	}
-	return flag;
-}
+#define gObjectEqual(a,b,_a,_b) ((a==_a&&b==_b)||(a==_b&&b==_a))
 
 // 调试使用
 #include <iostream>

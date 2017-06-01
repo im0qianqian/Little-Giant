@@ -15,5 +15,6 @@ public:
 	virtual bool init();
 	/* 创建武器进行攻击 */
 	void createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos);
+	void update(float dt);
 };
 #endif
