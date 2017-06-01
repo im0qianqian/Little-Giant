@@ -52,7 +52,7 @@ Character * CharacterManager::createCharacter(CharacterType characterType)
 	{
 		_enemyCharacter.pushBack(character);
 	}
-	character->setTag(characterType);
+	//character->setTag(characterType);
 	return character;
 }
 

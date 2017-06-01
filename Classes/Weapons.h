@@ -16,7 +16,7 @@ enum WeaponType
 	kWeaponDart
 };
 
-class Weapons :public PhysicsSprite3D
+class Weapons : public PhysicsSprite3D
 {
 public:
 	Weapons();
@@ -44,9 +44,10 @@ private:
 	float _speed;			//攻击速度
 	Vec3 _spos;				//攻击起始点坐标
 	Vec3 _epos;				//攻击点坐标
+	
 };
 
-class Arrow :virtual public Weapons
+class Arrow :public Weapons
 {
 public:
 	Arrow(void *owner, Vec3 spos, Vec3 epos);
@@ -54,7 +55,7 @@ public:
 	static Arrow* create(void *owner, Vec3 spos, Vec3 epos);
 };
 
-class Bomb :virtual public Weapons
+class Bomb :public Weapons
 {
 public:
 	Bomb(void *owner, Vec3 spos, Vec3 epos);
@@ -62,7 +63,7 @@ public:
 	static Bomb* create(void *owner, Vec3 spos, Vec3 epos);
 };
 
-class Dart :virtual public Weapons
+class Dart :public Weapons
 {
 public:
 	Dart(void *owner, Vec3 spos, Vec3 epos);

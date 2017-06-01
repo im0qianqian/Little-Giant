@@ -118,7 +118,6 @@ private:
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
-	
 	Slider* _hpSlider;		//人物血量条
 };
 

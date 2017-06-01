@@ -2,15 +2,16 @@
 #define __STAGE_H__
 
 #include "cocos2d.h"
+#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
-class Stage :public Sprite3D
+class Stage :public PhysicsSprite3D
 {
 public:
 	Stage();
 	~Stage();
 	virtual bool init();
-	CREATE_FUNC(Stage);
+	static Stage* create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const std::string &texture);
 };
 #endif

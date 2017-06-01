@@ -11,6 +11,8 @@ Character::Character() :
 	_weaponType(kWeaponArrow),
 	_isDie(false)
 {
+	// 设置属于人物标签
+	setTag(kGlobalCharacter);
 }
 
 Character::~Character()
@@ -34,7 +36,7 @@ void Character::addSorce(int add)
 
 void Character::attack(const Vec3 &pos)
 {
-	CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
+	//CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
 	//CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
 	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 }
@@ -54,7 +56,6 @@ void Character::move(const Vec3 & pos)
 
 bool Character::init()
 {
-	CCLOG("init");
 	_hpSlider = Slider::create();
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
@@ -72,10 +73,14 @@ Character * Character::create()
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
 	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+
 	auto character = new Character();
 	if (character && character->initWithFile("Sprite3DTest/box.c3t") &&character->init())
 	{
 		auto obj = Physics3DRigidBody::create(&des);
+		// 碰撞检测中会用到
+		obj->setUserData(character);
+
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
 		character->_contentSize = character->getBoundingBox().size;
@@ -84,11 +89,11 @@ Character * Character::create()
 
 		
 		/* 生成随机数以确定随机位置 */
-		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 100, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
+		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 20, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
 
 		character->setScale(2.f);
 		character->syncNodeToPhysics();
-		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
 		character->setCameraMask((unsigned int)CameraFlag::USER1);
 	}
 	else
@@ -101,7 +106,7 @@ Character * Character::create()
 
 void Character::update(float dt)
 {
-	CCLOG("update %f", dt);
+	//CCLOG("update %f", dt);
 	if (_dept == -1)
 	{
 		Vec3 ret = Vec3::ZERO;
@@ -127,7 +132,7 @@ void Character::update(float dt)
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			attackTime /= 10.f;
 		}
-		CCLOG("attack Time : %f", attackTime);
+		//CCLOG("attack Time : %f", attackTime);
 	}
 }
 

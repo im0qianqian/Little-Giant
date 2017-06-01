@@ -10,7 +10,8 @@ Weapons::Weapons() :
 	_spos(Vec3::ZERO),
 	_epos(Vec3::ZERO)
 {
-
+	// 武器标签
+	setTag(kGlobalWeapon);
 }
 
 Weapons::~Weapons()
@@ -44,10 +45,15 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 	rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
 
 	auto ret = new Arrow(owner, spos, epos);							//创建一枚箭矢
+	CCLOG("arrow tag: %d", ret->getTag());
 
 	if (ret && ret->initWithFile("Sprite3DTest/box.c3t"))
 	{
 		auto obj = Physics3DRigidBody::create(&rbDes);
+
+		// 设置用户数据为武器对象，碰撞检测中会使用
+		obj->setUserData(ret);
+
 		ret->_physicsComponent = Physics3DComponent::create(obj);
 		ret->addComponent(ret->_physicsComponent);
 		ret->_contentSize = ret->getBoundingBox().size;
@@ -66,9 +72,42 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 					ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
 						ps->removeFromParent();
 					}), nullptr));
+					
+					try
+					{
+						auto *objA = static_cast<Node*>(ci.objA->getUserData());
+						auto *objB = static_cast<Node*>(ci.objB->getUserData());
+
+						CCASSERT(objA, "OBJ A NULL");
+						CCASSERT(objB, "OBJ B NULL");
+						if (objA&&objB)
+						{
+							CCLOG("tag aa : %d", objA->Node::getTag());
+							CCLOG("tag bb : %d", objB->Node::getTag());
+
+							if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))
+							{
+								if (objA->Node::getTag() == kGlobalStage)
+									swap(objA, objB);
+								objA->removeFromParent();
+								cout << "============================" << endl;
+							}
+							else
+							{
+								cout << "++++++++++++++++++++++++++++++++" << endl;
+							}
+						}
+					}
+					catch (const std::exception&)
+					{
+						
+					}
+					
+					//CCLOG("user data a: %s", ci.objA->getUserData());
+					
+					CCLOG("---------------- peng zhuang --------------------");
 					ci.objA->setMask(0);
 				}
-				CCLOG("---------------- peng zhuang --------------------");
 			}
 		}
 		);
@@ -90,7 +129,7 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 	ret->syncNodeToPhysics();											//同步至物理世界
 	ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 	ret->setCameraMask((unsigned int)CameraFlag::USER1);
-	CCLOG("attack success!!!");
+	//CCLOG("attack success!!!");
 	return ret;
 }
 
