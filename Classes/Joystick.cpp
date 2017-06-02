@@ -107,7 +107,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 		if (!ci.collisionPointList.empty()) {
 			if (ci.objA->getMask() != 0) {
 				/* ÎäÆ÷Åö×²Á£×ÓÌØÐ§ */
-				/*auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+				auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
 				ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
 				ps->setScale(0.05f);
 				ps->startParticleSystem();
@@ -115,7 +115,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				GameScene::getWeaponManager()->addChild(ps);
 				ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
 					ps->removeFromParent();
-				}), nullptr));*/
+				}), nullptr));
 				ci.objA->setMask(0);
 
 				//CCLOG("user data aa : %s", ci.objA->getUserData());

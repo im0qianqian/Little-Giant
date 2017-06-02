@@ -47,7 +47,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("sounds");
 
     // 从游戏菜单界面加载
-	SceneManager::getInstance()->changeScene(kLoadingScene);
+	SceneManager::getInstance()->changeScene(kGameScene);
 
     return true;
 }

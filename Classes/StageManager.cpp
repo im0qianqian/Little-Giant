@@ -34,7 +34,15 @@ bool StageManager::init()
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 
 		/* 这部分创建四周的墙壁 */
-		rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, WORLD_HEIGHT, WORLD_WIDTH));
+		/*rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, 20, 1));
+		auto pd = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
+		pd->setScaleX(WORLD_LENGTH);
+		pd->setScaleY(20);
+		addChild(pd);
+		pd->setPosition3D(Vec3::UNIT_Z*WORLD_WIDTH/2);
+		pd->setCameraMask((unsigned int)CameraFlag::USER1);
+		pd->syncNodeToPhysics();
+		pd->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);*/
 		/* */
 
 		//create several boxes using PhysicsSprite3D

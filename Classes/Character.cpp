@@ -117,12 +117,12 @@ Character * Character::create()
 
 void Character::beAttacked(const Weapons * weapon)
 {
-	addLifeValue(-weapon->getPower() / 10.0);	//受到攻击先掉血
+	addLifeValue(-weapon->getPower() / 1.0);	//受到攻击先掉血
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
 	cout << "life life -------------------------------> " << getLifeValue() << endl;
 
 	// 如果血量小于0，则死亡
-	if (getLifeValue() < 0)
+	if (getLifeValue() <= 0)
 		die();
 }
 

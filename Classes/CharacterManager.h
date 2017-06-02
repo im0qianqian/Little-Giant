@@ -41,6 +41,6 @@ private:
 	Character* createCharacter(CharacterType characterType);
 	Character* _playerCharacter;				//玩家人物
 	set<Character*> _enemyCharacter;			//其他人物
-	Vector<Character*> _destroyList;				//销毁列表
+	Vector<Character*> _destroyList;			//销毁列表
 };
 #endif // __CHARACTER_MANAGER_H__
