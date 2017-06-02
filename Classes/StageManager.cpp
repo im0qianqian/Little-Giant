@@ -32,7 +32,10 @@ bool StageManager::init()
 		_ground->setCameraMask((unsigned int)CameraFlag::USER1);
 		_ground->syncNodeToPhysics();
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
-		CCLOG("I am a ground ,my address is & %d", _ground);
+
+		/* 这部分创建四周的墙壁 */
+		rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, WORLD_HEIGHT, WORLD_WIDTH));
+		/* */
 
 		//create several boxes using PhysicsSprite3D
 		rbDes.mass = 1.f;

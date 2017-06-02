@@ -32,7 +32,7 @@ SceneManager* SceneManager::getInstance()
 	return s_sceneManager;
 }
 
-void SceneManager::changeScene(SceneType sceneType)
+void SceneManager::changeScene(const SceneType &sceneType)
 {
 	_scene = Scene::createWithPhysics();
 	switch (sceneType)

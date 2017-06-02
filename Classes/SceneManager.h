@@ -25,7 +25,7 @@ public:
 	/* 获取当前场景管理者 */
 	static SceneManager* getInstance();
 	/* 切换场景 */
-	void changeScene(SceneType sceneType);
+	void changeScene(const SceneType &sceneType);
 	/* 获取当前场景 */
 	static Scene* getScene() { return _scene; }
 	/* 获取当前图层 */
