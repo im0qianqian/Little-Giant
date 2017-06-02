@@ -128,46 +128,30 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				CCASSERT(objB, "OBJ B NULL");
 				if (objA != NULL && objB != NULL)
 				{
-					CCLOG("---------------- weapon stage --------------------");
 					CCLOG("tag aa : %d", objA->Node::getTag());
 					CCLOG("tag bb : %d", objB->Node::getTag());
-					/*
-					* 因为武器对象在从父类图层中删除的时候写成 removeFromParent() 总是会出现内存冲突，
-					* 所以先写成把武器对象移动到看不到的地方骗骗玩家的眼睛
-					* 武器与地面等障碍物碰撞
-					*/
-					if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))
+					
+					if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))		//武器与障碍物碰撞
 					{
-						Weapons *weapon;
-						if (objA->Node::getTag() == kGlobalWeapon)
-						{
-							weapon = dynamic_cast<Weapons*>(objA);
-						}
-						else if (objB->Node::getTag() == kGlobalWeapon)
-						{
-							weapon = dynamic_cast<Weapons*>(objB);
-						}
-						// 这里改变武器位置到 (0,-100,0) 这一点
-						weapon->setPosition3D(-Vec3::UNIT_Y * 100);
-						// 同步到物理世界
-						weapon->syncNodeToPhysics();
+						CCLOG("---------------- weapon stage --------------------");
+						// 如果 A 是障碍物的话交换，最终结果： A 武器、B 障碍物
+						if (objA->Node::getTag() == kGlobalStage)
+							swap(objA, objB);
+						Weapons *weapon = dynamic_cast<Weapons*>(objA);
+						weapon->destroy();
 					}
-					/* 武器与人物碰撞 */
-					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))
+					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//武器与人物碰撞
 					{
+						CCLOG("---------------- weapon character --------------------");
 						// 如果 A 是武器的话交换，最终结果： A 人物、B 武器
 						if (objA->Node::getTag() == kGlobalWeapon)
-						{
 							swap(objA, objB);
-						}
 						Weapons *weapon = dynamic_cast<Weapons*>(objB);
 						Character *character = dynamic_cast<Character*>(objA);
-						character->addLifeValue(-weapon->getPower()/10.0);
-						cout << "life life -------------------------------> " << character->getLifeValue() << endl;
-						// 这里改变武器位置到 (0,-100,0) 这一点
-						weapon->setPosition3D(-Vec3::UNIT_Y * 100);
-						// 同步到物理世界
-						weapon->syncNodeToPhysics();
+						// 人物受到攻击
+						character->beAttacked(weapon);
+						// 删除武器对象
+						weapon->destroy();
 					}
 				}
 				

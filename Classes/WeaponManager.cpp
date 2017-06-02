@@ -37,15 +37,25 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 	}
 }
 
+void WeaponManager::addDestroyWeapon(Weapons *weapon)
+{
+	_destroyList.pushBack(weapon);
+}
+
 void WeaponManager::update(float dt)
 {
-	cout << "-----------------> children countL " << getChildrenCount() << endl;
-	for (auto i : getChildren())
+	/* 每次 update 销毁一次不可见的武器 */
+	destroyInvisibleWeapons();
+}
+
+void WeaponManager::destroyInvisibleWeapons()
+{
+	cout << "-----------------> _destroyList count " << _destroyList.size() << endl;
+	while (!_destroyList.empty())
 	{
-		CCASSERT(i, "NULL");
-		if (i->getPosition3D().y < 0)
-		{
-			i->removeFromParent();
-		}
+		auto *w = _destroyList.back();
+		CCASSERT(w, "NULL");
+		w->removeFromParent();
+		_destroyList.popBack();
 	}
 }

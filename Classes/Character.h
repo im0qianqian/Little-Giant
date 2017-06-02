@@ -105,6 +105,8 @@ public:
 	void die();
 	virtual bool init();
 	static Character* create();
+	/* ÊÜµ½ÎäÆ÷¹¥»÷ */
+	void beAttacked(const Weapons *weapon);
 private:
 	/* ÒÆ¶¯ */
 	void move(const Vec3 &pos);

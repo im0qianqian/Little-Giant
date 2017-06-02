@@ -37,6 +37,8 @@ public:
 	virtual void setSpeed(const float &speed) { _speed = speed; }
 	virtual void setSpos(const Vec3 &spos) { _spos = spos; }
 	virtual void setEpos(const Vec3 &epos) { _epos = epos; }
+	/* 销毁 */
+	virtual void destroy();
 private:
 	virtual void update(float dt);
 	void *_owner;			//武器所属人物

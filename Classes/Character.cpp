@@ -23,7 +23,6 @@ Character::~Character()
 void Character::addLifeValue(float add)
 {
 	_lifeValue += add;
-	_hpSlider->setPercent(_lifeValue);
 }
 
 void Character::addExperience(int add)
@@ -45,7 +44,7 @@ void Character::attack(const Vec3 &pos)
 
 void Character::die()
 {
-
+	GameScene::getCharacterManager()->addDestroyCharacter(this);
 }
 
 void Character::move(const Vec3 & pos)
@@ -107,6 +106,17 @@ Character * Character::create()
 		character = nullptr;
 	}
 	return character;
+}
+
+void Character::beAttacked(const Weapons * weapon)
+{
+	addLifeValue(-weapon->getPower() / 10.0);	//受到攻击先掉血
+	_hpSlider->setPercent(_lifeValue);			//更新血量条
+	cout << "life life -------------------------------> " << getLifeValue() << endl;
+
+	// 如果血量小于0，则死亡
+	if (getLifeValue() < 0)
+		die();
 }
 
 void Character::update(float dt)

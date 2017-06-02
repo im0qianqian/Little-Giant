@@ -17,6 +17,11 @@ bool CharacterManager::init()
 	return true;
 }
 
+void CharacterManager::addDestroyCharacter(Character * character)
+{
+	_destroyList.pushBack(character);
+}
+
 void CharacterManager::startGame(int ally, int enemy)
 {
 	createCharacter(kCharacterPlayer);
@@ -38,16 +43,22 @@ void CharacterManager::resumeGame()
 {
 }
 
+void CharacterManager::destroyDeadCharacters()
+{
+	cout << "-----------------> _destroyList characters count " << _destroyList.size() << endl;
+	while (!_destroyList.empty())
+	{
+		auto *w = _destroyList.back();
+		CCASSERT(w, "NULL");
+		w->removeFromParent();
+		_destroyList.popBack();
+	}
+}
+
 void CharacterManager::update(float dt)
 {
-	for (auto i : getEnemyCharacter())
-	{
-		if (i->getLifeValue() <= 0)
-		{
-			//getEnemyCharacter().erase(i);
-			i->removeFromParent();
-		}
-	}
+	// 每次 update 删除已经死亡的玩家
+	destroyDeadCharacters();
 }
 
 Character * CharacterManager::createCharacter(CharacterType characterType)

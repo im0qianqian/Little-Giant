@@ -20,6 +20,22 @@ Weapons::~Weapons()
 
 }
 
+/*
+ * 因为武器对象在从父类图层中删除的时候写成 removeFromParent() 总是会出现内存冲突，
+ * 所以先写成把武器对象移动到看不到的地方骗骗玩家的眼睛
+ * 武器与地面等障碍物碰撞
+ */
+
+void Weapons::destroy()
+{
+	// 这里改变武器位置到 (0,-100,0) 这一点
+	setPosition3D(-Vec3::UNIT_Y);
+	// 同步到物理世界
+	syncNodeToPhysics();
+	// 添加到武器删除队列中
+	GameScene::getWeaponManager()->addDestroyWeapon(this);
+}
+
 void Weapons::update(float dt)
 {
 }
