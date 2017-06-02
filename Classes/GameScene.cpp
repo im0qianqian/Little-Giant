@@ -17,7 +17,7 @@ Joystick *GameScene::_joystick = nullptr;
 GameScene::GameScene()
 {
 
-}
+} 
 
 GameScene::~GameScene()
 {
