@@ -54,8 +54,18 @@ void WeaponManager::destroyInvisibleWeapons()
 	for (auto i : _destroyList)
 	{
 		CCASSERT(i, "NULL");
-		i->removeFromParent();
+		removeChild(i);
 	}
 	_destroyList.clear();
 	cout << "-----------------> weapons count " << getChildrenCount() << endl;
+}
+
+void WeaponManager::createCachePool()
+{
+	// »º´æ³ØÇå¿Õ
+	_weaponsCachePool.clear();
+	for (auto i = 0; i < _cachePoolSize; i++)
+	{
+		
+	}
 }

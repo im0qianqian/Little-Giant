@@ -88,7 +88,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 		Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
 		//CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
 		//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
-		Vec3 c = Vec3(50.0f * sinf(_angle) + cam.x, 20.0f + cam.y, -50.0f * cosf(_angle) + cam.z);
+		Vec3 c = Vec3(50.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -50.0f * cosf(_angle) + cam.z);
 		//Vec3 c = camera->getPosition3D();
 		GameScene::getCamera()->setPosition3D(c);
 		//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
@@ -138,6 +138,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 						if (objA->Node::getTag() == kGlobalStage)
 							swap(objA, objB);
 						Weapons *weapon = dynamic_cast<Weapons*>(objA);
+						//weapon->removeFromParent();
 						weapon->destroy();
 					}
 					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//武器与人物碰撞
@@ -156,11 +157,11 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//武器与武器碰撞
 					{
 						CCLOG("---------------- weapon weapon --------------------");
-						Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
-						Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
+						//Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
+						//Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
 						// 删除武器对象
-						weapon1->destroy();
-						weapon2->destroy();
+						//weapon1->destroy();
+						//weapon2->destroy();
 					}
 				}
 				

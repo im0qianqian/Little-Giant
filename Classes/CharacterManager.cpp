@@ -50,7 +50,8 @@ void CharacterManager::destroyDeadCharacters()
 	{
 		CCASSERT(i, "NULL");
 		_enemyCharacter.erase(i);	//先从敌人列表中删除对象
-		i->removeFromParent();		//从图层中删除敌人
+		removeChild(i);
+		//i->removeFromParent();		//从图层中删除敌人
 	}
 	_destroyList.clear();
 	cout << "-----------------> _enemyCharacter characters count " << _enemyCharacter.size() << endl;

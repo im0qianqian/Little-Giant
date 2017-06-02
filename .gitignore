@@ -41,6 +41,7 @@ cocos2d/
 proj.*/
 !proj.win32/
 proj.win32/Debug*
+proj.win32/Release*
 .vs/
 
 

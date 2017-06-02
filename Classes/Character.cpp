@@ -93,6 +93,8 @@ Character * Character::create()
 		// 设置碰撞后的回调函数
 		obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());
 
+		obj->setCcdSweptSphereRadius(.4f);
+
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
 		character->_contentSize = character->getBoundingBox().size;

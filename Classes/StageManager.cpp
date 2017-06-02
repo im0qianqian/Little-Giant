@@ -34,15 +34,23 @@ bool StageManager::init()
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 
 		/* 这部分创建四周的墙壁 */
-		/*rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, 20, 1));
-		auto pd = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
-		pd->setScaleX(WORLD_LENGTH);
-		pd->setScaleY(20);
-		addChild(pd);
-		pd->setPosition3D(Vec3::UNIT_Z*WORLD_WIDTH/2);
-		pd->setCameraMask((unsigned int)CameraFlag::USER1);
-		pd->syncNodeToPhysics();
-		pd->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);*/
+		rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, 20, 1));
+		auto pd1 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/brickwork-texture.jpg");
+		pd1->setScaleX(WORLD_LENGTH);
+		pd1->setScaleY(20);
+		addChild(pd1);
+		pd1->setPosition3D(Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 20 / 2);
+		pd1->setCameraMask((unsigned int)CameraFlag::USER1);
+		pd1->syncNodeToPhysics();
+		pd1->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
+		auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
+		pd2->setScaleX(WORLD_LENGTH);
+		pd2->setScaleY(20);
+		addChild(pd2);
+		pd2->setPosition3D(-Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 20 / 2);
+		pd2->setCameraMask((unsigned int)CameraFlag::USER1);
+		pd2->syncNodeToPhysics();
+		pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 		/* */
 
 		//create several boxes using PhysicsSprite3D
