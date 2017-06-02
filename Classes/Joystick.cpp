@@ -24,7 +24,7 @@ bool Joystick::init()
 	return true;
 }
 
-void Joystick::setKeyState(EventKeyboard::KeyCode keyCode, bool state)
+void Joystick::setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &state)
 {
 	switch (keyCode)
 	{
@@ -107,7 +107,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 		if (!ci.collisionPointList.empty()) {
 			if (ci.objA->getMask() != 0) {
 				/* ÎäÆ÷Åö×²Á£×ÓÌØÐ§ */
-				auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+				/*auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
 				ps->setPosition3D(ci.collisionPointList[0].worldPositionOnB);
 				ps->setScale(0.05f);
 				ps->startParticleSystem();
@@ -115,7 +115,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				GameScene::getWeaponManager()->addChild(ps);
 				ps->runAction(Sequence::create(DelayTime::create(1.0f), CallFunc::create([=]() {
 					ps->removeFromParent();
-				}), nullptr));
+				}), nullptr));*/
 				ci.objA->setMask(0);
 
 				//CCLOG("user data aa : %s", ci.objA->getUserData());
@@ -152,6 +152,15 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 						character->beAttacked(weapon);
 						// É¾³ýÎäÆ÷¶ÔÏó
 						weapon->destroy();
+					}
+					else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//ÎäÆ÷ÓëÎäÆ÷Åö×²
+					{
+						CCLOG("---------------- weapon weapon --------------------");
+						Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
+						Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
+						// É¾³ýÎäÆ÷¶ÔÏó
+						weapon1->destroy();
+						weapon2->destroy();
 					}
 				}
 				

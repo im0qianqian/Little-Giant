@@ -37,7 +37,7 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 	}
 }
 
-void WeaponManager::addDestroyWeapon(Weapons *weapon)
+void WeaponManager::addDestroyWeapon(Weapons * const &weapon)
 {
 	_destroyList.pushBack(weapon);
 }
@@ -51,11 +51,11 @@ void WeaponManager::update(float dt)
 void WeaponManager::destroyInvisibleWeapons()
 {
 	cout << "-----------------> _destroyList count " << _destroyList.size() << endl;
-	while (!_destroyList.empty())
+	for (auto i : _destroyList)
 	{
-		auto *w = _destroyList.back();
-		CCASSERT(w, "NULL");
-		w->removeFromParent();
-		_destroyList.popBack();
+		CCASSERT(i, "NULL");
+		i->removeFromParent();
 	}
+	_destroyList.clear();
+	cout << "-----------------> weapons count " << getChildrenCount() << endl;
 }

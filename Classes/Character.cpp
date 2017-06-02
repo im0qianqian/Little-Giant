@@ -44,7 +44,14 @@ void Character::attack(const Vec3 &pos)
 
 void Character::die()
 {
-	GameScene::getCharacterManager()->addDestroyCharacter(this);
+	if (getDept() != -1)	// 其他人物死亡
+	{
+		GameScene::getCharacterManager()->addDestroyCharacter(this);
+	}
+	else	//自己死亡
+	{
+
+	}
 }
 
 void Character::move(const Vec3 & pos)
@@ -145,6 +152,7 @@ void Character::update(float dt)
 		attackTime += dt;
 		if (attackTime > 10.f) {
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+
 			attackTime /= 10.f;
 		}
 		//CCLOG("attack Time : %f", attackTime);

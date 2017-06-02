@@ -16,13 +16,13 @@ public:
 	CREATE_FUNC(CharacterManager);
 	virtual bool init();
 	/* 获取玩家人物 */
-	Character* getPlayerCharacter() { return _playerCharacter; }
+	Character* getPlayerCharacter() const { return _playerCharacter; }
 	/* 获取其他玩家 */
-	Vector<Character*> &getEnemyCharacter() { return _enemyCharacter; }
+	set<Character*> &getEnemyCharacter() { return _enemyCharacter; }
 	/* 添加销毁对象 */
-	void addDestroyCharacter(Character *character);
+	void addDestroyCharacter(Character * const &character);
 	/* 开始游戏 创建盟友数量 + 敌人数量 */
-	void startGame(int ally, int enemy);
+	void startGame(const int &ally,const int &enemy);
 	/* 暂停游戏 */
 	void pauseGame();
 	/* 继续游戏 */
@@ -40,7 +40,7 @@ private:
 	/* 创建人物 */
 	Character* createCharacter(CharacterType characterType);
 	Character* _playerCharacter;				//玩家人物
-	Vector<Character*> _enemyCharacter;			//其他人物
-	Vector<Character*> _destroyList;			//销毁列表
+	set<Character*> _enemyCharacter;			//其他人物
+	Vector<Character*> _destroyList;				//销毁列表
 };
 #endif // __CHARACTER_MANAGER_H__

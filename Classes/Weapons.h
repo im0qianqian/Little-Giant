@@ -32,7 +32,7 @@ public:
 	/* 获取目标点坐标 */
 	virtual Vec3 getEpos() const { return _epos; }
 	/* SET */
-	virtual void setOwner(void *owner) { _owner = owner; }
+	virtual void setOwner(void * const &owner) { _owner = owner; }
 	virtual void setPower(const float &power) { _power = power; }
 	virtual void setSpeed(const float &speed) { _speed = speed; }
 	virtual void setSpos(const Vec3 &spos) { _spos = spos; }
@@ -40,7 +40,6 @@ public:
 	/* 销毁 */
 	virtual void destroy();
 private:
-	virtual void update(float dt);
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度

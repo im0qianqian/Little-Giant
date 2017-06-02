@@ -36,11 +36,6 @@ void Weapons::destroy()
 	GameScene::getWeaponManager()->addDestroyWeapon(this);
 }
 
-void Weapons::update(float dt)
-{
-}
-
-
 Arrow::Arrow(void * owner, Vec3 spos, Vec3 epos)
 {
 	setOwner(owner);

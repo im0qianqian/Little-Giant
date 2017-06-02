@@ -15,10 +15,10 @@ public:
 	CREATE_FUNC(Joystick);
 	
 	/* GET */
-	bool getKeyW() { return keyW; }
-	bool getKeyA() { return keyA; }
-	bool getKeyS() { return keyS; }
-	bool getKeyD() { return keyD; }
+	bool getKeyW() const { return keyW; }
+	bool getKeyA() const { return keyA; }
+	bool getKeyS() const { return keyS; }
+	bool getKeyD() const { return keyD; }
 
 	/* 碰撞事件 */
 	std::function<void(const Physics3DCollisionInfo &ci)> onPhysics3DCollision();
@@ -29,7 +29,7 @@ private:
 	void touchListen();
 
 	/* 设置当前键盘按键状态 */
-	void setKeyState(EventKeyboard::KeyCode keyCode, bool state);
+	void setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &state);
 	/* 鼠标三种事件 */
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
