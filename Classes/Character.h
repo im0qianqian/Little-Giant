@@ -12,7 +12,7 @@ USING_NS_CC;
 
 using namespace cocos2d::ui;
 
-class Character :virtual public PhysicsSprite3D
+class Character :public PhysicsSprite3D
 {
 public:
 	class Attribute
@@ -105,6 +105,8 @@ public:
 	void die();
 	virtual bool init();
 	static Character* create();
+	/* 受到武器攻击 */
+	void beAttacked(const Weapons *weapon);
 private:
 	/* 移动 */
 	void move(const Vec3 &pos);
@@ -118,7 +120,6 @@ private:
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
-	
 	Slider* _hpSlider;		//人物血量条
 };
 

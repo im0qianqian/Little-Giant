@@ -49,4 +49,12 @@ enum GlobalType
 	kGlobalCharacter,
 	kGlobalWeapon
 };
+
+/* 判断 a 与 b 是否分别属于某两种对象 */
+#define gObjectEqual(a,b,_a,_b) ((a==_a&&b==_b)||(a==_b&&b==_a))
+
+// 调试使用
+#include <iostream>
+using namespace std;
+
 #endif

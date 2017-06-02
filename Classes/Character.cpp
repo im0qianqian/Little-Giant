@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "Global.h"
 #include "GameScene.h"
+#include "Joystick.h"
 
 USING_NS_CC;
 
@@ -11,6 +12,8 @@ Character::Character() :
 	_weaponType(kWeaponArrow),
 	_isDie(false)
 {
+	// 设置属于人物标签
+	setTag(kGlobalCharacter);
 }
 
 Character::~Character()
@@ -34,14 +37,14 @@ void Character::addSorce(int add)
 
 void Character::attack(const Vec3 &pos)
 {
-	CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
+	//CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
 	//CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
 	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 }
 
 void Character::die()
 {
-
+	GameScene::getCharacterManager()->addDestroyCharacter(this);
 }
 
 void Character::move(const Vec3 & pos)
@@ -54,13 +57,12 @@ void Character::move(const Vec3 & pos)
 
 bool Character::init()
 {
-	CCLOG("init");
 	_hpSlider = Slider::create();
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
 	_hpSlider->setTouchEnabled(false);
 	_hpSlider->setScale(.03f);
-	_hpSlider->setPercent(_lifeValue / INITIAL_LIFE_VALUE * 100.0);
+	_hpSlider->setPercent(_lifeValue);
 	_hpSlider->setRotation3D(Vec3(-90,0,0));
 	_hpSlider->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
 	addChild(_hpSlider);
@@ -72,23 +74,30 @@ Character * Character::create()
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
 	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+
 	auto character = new Character();
 	if (character && character->initWithFile("Sprite3DTest/box.c3t") &&character->init())
 	{
 		auto obj = Physics3DRigidBody::create(&des);
+		// 碰撞检测中会用到
+		obj->setUserData(character);
+		//obj->setUserData("i am a boy");
+
+		// 设置碰撞后的回调函数
+		obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());
+
 		character->_physicsComponent = Physics3DComponent::create(obj);
 		character->addComponent(character->_physicsComponent);
 		character->_contentSize = character->getBoundingBox().size;
 		character->setTexture("images/Icon.png");
 		character->autorelease();
 
-		
 		/* 生成随机数以确定随机位置 */
-		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 100, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
+		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 20, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
 
 		character->setScale(2.f);
 		character->syncNodeToPhysics();
-		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
+		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
 		character->setCameraMask((unsigned int)CameraFlag::USER1);
 	}
 	else
@@ -99,9 +108,20 @@ Character * Character::create()
 	return character;
 }
 
+void Character::beAttacked(const Weapons * weapon)
+{
+	addLifeValue(-weapon->getPower() / 10.0);	//受到攻击先掉血
+	_hpSlider->setPercent(_lifeValue);			//更新血量条
+	cout << "life life -------------------------------> " << getLifeValue() << endl;
+
+	// 如果血量小于0，则死亡
+	if (getLifeValue() < 0)
+		die();
+}
+
 void Character::update(float dt)
 {
-	CCLOG("update %f", dt);
+	//CCLOG("update %f", dt);
 	if (_dept == -1)
 	{
 		Vec3 ret = Vec3::ZERO;
@@ -127,7 +147,7 @@ void Character::update(float dt)
 			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			attackTime /= 10.f;
 		}
-		CCLOG("attack Time : %f", attackTime);
+		//CCLOG("attack Time : %f", attackTime);
 	}
 }
 

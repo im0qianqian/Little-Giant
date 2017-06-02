@@ -19,6 +19,8 @@ public:
 	Character* getPlayerCharacter() { return _playerCharacter; }
 	/* 获取其他玩家 */
 	Vector<Character*> &getEnemyCharacter() { return _enemyCharacter; }
+	/* 添加销毁对象 */
+	void addDestroyCharacter(Character *character);
 	/* 开始游戏 创建盟友数量 + 敌人数量 */
 	void startGame(int ally, int enemy);
 	/* 暂停游戏 */
@@ -26,6 +28,9 @@ public:
 	/* 继续游戏 */
 	void resumeGame();
 private:
+	/* 销毁已死亡的人物 */
+	void destroyDeadCharacters();
+	void update(float dt);
 	enum CharacterType
 	{
 		kCharacterPlayer,						//玩家
@@ -36,5 +41,6 @@ private:
 	Character* createCharacter(CharacterType characterType);
 	Character* _playerCharacter;				//玩家人物
 	Vector<Character*> _enemyCharacter;			//其他人物
+	Vector<Character*> _destroyList;			//销毁列表
 };
 #endif // __CHARACTER_MANAGER_H__
