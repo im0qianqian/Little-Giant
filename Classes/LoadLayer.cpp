@@ -21,7 +21,7 @@ bool LoadLayer::init()
 	loadLabel->setPosition(Point(visibleSize.width / 2 - 30, visibleSize.height / 2 + 30));
 	this->addChild(loadLabel,1);
 
-	percentLabel = Label::create("0%", "arial", 30);
+	percentLabel = Label::create("       0%", "arial", 30);
 	CCLOG("####%d %d", visibleSize.width / 2, visibleSize.height / 2);
 	percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
 	this->addChild(percentLabel, 2);
