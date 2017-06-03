@@ -44,16 +44,16 @@ bool LoadLayer::init()
 
 	CCLOG("PASS2");
 
-	/*for (int i = 1; i <= 500; i++)
+	for (int i = 1; i <= 500; i++)
 	{
 		CCLOG("PASS3,%d",i);
 		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::LoadingCallback,this));
-	}*/
-	for (int i = 1; i <= 500; i++)
+	}
+	/*for (int i = 1; i <= 500; i++)
 	{
 		CCLOG("#########" + i);
 		LoadLayer::LoadingCallback();
-	}
+	}*/
 	return true;
 
 }
