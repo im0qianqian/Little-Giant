@@ -164,7 +164,7 @@ void Character::update(float dt)
 		static float attackTime = 0;
 		attackTime += dt;
 		if (attackTime > 10.f) {
-			//attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			attackTime /= 10.f;
 		}
 	}
