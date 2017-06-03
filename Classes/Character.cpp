@@ -159,7 +159,7 @@ void Character::update(float dt)
 		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D() + ret*getAttribute().getMovingSpeed());
 		syncNodeToPhysics();
 	}
-	else
+	else if(!_isDie)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
