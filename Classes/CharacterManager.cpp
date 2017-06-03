@@ -1,7 +1,5 @@
 #include "CharacterManager.h"
 #include "GameScene.h"
-#include "Joystick.h"
-#include "SceneManager.h"
 
 CharacterManager::CharacterManager()
 {
@@ -15,7 +13,7 @@ bool CharacterManager::init()
 	// 第一步先创建缓存池
 	createCachePool();
 	// 第二步创建人物
-	startGame(0, 100);
+	startGame(0, 50);
 	schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
 }

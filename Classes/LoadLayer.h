@@ -1,8 +1,9 @@
 #ifndef __LoadLayer_H__
 #define __LoadLayer_H__
+
 #include "cocos2d.h"
 using namespace cocos2d;
-#pragma once
+
 class LoadLayer:public cocos2d::Layer
 {
 public :

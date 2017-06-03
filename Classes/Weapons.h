@@ -4,7 +4,6 @@
 #define __WEAPONS_H__
 
 #include "cocos2d.h"
-#include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;

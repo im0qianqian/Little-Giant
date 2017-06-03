@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Character.h"
+#include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
@@ -18,7 +19,7 @@ public:
 	/* 获取玩家人物 */
 	Character* getPlayerCharacter() const { return _playerCharacter; }
 	/* 获取其他玩家 */
-	set<Character*> &getEnemyCharacter() { return _enemyCharacter; }
+	std::set<Character*> &getEnemyCharacter() { return _enemyCharacter; }
 	/* 开始游戏 创建盟友数量 + 敌人数量 */
 	void startGame(const int &ally,const int &enemy);
 	/* 暂停游戏 */
@@ -38,10 +39,10 @@ public:
 private:
 	/* 从缓存池中获取一个人物对象 */
 	Character *getCharacterFromPool();
-	Character* _playerCharacter;				//玩家人物
-	set<Character*> _enemyCharacter;			//其他人物
-	const int _cachePoolSize = 100;				// 缓存池容量（场上同时存在多少人物）
-	void createCachePool();						// 创建缓存池
-	Vector<Character*> _characterCachePool;		// 武器对象缓冲池
+	Character* _playerCharacter;						//玩家人物
+	std::set<Character*> _enemyCharacter;					//其他人物
+	const int _cachePoolSize = CHARACTER_CACHE_SIZE;	// 缓存池容量（场上同时存在多少人物）
+	void createCachePool();								// 创建缓存池
+	Vector<Character*> _characterCachePool;				// 武器对象缓冲池
 };
 #endif // __CHARACTER_MANAGER_H__

@@ -1,5 +1,4 @@
 #include "Character.h"
-#include "Global.h"
 #include "GameScene.h"
 #include "Joystick.h"
 

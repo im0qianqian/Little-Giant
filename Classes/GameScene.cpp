@@ -1,6 +1,4 @@
 #include "GameScene.h"
-#include "Global.h"
-#include "cocostudio/CocoStudio.h"
 
 USING_NS_CC;
 

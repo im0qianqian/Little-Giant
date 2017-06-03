@@ -1,6 +1,5 @@
 #include "StageManager.h"
 #include "GameScene.h"
-#include "Global.h"
 
 StageManager::StageManager()
 {
@@ -39,7 +38,7 @@ bool StageManager::init()
 		pd1->setScaleX(WORLD_LENGTH);
 		pd1->setScaleY(20);
 		addChild(pd1);
-		pd1->setPosition3D(Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 20 / 2);
+		pd1->setPosition3D(Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 6 / 2);
 		pd1->setCameraMask((unsigned int)CameraFlag::USER1);
 		pd1->syncNodeToPhysics();
 		pd1->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
@@ -47,7 +46,7 @@ bool StageManager::init()
 		pd2->setScaleX(WORLD_LENGTH);
 		pd2->setScaleY(20);
 		addChild(pd2);
-		pd2->setPosition3D(-Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 20 / 2);
+		pd2->setPosition3D(-Vec3::UNIT_Z*WORLD_WIDTH / 2 + Vec3::UNIT_Y * 6 / 2);
 		pd2->setCameraMask((unsigned int)CameraFlag::USER1);
 		pd2->syncNodeToPhysics();
 		pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
