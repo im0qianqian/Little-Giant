@@ -12,7 +12,7 @@ public :
 	virtual bool init();
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(LoadLayer);
-	void LoadingCallback(Ref *pSender);
+	void LoadingCallback();
 private:
 	ProgressTimer *timer;
 	int totalImage;

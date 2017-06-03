@@ -24,6 +24,7 @@ void AppDelegate::initGLContextAttrs()
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
+
 bool AppDelegate::applicationDidFinishLaunching() {
     // initialize director
     auto director = Director::getInstance();
@@ -45,9 +46,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
     FileUtils::getInstance()->addSearchPath("fonts");
 	FileUtils::getInstance()->addSearchPath("images");
 	FileUtils::getInstance()->addSearchPath("sounds");
+	FileUtils::getInstance()->addSearchPath("res");
 
     // 从游戏菜单界面加载
-	SceneManager::getInstance()->changeScene(kGameScene);
+	SceneManager::getInstance()->changeScene(kLoadingScene);
 
     return true;
 }
