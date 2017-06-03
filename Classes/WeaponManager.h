@@ -20,7 +20,7 @@ public:
 	/* 添加一个武器对象到缓存池 */
 	void addWeaponToPool(Weapons * const &weapon) { _weaponsCachePool.pushBack(weapon); }
 private:
-	const int _cachePoolSize = 300;
+	const int _cachePoolSize = 100;		// 缓存池容量（场上同时发射的武器数目）
 	void createCachePool();				// 创建缓存池
 	Vector<Weapons*> _weaponsCachePool;	// 武器对象缓冲池
 };

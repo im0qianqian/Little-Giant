@@ -40,7 +40,7 @@ private:
 	Character *getCharacterFromPool();
 	Character* _playerCharacter;				//玩家人物
 	set<Character*> _enemyCharacter;			//其他人物
-	const int _cachePoolSize = 100;
+	const int _cachePoolSize = 100;				// 缓存池容量（场上同时存在多少人物）
 	void createCachePool();						// 创建缓存池
 	Vector<Character*> _characterCachePool;		// 武器对象缓冲池
 };

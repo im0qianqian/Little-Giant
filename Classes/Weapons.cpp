@@ -102,6 +102,15 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	syncNodeToPhysics();												//同步至物理世界
 }
 
+void Weapons::update(float dt)
+{
+	// 如果不在场上并且没有删除
+	if (getPositionY() < 0 && !_isDeleted)
+	{
+		destroy();
+	}
+}
+
 Arrow::Arrow(void * owner, Vec3 spos, Vec3 epos)
 {
 	setOwner(owner);

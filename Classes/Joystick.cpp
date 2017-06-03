@@ -115,7 +115,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				bool flag = true;	// 是否输出碰撞 Tag 调试使用
 
 				//判断位置合法，暂用(场外位置不考虑碰撞)
-				if ((objA->Node::getPositionY() < 0 && objB->Node::getPositionY() < 0))return;
+				if (ci.collisionPointList[0].worldPositionOnB.y < 0)return;
 
 				if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))		//武器与障碍物碰撞
 				{

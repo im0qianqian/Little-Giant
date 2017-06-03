@@ -73,7 +73,6 @@ bool StageManager::init()
 					auto sprite = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
 					sprite->setPosition3D(Vec3(x, y, z));
 					sprite->syncNodeToPhysics();
-					sprite->setVisible(false);
 					sprite->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 					sprite->setCameraMask((unsigned short)CameraFlag::USER1);
 					sprite->setScale(0.8f);

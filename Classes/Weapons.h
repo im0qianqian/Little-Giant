@@ -45,6 +45,7 @@ public:
 	virtual bool init();
 	virtual void init(void * const &owner, const Vec3 &spos, const Vec3 &epos);
 private:
+	void update(float dt);
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度
