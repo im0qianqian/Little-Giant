@@ -10,13 +10,15 @@ WeaponManager::~WeaponManager()
 
 bool WeaponManager::init()
 {
-	schedule(schedule_selector(WeaponManager::update), 1.f);
+	// 创建缓存池
+	createCachePool();
+	//schedule(schedule_selector(WeaponManager::update), 1.f);
 	return true;
 }
 
 void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos)
 {
-	Weapons *weapon = nullptr;
+	/*Weapons *weapon = nullptr;
 	switch (weaponType)
 	{
 	case kWeaponArrow:
@@ -34,30 +36,27 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 	if (weapon != NULL)
 	{
 		addChild(weapon);
-	}
-}
-
-void WeaponManager::addDestroyWeapon(Weapons * const &weapon)
-{
-	_destroyList.pushBack(weapon);
-}
-
-void WeaponManager::update(float dt)
-{
-	/* 每次 update 销毁一次不可见的武器 */
-	destroyInvisibleWeapons();
-}
-
-void WeaponManager::destroyInvisibleWeapons()
-{
-	cout << "-----------------> _destroyList count " << _destroyList.size() << endl;
-	for (auto i : _destroyList)
+	}*/
+	Weapons *weapon = getWeaponFromPool();
+	cout << weapon << endl;
+	if (weapon != NULL)
 	{
-		CCASSERT(i, "NULL");
-		removeChild(i);
+		CCASSERT(weapon, "NULL");
+		weapon->init(owner, spos, epos);
 	}
-	_destroyList.clear();
-	cout << "-----------------> weapons count " << getChildrenCount() << endl;
+}
+
+Weapons * WeaponManager::getWeaponFromPool()
+{
+	Weapons* weapon = nullptr;
+	if (!_weaponsCachePool.empty())
+	{
+		weapon = _weaponsCachePool.back();
+		_weaponsCachePool.popBack();
+	}
+	cout << "成功从缓存池中获取一个武器对象：" << weapon << endl;
+	cout << "武器缓存池大小剩余：" << _weaponsCachePool.size() << endl;
+	return weapon;
 }
 
 void WeaponManager::createCachePool()
@@ -66,6 +65,9 @@ void WeaponManager::createCachePool()
 	_weaponsCachePool.clear();
 	for (auto i = 0; i < _cachePoolSize; i++)
 	{
-		
+		Weapons* p = Weapons::create();
+		_weaponsCachePool.pushBack(p);
+		addChild(p);	//添加到图层
 	}
+	cout << "武器缓存池大小剩余：" << _weaponsCachePool.size() << endl;
 }

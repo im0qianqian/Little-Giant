@@ -39,12 +39,18 @@ public:
 	virtual void setEpos(const Vec3 &epos) { _epos = epos; }
 	/* 销毁 */
 	virtual void destroy();
+	/* 创建 */
+	CREATE_FUNC(Weapons);
+	/* 初始化属性 */
+	virtual bool init();
+	virtual void init(void * const &owner, const Vec3 &spos, const Vec3 &epos);
 private:
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度
 	Vec3 _spos;				//攻击起始点坐标
 	Vec3 _epos;				//攻击点坐标
+	bool _isDeleted;		//是否已经被删除（是否存在于缓存池中）
 };
 
 class Arrow :public Weapons

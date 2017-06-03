@@ -22,6 +22,9 @@ public:
 
 	/* 碰撞事件 */
 	std::function<void(const Physics3DCollisionInfo &ci)> onPhysics3DCollision();
+
+	/* 暂定、创建光效 */
+	void createParticle(const Vec3 &pos);
 private:
 	/* 键盘监听 */
 	void keyboardListen();

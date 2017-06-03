@@ -9,7 +9,8 @@ Weapons::Weapons() :
 	_power(0),
 	_speed(0),
 	_spos(Vec3::ZERO),
-	_epos(Vec3::ZERO)
+	_epos(Vec3::ZERO),
+	_isDeleted(true)
 {
 	// 武器标签
 	setTag(kGlobalWeapon);
@@ -28,12 +29,77 @@ Weapons::~Weapons()
 
 void Weapons::destroy()
 {
-	// 这里改变武器位置到 (0,-100,0) 这一点
-	setPosition3D(-Vec3::UNIT_Y);
+	// 如果已经被删除则不需要重新添加
+	if (_isDeleted)return;
+	// 删除元素
+	_isDeleted = true;
+	// 添加到缓存池
+	GameScene::getWeaponManager()->addWeaponToPool(this);
+	// 设置不可见
+	setVisible(false);
+	// 这里改变武器位置到 (0,-10,0) 这一点
+	setPosition3D(-Vec3::UNIT_Y * 10);
 	// 同步到物理世界
 	syncNodeToPhysics();
-	// 添加到武器删除队列中
-	GameScene::getWeaponManager()->addDestroyWeapon(this);
+}
+
+bool Weapons::init()
+{
+	initWithFile("Sprite3DTest/box.c3t");								//设置武器形状
+	setTexture("images/Icon.png");										//设置材质
+
+	Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
+	rbDes.mass = 1.f;													//设置刚体质量
+	rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
+
+	auto obj = Physics3DRigidBody::create(&rbDes);						//创建刚体对象
+
+	_physicsComponent = Physics3DComponent::create(obj);				//利用该刚体对象创建组件
+
+	addComponent(_physicsComponent);
+
+	_contentSize = getBoundingBox().size;
+
+	obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
+
+	obj->setUserData(this);												// 设置用户数据为当前武器对象，碰撞检测中会使用
+
+	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
+
+	setVisible(false);
+	setPosition3D(-Vec3::UNIT_Y*10);
+	// 同步到物理世界
+	syncNodeToPhysics();
+	return true;
+}
+
+void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
+{
+	// 首先设置部分属性
+	setOwner(owner);
+	setSpos(spos);
+	setEpos(epos);
+	setPower(100.f + static_cast<Character*>(owner)->getAttribute().getAttackDamage());
+	setSpeed(100.f + static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
+	_isDeleted = false;
+
+	Vec3 linearVel = getEpos() - getSpos();								//计算攻击方向的向量
+	linearVel.y = 0;													//沿水平方向打出
+	linearVel.normalize();												//单位化向量
+	Vec3 pos = getSpos() + 2 * linearVel + Vec3::UNIT_Y;				//武器起始坐标
+	setPosition3D(pos);													//设置武器起始坐标
+	setScale(0.5f);														//设置缩放大小
+	linearVel *= getSpeed();											//速度向量
+
+	auto obj = static_cast<Physics3DRigidBody*>(getPhysicsObj());		//获取刚体对象
+	obj->setLinearVelocity(linearVel);									//设置线速度
+	obj->setLinearFactor(Vec3::ONE);									//设置线性因子
+	obj->setAngularVelocity(Vec3::ZERO);								//设置角速度
+	obj->setCcdMotionThreshold(0.5f);									//设置运动阈值
+	obj->setCcdSweptSphereRadius(0.4f);									//设置扫描球半径
+
+	setVisible(true);
+	syncNodeToPhysics();												//同步至物理世界
 }
 
 Arrow::Arrow(void * owner, Vec3 spos, Vec3 epos)
@@ -51,53 +117,7 @@ Arrow::~Arrow()
 
 Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 {
-	Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
-	rbDes.originalTransform.translate(spos);							//坐标
-	rbDes.mass = 1.f;													//设置刚体质量
-	rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
-
-	auto ret = new Arrow(owner, spos, epos);							//创建一枚箭矢
-
-	if (ret && ret->initWithFile("Sprite3DTest/box.c3t"))
-	{
-		auto obj = Physics3DRigidBody::create(&rbDes);
-
-		// 设置用户数据为武器对象，碰撞检测中会使用
-		obj->setUserData(ret);
-		//obj->setUserData("i am a weapon!");
-
-		// 设置碰撞后的回调函数
-		obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());
-
-		ret->_physicsComponent = Physics3DComponent::create(obj);
-		ret->addComponent(ret->_physicsComponent);
-		ret->_contentSize = ret->getBoundingBox().size;
-		ret->setTexture("images/Icon.png");
-		ret->autorelease();
-
-		Vec3 linearVel = ret->getEpos() - ret->getSpos();					//计算攻击方向的向量
-		linearVel.y = 0;													//沿水平方向打出
-		linearVel.normalize();												//单位化向量
-		ret->setPosition3D(ret->getSpos() + 2 * linearVel + Vec3::UNIT_Y);						//设置箭矢起始点坐标
-		ret->setScale(0.5f);												//设置缩放大小
-		linearVel *= ret->getSpeed();										//速度向量
-		auto rigidBody = static_cast<Physics3DRigidBody*>(ret->getPhysicsObj());
-		rigidBody->setLinearFactor(Vec3::ONE);
-		rigidBody->setLinearVelocity(linearVel);
-		rigidBody->setAngularVelocity(Vec3::ZERO);
-		rigidBody->setCcdMotionThreshold(0.5f);
-		rigidBody->setCcdSweptSphereRadius(0.4f);
-
-		ret->syncNodeToPhysics();											//同步至物理世界
-		ret->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
-		ret->setCameraMask((unsigned int)CameraFlag::USER1);
-	}
-	else
-	{
-		delete ret;
-		ret = nullptr;
-	}
-	return ret;
+	return nullptr;
 }
 
 Bomb::Bomb(void * owner, Vec3 spos, Vec3 epos)

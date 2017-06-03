@@ -12,14 +12,12 @@ CharacterManager::~CharacterManager()
 }
 bool CharacterManager::init()
 {
+	// 第一步先创建缓存池
+	createCachePool();
+	// 第二步创建人物
 	startGame(0, 100);
 	schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
-}
-
-void CharacterManager::addDestroyCharacter(Character * const &character)
-{
-	_destroyList.pushBack(character);
 }
 
 void CharacterManager::startGame(const int &ally, const int &enemy)
@@ -43,31 +41,35 @@ void CharacterManager::resumeGame()
 {
 }
 
-void CharacterManager::destroyDeadCharacters()
+Character * CharacterManager::getCharacterFromPool()
 {
-	cout << "-----------------> _destroyList characters count " << _destroyList.size() << endl;
-	for (auto i : _destroyList)
+	Character* character = nullptr;
+	if (!_characterCachePool.empty())
 	{
-		CCASSERT(i, "NULL");
-		_enemyCharacter.erase(i);	//先从敌人列表中删除对象
-		removeChild(i);
-		//i->removeFromParent();		//从图层中删除敌人
+		character = _characterCachePool.back();
+		_characterCachePool.popBack();
 	}
-	_destroyList.clear();
-	cout << "-----------------> _enemyCharacter characters count " << _enemyCharacter.size() << endl;
+	cout << "成功从缓存池中获取一个人物对象：" << character << endl;
+	cout << "人物缓存池大小剩余：" << _characterCachePool.size() << endl;
+	return character;
 }
 
-void CharacterManager::update(float dt)
+void CharacterManager::addCharacterToPool(Character * const & character)
 {
-	// 每次 update 删除已经死亡的玩家
-	destroyDeadCharacters();
+	//加入缓存池说明当前人物已死亡
+	_characterCachePool.pushBack(character);
+	//从人物列表中删除
+	_enemyCharacter.erase(character);
+	cout << "一个人物已死亡，缓冲池大小：" << _characterCachePool.size() << endl;
+	cout << "场上剩余人数：" << _enemyCharacter.size() << endl;
 }
 
 Character * CharacterManager::createCharacter(CharacterType characterType)
 {
-	auto character = Character::create();
+	auto character = getCharacterFromPool();	//从缓存池中取出人物
 	if (character != NULL)
 	{
+		character->initialization();					//登场
 		if (characterType == kCharacterPlayer)
 		{
 			_playerCharacter = character;
@@ -79,8 +81,20 @@ Character * CharacterManager::createCharacter(CharacterType characterType)
 		{
 			_enemyCharacter.insert(character);
 		}
-		addChild(character);
 	}
 	return character;
+}
+
+void CharacterManager::createCachePool()
+{
+	// 缓存池清空
+	_characterCachePool.clear();
+	for (auto i = 0; i < _cachePoolSize; i++)
+	{
+		Character* character = Character::create();
+		_characterCachePool.pushBack(character);
+		addChild(character);	//添加到图层
+	}
+	cout << "人物缓存池大小剩余：" << _characterCachePool.size() << endl;
 }
 

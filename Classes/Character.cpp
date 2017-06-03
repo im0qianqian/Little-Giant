@@ -10,7 +10,7 @@ Character::Character() :
 	_experience(0),
 	_sorce(0),
 	_weaponType(kWeaponArrow),
-	_isDie(false)
+	_isDie(true)
 {
 	// 设置属于人物标签
 	setTag(kGlobalCharacter);
@@ -20,17 +20,18 @@ Character::~Character()
 {
 }
 
-void Character::addLifeValue(float add)
+void Character::addLifeValue(const float &add)
 {
 	_lifeValue += add;
+	_hpSlider->setPercent(_lifeValue);			//更新血量条
 }
 
-void Character::addExperience(int add)
+void Character::addExperience(const int &add)
 {
 	_experience += add;
 }
 
-void Character::addSorce(int add)
+void Character::addSorce(const int &add)
 {
 	_sorce += add;
 }
@@ -44,9 +45,17 @@ void Character::attack(const Vec3 &pos)
 
 void Character::die()
 {
+	if (_isDie)return;
+	_isDie = true;
 	if (getDept() != -1)	// 其他人物死亡
 	{
-		GameScene::getCharacterManager()->addDestroyCharacter(this);
+		GameScene::getCharacterManager()->addCharacterToPool(this);
+		//设置不可见
+		setVisible(false);
+		// 这里改变武器位置到 (0,-1,0) 这一点
+		setPosition3D(-Vec3::UNIT_Y * 10);
+		// 同步到物理世界
+		syncNodeToPhysics();
 	}
 	else	//自己死亡
 	{
@@ -64,6 +73,7 @@ void Character::move(const Vec3 & pos)
 
 bool Character::init()
 {
+	/* 以下是血量条 */
 	_hpSlider = Slider::create();
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
@@ -73,55 +83,57 @@ bool Character::init()
 	_hpSlider->setRotation3D(Vec3(-90,0,0));
 	_hpSlider->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
 	addChild(_hpSlider);
-	return true;
-}
 
-Character * Character::create()
-{
+	/* 以下是初始化部分 */
+	initWithFile("Sprite3DTest/box.c3t");
+	setTexture("images/Icon.png");
+
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
 	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
 
-	auto character = new Character();
-	if (character && character->initWithFile("Sprite3DTest/box.c3t") &&character->init())
-	{
-		auto obj = Physics3DRigidBody::create(&des);
-		// 碰撞检测中会用到
-		obj->setUserData(character);
-		//obj->setUserData("i am a boy");
+	auto obj = Physics3DRigidBody::create(&des);
 
-		// 设置碰撞后的回调函数
-		obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());
+	_physicsComponent = Physics3DComponent::create(obj);
 
-		obj->setCcdSweptSphereRadius(.4f);
+	addComponent(_physicsComponent);
 
-		character->_physicsComponent = Physics3DComponent::create(obj);
-		character->addComponent(character->_physicsComponent);
-		character->_contentSize = character->getBoundingBox().size;
-		character->setTexture("images/Icon.png");
-		character->autorelease();
+	_contentSize = getBoundingBox().size;
 
-		/* 生成随机数以确定随机位置 */
-		character->setPosition3D(Vec3(rand()%WORLD_LENGTH - WORLD_LENGTH/2, 20, rand()%WORLD_WIDTH - WORLD_WIDTH/2));
+	obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
 
-		character->setScale(2.f);
-		character->syncNodeToPhysics();
-		character->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NODE_AND_NODE);
-		character->setCameraMask((unsigned int)CameraFlag::USER1);
-	}
-	else
-	{
-		delete character;
-		character = nullptr;
-	}
-	return character;
+	obj->setUserData(this);
+
+	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
+
+	setScale(2.f);		//设置大小
+	setVisible(false);	//设置不可见
+	setPosition3D(-Vec3::UNIT_Y*10);	//设置初始坐标
+	syncNodeToPhysics();
+	return true;
+}
+
+void Character::initialization()
+{
+	// 初始化值
+	_lifeValue = INITIAL_LIFE_VALUE;
+	_experience = 0;
+	_sorce = 0;
+	_attribute.init();
+	_weaponType = kWeaponArrow;
+	_isDie = false;
+	_hpSlider->setPercent(_lifeValue);			//更新血量条
+
+	setVisible(true);							//设置可见
+	// 取出之后随机设置位置并同步
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
+	syncNodeToPhysics();
 }
 
 void Character::beAttacked(const Weapons * weapon)
 {
 	addLifeValue(-weapon->getPower() / 1.0);	//受到攻击先掉血
-	_hpSlider->setPercent(_lifeValue);			//更新血量条
-	cout << "life life -------------------------------> " << getLifeValue() << endl;
+	//cout << "life life -------------------------------> " << getLifeValue() << endl;
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
@@ -146,18 +158,15 @@ void Character::update(float dt)
 		move(ret*getAttribute().getMovingSpeed());
 		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D() + ret*getAttribute().getMovingSpeed());
 		syncNodeToPhysics();
-		//setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);
 	}
 	else
 	{
 		static float attackTime = 0;
 		attackTime += dt;
 		if (attackTime > 10.f) {
-			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
-
+			//attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			attackTime /= 10.f;
 		}
-		//CCLOG("attack Time : %f", attackTime);
 	}
 }
 
@@ -181,37 +190,37 @@ Character::Attribute::~Attribute()
 
 }
 
-void Character::Attribute::addAttackDamage(float add)
+void Character::Attribute::addAttackDamage(const float &add)
 {
 	_attackDamage = max(0.0f, _attackDamage + add);
 }
 
-void Character::Attribute::addAttackRange(float add)
+void Character::Attribute::addAttackRange(const float &add)
 {
 	_attackRange = max(0.0f, _attackRange + add);
 }
 
-void Character::Attribute::addAttackSpeed(float add)
+void Character::Attribute::addAttackSpeed(const float &add)
 {
 	_attackSpeed = max(0.0f, _attackSpeed + add);
 }
 
-void Character::Attribute::addMovingSpeed(float add)
+void Character::Attribute::addMovingSpeed(const float &add)
 {
 	_movingSpeed = max(0.0f, _movingSpeed + add);
 }
 
-void Character::Attribute::addEmpiricalAcquisition(float add)
+void Character::Attribute::addEmpiricalAcquisition(const float &add)
 {
 	_empiricalAcquisition = max(0.0f, _empiricalAcquisition + add);
 }
 
-void Character::Attribute::addDefensiveForce(float add)
+void Character::Attribute::addDefensiveForce(const float &add)
 {
 	_defensiveForce = max(0.0f, _defensiveForce + add);
 }
 
-void Character::Attribute::addRestoringAbility(float add)
+void Character::Attribute::addRestoringAbility(const float &add)
 {
 	_restoringAbility = max(0.0f, _restoringAbility + add);
 }
@@ -249,4 +258,15 @@ void Character::Attribute::delMagnet()
 void Character::Attribute::setDuration(float add)
 {
 	_duration = max(0.0f, _duration + add);
+}
+
+void Character::Attribute::init()
+{
+	_attackDamage = 0;
+	_attackRange = 0;
+	_attackSpeed = 0;
+	_movingSpeed = .5f;
+	_empiricalAcquisition = 0;
+	_defensiveForce = 0;
+	_restoringAbility = 0;
 }
