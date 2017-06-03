@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Weapons.h"
+#include "Global.h"
 
 USING_NS_CC;
 
@@ -15,14 +16,13 @@ public:
 	virtual bool init();
 	/* 创建武器进行攻击 */
 	void createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos);
-	/* 添加需要删除的武器对象 */
-	void addDestroyWeapon(Weapons * const &weapon);
+	/* 从缓存池中获取一个武器对象 */
+	Weapons *getWeaponFromPool();
+	/* 添加一个武器对象到缓存池 */
+	void addWeaponToPool(Weapons * const &weapon) { _weaponsCachePool.pushBack(weapon); }
 private:
-	const int _cachePoolSize = 300;
-	void update(float dt);
-	void destroyInvisibleWeapons();		//销毁不可见武器
-	void createCachePool();				// 创建缓存池
-	Vector<Weapons*> _weaponsCachePool;	// 武器对象缓冲池
-	Vector<Weapons*> _destroyList;		// 销毁列表
+	const int _cachePoolSize = WEAPONS_CACHE_SIZE;		// 缓存池容量（场上同时发射的武器数目）
+	void createCachePool();								// 创建缓存池
+	Vector<Weapons*> _weaponsCachePool;					// 武器对象缓冲池
 };
 #endif

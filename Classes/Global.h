@@ -31,16 +31,18 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 }
 
 /* 全局常量设置 */
-const auto SCREEN_WIDTH = 640;
-const auto SCREEN_HEIGHT = 960;
-const auto FORM_NAME = "Arrow.io";
+#define SCREEN_WIDTH			640			//屏幕高度
+#define SCREEN_HEIGHT			960			//屏幕宽度
+#define SCREEN_FORM_NAME		"Arrow.io"	//窗口标题
 
-const auto WORLD_LENGTH = 1000;	//世界长度
-const auto WORLD_WIDTH = 1000;	//世界宽度
-const auto WORLD_HEIGHT = 1;		//世界高度
+#define WORLD_LENGTH			1000			//世界长度
+#define WORLD_WIDTH				1000			//世界宽度
+#define WORLD_HEIGHT			1			//世界高度
 
-/* 人物初始生命值 */
-const float INITIAL_LIFE_VALUE = 100;
+#define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
+#define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
+
+#define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
 
 
 enum GlobalType

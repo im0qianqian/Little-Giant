@@ -21,19 +21,19 @@ public:
 		Attribute();
 		~Attribute();
 		/* 增加攻击力 */
-		void addAttackDamage(float add);
+		void addAttackDamage(const float &add);
 		/* 增加射程 */
-		void addAttackRange(float add);
+		void addAttackRange(const float &add);
 		/* 增加攻击速度 */
-		void addAttackSpeed(float add);
+		void addAttackSpeed(const float &add);
 		/* 增加移动速度 */
-		void addMovingSpeed(float add);
+		void addMovingSpeed(const float &add);
 		/* 增加经验获取倍数 */
-		void addEmpiricalAcquisition(float add);
+		void addEmpiricalAcquisition(const float &add);
 		/* 增加防御力 */
-		void addDefensiveForce(float add);
+		void addDefensiveForce(const float &add);
 		/* 增加恢复能力 */
-		void addRestoringAbility(float add);
+		void addRestoringAbility(const float &add);
 		/* 临时属性：增加视野 */
 		void addView();
 		/* 临时属性：增加变小 */
@@ -56,6 +56,8 @@ public:
 		float getEmpiricalAcquisition() { return _empiricalAcquisition; }
 		float getDefensiveForce() { return _defensiveForce; }
 		float getRestoringAbility() { return _restoringAbility; }
+		/* 初始化 */
+		void init();
 	private:
 		float _attackDamage;			//攻击力加成
 		float _attackRange;				//射程加成
@@ -82,11 +84,11 @@ public:
 	Character();
 	~Character();
 	/* 增加/减少生命 */
-	void addLifeValue(float add);
+	void addLifeValue(const float &add);
 	/* 增加经验值 */
-	void addExperience(int add);
+	void addExperience(const int &add);
 	/* 增加分数 */
-	void addSorce(int add);
+	void addSorce(const int &add);
 	/* 获取人物所属群落 */
 	int getDept() { return _dept; }
 	/* 获取当前生命值 */
@@ -96,17 +98,19 @@ public:
 	/* 获取当前得分 */
 	int getSorce() { return _sorce; }
 	/* 更改人物群落 */
-	void setDept(int dept) { _dept = dept; }
+	void setDept(const int &dept) { _dept = dept; }
 	/* 获取当前人物属性 */
 	Attribute getAttribute() { return _attribute; }
 	/* 攻击 */
 	void attack(const Vec3 &pos);
+	/* 受到武器攻击 */
+	void beAttacked(const Weapons *weapon);
 	/* 死亡 */
 	void die();
 	virtual bool init();
-	static Character* create();
-	/* 受到武器攻击 */
-	void beAttacked(const Weapons *weapon);
+	CREATE_FUNC(Character);
+	/* 人物初始化 */
+	void initialization();
 private:
 	/* 移动 */
 	void move(const Vec3 &pos);

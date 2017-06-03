@@ -1,6 +1,4 @@
 #include "GameScene.h"
-#include "Global.h"
-#include "cocostudio/CocoStudio.h"
 
 USING_NS_CC;
 
@@ -51,6 +49,10 @@ bool GameScene::init()
 		addChild(GameScene::_joystick, -1);
 		//GameScene::_awardManager = AwardManager::create();
 		//GameScene::_audioManager = AudioManager::create();
+
+		/* 设置当前场景在 USER1 中可见（必须要添加在所有图层 addChild 之后） */
+		setCameraMask((unsigned int)CameraFlag::USER1);
+
 		flag = true;
 	} while (false);
 	return flag;

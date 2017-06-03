@@ -30,7 +30,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto director = Director::getInstance();
     auto glview = director->getOpenGLView();
     if(!glview) {
-        glview = GLViewImpl::createWithRect(FORM_NAME, Rect(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH));
+        glview = GLViewImpl::createWithRect(SCREEN_FORM_NAME, Rect(0, 0, SCREEN_HEIGHT, SCREEN_WIDTH));
         director->setOpenGLView(glview);
     }
 
