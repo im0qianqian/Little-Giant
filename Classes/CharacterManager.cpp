@@ -72,7 +72,7 @@ Character * CharacterManager::createCharacter(CharacterType characterType)
 		{
 			_playerCharacter = character;
 			_playerCharacter->setDept(-1);
-			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x, 40, character->getPosition3D().z + 40));
+			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x+100, 50, character->getPosition3D().z + 100));
 			GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x, 0, character->getPosition3D().z));
 		}
 		else

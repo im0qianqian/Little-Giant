@@ -92,10 +92,9 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 		//Vec3 c = camera->getPosition3D();
 		GameScene::getCamera()->setPosition3D(c);
 		//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
-		GameScene::getCamera()->lookAt(cam, Vec3::UNIT_Y);
+		GameScene::getCamera()->lookAt(cam);
 	}
 	event->stopPropagation();
-
 }
 
 

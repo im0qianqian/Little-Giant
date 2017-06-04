@@ -66,10 +66,11 @@ void Character::move(const Vec3 & pos)
 {
 	/* 上演一场滑冰运动吧~ */
 	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
-	//Vec3 npos = pos+ s->getLinearVelocity();
-	s->setLinearVelocity(pos*getAttribute().getMovingSpeed());
-	cout << "速度: " << s->getLinearVelocity().length() << endl;
-	//setPosition3D(getPosition3D() + pos);
+	Vec3 npos = getAttribute().getMovingSpeed()*pos + s->getLinearVelocity();
+	npos = npos.getNormalized()*getAttribute().getMovingSpeed();
+	s->setLinearVelocity(npos);
+	//cout << "速度: " << s->getLinearVelocity().length() << endl;
+	//setPosition3D(getPosition3D() + getAttribute().getMovingSpeed() * pos);
 }
 
 bool Character::init()
@@ -155,8 +156,9 @@ void Character::update(float dt)
 			ret += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			ret += Vec3(1, 0, 0);
+		Vec3 last = getPosition3D();
 		move(ret.getNormalized());
-		GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3(100,50,100));
+		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()-last+ getPosition3D());
 		syncNodeToPhysics();
 	}
 	else if(!_isDie)
@@ -175,7 +177,7 @@ Character::Attribute::Attribute() :
 	_attackDamage(0),
 	_attackRange(0),
 	_attackSpeed(0),
-	_movingSpeed(0.5f),
+	_movingSpeed(50.f),
 	_empiricalAcquisition(0),
 	_defensiveForce(0),
 	_restoringAbility(0),
@@ -265,7 +267,7 @@ void Character::Attribute::init()
 	_attackDamage = 0;
 	_attackRange = 0;
 	_attackSpeed = 0;
-	_movingSpeed = 10.f;
+	_movingSpeed = 50.f;
 	_empiricalAcquisition = 0;
 	_defensiveForce = 0;
 	_restoringAbility = 0;

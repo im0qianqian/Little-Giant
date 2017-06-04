@@ -29,54 +29,50 @@ bool StageManager::init()
 		_ground = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "Sprite3DTest/plane.png");
 		_ground->setScaleX(WORLD_LENGTH);
 		_ground->setScaleZ(WORLD_WIDTH);
-		addChild(_ground);
-		_ground->setCameraMask((unsigned int)CameraFlag::USER1);
 		_ground->syncNodeToPhysics();
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
+		addChild(_ground);
 
-		std::string fullPath = FileUtils::sharedFileUtils()->fullPathForFilename("b.txt");
 		unsigned char* pBuffer = NULL;
 		ssize_t bufferSize = 0;
-		pBuffer = FileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &bufferSize);
-		CCLOG("%ld", bufferSize);
-		CCLOG("%s", pBuffer);
+		pBuffer = FileUtils::sharedFileUtils()->getFileData("maps/1.txt", "r", &bufferSize);
+		cout << bufferSize << endl;
+		cout << pBuffer << endl;
 		int x = 0, y = 0, t = 0;
+		const auto elementLength = WORLD_LENGTH / MAP_FILE_LENGTH;
+		const auto elementWidth = WORLD_WIDTH / MAP_FILE_WIDTH;
 		for (int i = 0; i < bufferSize; i++)
 		{
-			Physics3DRigidBodyDes rbDes;
 			if (pBuffer[i] == '0')
 			{
-				x += ELEMENT_LENGTH, t++;
-				if (t == 50)
+				x += elementLength, t++;
+				if (t == MAP_FILE_LENGTH)
 				{
 					t = 0;
 					x = 0;
-					y += ELEMENT_WIDTH;
+					y += elementWidth;
 				}
 			}
 			else if (pBuffer[i] == '1')
 			{
-				rbDes.shape = Physics3DShape::createBox(Vec3(ELEMENT_LENGTH,  20, ELEMENT_WIDTH));
+				rbDes.shape = Physics3DShape::createBox(Vec3(elementLength, ELEMENT_HEIGHT, elementWidth));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
-				pd2->setScaleX(ELEMENT_LENGTH);
-				pd2->setScaleY(20);
-				pd2->setScaleZ(ELEMENT_WIDTH);
-				pd2->setPosition3D(Vec3(x - WORLD_LENGTH / 2, 0, y - WORLD_WIDTH / 2));
-				addChild(pd2);
-				pd2->setCameraMask((unsigned int)CameraFlag::USER1);
-				pd2->syncNodeToPhysics();
+				pd2->setScaleX(elementLength);
+				pd2->setScaleY(ELEMENT_HEIGHT);
+				pd2->setScaleZ(elementWidth);
+				pd2->setPosition3D(Vec3(x - WORLD_LENGTH / 2, ELEMENT_HEIGHT/2, y - WORLD_WIDTH / 2));
 				pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
-				x += ELEMENT_LENGTH, t++;
-				if (t == 50)
+				pd2->syncNodeToPhysics();
+				addChild(pd2);
+				x += elementLength, t++;
+				if (t == MAP_FILE_WIDTH)
 				{
 					t = 0;
 					x = 0;
-					y += ELEMENT_WIDTH;
+					y += elementWidth;
 				}
 			}
 		}
-
-
 		if (pBuffer)
 		{
 			delete[] pBuffer;
