@@ -15,16 +15,19 @@ public:
 	CREATE_FUNC(Joystick);
 	
 	/* GET */
-	bool getKeyW() const { return keyW; }
-	bool getKeyA() const { return keyA; }
-	bool getKeyS() const { return keyS; }
-	bool getKeyD() const { return keyD; }
+	bool getKeyW() const { return _keyW; }
+	bool getKeyA() const { return _keyA; }
+	bool getKeyS() const { return _keyS; }
+	bool getKeyD() const { return _keyD; }
 
 	/* 碰撞事件 */
 	std::function<void(const Physics3DCollisionInfo &ci)> onPhysics3DCollision();
 
 	/* 暂定、创建光效 */
 	void createParticle(const Vec3 &pos);
+
+	/* 是否是第一人称视角 */
+	bool isFirstView() { return _isFirstView; }
 private:
 	/* 键盘监听 */
 	void keyboardListen();
@@ -39,10 +42,11 @@ private:
 	void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 
 	/* 一些按键 */
-	bool keyW;
-	bool keyA;
-	bool keyS;
-	bool keyD;
+	bool _keyW;
+	bool _keyA;
+	bool _keyS;
+	bool _keyD;
+	bool _isFirstView;								//是否为第一人称视角
 	EventListenerTouchAllAtOnce* _listenerTouch;	//触控监听器
 	EventListenerKeyboard* _listenerKeyboard;	//键盘监听器
 };

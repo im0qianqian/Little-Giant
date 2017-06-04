@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "GameScene.h"
+#include "SceneManager.h"
 #include "Joystick.h"
 
 USING_NS_CC;
@@ -64,10 +65,10 @@ void Character::die()
 
 void Character::move(const Vec3 & pos)
 {
-	/* 上演一场滑冰运动吧~ */
-	//auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
-	//s->setLinearVelocity(s->getLinearVelocity() + pos);
-	setPosition3D(getPosition3D() + pos);
+	/* 获取刚体对象 */
+	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
+	/* 设置线速度为人物移动速度*方向向量，Y方向保持和原来一样 */
+	s->setLinearVelocity(getAttribute().getMovingSpeed()*pos+Vec3(0,s->getLinearVelocity().y,0));
 }
 
 bool Character::init()
@@ -126,6 +127,7 @@ void Character::initialization()
 	setVisible(true);							//设置可见
 	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
+
 	syncNodeToPhysics();
 }
 
@@ -141,7 +143,6 @@ void Character::beAttacked(const Weapons * weapon)
 
 void Character::update(float dt)
 {
-	//CCLOG("update %f", dt);
 	if (_dept == -1)
 	{
 		Vec3 ret = Vec3::ZERO;
@@ -153,17 +154,38 @@ void Character::update(float dt)
 			ret += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			ret += Vec3(1, 0, 0);
-		ret.normalize();
-		move(ret*getAttribute().getMovingSpeed());
-		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D() + ret*getAttribute().getMovingSpeed());
+		if (GameScene::getJoystick()->isFirstView())
+		{
+			GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
+		}
+		else
+		{
+			//GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3(100,50,100));
+			//GameScene::getCamera()->lookAt(getPosition3D());
+			GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+		}
+		move(ret.getNormalized());
+
 		syncNodeToPhysics();
 	}
 	else if(!_isDie)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
+		static Vec3 minn = Vec3::ZERO;
 		if (attackTime > 10.f) {
-			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+			minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+			auto other = GameScene::getCharacterManager()->getEnemyCharacter();
+			int len = other.size();
+			for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
+			{
+				if (*i != this&&((*i)->getPosition3D() - getPosition3D()).length()<minn.length())
+				{
+					minn = (*i)->getPosition3D() - getPosition3D();
+				}
+			}
+			attack(minn);
+			move(minn.getNormalized());
 			attackTime /= 10.f;
 		}
 	}
@@ -174,7 +196,7 @@ Character::Attribute::Attribute() :
 	_attackDamage(0),
 	_attackRange(0),
 	_attackSpeed(0),
-	_movingSpeed(0.5f),
+	_movingSpeed(50.f),
 	_empiricalAcquisition(0),
 	_defensiveForce(0),
 	_restoringAbility(0),
@@ -264,7 +286,7 @@ void Character::Attribute::init()
 	_attackDamage = 0;
 	_attackRange = 0;
 	_attackSpeed = 0;
-	_movingSpeed = .5f;
+	_movingSpeed = 50.f;
 	_empiricalAcquisition = 0;
 	_defensiveForce = 0;
 	_restoringAbility = 0;

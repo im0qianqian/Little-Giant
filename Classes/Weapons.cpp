@@ -84,7 +84,7 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	_isDeleted = false;
 
 	Vec3 linearVel = getEpos() - getSpos();								//计算攻击方向的向量
-	linearVel.y = 0;													//沿水平方向打出
+	//linearVel.y = 0;													//沿水平方向打出
 	linearVel.normalize();												//单位化向量
 	Vec3 pos = getSpos() + 2 * linearVel + Vec3::UNIT_Y;				//武器起始坐标
 	setPosition3D(pos);													//设置武器起始坐标
