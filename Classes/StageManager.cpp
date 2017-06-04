@@ -81,7 +81,7 @@ bool StageManager::init()
 		
 		/* */
 		//create several boxes using PhysicsSprite3D
-		/*rbDes.mass = 1.f;
+		rbDes.mass = 1.f;
 		rbDes.shape = Physics3DShape::createBox(Vec3(0.8f, 0.8f, 0.8f));
 		float start_x = START_POS_X - ARRAY_SIZE_X / 2;
 		float start_y = START_POS_Y;
@@ -106,7 +106,7 @@ bool StageManager::init()
 					this->addChild(sprite);
 				}
 			}
-		}*/
+		}
 		flag = true;
 	} while (false);
 	return flag;
