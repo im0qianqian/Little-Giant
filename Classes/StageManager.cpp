@@ -60,6 +60,7 @@ bool StageManager::init()
 				pd2->setScaleX(elementLength);
 				pd2->setScaleY(ELEMENT_HEIGHT);
 				pd2->setScaleZ(elementWidth);
+				pd2->setOpacity(90);	//Í¸Ã÷¶È
 				pd2->setPosition3D(Vec3(x - WORLD_LENGTH / 2, ELEMENT_HEIGHT/2, y - WORLD_WIDTH / 2));
 				pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 				pd2->syncNodeToPhysics();

@@ -154,19 +154,38 @@ void Character::update(float dt)
 			ret += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			ret += Vec3(1, 0, 0);
-		Vec3 last = getPosition3D();
+		if (GameScene::getJoystick()->isFirstView())
+		{
+			GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
+		}
+		else
+		{
+			//GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3(100,50,100));
+			//GameScene::getCamera()->lookAt(getPosition3D());
+			GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+		}
 		move(ret.getNormalized());
-		//GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3(100,50,100));
-		//GameScene::getCamera()->lookAt(getPosition3D());
-		GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .5*ret.getNormalized());
+
 		syncNodeToPhysics();
 	}
 	else if(!_isDie)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
+		static Vec3 minn = Vec3::ZERO;
 		if (attackTime > 10.f) {
-			attack(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+			minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+			auto other = GameScene::getCharacterManager()->getEnemyCharacter();
+			int len = other.size();
+			for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
+			{
+				if (*i != this&&((*i)->getPosition3D() - getPosition3D()).length()<minn.length())
+				{
+					minn = (*i)->getPosition3D() - getPosition3D();
+				}
+			}
+			attack(minn);
+			move(minn.getNormalized());
 			attackTime /= 10.f;
 		}
 	}

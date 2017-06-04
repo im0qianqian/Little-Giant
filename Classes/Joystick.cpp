@@ -4,12 +4,13 @@
 #include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Joystick::Joystick() :
-	keyW(false),
-	keyA(false),
-	keyS(false),
-	keyD(false),
+	_keyW(false),
+	_keyA(false),
+	_keyS(false),
+	_keyD(false),
 	_listenerKeyboard(nullptr),
-	_listenerTouch(nullptr)
+	_listenerTouch(nullptr),
+	_isFirstView(false)
 {
 }
 
@@ -29,16 +30,16 @@ void Joystick::setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &st
 	switch (keyCode)
 	{
 	case cocos2d::EventKeyboard::KeyCode::KEY_W:
-		keyW = state;
+		_keyW = state;
 		break;
 	case cocos2d::EventKeyboard::KeyCode::KEY_A:
-		keyA = state;
+		_keyA = state;
 		break;
 	case cocos2d::EventKeyboard::KeyCode::KEY_S:
-		keyS = state;
+		_keyS = state;
 		break;
 	case cocos2d::EventKeyboard::KeyCode::KEY_D:
-		keyD = state;
+		_keyD = state;
 		break;
 	default:
 		break;
@@ -68,8 +69,7 @@ void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos
 		dist = (0 - ndo) / ndd;
 		Vec3 p = nearP + dist *  dir;
 		//CCLOG("%f %f %f", getPlayerCharacter()->getPosition3D().x, getPlayerCharacter()->getPosition3D().y, getPlayerCharacter()->getPosition3D().z);
-		//CCLOG("manag %f %f %f", p.x, p.y, p.z);
-		p.y = 20;
+		CCLOG("manag %f %f %f", p.x, p.y, p.z);
 		GameScene::getCharacterManager()->getPlayerCharacter()->attack(p);
 		event->stopPropagation();
 	}
@@ -81,18 +81,30 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 	{
 		auto touch = touches[0];
 		auto delta = touch->getDelta();
-		static float _angle = 0.f;
-		static float _angley = 0.f;
-		_angle -= CC_DEGREES_TO_RADIANS(delta.x);
-		_angley -= CC_DEGREES_TO_RADIANS(delta.y);
-		Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
-		//CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
-		//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
-		Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
-		//Vec3 c = camera->getPosition3D();
-		GameScene::getCamera()->setPosition3D(c);
-		//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
-		GameScene::getCamera()->lookAt(cam);
+		if (!_isFirstView)
+		{
+			static float _angle = 0.f;
+			//static float _angley = 0.f;
+			_angle -= CC_DEGREES_TO_RADIANS(delta.x);
+			//_angley -= CC_DEGREES_TO_RADIANS(delta.y);
+			Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
+			//CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
+			//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
+			Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
+			//Vec3 c = camera->getPosition3D();
+			GameScene::getCamera()->setPosition3D(c);
+			//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
+			GameScene::getCamera()->lookAt(cam);
+		}
+		else
+		{
+			// 第一人称视角
+			Vec3 rot = GameScene::getCamera()->getRotation3D();
+			rot.y += delta.x;
+			GameScene::getCamera()->setRotation3D(rot);
+			GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
+		}
+		
 	}
 	event->stopPropagation();
 }
@@ -198,6 +210,17 @@ void Joystick::keyboardListen()
 			if (SceneManager::getScene()->getPhysics3DWorld()->isDebugDrawEnabled())
 				SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(false);
 			else SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(true);
+		}
+		else if (keyCode == EventKeyboard::KeyCode::KEY_Q)	//视角变换
+		{
+			_isFirstView = !_isFirstView;
+			if (_isFirstView)
+			{
+				/* 第一人称视角时相机要保持水平方向 */
+				Vec3 pos = GameScene::getCamera()->getRotation3D();
+				pos.x = pos.z = 0;
+				GameScene::getCamera()->setRotation3D(pos);
+			}
 		}
 		/* ----------------------- */
 		log("Keyboard %d Pressed~", keyCode);
