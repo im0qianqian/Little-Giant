@@ -14,7 +14,7 @@ StageManager::~StageManager()
 #define ARRAY_SIZE_X 4
 #define ARRAY_SIZE_Y 3
 #define ARRAY_SIZE_Z 4
-#define MAXN 5000
+#define MAXN 60
 char array[MAXN][MAXN];
 bool StageManager::init()
 {
