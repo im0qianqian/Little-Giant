@@ -85,12 +85,14 @@ bool Character::init()
 	addChild(_hpSlider);
 
 	/* 以下是初始化部分 */
-	initWithFile("Sprite3DTest/box.c3t");
+	//initWithFile("Sprite3DTest/box.c3t");
+	initWithFile("Sprite3DTest/sphere.c3b");
 	setTexture("images/Icon.png");
 
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
-	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+	//des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+	des.shape = Physics3DShape::createSphere(1.f);
 
 	auto obj = Physics3DRigidBody::create(&des);
 
