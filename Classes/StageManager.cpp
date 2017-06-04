@@ -1,6 +1,5 @@
 #include "StageManager.h"
 #include "GameScene.h"
-
 StageManager::StageManager()
 {
 }
@@ -15,7 +14,8 @@ StageManager::~StageManager()
 #define ARRAY_SIZE_X 4
 #define ARRAY_SIZE_Y 3
 #define ARRAY_SIZE_Z 4
-
+#define MAXN 5000
+char array[MAXN][MAXN];
 bool StageManager::init()
 {
 	bool flag = false;
@@ -40,7 +40,77 @@ bool StageManager::init()
 		pBuffer = FileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &bufferSize);
 		CCLOG("%ld", bufferSize);
 		CCLOG("%s", pBuffer);
-		int x = 0, y = 0, t = 0;
+		int p = 0, q = 0;
+		bool f;
+		for (int i = 0; i < bufferSize; i++)
+		{
+			if (pBuffer[i] == '1' || pBuffer[i] == '0')
+			{
+				array[p][q] = pBuffer[i];
+				q++;
+				f = true;
+			}
+			else if (q>=50 && f == true)
+			{
+				f = false;
+				p++;
+				q = 0;
+			}
+		}
+		int count,m,n;
+		m = ELEMENT_LENGTH, n = 2;
+		for (int i = 0; i < 50; i++)
+		{
+			for (int j = 0; j < 50; j++)
+			{
+				count = 0;
+				while (array[i][j] == '1')
+				{
+					count++;
+					j++;
+				}
+				if (count>1)
+				{
+					rbDes.shape = Physics3DShape::createBox(Vec3(m*count, 20, n));
+					auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
+					pd2->setScaleX(m*count);
+					pd2->setScaleY(20);
+					pd2->setScaleZ(n);
+					pd2->setPosition3D(Vec3((j)*ELEMENT_LENGTH - (count+1)*ELEMENT_LENGTH / 2 - WORLD_LENGTH / 2, 0, i*ELEMENT_WIDTH - WORLD_WIDTH / 2));
+					addChild(pd2);
+					pd2->setCameraMask((unsigned int)CameraFlag::USER1);
+					pd2->syncNodeToPhysics();
+					pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
+				}
+			}
+		}
+		m = 2, n = ELEMENT_LENGTH;
+		for (int i = 0; i < 50; i++)
+		{
+			for (int j = 0; j < 50; j++)
+			{
+				count = 0;
+				while (array[j][i] == '1')
+				{
+					count++;
+					j++;
+				}
+				if (count>1)
+				{
+					rbDes.shape = Physics3DShape::createBox(Vec3(m, 20, n*count));
+					auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
+					pd2->setScaleX(m);
+					pd2->setScaleY(20);
+					pd2->setScaleZ(n*count);
+					pd2->setPosition3D(Vec3(i*ELEMENT_WIDTH - WORLD_LENGTH / 2, 0, j*ELEMENT_LENGTH - (count+1)*ELEMENT_LENGTH / 2 - WORLD_WIDTH / 2));
+					addChild(pd2);
+					pd2->setCameraMask((unsigned int)CameraFlag::USER1);
+					pd2->syncNodeToPhysics();
+					pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
+				}
+			}
+		}
+		/*int x = 0, y = 0, t = 0;
 		for (int i = 0; i < bufferSize; i++)
 		{
 			Physics3DRigidBodyDes rbDes;
@@ -56,11 +126,16 @@ bool StageManager::init()
 			}
 			else if (pBuffer[i] == '1')
 			{
-				rbDes.shape = Physics3DShape::createBox(Vec3(ELEMENT_LENGTH,  20, ELEMENT_WIDTH));
+				int m, n;
+				if (pBuffer[i - 1] == '1' || pBuffer[i + 1] == '1')
+					m = ELEMENT_LENGTH, n = 2;
+				else if (pBuffer[i - 1] == '0'&&pBuffer[i + 1] == '0')
+					m = 2, n = ELEMENT_LENGTH;
+				rbDes.shape = Physics3DShape::createBox(Vec3(m,  20, n));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
-				pd2->setScaleX(ELEMENT_LENGTH);
+				pd2->setScaleX(m);
 				pd2->setScaleY(20);
-				pd2->setScaleZ(ELEMENT_WIDTH);
+				pd2->setScaleZ(n);
 				pd2->setPosition3D(Vec3(x - WORLD_LENGTH / 2, 0, y - WORLD_WIDTH / 2));
 				addChild(pd2);
 				pd2->setCameraMask((unsigned int)CameraFlag::USER1);
@@ -74,15 +149,12 @@ bool StageManager::init()
 					y += ELEMENT_WIDTH;
 				}
 			}
-		}
-
-
+		}*/
 		if (pBuffer)
 		{
 			delete[] pBuffer;
 			pBuffer = NULL;
 		}
-		
 		/* */
 		//create several boxes using PhysicsSprite3D
 		/*rbDes.mass = 1.f;
