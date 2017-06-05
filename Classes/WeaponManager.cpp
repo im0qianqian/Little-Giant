@@ -1,9 +1,9 @@
 #include "WeaponManager.h"
 #include "Global.h"
 
-WeaponManager::WeaponManager()
+WeaponManager::WeaponManager():
+	_cachePool(ObjCachePool<Weapons>(this, WEAPONS_CACHE_SIZE))
 {
-	_weaponsCachePool.clear();
 }
 
 WeaponManager::~WeaponManager()
@@ -13,9 +13,7 @@ WeaponManager::~WeaponManager()
 bool WeaponManager::init()
 {
 	// ´´½¨»º´æ³Ø
-	_cachePool.setCacheSize(WEAPONS_CACHE_SIZE);
 	_cachePool.createCachePool();
-	//createCachePool();
 	//schedule(schedule_selector(WeaponManager::update), 1.f);
 	return true;
 }
@@ -48,30 +46,4 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 		CCASSERT(weapon, "NULL");
 		weapon->init(owner, spos, epos);
 	}
-}
-
-Weapons * WeaponManager::getWeaponFromPool()
-{
-	Weapons* weapon = nullptr;
-	if (!_weaponsCachePool.empty())
-	{
-		weapon = _weaponsCachePool.back();
-		_weaponsCachePool.popBack();
-	}
-	cout << "³É¹¦´Ó»º´æ³ØÖÐ»ñÈ¡Ò»¸öÎäÆ÷¶ÔÏó£º" << weapon << endl;
-	cout << "ÎäÆ÷»º´æ³Ø´óÐ¡Ê£Óà£º" << _weaponsCachePool.size() << endl;
-	return weapon;
-}
-
-void WeaponManager::createCachePool()
-{
-	// »º´æ³ØÇå¿Õ
-	_weaponsCachePool.clear();
-	for (auto i = 0; i < _cachePoolSize; i++)
-	{
-		Weapons* p = Weapons::create();
-		_weaponsCachePool.pushBack(p);
-		addChild(p);	//Ìí¼Óµ½Í¼²ã
-	}
-	cout << "ÎäÆ÷»º´æ³Ø´óÐ¡Ê£Óà£º" << _weaponsCachePool.size() << endl;
 }

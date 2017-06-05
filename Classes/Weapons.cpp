@@ -35,7 +35,7 @@ void Weapons::destroy()
 	// 删除元素
 	_isDeleted = true;
 	// 添加到缓存池
-	//GameScene::getWeaponManager()->addWeaponToPool(this);
+	GameScene::getWeaponManager()->addToPool(this);
 	// 设置不可见
 	setVisible(false);
 	// 这里改变武器位置到 (0,-10,0) 这一点

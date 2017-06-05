@@ -9,6 +9,7 @@ class ObjCachePool
 {
 public:
 	ObjCachePool();
+	ObjCachePool(Node *const &node, const int &size);
 	~ObjCachePool();
 	/* 添加一个对象到缓存池 */
 	void addToPool(T* const &t);
@@ -16,16 +17,28 @@ public:
 	void createCachePool();
 	/* 设置缓存池大小 */
 	void setCacheSize(const int &size);
+	/* 设置图层 */
+	void setLayer(Node *const &node);
 	/* 获取一个对象指针 */
 	T* getFromPool();
 private:
 	Vector<T*> _cachePool;		//缓冲池
 	int _cacheSize;				//缓冲池大小
+	Node * _layer;				//缓冲池所作用的图层
 };
 
 template<typename T>
 ObjCachePool<T>::ObjCachePool() :
-	_cacheSize(0)
+	_cacheSize(0),
+	_layer(nullptr)
+{
+	_cachePool.clear();
+}
+
+template<typename T>
+ObjCachePool<T>::ObjCachePool(Node * const & node, const int & size):
+	_cacheSize(size),
+	_layer(node)
 {
 	_cachePool.clear();
 }
@@ -52,6 +65,7 @@ void ObjCachePool<T>::createCachePool()
 	for (auto i = 0; i < _cacheSize; i++)
 	{
 		auto t = T::create();
+		_layer->addChild(t);
 		_cachePool.pushBack(t);
 	}
 	cout << "缓存池创建成功，大小：" << _cachePool.size() << endl;
@@ -61,6 +75,11 @@ template<typename T>
 void ObjCachePool<T>::setCacheSize(const int & size)
 {
 	_cacheSize = size;
+}
+
+template<typename T>
+void ObjCachePool<T>::setLayer(Node * const & node)
+{
 }
 
 template<typename T>
