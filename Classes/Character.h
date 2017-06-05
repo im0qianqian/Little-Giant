@@ -22,8 +22,6 @@ public:
 		~Attribute();
 		/* 增加攻击力 */
 		void addAttackDamage(const float &add);
-		/* 增加射程 */
-		void addAttackRange(const float &add);
 		/* 增加攻击速度 */
 		void addAttackSpeed(const float &add);
 		/* 增加移动速度 */
@@ -50,7 +48,6 @@ public:
 		void setDuration(float add);
 		/* GET */
 		float getAttackDamage() { return _attackDamage; }
-		float getAttackRange() { return _attackRange; }
 		float getAttackSpeed() { return _attackSpeed; }
 		float getMovingSpeed() { return _movingSpeed; }
 		float getEmpiricalAcquisition() { return _empiricalAcquisition; }
@@ -60,7 +57,6 @@ public:
 		void init();
 	private:
 		float _attackDamage;			//攻击力加成
-		float _attackRange;				//射程加成
 		float _attackSpeed;				//攻击速度加成
 		float _movingSpeed;				//移动速度加成
 		float _empiricalAcquisition;	//经验获取加成

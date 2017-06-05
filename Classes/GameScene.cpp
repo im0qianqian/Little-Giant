@@ -44,10 +44,13 @@ bool GameScene::init()
 		/* 武器管理 */
 		GameScene::_weaponManager = WeaponManager::create();
 		addChild(GameScene::_weaponManager, 2);
+		/* 奖励管理*/
+		GameScene::_awardManager = AwardManager::create();
+		addChild(GameScene::_awardManager, 3);
 		/* 操作管理 */
 		GameScene::_joystick = Joystick::create();
 		addChild(GameScene::_joystick, -1);
-		//GameScene::_awardManager = AwardManager::create();
+
 		//GameScene::_audioManager = AudioManager::create();
 
 		/* 设置当前场景在 USER1 中可见（必须要添加在所有图层 addChild 之后） */

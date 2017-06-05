@@ -1,7 +1,9 @@
 #include "WeaponManager.h"
+#include "Global.h"
 
 WeaponManager::WeaponManager()
 {
+	_weaponsCachePool.clear();
 }
 
 WeaponManager::~WeaponManager()
@@ -11,7 +13,9 @@ WeaponManager::~WeaponManager()
 bool WeaponManager::init()
 {
 	// ´´½¨»º´æ³Ø
-	createCachePool();
+	_cachePool.setCacheSize(WEAPONS_CACHE_SIZE);
+	_cachePool.createCachePool();
+	//createCachePool();
 	//schedule(schedule_selector(WeaponManager::update), 1.f);
 	return true;
 }
@@ -37,7 +41,7 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 	{
 		addChild(weapon);
 	}*/
-	Weapons *weapon = getWeaponFromPool();
+	auto weapon = _cachePool.getFromPool();
 	cout << weapon << endl;
 	if (weapon != NULL)
 	{

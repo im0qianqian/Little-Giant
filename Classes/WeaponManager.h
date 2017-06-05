@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "Weapons.h"
 #include "Global.h"
+#include "ObjCachePool.h"
 
 USING_NS_CC;
 
@@ -21,6 +22,7 @@ public:
 	/* 添加一个武器对象到缓存池 */
 	void addWeaponToPool(Weapons * const &weapon) { _weaponsCachePool.pushBack(weapon); }
 private:
+	ObjCachePool<Weapons> _cachePool;
 	const int _cachePoolSize = WEAPONS_CACHE_SIZE;		// 缓存池容量（场上同时发射的武器数目）
 	void createCachePool();								// 创建缓存池
 	Vector<Weapons*> _weaponsCachePool;					// 武器对象缓冲池

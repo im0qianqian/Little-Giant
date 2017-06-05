@@ -92,9 +92,9 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 			//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
 			Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
 			//Vec3 c = camera->getPosition3D();
-			GameScene::getCamera()->setPosition3D(c);
+			//GameScene::getCamera()->setPosition3D(c);
 			//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));
-			GameScene::getCamera()->lookAt(cam);
+			//GameScene::getCamera()->lookAt(cam);
 		}
 		else
 		{
@@ -167,6 +167,15 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					// 删除武器对象
 					weapon1->destroy();
 					weapon2->destroy();
+				}
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))
+				{
+					CCLOG("---------------- Award character --------------------");
+					// 如果 A 是武器的话交换，最终结果： A 人物、B 奖励
+					if (objA->Node::getTag() == kGlobalAward)
+						swap(objA, objB);
+					Award * award = dynamic_cast<Award*>(objB);
+					award->destroy();
 				}
 				else
 				{

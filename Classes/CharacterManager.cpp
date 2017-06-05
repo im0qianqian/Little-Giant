@@ -1,8 +1,11 @@
 #include "CharacterManager.h"
 #include "GameScene.h"
 
-CharacterManager::CharacterManager()
+CharacterManager::CharacterManager():
+	_playerCharacter(nullptr)
 {
+	_enemyCharacter.clear();
+	_characterCachePool.clear();
 }
 
 CharacterManager::~CharacterManager()
@@ -14,7 +17,7 @@ bool CharacterManager::init()
 	createCachePool();
 	// 第二步创建人物
 	startGame(0,0);
-	schedule(schedule_selector(CharacterManager::update), .3f);
+	//schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
 }
 
@@ -72,7 +75,7 @@ Character * CharacterManager::createCharacter(CharacterType characterType)
 		{
 			_playerCharacter = character;
 			_playerCharacter->setDept(-1);
-			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x+100, 50, character->getPosition3D().z + 100));
+			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x, 50, character->getPosition3D().z+20));
 			GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x, 0, character->getPosition3D().z));
 		}
 		else

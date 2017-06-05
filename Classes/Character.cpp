@@ -6,11 +6,14 @@
 USING_NS_CC;
 
 Character::Character() :
+	_dept(0),
 	_lifeValue(INITIAL_LIFE_VALUE),
 	_experience(0),
 	_sorce(0),
 	_weaponType(kWeaponArrow),
-	_isDie(true)
+	_isDie(true),
+	_attribute(Attribute()),
+	_hpSlider(nullptr)
 {
 	// 设置属于人物标签
 	setTag(kGlobalCharacter);
@@ -68,7 +71,7 @@ void Character::move(const Vec3 & pos)
 	/* 获取刚体对象 */
 	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
 	/* 设置线速度为人物移动速度*方向向量，Y方向保持和原来一样 */
-	s->setLinearVelocity(getAttribute().getMovingSpeed()*pos+Vec3(0,s->getLinearVelocity().y,0));
+	s->setLinearVelocity(getAttribute().getMovingSpeed()*pos + Vec3(0, s->getLinearVelocity().y, 0));
 }
 
 bool Character::init()
@@ -80,19 +83,18 @@ bool Character::init()
 	_hpSlider->setTouchEnabled(false);
 	_hpSlider->setScale(.03f);
 	_hpSlider->setPercent(_lifeValue);
-	_hpSlider->setRotation3D(Vec3(-90,0,0));
-	_hpSlider->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
+	_hpSlider->setRotation3D(Vec3(-90, 0, 0));
+	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
 	addChild(_hpSlider);
 
 	/* 以下是初始化部分 */
-	//initWithFile("Sprite3DTest/box.c3t");
-	initWithFile("Sprite3DTest/sphere.c3b");
+	initWithFile("Sprite3DTest/box.c3t");
+	//initWithFile("Sprite3DTest/sphere.c3b");
 	setTexture("images/Icon.png");
 
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
-	//des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
-	des.shape = Physics3DShape::createSphere(1.f);
+	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
 
 	auto obj = Physics3DRigidBody::create(&des);
 
@@ -110,7 +112,7 @@ bool Character::init()
 
 	setScale(2.f);		//设置大小
 	setVisible(false);	//设置不可见
-	setPosition3D(-Vec3::UNIT_Y*10);	//设置初始坐标
+	setPosition3D(-Vec3::UNIT_Y * 10);	//设置初始坐标
 	syncNodeToPhysics();
 	return true;
 }
@@ -135,8 +137,8 @@ void Character::initialization()
 
 void Character::beAttacked(const Weapons * weapon)
 {
-	addLifeValue(-weapon->getPower() / 1.0);	//受到攻击先掉血
-	//cout << "life life -------------------------------> " << getLifeValue() << endl;
+	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
+	addLifeValue(min((-weapon->getPower() + getAttribute().getDefensiveForce()) / 1.0, 0));
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
@@ -158,19 +160,18 @@ void Character::update(float dt)
 			ret += Vec3(1, 0, 0);
 		if (GameScene::getJoystick()->isFirstView())
 		{
-			GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3::UNIT_Y*2);
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
 		}
 		else
 		{
-			//GameScene::getCamera()->setPosition3D(getPosition3D()+Vec3(100,50,100));
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
 			//GameScene::getCamera()->lookAt(getPosition3D());
-			GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 		move(ret.getNormalized());
-
 		syncNodeToPhysics();
 	}
-	else if(!_isDie)
+	else if (!_isDie)
 	{
 		static float attackTime = 0;
 		attackTime += dt;
@@ -181,7 +182,7 @@ void Character::update(float dt)
 			int len = other.size();
 			for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
 			{
-				if (*i != this&&((*i)->getPosition3D() - getPosition3D()).length()<minn.length())
+				if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
 				{
 					minn = (*i)->getPosition3D() - getPosition3D();
 				}
@@ -196,7 +197,6 @@ void Character::update(float dt)
 
 Character::Attribute::Attribute() :
 	_attackDamage(0),
-	_attackRange(0),
 	_attackSpeed(0),
 	_movingSpeed(50.f),
 	_empiricalAcquisition(0),
@@ -216,11 +216,6 @@ Character::Attribute::~Attribute()
 void Character::Attribute::addAttackDamage(const float &add)
 {
 	_attackDamage = max(0.0f, _attackDamage + add);
-}
-
-void Character::Attribute::addAttackRange(const float &add)
-{
-	_attackRange = max(0.0f, _attackRange + add);
 }
 
 void Character::Attribute::addAttackSpeed(const float &add)
@@ -286,7 +281,6 @@ void Character::Attribute::setDuration(float add)
 void Character::Attribute::init()
 {
 	_attackDamage = 0;
-	_attackRange = 0;
 	_attackSpeed = 0;
 	_movingSpeed = 50.f;
 	_empiricalAcquisition = 0;

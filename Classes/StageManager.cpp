@@ -1,6 +1,7 @@
 #include "StageManager.h"
 #include "GameScene.h"
-StageManager::StageManager()
+StageManager::StageManager():
+	_ground(nullptr)
 {
 }
 
@@ -15,7 +16,7 @@ StageManager::~StageManager()
 #define ARRAY_SIZE_Y 3
 #define ARRAY_SIZE_Z 4
 #define MAXN 60
-char array[MAXN][MAXN];
+char arr[MAXN][MAXN];
 bool StageManager::init()
 {
 	bool flag = false;
@@ -30,14 +31,12 @@ bool StageManager::init()
 		_ground->setScaleX(WORLD_LENGTH);
 		_ground->setScaleZ(WORLD_WIDTH);
 		addChild(_ground);
-		_ground->setCameraMask((unsigned int)CameraFlag::USER1);
 		_ground->syncNodeToPhysics();
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 
-		std::string fullPath = FileUtils::sharedFileUtils()->fullPathForFilename("b.txt");
 		unsigned char* pBuffer = NULL;
 		ssize_t bufferSize = 0;
-		pBuffer = FileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &bufferSize);
+		pBuffer = FileUtils::sharedFileUtils()->getFileData("maps/1.txt", "r", &bufferSize);
 		CCLOG("%ld", bufferSize);
 		CCLOG("%s", pBuffer);
 		int p = 0, q = 0;
@@ -46,11 +45,11 @@ bool StageManager::init()
 		{
 			if (pBuffer[i] == '1' || pBuffer[i] == '0')
 			{
-				array[p][q] = pBuffer[i];
+				arr[p][q] = pBuffer[i];
 				q++;
 				f = true;
 			}
-			else if (q>=50 && f == true)
+			else if (q>=52 && f == true)
 			{
 				f = false;
 				p++;
@@ -59,12 +58,12 @@ bool StageManager::init()
 		}
 		int count,m,n;
 		m = ELEMENT_LENGTH, n = 2;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 52; i++)
 		{
-			for (int j = 0; j < 50; j++)
+			for (int j = 0; j < 52; j++)
 			{
 				count = 0;
-				while (array[i][j] == '1')
+				while (arr[i][j] == '1')
 				{
 					count++;
 					j++;
@@ -85,12 +84,12 @@ bool StageManager::init()
 			}
 		}
 		m = 2, n = ELEMENT_LENGTH;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < 52; i++)
 		{
-			for (int j = 0; j < 50; j++)
+			for (int j = 0; j < 52; j++)
 			{
 				count = 0;
-				while (array[j][i] == '1')
+				while (arr[j][i] == '1')
 				{
 					count++;
 					j++;
@@ -104,7 +103,6 @@ bool StageManager::init()
 					pd2->setScaleZ(n*count);
 					pd2->setPosition3D(Vec3(i*ELEMENT_WIDTH - WORLD_LENGTH / 2, 0, j*ELEMENT_LENGTH - (count+1)*ELEMENT_LENGTH / 2 - WORLD_WIDTH / 2));
 					addChild(pd2);
-					pd2->setCameraMask((unsigned int)CameraFlag::USER1);
 					pd2->syncNodeToPhysics();
 					pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 				}
