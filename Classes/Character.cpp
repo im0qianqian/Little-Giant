@@ -85,7 +85,8 @@ bool Character::init()
 	addChild(_hpSlider);
 
 	/* 以下是初始化部分 */
-	initWithFile("Sprite3DTest/box.c3t");
+	//initWithFile("Sprite3DTest/box.c3t");
+	initWithFile("Sprite3DTest/sphere.c3b");
 	setTexture("images/Icon.png");
 
 	Physics3DRigidBodyDes des;
