@@ -52,13 +52,7 @@ void Character::die()
 	_isDie = true;
 	if (getDept() != -1)	// 其他人物死亡
 	{
-		GameScene::getCharacterManager()->addCharacterToPool(this);
-		//设置不可见
-		setVisible(false);
-		// 这里改变武器位置到 (0,-1,0) 这一点
-		setPosition3D(-Vec3::UNIT_Y * 10);
-		// 同步到物理世界
-		syncNodeToPhysics();
+		GameScene::getCharacterManager()->addToPool(this);
 	}
 	else	//自己死亡
 	{
@@ -111,9 +105,6 @@ bool Character::init()
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
 
 	setScale(2.f);		//设置大小
-	setVisible(false);	//设置不可见
-	setPosition3D(-Vec3::UNIT_Y * 10);	//设置初始坐标
-	syncNodeToPhysics();
 	return true;
 }
 
@@ -128,7 +119,6 @@ void Character::initialization()
 	_isDie = false;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
 
-	setVisible(true);							//设置可见
 	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
 

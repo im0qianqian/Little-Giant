@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "Character.h"
-#include "Global.h"
+#include "ObjCachePool.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
@@ -26,8 +26,6 @@ public:
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
-	/* 添加一个人物对象到缓存池 */
-	void addCharacterToPool(Character * const &character);
 	enum CharacterType
 	{
 		kCharacterPlayer,						//玩家
@@ -36,13 +34,11 @@ public:
 	};
 	/* 创建人物 */
 	Character* createCharacter(CharacterType characterType);
+	/* 添加一个人物对象到缓存池 */
+	void addToPool(Character * const &character);
 private:
-	/* 从缓存池中获取一个人物对象 */
-	Character *getCharacterFromPool();
 	Character* _playerCharacter;						//玩家人物
-	std::set<Character*> _enemyCharacter;					//其他人物
-	const int _cachePoolSize = CHARACTER_CACHE_SIZE;	// 缓存池容量（场上同时存在多少人物）
-	void createCachePool();								// 创建缓存池
-	Vector<Character*> _characterCachePool;				// 武器对象缓冲池
+	std::set<Character*> _enemyCharacter;				//其他人物
+	ObjCachePool<Character> _cachePool;					//缓存池
 };
 #endif // __CHARACTER_MANAGER_H__

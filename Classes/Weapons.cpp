@@ -36,12 +36,6 @@ void Weapons::destroy()
 	_isDeleted = true;
 	// 添加到缓存池
 	GameScene::getWeaponManager()->addToPool(this);
-	// 设置不可见
-	setVisible(false);
-	// 这里改变武器位置到 (0,-10,0) 这一点
-	setPosition3D(-Vec3::UNIT_Y * 10);
-	// 同步到物理世界
-	syncNodeToPhysics();
 }
 
 bool Weapons::init()
@@ -66,11 +60,6 @@ bool Weapons::init()
 	obj->setUserData(this);												// 设置用户数据为当前武器对象，碰撞检测中会使用
 
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
-
-	setVisible(false);
-	setPosition3D(-Vec3::UNIT_Y*10);
-	// 同步到物理世界
-	syncNodeToPhysics();
 	return true;
 }
 
@@ -99,7 +88,6 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	obj->setCcdMotionThreshold(0.5f);									//设置运动阈值
 	obj->setCcdSweptSphereRadius(0.4f);									//设置扫描球半径
 
-	setVisible(true);
 	syncNodeToPhysics();												//同步至物理世界
 }
 

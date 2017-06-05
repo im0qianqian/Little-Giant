@@ -35,19 +35,14 @@ bool Award::init()
 	obj->setUserData(this);
 
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//应用同步
-
-	setVisible(false);
-	setPosition3D(-Vec3::UNIT_Y * 10);
-	// 同步到物理世界
-	syncNodeToPhysics();
 	return true;
 }
 
 void Award::initialization()
 {
 	_isDeleted = false;
-	setVisible(true);							//设置可见
-												// 取出之后随机设置位置并同步
+	
+	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 0, rand() % WORLD_WIDTH - WORLD_WIDTH / 2)+Vec3::UNIT_Y);
 
 	syncNodeToPhysics();
@@ -60,11 +55,5 @@ void Award::destroy()
 	// 删除元素
 	_isDeleted = true;
 	// 添加到缓存池
-	GameScene::getAwardManager()->addAwardToPool(this);
-	// 设置不可见
-	setVisible(false);
-	// 这里改变武器位置到 (0,-10,0) 这一点
-	setPosition3D(-Vec3::UNIT_Y * 10);
-	// 同步到物理世界
-	syncNodeToPhysics();
+	GameScene::getAwardManager()->addToPool(this);
 }

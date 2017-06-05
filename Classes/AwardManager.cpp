@@ -1,8 +1,9 @@
 #include "AwardManager.h"
+#include "Global.h"
 
-AwardManager::AwardManager()
+AwardManager::AwardManager():
+	_cachePool(ObjCachePool<Award>(this,AWARD_CACHE_SIZE))
 {
-	_awardCachePool.clear();
 }
 
 AwardManager::~AwardManager()
@@ -13,45 +14,20 @@ AwardManager::~AwardManager()
 bool AwardManager::init()
 {
 	// 第一步先创建缓存池
-	createCachePool();
+	_cachePool.createCachePool();
 	// 第二步创建奖励
 	createAllAward();
 	return true;
 }
 
-Award * AwardManager::getAwardFromPool()
-{
-	Award* award = nullptr;
-	if (!_awardCachePool.empty())
-	{
-		award = _awardCachePool.back();
-		_awardCachePool.popBack();
-	}
-	cout << "奖励缓存池大小剩余：" << _awardCachePool.size() << endl;
-	return award;
-}
-
 void AwardManager::createAllAward()
 {
-	for (auto i = 0; i < _cachePoolSize; i++)
+	for (auto i = 0; i < AWARD_CACHE_SIZE; i++)
 	{
-		auto award = getAwardFromPool();	//从缓存池中取出奖励
+		auto award = _cachePool.getFromPool();			//从缓存池中取出奖励
 		if (award != NULL)
 		{
 			award->initialization();					//登场
 		}
 	}
-}
-
-void AwardManager::createCachePool()
-{
-	// 缓存池清空
-	_awardCachePool.clear();
-	for (auto i = 0; i < _cachePoolSize; i++)
-	{
-		Award* award = Award::create();
-		_awardCachePool.pushBack(award);
-		addChild(award);	//添加到图层
-	}
-	cout << "奖励缓存池大小剩余：" << _awardCachePool.size() << endl;
 }

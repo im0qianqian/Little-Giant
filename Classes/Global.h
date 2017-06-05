@@ -38,6 +38,7 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 #define WORLD_LENGTH			104			//世界长度
 #define WORLD_WIDTH				104			//世界宽度
 #define WORLD_HEIGHT			1			//世界高度
+#define ELEMENT_HEIGHT			20			//墙的高度
 
 #define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
 #define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
@@ -45,10 +46,8 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 
 #define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
 
-#define MAPS_FILE 52         //地图文件的大小
-#define ELEMENT_LENGTH  WORLD_LENGTH/MAPS_FILE    //组成元素的长度
-#define ELEMENT_WIDTH      WORLD_WIDTH/MAPS_FILE     //组成元素的宽度
-#define ELEMENT_HEIGHT  50     //墙的高度
+#define MAPS_FILE_LENGTH		52			//地图文件长
+#define MAPS_FILE_WIDTH			52			//地图文件宽
 
 
 enum GlobalType
