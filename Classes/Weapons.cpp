@@ -2,6 +2,7 @@
 #include "Character.h"
 #include "GameScene.h"
 #include "Joystick.h"
+#include "Global.h"
 #include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Weapons::Weapons() :
@@ -34,7 +35,7 @@ void Weapons::destroy()
 	// 删除元素
 	_isDeleted = true;
 	// 添加到缓存池
-	GameScene::getWeaponManager()->addWeaponToPool(this);
+	//GameScene::getWeaponManager()->addWeaponToPool(this);
 	// 设置不可见
 	setVisible(false);
 	// 这里改变武器位置到 (0,-10,0) 这一点
