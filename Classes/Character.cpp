@@ -90,7 +90,8 @@ bool Character::init()
 
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
-	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+	//des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+	des.shape = Physics3DShape::createSphere(1.f);
 
 	auto obj = Physics3DRigidBody::create(&des);
 

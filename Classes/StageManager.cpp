@@ -14,8 +14,7 @@ StageManager::~StageManager()
 #define ARRAY_SIZE_X 4
 #define ARRAY_SIZE_Y 3
 #define ARRAY_SIZE_Z 4
-#define MAXN 60
-char array[MAXN][MAXN];
+char array[MAPS_FILE + 2][MAPS_FILE+2];
 bool StageManager::init()
 {
 	bool flag = false;
@@ -30,14 +29,12 @@ bool StageManager::init()
 		_ground->setScaleX(WORLD_LENGTH);
 		_ground->setScaleZ(WORLD_WIDTH);
 		addChild(_ground);
-		_ground->setCameraMask((unsigned int)CameraFlag::USER1);
 		_ground->syncNodeToPhysics();
 		_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 
-		std::string fullPath = FileUtils::sharedFileUtils()->fullPathForFilename("b.txt");
 		unsigned char* pBuffer = NULL;
 		ssize_t bufferSize = 0;
-		pBuffer = FileUtils::sharedFileUtils()->getFileData(fullPath.c_str(), "r", &bufferSize);
+		pBuffer = FileUtils::sharedFileUtils()->getFileData("maps/1.txt", "r", &bufferSize);
 		CCLOG("%ld", bufferSize);
 		CCLOG("%s", pBuffer);
 		int p = 0, q = 0;
@@ -50,7 +47,7 @@ bool StageManager::init()
 				q++;
 				f = true;
 			}
-			else if (q>=50 && f == true)
+			else if (q >= MAPS_FILE && f == true)
 			{
 				f = false;
 				p++;
@@ -59,9 +56,9 @@ bool StageManager::init()
 		}
 		int count,m,n;
 		m = ELEMENT_LENGTH, n = 2;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < MAPS_FILE; i++)
 		{
-			for (int j = 0; j < 50; j++)
+			for (int j = 0; j < MAPS_FILE; j++)
 			{
 				count = 0;
 				while (array[i][j] == '1')
@@ -71,23 +68,22 @@ bool StageManager::init()
 				}
 				if (count>1)
 				{
-					rbDes.shape = Physics3DShape::createBox(Vec3(m*count, 20, n));
+					rbDes.shape = Physics3DShape::createBox(Vec3(m*count, ELEMENT_HEIGHT, n));
 					auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
 					pd2->setScaleX(m*count);
-					pd2->setScaleY(20);
+					pd2->setScaleY(ELEMENT_HEIGHT);
 					pd2->setScaleZ(n);
 					pd2->setPosition3D(Vec3((j)*ELEMENT_LENGTH - (count+1)*ELEMENT_LENGTH / 2 - WORLD_LENGTH / 2, 0, i*ELEMENT_WIDTH - WORLD_WIDTH / 2));
 					addChild(pd2);
-					pd2->setCameraMask((unsigned int)CameraFlag::USER1);
 					pd2->syncNodeToPhysics();
 					pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 				}
 			}
 		}
 		m = 2, n = ELEMENT_LENGTH;
-		for (int i = 0; i < 50; i++)
+		for (int i = 0; i < MAPS_FILE; i++)
 		{
-			for (int j = 0; j < 50; j++)
+			for (int j = 0; j < MAPS_FILE; j++)
 			{
 				count = 0;
 				while (array[j][i] == '1')
@@ -97,10 +93,10 @@ bool StageManager::init()
 				}
 				if (count>1)
 				{
-					rbDes.shape = Physics3DShape::createBox(Vec3(m, 20, n*count));
+					rbDes.shape = Physics3DShape::createBox(Vec3(m, ELEMENT_HEIGHT, n*count));
 					auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
 					pd2->setScaleX(m);
-					pd2->setScaleY(20);
+					pd2->setScaleY(ELEMENT_HEIGHT);
 					pd2->setScaleZ(n*count);
 					pd2->setPosition3D(Vec3(i*ELEMENT_WIDTH - WORLD_LENGTH / 2, 0, j*ELEMENT_LENGTH - (count+1)*ELEMENT_LENGTH / 2 - WORLD_WIDTH / 2));
 					addChild(pd2);

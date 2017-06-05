@@ -35,8 +35,8 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 #define SCREEN_HEIGHT			960			//屏幕宽度
 #define SCREEN_FORM_NAME		"Arrow.io"	//窗口标题
 
-#define WORLD_LENGTH			100			//世界长度
-#define WORLD_WIDTH				100			//世界宽度
+#define WORLD_LENGTH			1000			//世界长度
+#define WORLD_WIDTH				1000			//世界宽度
 #define WORLD_HEIGHT			1			//世界高度
 
 #define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
@@ -44,9 +44,10 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 
 #define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
 
-#define ELEMENT_LENGTH  WORLD_LENGTH/50    //组成元素的长度
-#define ELEMENT_WIDTH      WORLD_WIDTH/50     //组成元素的宽度
-#define ELEMENT_HEIGHT  10     //墙的高度
+#define MAPS_FILE 52         //地图文件的大小
+#define ELEMENT_LENGTH  WORLD_LENGTH/MAPS_FILE    //组成元素的长度
+#define ELEMENT_WIDTH      WORLD_WIDTH/MAPS_FILE     //组成元素的宽度
+#define ELEMENT_HEIGHT  50     //墙的高度
 
 
 enum GlobalType
