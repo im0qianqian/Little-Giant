@@ -25,13 +25,23 @@ Character::~Character()
 
 void Character::addLifeValue(const float &add)
 {
-	_lifeValue += add;
+	if (add >= 0)
+	{
+		// 加血时增加恢复能力加成
+		_lifeValue += add*getAttribute().getRestoringAbility();
+	}
+	else
+	{
+		// 减血时减掉防御力所抵消的伤害
+		_lifeValue += min(add + getAttribute().getDefensiveForce(), 0);
+	}
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
 }
 
 void Character::addExperience(const int &add)
 {
-	_experience += add;
+	_experience += add*getAttribute().getEmpiricalAcquisition();
+	cout << "当前经验值：" << _experience << endl;
 }
 
 void Character::addSorce(const int &add)
@@ -132,7 +142,15 @@ void Character::beAttacked(const Weapons * weapon)
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
+	{
+		/* 武器的主人 */
+		auto *cer = static_cast<Character*>(weapon->getOwner());
+		// 得到对方的所有经验值与得分（BUG BUG BUG）
+		cer->addExperience(getExperience());
+		cer->addSorce(getSorce());
+		cout << cer << " 杀死了 " << this << " ，得到经验值：" << getExperience() << " ，得到分数：" << getSorce() << endl;
 		die();
+	}
 }
 
 void Character::update(float dt)
@@ -150,7 +168,7 @@ void Character::update(float dt)
 			ret += Vec3(1, 0, 0);
 		if (GameScene::getJoystick()->isFirstView())
 		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
 		}
 		else
 		{
@@ -186,12 +204,12 @@ void Character::update(float dt)
 
 
 Character::Attribute::Attribute() :
-	_attackDamage(0),
-	_attackSpeed(0),
+	_attackDamage(1),
+	_attackSpeed(1),
 	_movingSpeed(50.f),
-	_empiricalAcquisition(0),
+	_empiricalAcquisition(1),
 	_defensiveForce(0),
-	_restoringAbility(0),
+	_restoringAbility(1),
 	_temporary(kTemporaryNone),
 	_duration(0)
 {
@@ -270,10 +288,12 @@ void Character::Attribute::setDuration(float add)
 
 void Character::Attribute::init()
 {
-	_attackDamage = 0;
-	_attackSpeed = 0;
+	_attackDamage = 1;
+	_attackSpeed = 1;
 	_movingSpeed = 50.f;
-	_empiricalAcquisition = 0;
+	_empiricalAcquisition = 1;
 	_defensiveForce = 0;
-	_restoringAbility = 0;
+	_restoringAbility = 1;
+	_temporary = kTemporaryNone;
+	_duration = 0;
 }

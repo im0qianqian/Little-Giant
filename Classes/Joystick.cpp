@@ -175,6 +175,9 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					if (objA->Node::getTag() == kGlobalAward)
 						swap(objA, objB);
 					Award * award = dynamic_cast<Award*>(objB);
+					// 给人物增加奖励
+					award->applyToCharacter(dynamic_cast<Character*>(objA));
+					// 删除奖励对象
 					award->destroy();
 				}
 				else
@@ -229,6 +232,11 @@ void Joystick::keyboardListen()
 				Vec3 pos = GameScene::getCamera()->getRotation3D();
 				pos.x = pos.z = 0;
 				GameScene::getCamera()->setRotation3D(pos);
+			}
+			else
+			{
+				GameScene::getCamera()->setPosition3D(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() + Vec3(0, 50, 20));
+				GameScene::getCamera()->lookAt(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 			}
 		}
 		/* ----------------------- */

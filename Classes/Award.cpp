@@ -3,7 +3,8 @@
 #include "Joystick.h"
 
 Award::Award():
-	_isDeleted(true)
+	_isDeleted(true),
+	_awardType(AwardType::kAwardEXP)
 {
 	// 武器标签
 	setTag(kGlobalAward);
@@ -16,7 +17,6 @@ Award::~Award()
 bool Award::init()
 {
 	initWithFile("Sprite3DTest/box.c3t");								//设置形状
-	setTexture("Sprite3DTest/teapot.png");								//设置材质
 
 	Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
 	rbDes.mass = 0.f;													//设置刚体质量
@@ -44,6 +44,7 @@ void Award::initialization()
 	
 	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 0, rand() % WORLD_WIDTH - WORLD_WIDTH / 2)+Vec3::UNIT_Y);
+	randomType();
 
 	syncNodeToPhysics();
 }
@@ -56,4 +57,36 @@ void Award::destroy()
 	_isDeleted = true;
 	// 添加到缓存池
 	GameScene::getAwardManager()->addToPool(this);
+}
+
+void Award::applyToCharacter(Character * const & character)
+{
+	switch (_awardType)
+	{
+	case kAwardHP:
+		character->addLifeValue(100.f);
+		break;
+	case kAwardEXP:
+		character->addExperience(1.f);
+		break;
+	default:
+		break;
+	}
+}
+
+void Award::randomType()
+{
+	/* 随机确定奖励类型 */
+	_awardType = AwardType(rand() % 2);
+	switch (_awardType)
+	{
+	case kAwardEXP:
+		setTexture("Sprite3DTest/brickwork_normal-map.jpg");
+		break;
+	case kAwardHP:
+		setTexture("Sprite3DTest/brickwork-texture.jpg");
+		break;
+	default:
+		break;
+	}
 }

@@ -19,6 +19,7 @@ public:
 	/* 创建所有的奖励对象 */
 	void createAllAward();
 private:
+	void update(float dt);
 	ObjCachePool<Award> _cachePool;						//缓存池
 };
 #endif

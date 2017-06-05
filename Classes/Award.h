@@ -2,6 +2,7 @@
 #define __AWARD_H__
 
 #include "cocos2d.h"
+#include "Character.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
@@ -18,7 +19,18 @@ public:
 	void destroy();
 	/* 创建 */
 	CREATE_FUNC(Award);
+	enum AwardType
+	{
+		kAwardHP,
+		kAwardEXP
+	};
+	/* 将奖励应用于人物 */
+	void applyToCharacter(Character *const &character);
 private:
-	bool _isDeleted;	//是否被删除
+	
+	/* 随机生成奖励类型 */
+	void randomType();
+	AwardType _awardType;	//奖励类型
+	bool _isDeleted;		//是否被删除
 };
 #endif
