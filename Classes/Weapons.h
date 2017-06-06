@@ -8,13 +8,8 @@
 
 USING_NS_CC;
 
-enum WeaponType
-{
-	kWeaponArrow,
-	kWeaponBomb,
-	kWeaponDart
-};
-
+/* 类声明，不能引入那个头文件，否则会造成无限引入 */
+class Character;
 class Weapons : public PhysicsSprite3D
 {
 public:
@@ -43,6 +38,14 @@ public:
 	/* 初始化属性 */
 	virtual bool init();
 	virtual void init(void * const &owner, const Vec3 &spos, const Vec3 &epos);
+	/* 杀死敌人 */
+	virtual void killCharacter(Character *const &character) const;
+	/* 与场景碰撞 */
+	virtual void collisionWithStage();
+	/* 与武器碰撞 */
+	virtual void collisionWithWeapon(Weapons *const &weapon);
+	/* 与人物碰撞 */
+	virtual void collisionWithCharacter(Character *const &character);
 private:
 	void update(float dt);
 	void *_owner;			//武器所属人物

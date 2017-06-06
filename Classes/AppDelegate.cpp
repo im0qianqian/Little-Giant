@@ -1,6 +1,7 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
 #include "SceneManager.h"
+#include "Global.h"
 
 USING_NS_CC;
 

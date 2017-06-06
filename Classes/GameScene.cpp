@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "Global.h"
 
 USING_NS_CC;
 

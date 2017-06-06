@@ -4,7 +4,6 @@
 #include "cocos2d.h"
 #include "Character.h"
 #include "ObjCachePool.h"
-#include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 

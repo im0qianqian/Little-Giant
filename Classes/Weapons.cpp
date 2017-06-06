@@ -91,6 +91,31 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	syncNodeToPhysics();												//同步至物理世界
 }
 
+void Weapons::killCharacter(Character * const &character) const
+{
+	// 武器的主人
+	auto *master = static_cast<Character*>(getOwner());
+	// 得到对方的所有经验值与得分（BUG BUG BUG）
+	master->addExperience(character->getExperience());
+	master->addSorce(character->getSorce());
+	cout << master << " 杀死了 " << character << " ，得到经验值：" << character->getExperience() << " ，得到分数：" << character->getSorce() << endl;
+}
+
+void Weapons::collisionWithStage()
+{
+	destroy();
+}
+
+void Weapons::collisionWithWeapon(Weapons * const & weapon)
+{
+	destroy();
+}
+
+void Weapons::collisionWithCharacter(Character * const & character)
+{
+	destroy();
+}
+
 void Weapons::update(float dt)
 {
 	// 如果不在场上并且没有删除

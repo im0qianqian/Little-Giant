@@ -1,5 +1,4 @@
 #include "WeaponManager.h"
-#include "Global.h"
 
 WeaponManager::WeaponManager():
 	_cachePool(ObjCachePool<Weapons>(this, WEAPONS_CACHE_SIZE))

@@ -1,6 +1,8 @@
 #include "Joystick.h"
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "Global.h"
+#include "Weapons.h"
 #include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Joystick::Joystick() :
@@ -137,8 +139,9 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					// 如果 A 是障碍物的话交换，最终结果： A 武器、B 障碍物
 					if (objA->Node::getTag() == kGlobalStage)
 						swap(objA, objB);
+					// 与障碍物碰撞
 					Weapons *weapon = dynamic_cast<Weapons*>(objA);
-					weapon->destroy();
+					weapon->collisionWithStage();
 				}
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//武器与人物碰撞
 				{
@@ -151,10 +154,10 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 						swap(objA, objB);
 					Weapons *weapon = dynamic_cast<Weapons*>(objB);
 					Character *character = dynamic_cast<Character*>(objA);
-					// 人物受到攻击
-					character->beAttacked(weapon);
-					// 删除武器对象
-					weapon->destroy();
+					// 人物与武器发生碰撞
+					character->collisionWithWeapon(weapon);
+					// 武器与人物发生碰撞
+					weapon->collisionWithCharacter(character);
 				}
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//武器与武器碰撞
 				{
@@ -164,9 +167,9 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					CCLOG("---------------- weapon weapon --------------------");
 					Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
 					Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
-					// 删除武器对象
-					weapon1->destroy();
-					weapon2->destroy();
+					// 武器与武器发生碰撞
+					weapon1->collisionWithWeapon(weapon2);
+					weapon2->collisionWithWeapon(weapon1);
 				}
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))
 				{
@@ -175,10 +178,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					if (objA->Node::getTag() == kGlobalAward)
 						swap(objA, objB);
 					Award * award = dynamic_cast<Award*>(objB);
-					// 给人物增加奖励
-					award->applyToCharacter(dynamic_cast<Character*>(objA));
-					// 删除奖励对象
-					award->destroy();
+					// 奖励与人物碰撞
+					award->collisionWithCharacter(dynamic_cast<Character*>(objA));
 				}
 				else
 				{

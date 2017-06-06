@@ -33,9 +33,6 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Global.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LoadLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>

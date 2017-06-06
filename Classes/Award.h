@@ -2,11 +2,11 @@
 #define __AWARD_H__
 
 #include "cocos2d.h"
-#include "Character.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
+class Character;
 class Award :public PhysicsSprite3D
 {
 public:
@@ -15,19 +15,20 @@ public:
 	virtual bool init();
 	/* 初始化方法 */
 	void initialization();
-	/* 销毁 */
-	void destroy();
 	/* 创建 */
 	CREATE_FUNC(Award);
+	/* 与人物碰撞 */
+	void collisionWithCharacter(Character *const &character);
+private:
 	enum AwardType
 	{
 		kAwardHP,
 		kAwardEXP
 	};
+	/* 销毁 */
+	void destroy();
 	/* 将奖励应用于人物 */
 	void applyToCharacter(Character *const &character);
-private:
-	
 	/* 随机生成奖励类型 */
 	void randomType();
 	AwardType _awardType;	//奖励类型

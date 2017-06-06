@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "Global.h"
 #include "LoadLayer.h"
 
 /* 类静态私有变量初始化 */

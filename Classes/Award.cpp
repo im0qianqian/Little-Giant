@@ -1,6 +1,7 @@
 #include "Award.h"
 #include "GameScene.h"
 #include "Joystick.h"
+#include "Global.h"
 
 Award::Award():
 	_isDeleted(true),
@@ -57,6 +58,14 @@ void Award::destroy()
 	_isDeleted = true;
 	// 添加到缓存池
 	GameScene::getAwardManager()->addToPool(this);
+}
+
+void Award::collisionWithCharacter(Character * const & character)
+{
+	// 将奖励给人物
+	applyToCharacter(character);
+	// 自身销毁
+	destroy();
 }
 
 void Award::applyToCharacter(Character * const & character)

@@ -4,14 +4,15 @@
 #define __Character_H__
 
 #include "cocos2d.h"
-#include "Weapons.h"
 #include "ui\UISlider.h"
+#include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
 
 using namespace cocos2d::ui;
 
+class Weapons;
 class Character :public PhysicsSprite3D
 {
 public:
@@ -47,12 +48,12 @@ public:
 		/* 更改临时能力持续时间 */
 		void setDuration(float add);
 		/* GET */
-		float getAttackDamage() { return _attackDamage; }
-		float getAttackSpeed() { return _attackSpeed; }
-		float getMovingSpeed() { return _movingSpeed; }
-		float getEmpiricalAcquisition() { return _empiricalAcquisition; }
-		float getDefensiveForce() { return _defensiveForce; }
-		float getRestoringAbility() { return _restoringAbility; }
+		float getAttackDamage() const { return _attackDamage; }
+		float getAttackSpeed() const { return _attackSpeed; }
+		float getMovingSpeed() const { return _movingSpeed; }
+		float getEmpiricalAcquisition() const { return _empiricalAcquisition; }
+		float getDefensiveForce() const { return _defensiveForce; }
+		float getRestoringAbility() const { return _restoringAbility; }
 		/* 初始化 */
 		void init();
 	private:
@@ -86,28 +87,30 @@ public:
 	/* 增加分数 */
 	void addSorce(const int &add);
 	/* 获取人物所属群落 */
-	int getDept() { return _dept; }
+	int getDept() const { return _dept; }
 	/* 获取当前生命值 */
-	float getLifeValue() { return _lifeValue; }
+	float getLifeValue() const { return _lifeValue; }
 	/* 获取当前经验值 */
-	int getExperience() { return _experience; }
+	int getExperience() const { return _experience; }
 	/* 获取当前得分 */
-	int getSorce() { return _sorce; }
+	int getSorce() const { return _sorce; }
 	/* 更改人物群落 */
 	void setDept(const int &dept) { _dept = dept; }
 	/* 获取当前人物属性 */
-	Attribute getAttribute() { return _attribute; }
+	Attribute getAttribute() const { return _attribute; }
 	/* 攻击 */
 	void attack(const Vec3 &pos);
-	/* 受到武器攻击 */
-	void beAttacked(const Weapons *weapon);
-	/* 死亡 */
-	void die();
 	virtual bool init();
 	CREATE_FUNC(Character);
 	/* 人物初始化 */
 	void initialization();
+	/* 与武器碰撞 */
+	void collisionWithWeapon(Weapons *const &weapon);
 private:
+	/* 受到武器攻击 */
+	void beAttacked(Weapons *const &weapon);
+	/* 死亡 */
+	void die();
 	/* 移动 */
 	void move(const Vec3 &pos);
 	/* 与 update 有关的函数 */
