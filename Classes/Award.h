@@ -23,7 +23,8 @@ private:
 	enum AwardType
 	{
 		kAwardHP,
-		kAwardEXP
+		kAwardEXP,
+		kAwardSorce
 	};
 	/* Ïú»Ù */
 	void destroy();

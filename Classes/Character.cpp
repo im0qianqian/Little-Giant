@@ -42,7 +42,6 @@ void Character::addLifeValue(const float &add)
 void Character::addExperience(const int &add)
 {
 	_experience += add*getAttribute().getEmpiricalAcquisition();
-	cout << "当前经验值：" << _experience << endl;
 }
 
 void Character::addSorce(const int &add)

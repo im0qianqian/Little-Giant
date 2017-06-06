@@ -5,8 +5,12 @@
       <RootFolder Name=".">
         <Mesh Name="axe.c3b" />
         <Image Name="background.jpg" />
+        <Image Name="blood.png" />
+        <Image Name="bloodbg.png" />
         <Mesh Name="boss.c3b" />
         <Image Name="CloseNormal.png" />
+        <Image Name="CyanSquare.png" />
+        <Project Name="DisplayLayer.csd" Type="Layer" />
         <Project Name="GameScene.csd" Type="Scene" />
         <Image Name="HelloWorld.png" />
         <Project Name="MainScene.csd" Type="Scene" />
