@@ -60,9 +60,6 @@
     <ClCompile Include="..\Classes\Award.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\DisplayManager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -114,9 +111,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ObjCachePool.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\DisplayManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
