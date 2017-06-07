@@ -69,8 +69,8 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	setOwner(owner);
 	setSpos(spos);
 	setEpos(epos);
-	setPower(100.f + static_cast<Character*>(owner)->getAttribute().getAttackDamage());
-	setSpeed(100.f + static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
+	setPower(100.f * static_cast<Character*>(owner)->getAttribute().getAttackDamage());
+	setSpeed(100.f * static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
 	_isDeleted = false;
 
 	Vec3 linearVel = getEpos() - getSpos();								//计算攻击方向的向量
@@ -95,9 +95,10 @@ void Weapons::killCharacter(Character * const &character) const
 {
 	// 武器的主人
 	auto *master = static_cast<Character*>(getOwner());
-	// 得到对方的所有经验值与得分（BUG BUG BUG）
-	master->addExperience(character->getExperience());
-	master->addSorce(character->getSorce());
+	// 得到对方的所有经验值与得分（BUG BUG BUG），另外获取5个经验点
+	master->addExperience(character->getExperience()+5);
+	// 得到对方所有的分数，另外获取5分
+	master->addSorce(character->getSorce()+5);
 	cout << master << " 杀死了 " << character << " ，得到经验值：" << character->getExperience() << " ，得到分数：" << character->getSorce() << endl;
 }
 
@@ -127,11 +128,6 @@ void Weapons::update(float dt)
 
 Arrow::Arrow(void * owner, Vec3 spos, Vec3 epos)
 {
-	setOwner(owner);
-	setSpos(spos);
-	setEpos(epos);
-	setPower(100.f + static_cast<Character*>(owner)->getAttribute().getAttackDamage());
-	setSpeed(100.f + static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
 }
 
 Arrow::~Arrow()
@@ -145,11 +141,6 @@ Arrow *Arrow::create(void *owner, Vec3 spos, Vec3 epos)
 
 Bomb::Bomb(void * owner, Vec3 spos, Vec3 epos)
 {
-	setOwner(owner);
-	setSpos(spos);
-	setEpos(epos);
-	setPower(200.f + static_cast<Character*>(owner)->getAttribute().getAttackDamage());
-	setSpeed(50.f + static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
 }
 
 Bomb::~Bomb()
@@ -163,11 +154,6 @@ Bomb * Bomb::create(void * owner, Vec3 spos, Vec3 epos)
 
 Dart::Dart(void * owner, Vec3 spos, Vec3 epos)
 {
-	setOwner(owner);
-	setSpos(spos);
-	setEpos(epos);
-	setPower(150.f + static_cast<Character*>(owner)->getAttribute().getAttackDamage());
-	setSpeed(70.f + static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
 }
 
 Dart::~Dart()

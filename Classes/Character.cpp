@@ -129,7 +129,8 @@ void Character::initialization()
 	_isDie = false;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
 	_dept = 0;
-
+	// 随机一个姓名（可能会重复）
+	setName(CHARACTER_NAME[rand()%(sizeof(CHARACTER_NAME)/sizeof(string))]);
 	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
 

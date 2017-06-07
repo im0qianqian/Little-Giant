@@ -114,14 +114,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="SorceList_sorce" ActionTag="1622385098" ZOrder="2" Tag="84" IconVisible="False" LeftMargin="170.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="80.0000" Y="26.0000" />
+                  <AbstractNodeData Name="SorceList_sorce" ActionTag="1622385098" ZOrder="2" Tag="84" IconVisible="False" LeftMargin="170.0000" RightMargin="10.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="70.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="210.0000" Y="14.0000" />
+                    <Position X="205.0000" Y="14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8400" Y="0.5000" />
-                    <PreSize X="0.3200" Y="0.9286" />
+                    <PrePosition X="0.8200" Y="0.5000" />
+                    <PreSize X="0.2800" Y="0.9286" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -258,14 +258,14 @@
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="SorceList_sorce" ActionTag="-857956860" ZOrder="2" Tag="96" IconVisible="False" LeftMargin="170.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="80.0000" Y="26.0000" />
+                  <AbstractNodeData Name="SorceList_sorce" ActionTag="-857956860" ZOrder="2" Tag="96" IconVisible="False" LeftMargin="170.0000" RightMargin="10.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="70.0000" Y="26.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                    <Position X="210.0000" Y="14.0000" />
+                    <Position X="205.0000" Y="14.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.8400" Y="0.5000" />
-                    <PreSize X="0.3200" Y="0.9286" />
+                    <PrePosition X="0.8200" Y="0.5000" />
+                    <PreSize X="0.2800" Y="0.9286" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

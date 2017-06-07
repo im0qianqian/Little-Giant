@@ -53,6 +53,7 @@ Character * CharacterManager::createCharacter(CharacterType characterType)
 		{
 			_playerCharacter = character;
 			_playerCharacter->setDept(-1);
+			_playerCharacter->setName("qianqian");		// 主角设置自己的姓名
 			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x, 50, character->getPosition3D().z+20));
 			GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x, 0, character->getPosition3D().z));
 		}
