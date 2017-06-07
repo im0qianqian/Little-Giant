@@ -3,13 +3,14 @@
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
 #include "ui\UIListView.h"
-
+#include <vector>
+#include <algorithm>
 DisplayManager::DisplayManager():
 	_displayNode(nullptr),
 	_levelLabel(nullptr),
 	_experienceBar(nullptr)
 {
-	_sorceList.clear();
+	_scoreList.clear();
 }
 
 DisplayManager::~DisplayManager()
@@ -29,7 +30,7 @@ bool DisplayManager::init()
 		_experienceBar = static_cast<LoadingBar*>(_displayNode->getChildByName("Experience_bar"));
 		// 获取成绩列表
 		auto sorceList = static_cast<ListView*>(_displayNode->getChildByName("SorceListView"));
-		for (auto i = 0; i < _sorceListSize; i++)
+		for (auto i = 0; i < _scoreListSize; i++)
 		{
 			auto list = static_cast<ListView*>(sorceList->getChildByName("SorceList_" + to_string(i)));
 			CCASSERT(list, "NULL");
@@ -39,7 +40,7 @@ bool DisplayManager::init()
 			CCASSERT(rank, "NULL");
 			CCASSERT(name, "NULL");
 			CCASSERT(sorce, "NULL");
-			_sorceList.push_back(ListViewSorce(rank,name,sorce));
+			_scoreList.push_back(ListViewSorce(rank, name, sorce));
 		}
 		addChild(_displayNode);
 		// 启动定时器开始更新
@@ -57,23 +58,44 @@ void DisplayManager::update(float dt)
 	updateSorceList();
 }
 
+
 void DisplayManager::updateSorceList()
 {
-	if (_sorceList.size() < _sorceListSize)return;
-	_sorceList[0].setName("qianqian");
-	_sorceList[0].setRank("#1");
-	_sorceList[0].setSorce(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
-	if (GameScene::getCharacterManager()->getEnemyCharacter().size() < _sorceListSize - 1)return;
-	for (auto i = 1; i < _sorceListSize; i++)
+	if (_scoreList.size() < _scoreListSize)return;
+	auto person = GameScene::getCharacterManager()->getAllCharacter();
+	std::sort(person.begin(), person.end(), [](Character * const &a, Character * const &b)
 	{
-
+		return a->getSorce()>b->getSorce();
+	}
+	);
+	_scoreList[0].setName("qianqian");
+	_scoreList[0].setRank("#1");
+	_scoreList[0].setSorce(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
+	int size = person.size();
+	for (auto i = 0; i < _scoreListSize-1; i++)
+	{
+		_scoreList[i+1].setRank(to_string(i+1));
+		_scoreList[i+1].setName(person[i]->getName());
+		_scoreList[i+1].setSorce(to_string(person[i]->getSorce()));
+		if (i>=size)break;
 	}
 }
 
 void DisplayManager::updateExperience()
 {
-	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience();
-	_levelLabel->setString(to_string(exp));
+	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum + 1-1) * 5;
+	int _levelexperinence = (_levelnum + 1 ) * 5 - (_levelnum + 1-1) * 5;
+	//int _levelexperinence = 30 * ((_levelnum + 1)*(_levelnum + 1)*(_levelnum + 1) + 5 * (_levelnum + 1)) - 80 -30 * (_levelnum*_levelnum*_levelnum + 5 * _levelnum) - 80;
+	if (exp >= _levelexperinence)
+	{
+		_experienceBar->setPercent(100.f);
+		exp = exp - _levelexperinence;
+		_levelnum++;
+	}
+	float _percent = (float)(exp) / (float)(_levelexperinence);
+	CCLOG("***************%d %d %f", exp, _levelexperinence, _percent);
+	_experienceBar->setPercent(_percent*100);
+	_levelLabel->setString(to_string(_levelnum));
 }
 
 DisplayManager::ListViewSorce::ListViewSorce():

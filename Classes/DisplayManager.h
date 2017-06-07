@@ -22,6 +22,7 @@ private:
 	void updateExperience();
 	Node *_displayNode;				// CSB node
 	Text *_levelLabel;					// 等级
+	int _levelnum = 0;
 	LoadingBar *_experienceBar;	// 经验条
 	class ListViewSorce
 	{
@@ -42,8 +43,8 @@ private:
 		Text *_name;
 		Text *_sorce;
 	};
-	const int _sorceListSize = 6;
-	std::vector<ListViewSorce> _sorceList;	//成绩
+	const int _scoreListSize = 6;
+	std::vector<ListViewSorce> _scoreList;	//成绩
 };
 
 #endif

@@ -19,6 +19,7 @@ public:
 	Character* getPlayerCharacter() const { return _playerCharacter; }
 	/* 获取其他玩家 */
 	std::set <Character*> &getEnemyCharacter() { return _enemyCharacter; }
+	std::vector <Character*> &getAllCharacter(){ return _allCharacter; }
 	/* 开始游戏 创建盟友数量 + 敌人数量 */
 	void startGame(const int &ally,const int &enemy);
 	/* 暂停游戏 */
@@ -38,6 +39,7 @@ public:
 private:
 	Character* _playerCharacter;						//玩家人物
 	std::set <Character*> _enemyCharacter;				//其他人物
+	std::vector <Character*> _allCharacter;				//所有人物
 	ObjCachePool<Character> _cachePool;					//缓存池
 };
 #endif // __CHARACTER_MANAGER_H__
