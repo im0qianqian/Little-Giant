@@ -28,15 +28,5 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
-    <Item Key="TabsParamsKey">
-      <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="GameScene.csd" />
-          <FilePathData Path="Scene3D.csd" />
-          <FilePathData Path="MainScene.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="Scene3D.csd" />
-      </Value>
-    </Item>
   </Properties>
 </UserData>
