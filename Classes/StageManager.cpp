@@ -1,5 +1,7 @@
 #include "StageManager.h"
 #include "GameScene.h"
+#include "Global.h"
+
 StageManager::StageManager() :
 	_ground(nullptr)
 {

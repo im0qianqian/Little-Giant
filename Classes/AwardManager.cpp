@@ -8,7 +8,6 @@ AwardManager::AwardManager():
 
 AwardManager::~AwardManager()
 {
-
 }
 
 bool AwardManager::init()

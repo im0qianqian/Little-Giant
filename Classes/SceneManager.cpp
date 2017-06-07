@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include "GameScene.h"
+#include "Global.h"
 #include "LoadLayer.h"
 
 /* 类静态私有变量初始化 */
@@ -38,6 +39,7 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	switch (sceneType)
 	{
 	case kMenuScene:
+		_layer = DisplayManager::create();
 		break;
 	case kLoadingScene:
 		_layer = LoadLayer::create();

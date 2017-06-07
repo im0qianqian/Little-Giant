@@ -7,6 +7,7 @@
 #include "StageManager.h"
 #include "AwardManager.h"
 #include "AudioManager.h"
+#include "DisplayManager.h"
 #include "Joystick.h"
 
 
@@ -40,18 +41,21 @@ public:
 	static AwardManager *getAwardManager() { return _awardManager; }
 	/* 获取声音管理对象 */
 	static AudioManager *getAudioManager() { return _audioManager; }
+	/* 获取界面管理对象 */
+	static DisplayManager *getDisplayManager() { return _displayManager; }
 	/* 获取操作管理对象 */
 	static Joystick *getJoystick() { return _joystick; }
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
 private:
-	static Camera *_camera;						//游戏摄像机
+	static Camera *_camera;						//游戏摄像机(3D)
 	static GameStateType _gameState;			//游戏状态
 	static CharacterManager *_characterManager;	//人物管理对象
 	static StageManager *_stageManager;			//地图管理对象
 	static WeaponManager *_weaponManager;		//武器管理对象
 	static AwardManager *_awardManager;			//奖励管理对象
 	static AudioManager *_audioManager;			//声音管理对象
+	static DisplayManager *_displayManager;		//界面显示管理对象
 	static Joystick *_joystick;					//操作管理对象
 };
 

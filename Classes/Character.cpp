@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "SceneManager.h"
 #include "Joystick.h"
+#include "Weapons.h"
 
 USING_NS_CC;
 
@@ -41,7 +42,6 @@ void Character::addLifeValue(const float &add)
 void Character::addExperience(const int &add)
 {
 	_experience += add*getAttribute().getEmpiricalAcquisition();
-	cout << "当前经验值：" << _experience << endl;
 }
 
 void Character::addSorce(const int &add)
@@ -128,6 +128,7 @@ void Character::initialization()
 	_weaponType = kWeaponArrow;
 	_isDie = false;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
+	_dept = 0;
 
 	// 取出之后随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
@@ -135,20 +136,24 @@ void Character::initialization()
 	syncNodeToPhysics();
 }
 
-void Character::beAttacked(const Weapons * weapon)
+void Character::collisionWithWeapon(Weapons * const & weapon)
+{
+	// 人物受到攻击
+	beAttacked(weapon);
+	cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;
+}
+
+void Character::beAttacked(Weapons *const &weapon)
 {
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
-	addLifeValue(min((-weapon->getPower() + getAttribute().getDefensiveForce()) / 1.0, 0));
+	addLifeValue(-weapon->getPower() / 1.0);
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
 	{
-		/* 武器的主人 */
-		auto *cer = static_cast<Character*>(weapon->getOwner());
-		// 得到对方的所有经验值与得分（BUG BUG BUG）
-		cer->addExperience(getExperience());
-		cer->addSorce(getSorce());
-		cout << cer << " 杀死了 " << this << " ，得到经验值：" << getExperience() << " ，得到分数：" << getSorce() << endl;
+		/* 武器成功杀死敌人 */
+		weapon->killCharacter(this);
+		/* 自身死亡 */
 		die();
 	}
 }

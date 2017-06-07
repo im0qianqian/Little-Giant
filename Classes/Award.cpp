@@ -1,6 +1,7 @@
 #include "Award.h"
 #include "GameScene.h"
 #include "Joystick.h"
+#include "Global.h"
 
 Award::Award():
 	_isDeleted(true),
@@ -59,6 +60,14 @@ void Award::destroy()
 	GameScene::getAwardManager()->addToPool(this);
 }
 
+void Award::collisionWithCharacter(Character * const & character)
+{
+	// 将奖励给人物
+	applyToCharacter(character);
+	// 自身销毁
+	destroy();
+}
+
 void Award::applyToCharacter(Character * const & character)
 {
 	switch (_awardType)
@@ -69,6 +78,9 @@ void Award::applyToCharacter(Character * const & character)
 	case kAwardEXP:
 		character->addExperience(1.f);
 		break;
+	case kAwardSorce:
+		character->addSorce(1.f);
+		break;
 	default:
 		break;
 	}
@@ -77,7 +89,7 @@ void Award::applyToCharacter(Character * const & character)
 void Award::randomType()
 {
 	/* 随机确定奖励类型 */
-	_awardType = AwardType(rand() % 2);
+	_awardType = AwardType(rand() % 3);
 	switch (_awardType)
 	{
 	case kAwardEXP:
@@ -85,6 +97,9 @@ void Award::randomType()
 		break;
 	case kAwardHP:
 		setTexture("Sprite3DTest/brickwork-texture.jpg");
+		break;
+	case kAwardSorce:
+		setTexture("Sprite3DTest/caustics.png");
 		break;
 	default:
 		break;
