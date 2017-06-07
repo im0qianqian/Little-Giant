@@ -61,9 +61,9 @@ void DisplayManager::updateSorceList()
 {
 	if (_sorceList.size() < _sorceListSize)return;
 	_sorceList[0].setName("qianqian");
-	_sorceList[0].setRand("1");
+	_sorceList[0].setRank("#1");
 	_sorceList[0].setSorce(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
-	if (GameScene:getCharacterManager()->getEnemyCharacter().size() < _sorceListSize - 1)return;
+	if (GameScene::getCharacterManager()->getEnemyCharacter().size() < _sorceListSize - 1)return;
 	for (auto i = 1; i < _sorceListSize; i++)
 	{
 

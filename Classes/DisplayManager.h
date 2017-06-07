@@ -2,6 +2,7 @@
 #define __DISPLAY_MANAGER_H__
 
 #include "cocos2d.h"
+#include "Global.h"
 #include "ui\UIText.h"
 #include "ui\UILoadingBar.h"
 
