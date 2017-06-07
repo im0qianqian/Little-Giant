@@ -61,24 +61,29 @@ void DisplayManager::update(float dt)
 
 void DisplayManager::updateSorceList()
 {
-	if (_scoreList.size() < _scoreListSize)return;
-	auto person = GameScene::getCharacterManager()->getAllCharacter();
-	std::sort(person.begin(), person.end(), [](Character * const &a, Character * const &b)
+	// 利用场上的所有敌人set构造出一个vector
+	vector<Character*> allCharacter(GameScene::getCharacterManager()->getEnemyCharacter().begin(), GameScene::getCharacterManager()->getEnemyCharacter().end());
+	// 加入玩家本身
+	allCharacter.push_back(GameScene::getCharacterManager()->getPlayerCharacter());
+	// 对其排序
+	sort(allCharacter.begin(), allCharacter.end(), [](Character * const &a, Character * const &b)
 	{
 		return a->getSorce()>b->getSorce();
-	}
-	);
-	_scoreList[0].setName("qianqian");
-	_scoreList[0].setRank("#1");
-	_scoreList[0].setSorce(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
-	int size = person.size();
-	for (auto i = 0; i < _scoreListSize-1; i++)
+	});
+	CCASSERT(_scoreList.size() >= _scoreListSize, "列表太小");
+	// 获取当前场上人数
+	int size = allCharacter.size();
+	for (auto i = 0; i < size && i < _scoreListSize - 1; i++)	// i 小于人数并且小于5
 	{
-		_scoreList[i+1].setRank(to_string(i+1));
-		_scoreList[i+1].setName(person[i]->getName());
-		_scoreList[i+1].setSorce(to_string(person[i]->getSorce()));
-		if (i>=size)break;
+		_scoreList[i + 1].setName(allCharacter[i]->getName());
+		_scoreList[i + 1].setRank("#" + to_string(i + 1));
+		_scoreList[i + 1].setSorce(to_string(allCharacter[i]->getSorce()));
 	}
+	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
+	auto myrank = find(allCharacter.begin(), allCharacter.end(), myCharacter)-allCharacter.begin();
+	_scoreList[0].setName("qianqian");
+	_scoreList[0].setRank("#" + to_string(myrank+1));
+	_scoreList[0].setSorce(to_string(myCharacter->getSorce()));
 }
 
 void DisplayManager::updateExperience()
