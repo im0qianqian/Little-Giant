@@ -39,12 +39,12 @@ bool GameScene::init()
 		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_WIDTH / SCREEN_HEIGHT, 1, 1000);
 		_camera->setCameraFlag(CameraFlag::USER1);
 		_layer3D->addChild(_camera);		//将3D摄像机添加进图层
-		/* 地图管理 */
-		GameScene::_stageManager = StageManager::create();
-		_layer3D->addChild(GameScene::_stageManager, 0);
 		/* 人物管理 */
 		GameScene::_characterManager = CharacterManager::create();
 		_layer3D->addChild(GameScene::_characterManager, 1);
+		/* 地图管理 */
+		GameScene::_stageManager = StageManager::create();
+		_layer3D->addChild(GameScene::_stageManager, 0);
 		/* 武器管理 */
 		GameScene::_weaponManager = WeaponManager::create();
 		_layer3D->addChild(GameScene::_weaponManager, 2);

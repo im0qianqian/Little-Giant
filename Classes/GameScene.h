@@ -34,7 +34,7 @@ public:
 	/* 获取人物管理对象 */
 	static CharacterManager* getCharacterManager() { return _characterManager; }
 	/* 获取地图管理对象 */
-	static StageManager* getStage() { return _stageManager; }
+	static StageManager* getStageManager() { return _stageManager; }
 	/* 获取武器管理对象 */
 	static WeaponManager* getWeaponManager() { return _weaponManager; }
 	/* 获取奖励管理对象 */
