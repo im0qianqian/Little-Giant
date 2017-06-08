@@ -38,6 +38,8 @@ private:
 		void setRank(string const &rank) { _rank->setString(rank); }
 		void setName(string const &name) { _name->setString(name); }
 		void setSorce(string const &sorce) { _sorce->setString(sorce); }
+		/* …Ë÷√—’…´ */
+		void setColor(const Color3B &color);
 	private:
 		Text *_rank;
 		Text *_name;

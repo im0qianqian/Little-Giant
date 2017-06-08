@@ -38,10 +38,10 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="SorceListView" ActionTag="-2129150653" Alpha="204" Tag="57" IconVisible="False" LeftMargin="695.3417" RightMargin="14.6583" TopMargin="12.1178" BottomMargin="458.8822" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" LeftEage="27" RightEage="33" TopEage="33" BottomEage="33" Scale9OriginX="-33" Scale9OriginY="-33" Scale9Width="60" Scale9Height="66" ScrollDirectionType="0" DirectionType="Vertical" HorizontalType="Align_HorizontalCenter" ctype="ListViewObjectData">
+          <AbstractNodeData Name="SorceListView" ActionTag="-2129150653" Alpha="204" Tag="57" IconVisible="False" LeftMargin="695.3417" RightMargin="14.6583" TopMargin="12.1178" BottomMargin="458.8822" ClipAble="True" BackColorAlpha="153" ComboBoxIndex="1" ColorAngle="90.0000" LeftEage="27" RightEage="33" TopEage="33" BottomEage="33" Scale9OriginX="-33" Scale9OriginY="-33" Scale9Width="60" Scale9Height="66" ScrollDirectionType="0" DirectionType="Vertical" HorizontalType="Align_HorizontalCenter" ctype="ListViewObjectData">
             <Size X="250.0000" Y="169.0000" />
             <Children>
-              <AbstractNodeData Name="SorceList_1" ActionTag="-1549670480" Tag="51" IconVisible="False" BottomMargin="141.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_1" ActionTag="-1549670480" Tag="51" IconVisible="False" BottomMargin="141.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="1884789247" Tag="54" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -89,7 +89,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="SorceList_2" ActionTag="1486263574" ZOrder="1" Tag="81" IconVisible="False" TopMargin="28.0000" BottomMargin="113.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_2" ActionTag="1486263574" ZOrder="1" Tag="81" IconVisible="False" TopMargin="28.0000" BottomMargin="113.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="1418813535" Tag="82" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -137,7 +137,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="SorceList_3" ActionTag="1850787764" ZOrder="2" Tag="85" IconVisible="False" TopMargin="56.0000" BottomMargin="85.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_3" ActionTag="1850787764" ZOrder="2" Tag="85" IconVisible="False" TopMargin="56.0000" BottomMargin="85.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="894429438" Tag="86" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -185,7 +185,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="SorceList_4" ActionTag="-1265860312" ZOrder="3" Tag="89" IconVisible="False" TopMargin="84.0000" BottomMargin="57.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_4" ActionTag="-1265860312" ZOrder="3" Tag="89" IconVisible="False" TopMargin="84.0000" BottomMargin="57.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="1097035519" Tag="90" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -233,7 +233,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="SorceList_5" ActionTag="-677392797" ZOrder="4" Tag="93" IconVisible="False" TopMargin="112.0000" BottomMargin="29.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_5" ActionTag="-677392797" ZOrder="4" Tag="93" IconVisible="False" TopMargin="112.0000" BottomMargin="29.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="-1326296921" Tag="94" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -281,7 +281,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="SorceList_0" ActionTag="114403596" ZOrder="5" Tag="97" IconVisible="False" TopMargin="140.0000" BottomMargin="1.0000" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
+              <AbstractNodeData Name="SorceList_0" ActionTag="114403596" ZOrder="5" Tag="97" IconVisible="False" TopMargin="140.0000" BottomMargin="1.0000" ClipAble="True" BackColorAlpha="0" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Enable="True" LeftEage="33" RightEage="14" TopEage="33" BottomEage="33" Scale9OriginX="-14" Scale9OriginY="-33" Scale9Width="47" Scale9Height="66" ScrollDirectionType="0" ItemMargin="10" VerticalType="Align_VerticalCenter" ctype="ListViewObjectData">
                 <Size X="250.0000" Y="28.0000" />
                 <Children>
                   <AbstractNodeData Name="SorceList_rank" ActionTag="784238858" Tag="98" IconVisible="False" RightMargin="220.0000" TopMargin="1.0000" BottomMargin="1.0000" IsCustomSize="True" FontSize="20" LabelText="" HorizontalAlignmentType="HT_Right" VerticalAlignmentType="VT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -336,7 +336,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.7243" Y="0.7170" />
             <PreSize X="0.2604" Y="0.2641" />
-            <SingleColor A="255" R="150" G="150" B="255" />
+            <SingleColor A="255" R="77" G="77" B="77" />
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />

@@ -73,14 +73,26 @@ void DisplayManager::updateSorceList()
 	CCASSERT(_scoreList.size() >= _scoreListSize, "列表太小");
 	// 获取当前场上人数
 	int size = allCharacter.size();
-	for (auto i = 0; i < size && i < _scoreListSize - 1; i++)	// i 小于人数并且小于5
+	int i;
+	for (i = 0; i < size && i < _scoreListSize - 1; i++)	// i 小于人数并且小于5
 	{
 		_scoreList[i + 1].setName(allCharacter[i]->getName());
 		_scoreList[i + 1].setRank("#" + to_string(i + 1));
 		_scoreList[i + 1].setSorce(to_string(allCharacter[i]->getSorce()));
+		_scoreList[i + 1].setColor(Color3B::WHITE);
+	}
+	for (; i < _scoreListSize - 1; i++)
+	{
+		_scoreList[i + 1].setName("");
+		_scoreList[i + 1].setRank("");
+		_scoreList[i + 1].setSorce("");
 	}
 	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
 	auto myrank = find(allCharacter.begin(), allCharacter.end(), myCharacter)-allCharacter.begin();
+	if (myrank < _scoreListSize)	//如果我的排名在前五名，高亮显示
+	{
+		_scoreList[myrank+1].setColor(Color3B::YELLOW);	//设置颜色
+	}
 	_scoreList[0].setName("qianqian");
 	_scoreList[0].setRank("#" + to_string(myrank+1));
 	_scoreList[0].setSorce(to_string(myCharacter->getSorce()));
@@ -120,4 +132,11 @@ DisplayManager::ListViewSorce::ListViewSorce(Text * const & rank, Text * const &
 	_sorce(sorce)
 {
 
+}
+
+void DisplayManager::ListViewSorce::setColor(const Color3B &color)
+{
+	_rank->setColor(color);
+	_name->setColor(color);
+	_sorce->setColor(color);
 }
