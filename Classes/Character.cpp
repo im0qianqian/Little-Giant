@@ -8,7 +8,7 @@ USING_NS_CC;
 
 Character::Character() :
 	_dept(0),
-	_lifeValu  e(INITIAL_LIFE_VALUE),
+	_lifeValue(INITIAL_LIFE_VALUE),
 	_experience(0),
 	_sorce(0),
 	_weaponType(kWeaponArrow),

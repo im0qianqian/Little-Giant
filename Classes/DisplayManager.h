@@ -21,11 +21,13 @@ private:
 	void updateAnimation(float dt);
 	void updateSorceList();
 	void updateExperience();
+	int getLevelExperience(int const levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	int _levelnum;
 	float _experience;
 	LoadingBar *_experienceBar;			// 经验条
+	float _percent;                    //当前经验条所占百分比
 	class ListViewSorce
 	{
 	public:
