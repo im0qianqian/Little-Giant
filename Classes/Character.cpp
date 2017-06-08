@@ -92,9 +92,9 @@ bool Character::init()
 	addChild(_hpSlider);
 
 	/* 以下是初始化部分 */
-	initWithFile("Sprite3DTest/box.c3t");
+	initWithFile("Sprite3DTest/girl.c3b");
 	//initWithFile("Sprite3DTest/sphere.c3b");
-	setTexture("images/Icon.png");
+	//setTexture("images/Icon.png");
 
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
@@ -114,7 +114,7 @@ bool Character::init()
 
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
 
-	setScale(2.f);		//设置大小
+	setScale(.1f);		//设置大小
 	return true;
 }
 

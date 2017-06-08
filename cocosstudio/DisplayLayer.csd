@@ -6,6 +6,19 @@
       <ObjectData Name="Layer" Tag="26" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
+          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" Alpha="204" Tag="133" IconVisible="False" LeftMargin="158.4612" RightMargin="651.5388" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="150.0000" Y="150.0000" />
+            <AnchorPoint />
+            <Position X="158.4612" Y="78.8394" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="77" G="77" B="77" />
+            <PrePosition X="0.1651" Y="0.1232" />
+            <PreSize X="0.1563" Y="0.2344" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
           <AbstractNodeData Name="skill_panel_1" ActionTag="798244313" Alpha="204" Tag="134" IconVisible="False" LeftMargin="398.6631" RightMargin="411.3369" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
@@ -674,19 +687,6 @@
             <PreSize X="0.1354" Y="0.2031" />
             <SingleColor A="255" R="150" G="150" B="255" />
             <FirstColor A="255" R="150" G="150" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" Alpha="204" Tag="133" IconVisible="False" LeftMargin="158.4612" RightMargin="651.5388" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
-            <Size X="150.0000" Y="150.0000" />
-            <AnchorPoint />
-            <Position X="158.4612" Y="78.8394" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="77" G="77" B="77" />
-            <PrePosition X="0.1651" Y="0.1232" />
-            <PreSize X="0.1563" Y="0.2344" />
-            <SingleColor A="255" R="150" G="200" B="255" />
-            <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
