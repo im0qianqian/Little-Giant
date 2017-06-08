@@ -67,7 +67,8 @@ enum WeaponType
 
 /* 判断 a 与 b 是否分别属于某两种对象 */
 #define gObjectEqual(a,b,_a,_b) ((a==_a&&b==_b)||(a==_b&&b==_a))
-
+#define u8 
+//#pragma execution_character_set("utf-8")
 const std::string CHARACTER_NAME[] = {
 	u8"一袭白衣祭故人",
 	u8"厌生′々",

@@ -8,7 +8,7 @@ USING_NS_CC;
 
 Character::Character() :
 	_dept(0),
-	_lifeValue(INITIAL_LIFE_VALUE),
+	_lifeValu  e(INITIAL_LIFE_VALUE),
 	_experience(0),
 	_sorce(0),
 	_weaponType(kWeaponArrow),
@@ -101,7 +101,7 @@ bool Character::init()
 	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//∏’ÃÂ¥Û–°
 
 	auto obj = Physics3DRigidBody::create(&des);
-
+   
 	_physicsComponent = Physics3DComponent::create(obj);
 
 	addComponent(_physicsComponent);

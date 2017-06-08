@@ -100,8 +100,10 @@ void DisplayManager::updateSorceList()
 
 void DisplayManager::updateExperience()
 {
-	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum + 1-1) * 5;
-	int _levelexperinence = (_levelnum + 1 ) * 5 - (_levelnum + 1-1) * 5;
+	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum+1)*(_levelnum+1)*(_levelnum+1);
+	int _levelexperinence = (_levelnum + 2)*(_levelnum + 2)*(_levelnum+2) - (_levelnum +1)*(_levelnum +1)*(_levelnum +1);
+	/*int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum + 1-1) * 5;
+	int _levelexperinence = (_levelnum + 1 ) * 5 - (_levelnum + 1-1) * 5;*/
 	//int _levelexperinence = 30 * ((_levelnum + 1)*(_levelnum + 1)*(_levelnum + 1) + 5 * (_levelnum + 1)) - 80 -30 * (_levelnum*_levelnum*_levelnum + 5 * _levelnum) - 80;
 	if (exp >= _levelexperinence)
 	{
