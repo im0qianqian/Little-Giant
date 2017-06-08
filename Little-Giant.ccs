@@ -14,6 +14,8 @@
           <Image Name="speed.png" />
         </Folder>
         <Image Name="20170608180504.png" />
+        <Image Name="animationbuttonnormal.png" />
+        <Image Name="animationbuttonpressed.png" />
         <Mesh Name="axe.c3b" />
         <Image Name="background.jpg" />
         <Image Name="blood.png" />

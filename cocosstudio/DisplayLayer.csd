@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="26" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" Alpha="204" Tag="133" IconVisible="False" LeftMargin="158.4612" RightMargin="651.5388" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" Alpha="204" Tag="133" IconVisible="False" LeftMargin="158.4612" RightMargin="651.5388" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="158.4612" Y="78.8394" />
@@ -19,7 +19,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_panel_1" ActionTag="798244313" Alpha="204" Tag="134" IconVisible="False" LeftMargin="398.6631" RightMargin="411.3369" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_1" ActionTag="798244313" Alpha="204" Tag="134" IconVisible="False" LeftMargin="398.6631" RightMargin="411.3369" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="398.6631" Y="78.8394" />
@@ -32,7 +32,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_panel_2" ActionTag="1581851089" Alpha="204" Tag="135" IconVisible="False" LeftMargin="639.5890" RightMargin="170.4110" TopMargin="411.1606" BottomMargin="78.8394" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_2" ActionTag="1581851089" Alpha="204" Tag="135" IconVisible="False" LeftMargin="639.5890" RightMargin="170.4110" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="639.5890" Y="78.8394" />
@@ -689,6 +689,105 @@
             <FirstColor A="255" R="150" G="150" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="button_exit" ActionTag="-546000955" Alpha="204" Tag="150" IconVisible="False" LeftMargin="863.6078" RightMargin="6.3922" TopMargin="587.2848" BottomMargin="7.7152" TouchEnable="True" FontSize="20" ButtonText="Exit" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="90.0000" Y="45.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="908.6078" Y="30.2152" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.9465" Y="0.0472" />
+            <PreSize X="0.0938" Y="0.0703" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+            <TextColor A="255" R="230" G="230" B="250" />
+            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+            <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
+            <NormalFileData Type="Normal" Path="animationbuttonnormal.png" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="SorceBoard" ActionTag="-1744932675" Tag="151" IconVisible="False" LeftMargin="239.8246" RightMargin="220.1754" TopMargin="160.8258" BottomMargin="179.1742" ClipAble="True" BackColorAlpha="204" ComboBoxIndex="2" ColorAngle="260.0000" ctype="PanelObjectData">
+            <Size X="500.0000" Y="300.0000" />
+            <Children>
+              <AbstractNodeData Name="game_over" ActionTag="1682102713" Tag="152" IconVisible="False" LeftMargin="47.0553" RightMargin="282.9447" TopMargin="41.9667" BottomMargin="214.0333" FontSize="40" LabelText="Game Over" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="170.0000" Y="44.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="132.0553" Y="236.0333" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2641" Y="0.7868" />
+                <PreSize X="0.3400" Y="0.1467" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="255" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="sorce" ActionTag="-1632423610" Tag="153" IconVisible="False" LeftMargin="111.7367" RightMargin="295.2633" TopMargin="127.0552" BottomMargin="130.9448" FontSize="40" LabelText="Sorce: " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="93.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="158.2367" Y="151.9448" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.3165" Y="0.5065" />
+                <PreSize X="0.1860" Y="0.1400" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="sorce" ActionTag="-1279520349" Tag="155" IconVisible="False" LeftMargin="272.1109" RightMargin="136.8891" TopMargin="127.0552" BottomMargin="130.9448" FontSize="40" LabelText="10000" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="91.0000" Y="42.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="317.6109" Y="151.9448" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6352" Y="0.5065" />
+                <PreSize X="0.1820" Y="0.1400" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Button_home" ActionTag="-958038954" Alpha="229" Tag="156" IconVisible="False" LeftMargin="58.8223" RightMargin="271.1777" TopMargin="206.8181" BottomMargin="33.1819" TouchEnable="True" FontSize="30" ButtonText="Home" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="170.0000" Y="60.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="143.8223" Y="63.1819" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.2876" Y="0.2106" />
+                <PreSize X="0.3400" Y="0.2000" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <TextColor A="255" R="230" G="230" B="250" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
+                <NormalFileData Type="Normal" Path="animationbuttonnormal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Button_restart" ActionTag="432729524" Alpha="229" Tag="157" IconVisible="False" LeftMargin="261.0983" RightMargin="68.9017" TopMargin="206.8181" BottomMargin="33.1819" TouchEnable="True" FontSize="30" ButtonText="Restart" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+                <Size X="170.0000" Y="60.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="346.0983" Y="63.1819" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition X="0.6922" Y="0.2106" />
+                <PreSize X="0.3400" Y="0.2000" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <TextColor A="255" R="230" G="230" B="250" />
+                <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
+                <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
+                <NormalFileData Type="Normal" Path="animationbuttonnormal.png" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="239.8246" Y="179.1742" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.2498" Y="0.2800" />
+            <PreSize X="0.5208" Y="0.4688" />
+            <SingleColor A="255" R="173" G="216" B="230" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleX="-0.1736" ScaleY="-0.9848" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

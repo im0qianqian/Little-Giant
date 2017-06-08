@@ -29,7 +29,7 @@ void Character::addLifeValue(const float &add)
 	if (add >= 0)
 	{
 		// 加血时增加恢复能力加成
-		_lifeValue += add*getAttribute().getRestoringAbility();
+		_lifeValue += min(INITIAL_LIFE_VALUE,add*getAttribute().getRestoringAbility());
 	}
 	else
 	{
@@ -66,7 +66,8 @@ void Character::die()
 	}
 	else	//自己死亡
 	{
-
+		GameScene::getDisplayManager()->showSorceBoard();
+		cout << "你已死亡，游戏结束~" << endl;
 	}
 }
 
@@ -80,21 +81,9 @@ void Character::move(const Vec3 & pos)
 
 bool Character::init()
 {
-	/* 以下是血量条 */
-	_hpSlider = Slider::create();
-	_hpSlider->loadBarTexture("images/bloodbg.png");
-	_hpSlider->loadProgressBarTexture("images/blood.png");
-	_hpSlider->setTouchEnabled(false);
-	_hpSlider->setScale(.03f);
-	_hpSlider->setPercent(_lifeValue);
-	_hpSlider->setRotation3D(Vec3(-90, 0, 0));
-	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
-	addChild(_hpSlider);
-
 	/* 以下是初始化部分 */
-	initWithFile("Sprite3DTest/girl.c3b");
-	//initWithFile("Sprite3DTest/sphere.c3b");
-	//setTexture("images/Icon.png");
+	initWithFile("Sprite3DTest/box.c3t");
+	setTexture("images/Icon.png");
 
 	Physics3DRigidBodyDes des;
 	des.mass = 50.f;			//暂定，人物质量设置为50
@@ -114,7 +103,8 @@ bool Character::init()
 
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
 
-	setScale(.1f);		//设置大小
+	setScale(2.f);		//设置大小
+	createHpBar();		//创建血量条
 	return true;
 }
 
@@ -127,8 +117,8 @@ void Character::initialization()
 	_attribute.init();
 	_weaponType = kWeaponArrow;
 	_isDie = false;
-	_hpSlider->setPercent(_lifeValue);			//更新血量条
 	_dept = 0;
+	_hpSlider->setPercent(_lifeValue);			//更新血量条
 	// 随机一个姓名（可能会重复）
 	setName(CHARACTER_NAME[rand()%(sizeof(CHARACTER_NAME)/sizeof(string))]);
 	// 取出之后随机设置位置并同步
@@ -183,7 +173,6 @@ void Character::update(float dt)
 			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 		move(ret.getNormalized());
-		syncNodeToPhysics();
 	}
 	else if (!_isDie)
 	{
@@ -206,13 +195,34 @@ void Character::update(float dt)
 			attackTime /= 10.f;
 		}
 	}
+	// 更正人物旋转角度
+	Vec3 roat = getRotation3D();
+	roat.x = roat.z = 0;
+	setRotation3D(roat);
+
+	syncNodeToPhysics();
+}
+
+void Character::createHpBar()
+{
+	/* 以下是血量条 */
+	_hpSlider = Slider::create();
+	_hpSlider->loadBarTexture("images/bloodbg.png");
+	_hpSlider->loadProgressBarTexture("images/blood.png");
+	_hpSlider->setTouchEnabled(false);
+	_hpSlider->setScale(.03f);
+	_hpSlider->setPercent(_lifeValue);
+	// 更正血量条角度
+	_hpSlider->setRotation3D(Vec3(-90, 0, 0));
+	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
+	addChild(_hpSlider);
 }
 
 
 Character::Attribute::Attribute() :
 	_attackDamage(1),
 	_attackSpeed(1),
-	_movingSpeed(50.f),
+	_movingSpeed(20.f),
 	_empiricalAcquisition(1),
 	_defensiveForce(0),
 	_restoringAbility(1),
@@ -296,7 +306,7 @@ void Character::Attribute::init()
 {
 	_attackDamage = 1;
 	_attackSpeed = 1;
-	_movingSpeed = 50.f;
+	_movingSpeed = 20.f;
 	_empiricalAcquisition = 1;
 	_defensiveForce = 0;
 	_restoringAbility = 1;
