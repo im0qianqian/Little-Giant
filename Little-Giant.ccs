@@ -19,6 +19,8 @@
         <Mesh Name="ReskinGirl.c3b" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
         <File Name="SkyBox.csb" />
+        <Image Name="spheretex.png" />
+        <Image Name="texture.png" />
         <File Name="UserCamera.csb" />
       </RootFolder>
     </Group>

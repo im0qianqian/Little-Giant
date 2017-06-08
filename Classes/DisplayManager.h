@@ -18,11 +18,13 @@ public:
 	CREATE_FUNC(DisplayManager);
 private:
 	void update(float dt);
+	void updateAnimation(float dt);
 	void updateSorceList();
 	void updateExperience();
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
-	int _levelnum = 0;
+	int _levelnum;
+	float _experience;
 	LoadingBar *_experienceBar;			// 经验条
 	class ListViewSorce
 	{

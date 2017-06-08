@@ -6,35 +6,60 @@
       <ObjectData Name="Layer" Tag="26" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Text_1" ActionTag="1917110651" Tag="28" IconVisible="False" LeftMargin="285.0000" RightMargin="639.0000" TopMargin="29.5000" BottomMargin="586.5000" FontSize="24" LabelText="LV " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="36.0000" Y="24.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="303.0000" Y="598.5000" />
+          <AbstractNodeData Name="Panel_2" ActionTag="-855928008" Alpha="204" Tag="41" IconVisible="False" LeftMargin="279.0000" RightMargin="621.0000" TopMargin="30.0000" BottomMargin="585.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="60.0000" Y="25.0000" />
+            <AnchorPoint />
+            <Position X="279.0000" Y="585.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.3156" Y="0.9352" />
-            <PreSize X="0.0375" Y="0.0375" />
-            <OutlineColor A="255" R="255" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
+            <CColor A="255" R="77" G="77" B="77" />
+            <PrePosition X="0.2906" Y="0.9141" />
+            <PreSize X="0.0625" Y="0.0391" />
+            <SingleColor A="255" R="150" G="200" B="255" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Experience_bar" ActionTag="1662028386" Tag="35" IconVisible="False" LeftMargin="397.8085" RightMargin="362.1915" TopMargin="34.4998" BottomMargin="591.5002" ProgressInfo="100" ctype="LoadingBarObjectData">
+          <AbstractNodeData Name="Experience_bar_bg" ActionTag="1146596744" Alpha="204" Tag="33" IconVisible="False" LeftMargin="397.8100" RightMargin="362.1900" TopMargin="35.5000" BottomMargin="590.5000" ProgressInfo="100" ctype="LoadingBarObjectData">
             <Size X="200.0000" Y="14.0000" />
             <AnchorPoint ScaleX="0.4800" ScaleY="0.7857" />
-            <Position X="493.8085" Y="602.5000" />
+            <Position X="493.8100" Y="601.4998" />
             <Scale ScaleX="1.5481" ScaleY="1.0000" />
-            <CColor A="255" R="30" G="144" B="255" />
-            <PrePosition X="0.5144" Y="0.9414" />
+            <CColor A="255" R="77" G="77" B="77" />
+            <PrePosition X="0.5144" Y="0.9398" />
             <PreSize X="0.2083" Y="0.0219" />
             <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="321.9996" RightMargin="626.0004" TopMargin="29.4992" BottomMargin="586.5008" FontSize="24" LabelText="1" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="12.0000" Y="24.0000" />
-            <AnchorPoint ScaleX="0.6667" ScaleY="0.5208" />
-            <Position X="330.0000" Y="599.0000" />
+          <AbstractNodeData Name="Text_1" ActionTag="1917110651" Tag="28" IconVisible="False" LeftMargin="285.9231" RightMargin="652.0769" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="LV " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="22.0000" Y="21.0000" />
+            <AnchorPoint ScaleX="0.7308" ScaleY="0.7200" />
+            <Position X="302.0000" Y="602.1200" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.3438" Y="0.9359" />
-            <PreSize X="0.0125" Y="0.0375" />
+            <PrePosition X="0.3146" Y="0.9408" />
+            <PreSize X="0.0229" Y="0.0328" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Experience_bar" ActionTag="1662028386" Alpha="229" Tag="35" IconVisible="False" LeftMargin="397.8100" RightMargin="362.1900" TopMargin="35.5000" BottomMargin="590.5000" ProgressInfo="100" ctype="LoadingBarObjectData">
+            <Size X="200.0000" Y="14.0000" />
+            <AnchorPoint ScaleX="0.4800" ScaleY="0.7857" />
+            <Position X="493.8100" Y="601.4998" />
+            <Scale ScaleX="1.5481" ScaleY="1.0000" />
+            <CColor A="255" R="30" G="144" B="255" />
+            <PrePosition X="0.5144" Y="0.9398" />
+            <PreSize X="0.2083" Y="0.0219" />
+            <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="323.6664" RightMargin="628.3336" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="1" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="8.0000" Y="21.0000" />
+            <AnchorPoint ScaleX="0.6667" ScaleY="0.5208" />
+            <Position X="329.0000" Y="597.9368" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.3427" Y="0.9343" />
+            <PreSize X="0.0083" Y="0.0328" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

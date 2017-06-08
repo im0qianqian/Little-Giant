@@ -8,7 +8,9 @@
 DisplayManager::DisplayManager():
 	_displayNode(nullptr),
 	_levelLabel(nullptr),
-	_experienceBar(nullptr)
+	_experienceBar(nullptr),
+	_levelnum(0),
+	_experience(0)
 {
 	_scoreList.clear();
 }
@@ -45,6 +47,7 @@ bool DisplayManager::init()
 		addChild(_displayNode);
 		// 启动定时器开始更新
 		schedule(schedule_selector(DisplayManager::update), .5f);
+		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);
 		flag = true;
 	} while (0);
 	return flag;
@@ -56,6 +59,19 @@ void DisplayManager::update(float dt)
 	updateExperience();
 	// 更新成绩列表
 	updateSorceList();
+}
+
+void DisplayManager::updateAnimation(float dt)
+{
+	float nExp = _experienceBar->getPercent();
+	if (nExp > _experience)
+	{
+		_experienceBar->setPercent(nExp - 1);
+	}
+	else if(nExp < _experience)
+	{
+		_experienceBar->setPercent(nExp + 1);
+	}
 }
 
 
@@ -105,13 +121,15 @@ void DisplayManager::updateExperience()
 	//int _levelexperinence = 30 * ((_levelnum + 1)*(_levelnum + 1)*(_levelnum + 1) + 5 * (_levelnum + 1)) - 80 -30 * (_levelnum*_levelnum*_levelnum + 5 * _levelnum) - 80;
 	if (exp >= _levelexperinence)
 	{
-		_experienceBar->setPercent(100.f);
+		//_experienceBar->setPercent(100.f);
+		_experience = 100.f;
 		exp = exp - _levelexperinence;
 		_levelnum++;
 	}
 	float _percent = (float)(exp) / (float)(_levelexperinence);
 	CCLOG("***************%d %d %f", exp, _levelexperinence, _percent);
-	_experienceBar->setPercent(_percent*100);
+	//_experienceBar->setPercent(_percent*100);
+	_experience = _percent * 100;
 	_levelLabel->setString(to_string(_levelnum));
 }
 

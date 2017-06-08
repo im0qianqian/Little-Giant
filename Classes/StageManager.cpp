@@ -29,7 +29,7 @@ bool StageManager::init()
 		rbDes.mass = 0.0f;
 		rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, WORLD_HEIGHT, WORLD_WIDTH));
 
-		_ground = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "Sprite3DTest/plane.png");
+		_ground = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/sss.jpg");
 		_ground->setScaleX(WORLD_LENGTH);
 		_ground->setScaleZ(WORLD_WIDTH);
 		addChild(_ground);
