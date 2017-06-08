@@ -3,6 +3,17 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="skill">
+          <Image Name="arrow.png" />
+          <Image Name="attack.png" />
+          <Image Name="attacknum.png" />
+          <Image Name="dart.png" />
+          <Image Name="defensiveforce.png" />
+          <Image Name="lifevalue.png" />
+          <Image Name="movespeed.png" />
+          <Image Name="speed.png" />
+        </Folder>
+        <Image Name="20170608180504.png" />
         <Mesh Name="axe.c3b" />
         <Image Name="background.jpg" />
         <Image Name="blood.png" />

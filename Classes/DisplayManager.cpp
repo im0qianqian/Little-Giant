@@ -9,8 +9,8 @@ DisplayManager::DisplayManager():
 	_displayNode(nullptr),
 	_levelLabel(nullptr),
 	_experienceBar(nullptr),
-	_levelnum(0),
-	_experience(0)
+	_levelNum(0),
+	_percent(0)
 {
 	_scoreList.clear();
 }
@@ -46,7 +46,7 @@ bool DisplayManager::init()
 		}
 		addChild(_displayNode);
 		// 启动定时器开始更新
-		schedule(schedule_selector(DisplayManager::update), .02f);
+		schedule(schedule_selector(DisplayManager::update), .5f);
 		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);
 		flag = true;
 	} while (0);
@@ -64,11 +64,11 @@ void DisplayManager::update(float dt)
 void DisplayManager::updateAnimation(float dt)
 {
 	float nExp = _experienceBar->getPercent();
-	if (nExp > int(_experience))
+	if (nExp > int(_percent))
 	{
 		_experienceBar->setPercent(nExp - 1);
 	}
-	else if(nExp < int(_experience))
+	else if (nExp < int(_percent))
 	{
 		_experienceBar->setPercent(nExp + 1);
 	}
@@ -116,23 +116,18 @@ void DisplayManager::updateSorceList()
 
 void DisplayManager::updateExperience()
 {
-	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum+1)*(_levelnum+1)*(_levelnum+1);
-	int _levelexperinence = (_levelnum + 2)*(_levelnum + 2)*(_levelnum+2) - (_levelnum +1)*(_levelnum +1)*(_levelnum +1);
-	/*int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum + 1-1) * 5;
-	int _levelexperinence = (_levelnum + 1 ) * 5 - (_levelnum + 1-1) * 5;*/
-	//int _levelexperinence = 30 * ((_levelnum + 1)*(_levelnum + 1)*(_levelnum + 1) + 5 * (_levelnum + 1)) - 80 -30 * (_levelnum*_levelnum*_levelnum + 5 * _levelnum) - 80;
-	if (exp >= _levelexperinence)
+	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - getLevelExperience(_levelNum);
+	int levelExperinence = getLevelExperience(_levelNum + 1) - getLevelExperience(_levelNum);
+	/*int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum)*(_levelnum)*(_levelnum);
+	int levelExperinence = (_levelnum + 1)*(_levelnum + 1)*(_levelnum+1) - (_levelnum )*(_levelnum )*(_levelnum );*/
+	if (exp >= levelExperinence)
 	{
-		//_experienceBar->setPercent(100.f);
-		_experience = 100.f;
-		exp = exp - _levelexperinence;
-		_levelnum++;
+		exp = exp - levelExperinence;
+		_levelNum++;
 	}
-	float _percent = (float)(exp) / (float)(_levelexperinence);
-	//_experienceBar->setPercent(_percent*100);
-	_experience = _percent * 100;
-	CCLOG("***************%d %d %f", exp, _levelexperinence, _percent, _experience);
-	_levelLabel->setString(to_string(_levelnum));
+	_percent = (float)(exp) / (float)(levelExperinence)*100;
+	CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
+	_levelLabel->setString(to_string(_levelNum));
 }
 
 DisplayManager::ListViewSorce::ListViewSorce():
