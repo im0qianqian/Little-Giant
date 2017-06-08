@@ -25,7 +25,6 @@ Stage* Stage::create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const
 		auto obj = Physics3DRigidBody::create(rbDes);
 		// 设置标签为当前固体对象指针，因为在碰撞检测中需要使用
 		obj->setUserData(ret);
-
 		ret->_physicsComponent = Physics3DComponent::create(obj);
 		ret->addComponent(ret->_physicsComponent);
 		ret->_contentSize = ret->getBoundingBox().size;
