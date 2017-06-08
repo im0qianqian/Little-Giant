@@ -8,7 +8,7 @@ USING_NS_CC;
 
 Character::Character() :
 	_dept(0),
-	_lifeValu  e(INITIAL_LIFE_VALUE),
+	_lifeValue(INITIAL_LIFE_VALUE),
 	_experience(0),
 	_sorce(0),
 	_weaponType(kWeaponArrow),
@@ -138,6 +138,7 @@ void Character::initialization()
 
 void Character::collisionWithWeapon(Weapons * const & weapon)
 {
+	if (isDie() || weapon->isDeleted())return;	// 如果某方已经不存在
 	// 人物受到攻击
 	beAttacked(weapon);
 	cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;

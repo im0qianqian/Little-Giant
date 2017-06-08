@@ -62,6 +62,7 @@ void Award::destroy()
 
 void Award::collisionWithCharacter(Character * const & character)
 {
+	if (isDeleted() || character->isDie())return;
 	// 将奖励给人物
 	applyToCharacter(character);
 	// 自身销毁

@@ -1,12 +1,13 @@
 #include "StageManager.h"
 #include "GameScene.h"
 #include "Global.h"
+#include "cocostudio/CocoStudio.h"
 
 StageManager::StageManager() :
 	_ground(nullptr),
 	_sun(nullptr),
 	_characterLight(nullptr),
-	_isTurnOnLight(true)
+	_isTurnOnLight(false)
 {
 }
 

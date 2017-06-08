@@ -46,6 +46,8 @@ public:
 	virtual void collisionWithWeapon(Weapons *const &weapon);
 	/* 与人物碰撞 */
 	virtual void collisionWithCharacter(Character *const &character);
+	/* 是否被删除 */
+	bool isDeleted() const{ return _isDeleted; }
 private:
 	void update(float dt);
 	void *_owner;			//武器所属人物

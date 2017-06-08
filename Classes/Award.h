@@ -19,6 +19,8 @@ public:
 	CREATE_FUNC(Award);
 	/* 与人物碰撞 */
 	void collisionWithCharacter(Character *const &character);
+	/* 是否被删除 */
+	bool isDeleted() const { return _isDeleted; }
 private:
 	enum AwardType
 	{

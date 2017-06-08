@@ -106,6 +106,8 @@ public:
 	void initialization();
 	/* ÓëÎäÆ÷Åö×² */
 	void collisionWithWeapon(Weapons *const &weapon);
+	/* ÊÇ·ñËÀÍö */
+	bool isDie() const { return _isDie; }
 private:
 	/* ÊÜµ½ÎäÆ÷¹¥»÷ */
 	void beAttacked(Weapons *const &weapon);

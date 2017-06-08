@@ -178,8 +178,9 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					if (objA->Node::getTag() == kGlobalAward)
 						swap(objA, objB);
 					Award * award = dynamic_cast<Award*>(objB);
+					Character *character = dynamic_cast<Character*>(objA);
 					// ½±ÀøÓëÈËÎïÅö×²
-					award->collisionWithCharacter(dynamic_cast<Character*>(objA));
+					award->collisionWithCharacter(character);
 				}
 				else
 				{

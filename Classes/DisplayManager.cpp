@@ -46,7 +46,7 @@ bool DisplayManager::init()
 		}
 		addChild(_displayNode);
 		// 启动定时器开始更新
-		schedule(schedule_selector(DisplayManager::update), .5f);
+		schedule(schedule_selector(DisplayManager::update), .02f);
 		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);
 		flag = true;
 	} while (0);
@@ -64,11 +64,11 @@ void DisplayManager::update(float dt)
 void DisplayManager::updateAnimation(float dt)
 {
 	float nExp = _experienceBar->getPercent();
-	if (nExp > _experience)
+	if (nExp > int(_experience))
 	{
 		_experienceBar->setPercent(nExp - 1);
 	}
-	else if(nExp < _experience)
+	else if(nExp < int(_experience))
 	{
 		_experienceBar->setPercent(nExp + 1);
 	}
@@ -129,9 +129,9 @@ void DisplayManager::updateExperience()
 		_levelnum++;
 	}
 	float _percent = (float)(exp) / (float)(_levelexperinence);
-	CCLOG("***************%d %d %f", exp, _levelexperinence, _percent);
 	//_experienceBar->setPercent(_percent*100);
 	_experience = _percent * 100;
+	CCLOG("***************%d %d %f", exp, _levelexperinence, _percent, _experience);
 	_levelLabel->setString(to_string(_levelnum));
 }
 
