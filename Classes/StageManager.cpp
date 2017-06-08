@@ -5,7 +5,8 @@
 StageManager::StageManager() :
 	_ground(nullptr),
 	_sun(nullptr),
-	_characterLight(nullptr)
+	_characterLight(nullptr),
+	_isTurnOnLight(true)
 {
 }
 
@@ -22,10 +23,13 @@ bool StageManager::init()
 		createGround();
 		/* 创建障碍物 */
 		createObstacles();
-		/* 创建灯光 */
-		createLight();
-		/* 启动定时器更新 */
-		scheduleUpdate();
+		if (_isTurnOnLight)		//如果打开了光照系统
+		{
+			/* 创建灯光 */
+			createLight();
+			/* 启动定时器更新 */
+			scheduleUpdate();
+		}
 		flag = true;
 	} while (false);
 	return flag;
@@ -45,7 +49,7 @@ void StageManager::createLight()
 		static float angle = 0.0;
 		node->setPosition3D(Vec3(radius * cos(angle), radius * sin(angle), 0.0f));
 		dynamic_cast<DirectionLight*>(node)->setDirection(Vec3::ZERO - node->getPosition3D());
-		angle -= 0.001;
+		angle -= 0.001f;
 	}), nullptr)));
 
 	addChild(_characterLight);
