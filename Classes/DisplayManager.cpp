@@ -2,7 +2,9 @@
 #include "Global.h"
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
+#include "cocos2d.h"
 #include "ui\UIListView.h"
+#include "ui\UIScrollView.h"
 #include <vector>
 #include <algorithm>
 DisplayManager::DisplayManager():
@@ -32,6 +34,18 @@ bool DisplayManager::init()
 		_experienceBar = static_cast<LoadingBar*>(_displayNode->getChildByName("Experience_bar"));
 		// 获取成绩列表
 		auto sorceList = static_cast<ListView*>(_displayNode->getChildByName("SorceListView"));
+		skill_list_0 = static_cast<ListView*>(_displayNode->getChildByName("skill_list_0"));
+		skill_list_1 = static_cast<ListView*>(_displayNode->getChildByName("skill_list_1"));
+		skill_list_2 = static_cast<ListView*>(_displayNode->getChildByName("skill_list_2"));
+		skill_panel_0 = static_cast<Label*>(_displayNode->getChildByName("skill_panel_0"));
+		skill_panel_1 = static_cast<Label*>(_displayNode->getChildByName("skill_panel_1"));
+		skill_panel_2 = static_cast<Label*>(_displayNode->getChildByName("skill_panel_2"));
+		skill_list_0->setVisible(false);
+		skill_list_1->setVisible(false);
+		skill_list_2->setVisible(false);
+		skill_panel_0->setVisible(false);
+		skill_panel_1->setVisible(false);
+		skill_panel_2->setVisible(false);
 		for (auto i = 0; i < _scoreListSize; i++)
 		{
 			auto list = static_cast<ListView*>(sorceList->getChildByName("SorceList_" + to_string(i)));
@@ -124,6 +138,20 @@ void DisplayManager::updateExperience()
 	{
 		exp = exp - levelExperinence;
 		_levelNum++;
+		skill_list_0->setVisible(true); 
+		skill_list_1->setVisible(true);
+		skill_list_2->setVisible(true);
+		skill_panel_0->setVisible(true);
+		skill_panel_1->setVisible(true);
+		skill_panel_2->setVisible(true);
+		/*skill_list_0->setInertiaScrollEnabled(true);
+		skill_list_1->setInertiaScrollEnabled(true);
+		skill_list_2->setInertiaScrollEnabled(true);*/
+		skill_list_0->setScrollBarOpacity(0);
+		skill_list_1->setScrollBarOpacity(0);
+		skill_list_2->setScrollBarOpacity(0);
+		skill_list_0->scrollToTop(1, true);
+		skill_list_0->cocos2d::ui::ListView::addClickEventListener(CC_CALLBACK_1(DisplayManager::ListViewMoveCallback, this));
 	}
 	_percent = (float)(exp) / (float)(levelExperinence)*100;
 	CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
@@ -154,4 +182,16 @@ void DisplayManager::ListViewSorce::setColor(const Color3B &color)
 	_rank->setColor(color);
 	_name->setColor(color);
 	_sorce->setColor(color);
+}
+
+void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
+{
+	skill_list_0->setVisible(false);
+	skill_list_1->setVisible(false);
+	skill_list_2->setVisible(false);
+	skill_panel_0->setVisible(false);
+	skill_panel_1->setVisible(false);
+	skill_panel_2->setVisible(false);/*
+	auto skill_list = static_cast<Text *>(pSender);
+	CCLOG("click btn Tag=%s", skill_list->getTag());*/
 }

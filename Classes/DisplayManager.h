@@ -5,6 +5,7 @@
 #include "Global.h"
 #include "ui\UIText.h"
 #include "ui\UILoadingBar.h"
+#include "ui\UIListView.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -22,11 +23,18 @@ private:
 	void updateSorceList();
 	void updateExperience();
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
+	void ListViewMoveCallback(cocos2d::Ref *pSender);
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	LoadingBar *_experienceBar;			// 经验条
 	int _levelNum;
 	float _percent;                    //当前经验条所占百分比
+	ListView* skill_list_0;
+	ListView* skill_list_1;
+	ListView* skill_list_2;
+	Label* skill_panel_0;
+	Label* skill_panel_1;
+	Label* skill_panel_2;
 	class ListViewSorce
 	{
 	public:
