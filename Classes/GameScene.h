@@ -22,6 +22,13 @@ enum GameStateType	// 游戏状态
 	kGameStateFail		//游戏失败
 };
 
+enum GameModeType	// 游戏模式
+{
+	kGameModeAdventure,		// 冒险模式（死亡结束）
+	kGameModeTimer,			// 计时模式（时间到结束）
+	kGameModeNight			// 黑夜模式（死亡结束）
+};
+
 class GameScene :public Layer
 {
 public:

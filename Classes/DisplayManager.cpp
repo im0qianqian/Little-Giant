@@ -142,6 +142,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::showSorceBoard()
 {
+	_sorceBoard->setVisible(true);
 }
 
 void DisplayManager::showSkillBoard()

@@ -66,7 +66,8 @@ void Character::die()
 	}
 	else	//自己死亡
 	{
-
+		GameScene::getDisplayManager()->showSorceBoard();
+		cout << "你已死亡，游戏结束~" << endl;
 	}
 }
 

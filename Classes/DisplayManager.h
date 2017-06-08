@@ -18,6 +18,8 @@ public:
 	~DisplayManager();
 	virtual bool init();
 	CREATE_FUNC(DisplayManager);
+	/* 游戏结束 显示积分表 */
+	void showSorceBoard();
 private:
 	void update(float dt);
 	/* 更新动画效果 */
@@ -28,8 +30,6 @@ private:
 	void updateExperience();
 	/* 获取当前等级升级所需要的经验点 */
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
-	/* 游戏结束 显示积分表 */
-	void showSorceBoard();
 	/* 人物升级 显示技能选择栏 */
 	void showSkillBoard();
 	Node *_displayNode;					// CSB node

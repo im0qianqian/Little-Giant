@@ -52,17 +52,17 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 
 enum GlobalType
 {
-	kGlobalStage,
-	kGlobalCharacter,
-	kGlobalWeapon,
-	kGlobalAward
+	kGlobalStage,		//场景，障碍
+	kGlobalCharacter,	//人物
+	kGlobalWeapon,		//武器
+	kGlobalAward		//奖励
 };
 
 enum WeaponType
 {
-	kWeaponArrow,
-	kWeaponBomb,
-	kWeaponDart
+	kWeaponArrow,		//箭矢
+	kWeaponBomb,		//炸弹
+	kWeaponDart			//飞镖
 };
 
 /* 判断 a 与 b 是否分别属于某两种对象 */
