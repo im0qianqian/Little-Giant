@@ -114,7 +114,13 @@ bool Character::init()
 
 	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
 
-	setScale(.1f);		//设置大小
+	setScale(.05f);		//设置大小
+	auto animation = Animation3D::create("Sprite3DTest/girl.c3b");
+	if (animation)
+	{
+		auto animate = Animate3D::create(animation);
+		runAction(RepeatForever::create(animate));
+	}
 	return true;
 }
 
@@ -183,7 +189,6 @@ void Character::update(float dt)
 			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 		move(ret.getNormalized());
-		syncNodeToPhysics();
 	}
 	else if (!_isDie)
 	{
@@ -206,6 +211,10 @@ void Character::update(float dt)
 			attackTime /= 10.f;
 		}
 	}
+	Vec3 roat = getRotation3D();
+	roat.x = roat.z = 0;
+	setRotation3D(roat);
+	syncNodeToPhysics();
 }
 
 
