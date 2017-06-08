@@ -5,6 +5,8 @@
 #include "Global.h"
 #include "ui\UIText.h"
 #include "ui\UILoadingBar.h"
+#include "ui\UIButton.h"
+#include "ui\UILayout.h"
 
 USING_NS_CC;
 using namespace cocos2d::ui;
@@ -18,15 +20,25 @@ public:
 	CREATE_FUNC(DisplayManager);
 private:
 	void update(float dt);
+	/* 更新动画效果 */
 	void updateAnimation(float dt);
+	/* 更新排行榜 */
 	void updateSorceList();
+	/* 更新经验条 */
 	void updateExperience();
+	/* 获取当前等级升级所需要的经验点 */
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
+	/* 游戏结束 显示积分表 */
+	void showSorceBoard();
+	/* 人物升级 显示技能选择栏 */
+	void showSkillBoard();
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	LoadingBar *_experienceBar;			// 经验条
-	int _levelNum;
-	float _percent;                    //当前经验条所占百分比
+	Button *_exitButton;				// 退出按钮
+	Layout *_sorceBoard;				// 计分表
+	int _levelNum;						// 当前等级
+	float _percent;						// 当前经验条所占百分比
 	class ListViewSorce
 	{
 	public:

@@ -5,6 +5,7 @@
 
 #include "cocos2d.h"
 #include "ui\UISlider.h"
+#include "ui\UILoadingBar.h"
 #include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 
@@ -117,7 +118,8 @@ private:
 	void move(const Vec3 &pos);
 	/* 与 update 有关的函数 */
 	virtual void update(float dt);
-
+	/* 界面显示有关，创建血量条 */
+	void createHpBar();
 	int _dept;				//人物所属群落
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验

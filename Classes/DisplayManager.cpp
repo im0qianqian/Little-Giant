@@ -5,10 +5,12 @@
 #include "ui\UIListView.h"
 #include <vector>
 #include <algorithm>
-DisplayManager::DisplayManager():
+DisplayManager::DisplayManager() :
 	_displayNode(nullptr),
 	_levelLabel(nullptr),
 	_experienceBar(nullptr),
+	_exitButton(nullptr),
+	_sorceBoard(nullptr),
 	_levelNum(0),
 	_percent(0)
 {
@@ -44,6 +46,14 @@ bool DisplayManager::init()
 			CCASSERT(sorce, "NULL");
 			_scoreList.push_back(ListViewSorce(rank, name, sorce));
 		}
+		// 获取退出按钮
+		_exitButton = static_cast<Button*>(_displayNode->getChildByName("button_exit"));
+		// 获取计分表
+		_sorceBoard = static_cast<Layout*>(_displayNode->getChildByName("SorceBoard"));
+		/* 这里暂定隐藏 */
+		_exitButton->setVisible(false);
+		_sorceBoard->setVisible(false);
+		/* */
 		addChild(_displayNode);
 		// 启动定时器开始更新
 		schedule(schedule_selector(DisplayManager::update), .5f);
@@ -84,7 +94,7 @@ void DisplayManager::updateSorceList()
 	// 对其排序
 	sort(allCharacter.begin(), allCharacter.end(), [](Character * const &a, Character * const &b)
 	{
-		return a->getSorce()>b->getSorce();
+		return a->getSorce() > b->getSorce();
 	});
 	CCASSERT(_scoreList.size() >= _scoreListSize, "列表太小");
 	// 获取当前场上人数
@@ -104,13 +114,13 @@ void DisplayManager::updateSorceList()
 		_scoreList[i + 1].setSorce("");
 	}
 	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
-	auto myrank = find(allCharacter.begin(), allCharacter.end(), myCharacter)-allCharacter.begin();
+	auto myrank = find(allCharacter.begin(), allCharacter.end(), myCharacter) - allCharacter.begin();
 	if (myrank < _scoreListSize)	//如果我的排名在前五名，高亮显示
 	{
-		_scoreList[myrank+1].setColor(Color3B::YELLOW);	//设置颜色
+		_scoreList[myrank + 1].setColor(Color3B::YELLOW);	//设置颜色
 	}
 	_scoreList[0].setName("qianqian");
-	_scoreList[0].setRank("#" + to_string(myrank+1));
+	_scoreList[0].setRank("#" + to_string(myrank + 1));
 	_scoreList[0].setSorce(to_string(myCharacter->getSorce()));
 }
 
@@ -125,12 +135,20 @@ void DisplayManager::updateExperience()
 		exp = exp - levelExperinence;
 		_levelNum++;
 	}
-	_percent = (float)(exp) / (float)(levelExperinence)*100;
+	_percent = (float)(exp) / (float)(levelExperinence) * 100;
 	CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
 	_levelLabel->setString(to_string(_levelNum));
 }
 
-DisplayManager::ListViewSorce::ListViewSorce():
+void DisplayManager::showSorceBoard()
+{
+}
+
+void DisplayManager::showSkillBoard()
+{
+}
+
+DisplayManager::ListViewSorce::ListViewSorce() :
 	_rank(nullptr),
 	_name(nullptr),
 	_sorce(nullptr)
@@ -141,7 +159,7 @@ DisplayManager::ListViewSorce::~ListViewSorce()
 {
 }
 
-DisplayManager::ListViewSorce::ListViewSorce(Text * const & rank, Text * const & name, Text * const & sorce):
+DisplayManager::ListViewSorce::ListViewSorce(Text * const & rank, Text * const & name, Text * const & sorce) :
 	_rank(rank),
 	_name(name),
 	_sorce(sorce)
