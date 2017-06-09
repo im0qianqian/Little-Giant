@@ -13,7 +13,7 @@ public:
 	StageManager();
 	~StageManager();
 	CREATE_FUNC(StageManager);
-	virtual bool init();
+	bool init();
 	/* 创建场景灯光 */
 	void createLight();
 	/* 创建障碍物 */

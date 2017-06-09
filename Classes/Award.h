@@ -34,6 +34,7 @@ private:
 	void applyToCharacter(Character *const &character);
 	/* 随机生成奖励类型 */
 	void randomType();
+
 	AwardType _awardType;	//奖励类型
 	bool _isDeleted;		//是否被删除
 };

@@ -29,7 +29,7 @@ void Character::addLifeValue(const float &add)
 	if (add >= 0)
 	{
 		// 加血时增加恢复能力加成
-		_lifeValue += min(INITIAL_LIFE_VALUE,add*getAttribute().getRestoringAbility());
+		_lifeValue += min(INITIAL_LIFE_VALUE, add*getAttribute().getRestoringAbility());
 	}
 	else
 	{
@@ -66,31 +66,38 @@ void Character::move(const Vec3 & pos)
 
 bool Character::init()
 {
-	/* 以下是初始化部分 */
-	initWithFile("Sprite3DTest/box.c3t");
-	setTexture("images/Icon.png");
+	bool flag = false;
+	do
+	{
+		/* 以下是初始化部分 */
+		if (initWithFile("Sprite3DTest/box.c3t"))
+		{
+			setTexture("images/Icon.png");
 
-	Physics3DRigidBodyDes des;
-	des.mass = 50.f;			//暂定，人物质量设置为50
-	des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
+			Physics3DRigidBodyDes des;
+			des.mass = 50.f;			//暂定，人物质量设置为50
+			des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//刚体大小
 
-	auto obj = Physics3DRigidBody::create(&des);
-   
-	_physicsComponent = Physics3DComponent::create(obj);
+			auto obj = Physics3DRigidBody::create(&des);
 
-	addComponent(_physicsComponent);
+			_physicsComponent = Physics3DComponent::create(obj);
 
-	_contentSize = getBoundingBox().size;
+			addComponent(_physicsComponent);
 
-	obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
+			_contentSize = getBoundingBox().size;
 
-	obj->setUserData(this);
+			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
 
-	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
+			obj->setUserData(this);
 
-	setScale(2.f);		//设置大小
-	createHpBar();		//创建血量条
-	return true;
+			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
+
+			setScale(2.f);		//设置大小
+			createHpBar();		//创建血量条
+			flag = true;
+		}
+	} while (false);
+	return flag;
 }
 
 void Character::initialization()
@@ -106,7 +113,7 @@ void Character::initialization()
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
 
 	// 随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 2, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
 	syncNodeToPhysics();
 }
 
