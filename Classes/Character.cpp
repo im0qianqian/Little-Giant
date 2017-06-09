@@ -137,11 +137,7 @@ void Character::collisionWithWeapon(Weapons * const & weapon)
 void Character::beAttacked(Weapons *const &weapon)
 {
 	// 如果武器的创建者是自己的话不掉血（自己打自己）
-	if (weapon->getOwner() == this)
-	{
-		cout << "你攻击到了自己~~" << endl;
-		return;
-	}
+	if (weapon->getOwner() == this) return;
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
 	addLifeValue(-weapon->getPower() / 1.0);
 
