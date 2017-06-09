@@ -39,7 +39,6 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	switch (sceneType)
 	{
 	case kMenuScene:
-		_layer = DisplayManager::create();
 		break;
 	case kLoadingScene:
 		_layer = LoadLayer::create();

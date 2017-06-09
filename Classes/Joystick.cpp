@@ -83,6 +83,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 	{
 		auto touch = touches[0];
 		auto delta = touch->getDelta();
+		std::cout << delta.x << endl;
 		if (!_isFirstView)
 		{
 			static float _angle = 0.f;
@@ -106,7 +107,6 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 			GameScene::getCamera()->setRotation3D(rot);
 			GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
 		}
-		
 	}
 	event->stopPropagation();
 }

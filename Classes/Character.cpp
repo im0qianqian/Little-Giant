@@ -66,7 +66,7 @@ void Character::die()
 	}
 	else	//自己死亡
 	{
-		GameScene::getDisplayManager()->showSorceBoard();
+		//GameScene::getDisplayManager()->showSorceBoard();
 		cout << "你已死亡，游戏结束~" << endl;
 	}
 }
@@ -136,6 +136,12 @@ void Character::collisionWithWeapon(Weapons * const & weapon)
 
 void Character::beAttacked(Weapons *const &weapon)
 {
+	// 如果武器的创建者是自己的话不掉血（自己打自己）
+	if (weapon->getOwner() == this)
+	{
+		cout << "你攻击到了自己~~" << endl;
+		return;
+	}
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
 	addLifeValue(-weapon->getPower() / 1.0);
 
@@ -196,9 +202,9 @@ void Character::update(float dt)
 		}
 	}
 	// 更正人物旋转角度
-	Vec3 roat = getRotation3D();
-	roat.x = roat.z = 0;
-	setRotation3D(roat);
+	//Vec3 roat = getRotation3D();
+	//roat.x = roat.z = 0;
+	//setRotation3D(roat);
 
 	syncNodeToPhysics();
 }

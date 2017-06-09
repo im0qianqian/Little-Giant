@@ -27,7 +27,7 @@ Stage* Stage::create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const
 		obj->setUserData(ret);
 		ret->_physicsComponent = Physics3DComponent::create(obj);
 		ret->addComponent(ret->_physicsComponent);
-		ret->_contentSize = ret->getBoundingBox().size;
+		//ret->_contentSize = ret->getBoundingBox().size;
 		ret->setTexture(texture);
 		ret->autorelease();
 	}

@@ -17,37 +17,37 @@ bool LoadLayer::init()
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	loadLabel = Label::create("Loading:", "arial", 30);
-	loadLabel->setPosition(Point(visibleSize.width / 2 - 30, visibleSize.height / 2 + 30));
-	this->addChild(loadLabel,1);
+	_loadLabel = Label::create("Loading:", "arial", 30);
+	_loadLabel->setPosition(Point(visibleSize.width / 2 - 30, visibleSize.height / 2 + 30));
+	this->addChild(_loadLabel,1);
 
-	percentLabel = Label::create("       0%", "arial", 30);
+	_percentLabel = Label::create("       0%", "arial", 30);
 	CCLOG("####%d %d", visibleSize.width / 2, visibleSize.height / 2);
-	percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
-	this->addChild(percentLabel, 2);
+	_percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
+	this->addChild(_percentLabel, 2);
 	
-	totalImage = 500;
-	loadImage = 0;
+	_totalImage = 500;
+	_loadImage = 0;
 
 	CCLOG("PASS1");
 
-	timer = ProgressTimer::create(Sprite::create("blood.png"));
-	timer->setType(cocos2d::ProgressTimer::Type::BAR);
-	timer->setMidpoint(Vec2(0, 1));
-	timer->setBarChangeRate(Vec2(1, 0));
-	timer->setPercentage(0.0f);
-	timer->setScaleX(2);
+	_timer = ProgressTimer::create(Sprite::create("blood.png"));
+	_timer->setType(cocos2d::ProgressTimer::Type::BAR);
+	_timer->setMidpoint(Vec2(0, 1));
+	_timer->setBarChangeRate(Vec2(1, 0));
+	_timer->setPercentage(0.0f);
+	_timer->setScaleX(2);
 	//timer->setScale(2);
 	CCLOG("####%d %d", visibleSize.width / 2, visibleSize.height / 2);
-	timer->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
-	this->addChild(timer,3);
+	_timer->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	this->addChild(_timer,3);
 
 	CCLOG("PASS2");
 
 	for (int i = 1; i <= 500; i++)
 	{
 		CCLOG("PASS3,%d",i);
-		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::LoadingCallback,this));
+		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::loadingCallback,this));
 	}
 	/*for (int i = 1; i <= 500; i++)
 	{
@@ -58,23 +58,23 @@ bool LoadLayer::init()
 
 }
 
-void LoadLayer::LoadingCallback()
+void LoadLayer::loadingCallback()
 {
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	loadImage++;
-	float newPercent = 100 - ((float)totalImage - (float)loadImage) / ((float)totalImage / 100);
-	timer->setPercentage(newPercent);
+	_loadImage++;
+	float newPercent = 100 - ((float)_totalImage - (float)_loadImage) / ((float)_totalImage / 100);
+	_timer->setPercentage(newPercent);
 	CCLOG("%f", newPercent);
 	char buf_str[16];
-	sprintf(buf_str, "       %d%%", (int)(((float)loadImage) / (float)totalImage * 100));
+	sprintf(buf_str, "       %d%%", (int)(((float)_loadImage) / (float)_totalImage * 100));
 	CCLOG("%s", buf_str);
-	percentLabel->setString(buf_str);
-	if (loadImage == totalImage)
+	_percentLabel->setString(buf_str);
+	if (_loadImage == _totalImage)
 	{
 		CCLOG("PASS4");
-		this->removeChild(timer);
-		this->removeChild(percentLabel);
-		this->removeChild(loadLabel);
+		this->removeChild(_timer);
+		this->removeChild(_percentLabel);
+		this->removeChild(_loadLabel);
 		CCLOG("PASS5");
 		/*Sprite *newScene = Sprite::create("background.png");
 		CCLOG("PASS6");

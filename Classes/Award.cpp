@@ -62,6 +62,7 @@ void Award::destroy()
 
 void Award::collisionWithCharacter(Character * const & character)
 {
+	// 如果奖励已经给了别人就不能再给了，如果对方死亡的话也不能被得到
 	if (isDeleted() || character->isDie())return;
 	// 将奖励给人物
 	applyToCharacter(character);
