@@ -17,7 +17,7 @@ bool CharacterManager::init()
 	// 第一步先创建缓存池
 	_cachePool.createCachePool();
 	// 第二步创建人物
-	startGame(0,0);
+	startGame(0,100);
 	//schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
 }

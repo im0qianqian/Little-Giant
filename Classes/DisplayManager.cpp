@@ -210,7 +210,7 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 	skill_list_2->setVisible(false);
 	skill_panel_0->setVisible(false);
 	skill_panel_1->setVisible(false);
-	skill_panel_2->setVisible(false);/*
-	auto skill_list = static_cast<Text *>(pSender);
-	CCLOG("click btn Tag=%s", skill_list->getTag());*/
+	skill_panel_2->setVisible(false);
+	auto skill_list = static_cast<Image *>(pSender);
+
 }
