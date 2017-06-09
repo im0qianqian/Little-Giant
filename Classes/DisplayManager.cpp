@@ -133,13 +133,14 @@ void DisplayManager::updateSorceList()
 	{
 		_scoreList[myRank + 1].setColor(Color3B::YELLOW);	//ÉèÖÃÑÕÉ«
 	}
-	_scoreList[0].setName("qianqian");
+	_scoreList[0].setName(myCharacter->getName());
 	_scoreList[0].setRank("#" + to_string(myRank + 1));
 	_scoreList[0].setSorce(to_string(myCharacter->getSorce()));
 }
 
 void DisplayManager::updateExperience()
 {
+	if (GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() == 0)_levelNum = 0;
 	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - getLevelExperience(_levelNum);
 	int levelExperinence = getLevelExperience(_levelNum + 1) - getLevelExperience(_levelNum);
 	/*int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum)*(_levelnum)*(_levelnum);

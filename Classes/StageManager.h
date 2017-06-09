@@ -20,10 +20,6 @@ public:
 	void createObstacles();
 	/* 创建地面 */
 	void createGround();
-	/* 获取当前是否打开了光照 */
-	bool getIsTurnOnLight() const { return _isTurnOnLight; }
-	/* 设置光照属性 */
-	void setIsTurnOnLight(const bool &light) { _isTurnOnLight = light; }
 	/* GET */
 	DirectionLight* getSun()const { return _sun; }
 	PointLight* getCharacterLight() const { return _characterLight; }
@@ -32,7 +28,6 @@ private:
 	Stage *_ground;						//地面
 	DirectionLight *_sun;				//太阳
 	PointLight *_characterLight;		//人物小灯
-	bool _isTurnOnLight;				//是否打开了关照
 };
 
 #endif

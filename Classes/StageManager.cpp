@@ -6,8 +6,7 @@
 StageManager::StageManager() :
 	_ground(nullptr),
 	_sun(nullptr),
-	_characterLight(nullptr),
-	_isTurnOnLight(false)
+	_characterLight(nullptr)
 {
 }
 
@@ -24,7 +23,7 @@ bool StageManager::init()
 		createGround();
 		/* 创建障碍物 */
 		createObstacles();
-		if (_isTurnOnLight)		//如果打开了光照系统
+		if (GameScene::getGameMode() == kGameModeNight)	// 如果当前游戏属于黑夜模式
 		{
 			/* 创建灯光 */
 			createLight();

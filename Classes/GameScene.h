@@ -38,6 +38,12 @@ public:
 	virtual bool init();
 	/* 获取当前游戏状态 */
 	static GameStateType getGameState() { return _gameState; }
+	/* 更改当前游戏状态 */
+	static void setGameState(const GameStateType &gameState) { _gameState = gameState; }
+	/* 获取当前游戏模式 */
+	static GameModeType getGameMode() { return _gameMode; }
+	/* 更改当前游戏模式 */
+	static void setGameMode(const GameModeType &gameMode) { _gameMode = gameMode; }
 	/* 获取人物管理对象 */
 	static CharacterManager* getCharacterManager() { return _characterManager; }
 	/* 获取地图管理对象 */
@@ -64,6 +70,7 @@ private:
 	static AudioManager *_audioManager;			//声音管理对象
 	static DisplayManager *_displayManager;		//界面显示管理对象
 	static Joystick *_joystick;					//操作管理对象
+	static GameModeType _gameMode;				//游戏模式
 };
 
 

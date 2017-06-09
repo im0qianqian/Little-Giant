@@ -120,7 +120,7 @@ void Weapons::collisionWithCharacter(Character * const & character)
 void Weapons::update(float dt)
 {
 	// 如果不在场上并且没有删除
-	if (getPositionY() < 0 && !_isDeleted)
+	if (getPositionY() < 0 && !isDeleted())
 	{
 		destroy();
 	}

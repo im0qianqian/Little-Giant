@@ -4,14 +4,15 @@
 
 CharacterManager::CharacterManager():
 	_playerCharacter(nullptr),
-	_cachePool(ObjCachePool<Character>(this, CHARACTER_CACHE_SIZE))
+	_cachePool(ObjCachePool<EnemyCharacter>(this, CHARACTER_CACHE_SIZE)),
+	_enemyCharacter(set<Character*>())
 {
-	_enemyCharacter.clear();
 }
 
 CharacterManager::~CharacterManager()
 {
 }
+
 bool CharacterManager::init()
 {
 	// 第一步先创建缓存池
@@ -43,29 +44,26 @@ void CharacterManager::resumeGame()
 {
 }
 
-Character * CharacterManager::createCharacter(CharacterType characterType)
+void CharacterManager::createCharacter(CharacterType characterType)
 {
-	auto character = _cachePool.getFromPool();	//从缓存池中取出人物
-	if (character != NULL)
+	switch (characterType)
 	{
-		character->initialization();					//登场
-		if (characterType == kCharacterPlayer)
-		{
-			_playerCharacter = character;
-			_playerCharacter->setDept(-1);
-			_playerCharacter->setName("qianqian");		// 主角设置自己的姓名
-			GameScene::getCamera()->setPosition3D(Vec3(character->getPosition3D().x, 50, character->getPosition3D().z+20));
-			GameScene::getCamera()->lookAt(Vec3(character->getPosition3D().x, 0, character->getPosition3D().z));
-		}
-		else
-		{
-			_enemyCharacter.insert(character);
-		}
+	case kCharacterPlayer:
+		_playerCharacter = PlayerCharacter::create();
+		_playerCharacter->initialization();
+		GameScene::getCamera()->setPosition3D(Vec3(_playerCharacter->getPosition3D().x, 50, _playerCharacter->getPosition3D().z + 20));
+		GameScene::getCamera()->lookAt(Vec3(_playerCharacter->getPosition3D().x, 0, _playerCharacter->getPosition3D().z));
+		addChild(_playerCharacter);
+		break;
+	default:
+		auto character = _cachePool.getFromPool();	//从缓存池中取出人物
+		character->initialization();				//登场
+		_enemyCharacter.insert(character);
+		break;
 	}
-	return character;
 }
 
-void CharacterManager::addToPool(Character * const & character)
+void CharacterManager::addToPool(EnemyCharacter * const & character)
 {
 	//加入缓存池说明当前人物已死亡
 	_cachePool.addToPool(character);

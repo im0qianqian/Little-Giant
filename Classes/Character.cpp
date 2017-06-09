@@ -56,21 +56,6 @@ void Character::attack(const Vec3 &pos)
 	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 }
 
-void Character::die()
-{
-	if (_isDie)return;
-	_isDie = true;
-	if (getDept() != -1)	// 其他人物死亡
-	{
-		GameScene::getCharacterManager()->addToPool(this);
-	}
-	else	//自己死亡
-	{
-		//GameScene::getDisplayManager()->showSorceBoard();
-		cout << "你已死亡，游戏结束~" << endl;
-	}
-}
-
 void Character::move(const Vec3 & pos)
 {
 	/* 获取刚体对象 */
@@ -119,10 +104,9 @@ void Character::initialization()
 	_isDie = false;
 	_dept = 0;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
-	// 随机一个姓名（可能会重复）
-	setName(CHARACTER_NAME[rand()%(sizeof(CHARACTER_NAME)/sizeof(string))]);
-	// 取出之后随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 20, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
+
+	// 随机设置位置并同步
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 2, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
 	syncNodeToPhysics();
 }
 
@@ -131,7 +115,7 @@ void Character::collisionWithWeapon(Weapons * const & weapon)
 	if (isDie() || weapon->isDeleted())return;	// 如果某方已经不存在
 	// 人物受到攻击
 	beAttacked(weapon);
-	cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;
+	//cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;
 }
 
 void Character::beAttacked(Weapons *const &weapon)
@@ -151,58 +135,28 @@ void Character::beAttacked(Weapons *const &weapon)
 	}
 }
 
+void Character::die()
+{
+	if (isDie())return;
+	_isDie = true;
+}
+
 void Character::update(float dt)
 {
-	if (_dept == -1)
+	if (detectionStatus())	// 如果当前状况正常(人物是否存活)
 	{
-		Vec3 ret = Vec3::ZERO;
-		if (GameScene::getJoystick()->getKeyW())
-			ret += Vec3(0, 0, -1);
-		if (GameScene::getJoystick()->getKeyA())
-			ret += Vec3(-1, 0, 0);
-		if (GameScene::getJoystick()->getKeyS())
-			ret += Vec3(0, 0, 1);
-		if (GameScene::getJoystick()->getKeyD())
-			ret += Vec3(1, 0, 0);
-		if (GameScene::getJoystick()->isFirstView())
-		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
-		}
-		else
-		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
-			//GameScene::getCamera()->lookAt(getPosition3D());
-			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
-		}
-		move(ret.getNormalized());
+		moveModule();		// 执行移动模块
 	}
-	else if (!_isDie)
-	{
-		static float attackTime = 0;
-		attackTime += dt;
-		static Vec3 minn = Vec3::ZERO;
-		if (attackTime > 10.f) {
-			minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
-			auto other = GameScene::getCharacterManager()->getEnemyCharacter();
-			int len = other.size();
-			for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
-			{
-				if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
-				{
-					minn = (*i)->getPosition3D() - getPosition3D();
-				}
-			}
-			attack(minn);
-			move(minn.getNormalized());
-			attackTime /= 10.f;
-		}
-	}
-	// 更正人物旋转角度
-	//Vec3 roat = getRotation3D();
-	//roat.x = roat.z = 0;
-	//setRotation3D(roat);
+}
 
-	syncNodeToPhysics();
+
+bool Character::detectionStatus()
+{
+	if (!isDie() && getPositionY() < 0)		// 如果人物存活并且掉出了场外
+	{
+		die();								// 人物立即死亡
+	}
+	return !isDie();
 }
 
 void Character::createHpBar()
@@ -221,17 +175,9 @@ void Character::createHpBar()
 }
 
 
-Character::Attribute::Attribute() :
-	_attackDamage(1),
-	_attackSpeed(1),
-	_movingSpeed(20.f),
-	_empiricalAcquisition(1),
-	_defensiveForce(0),
-	_restoringAbility(1),
-	_temporary(kTemporaryNone),
-	_duration(0)
+Character::Attribute::Attribute()
 {
-
+	init();		// 直接执行初始化函数
 }
 
 Character::Attribute::~Attribute()
@@ -308,10 +254,125 @@ void Character::Attribute::init()
 {
 	_attackDamage = 1;
 	_attackSpeed = 1;
-	_movingSpeed = 20.f;
+	_movingSpeed = 50.f;
 	_empiricalAcquisition = 1;
 	_defensiveForce = 0;
 	_restoringAbility = 1;
 	_temporary = kTemporaryNone;
 	_duration = 0;
+}
+
+void PlayerCharacter::initialization()
+{
+	// 先执行父类的初始化方法
+	Character::initialization();
+	// 随机一个姓名（可能会重复）
+	setName("qianqian");
+	// 设置群落，主角为 -1
+	setDept(-1);
+}
+
+void PlayerCharacter::die()
+{
+	Character::die();
+
+	switch (GameScene::getGameMode())
+	{
+	case kGameModeAdventure:			// 冒险模式
+		cout << "你已死亡，游戏结束~" << endl;
+		break;
+	case kGameModeTimer:				// 计时模式
+		initialization();				// 充血复活
+		break;
+	case kGameModeNight:				// 黑夜模式
+		cout << "你已死亡，游戏结束~" << endl;
+		break;
+	default:
+		break;
+	}
+}
+
+void PlayerCharacter::moveModule()
+{
+	Vec3 ret = Vec3::ZERO;
+	if (GameScene::getJoystick()->getKeyW())
+		ret += Vec3(0, 0, -1);
+	if (GameScene::getJoystick()->getKeyA())
+		ret += Vec3(-1, 0, 0);
+	if (GameScene::getJoystick()->getKeyS())
+		ret += Vec3(0, 0, 1);
+	if (GameScene::getJoystick()->getKeyD())
+		ret += Vec3(1, 0, 0);
+	if (GameScene::getJoystick()->isFirstView())
+	{
+		GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
+	}
+	else
+	{
+		GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
+		//GameScene::getCamera()->lookAt(getPosition3D());
+		//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+	}
+	move(ret.getNormalized());
+	// 更正人物旋转角度
+	Vec3 roat = getRotation3D();
+	roat.x = roat.z = 0;
+	setRotation3D(roat);
+
+	syncNodeToPhysics();
+}
+
+void EnemyCharacter::initialization()
+{
+	// 先执行父类的初始化方法
+	Character::initialization();
+	// 随机一个姓名（可能会重复）
+	setName(CHARACTER_NAME[rand() % (sizeof(CHARACTER_NAME) / sizeof(string))]);
+}
+
+void EnemyCharacter::die()
+{
+	Character::die();
+
+	switch (GameScene::getGameMode())
+	{
+	case kGameModeAdventure:			// 冒险模式
+		GameScene::getCharacterManager()->addToPool(this);
+		break;
+	case kGameModeTimer:				// 计时模式
+		initialization();				// 充血复活
+		break;
+	case kGameModeNight:				// 黑夜模式
+		GameScene::getCharacterManager()->addToPool(this);
+		break;
+	default:
+		break;
+	}
+}
+
+void EnemyCharacter::moveModule()
+{
+	static float attackTime = 0;
+	attackTime += 0.1;
+	static Vec3 minn = Vec3::ZERO;
+	if (attackTime > 10.f) {
+		minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+		auto other = GameScene::getCharacterManager()->getEnemyCharacter();
+		int len = other.size();
+		for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
+		{
+			if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
+			{
+				minn = (*i)->getPosition3D() - getPosition3D();
+			}
+		}
+		attack(minn + getPosition3D());
+		move(minn.getNormalized());
+		attackTime /= 10.f;
+	}
+	Vec3 roat = getRotation3D();
+	roat.x = roat.z = 0;
+	setRotation3D(roat);
+
+	syncNodeToPhysics();
 }
