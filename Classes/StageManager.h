@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Stage.h"
+#include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 
 USING_NS_CC;
@@ -25,9 +26,10 @@ public:
 	PointLight* getCharacterLight() const { return _characterLight; }
 private:
 	void update(float dt);
-	Stage *_ground;						//地面
-	DirectionLight *_sun;				//太阳
-	PointLight *_characterLight;		//人物小灯
+	Stage *_ground;									//地面
+	DirectionLight *_sun;							//太阳
+	PointLight *_characterLight;					//人物小灯
+	int _map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//当前地图
 };
 
 #endif
