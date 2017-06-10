@@ -3,6 +3,7 @@
 #include "SceneManager.h"
 #include "Joystick.h"
 #include "Weapons.h"
+#include "WeaponManager.h"
 
 USING_NS_CC;
 
@@ -24,7 +25,6 @@ Character::Character() :
 
 Character::~Character()
 {
-	_isDie = true;
 }
 
 void Character::addLifeValue(const float &add)
@@ -115,7 +115,7 @@ void Character::initialization()
 	_isDie = false;
 	_dept = 0;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
-	_intelligence = thread(&Character::moveModule, this);
+	_intelligence = thread(&Character::moveModule, this);	//开启人物AI线程
 
 	// 随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
@@ -158,8 +158,7 @@ void Character::die()
 {
 	if (isDie())return;
 	_isDie = true;
-	if (_intelligence.joinable())
-		_intelligence.join();
+	cleanup();		// 人物死亡，结束线程
 }
 
 void Character::update(float dt)
@@ -317,31 +316,36 @@ void PlayerCharacter::moveModule()
 {
 	while (!isDie())
 	{
-		Vec3 res = Vec3::ZERO;
-		if (GameScene::getJoystick()->getKeyW())
-			res += Vec3(0, 0, -1);
-		if (GameScene::getJoystick()->getKeyA())
-			res += Vec3(-1, 0, 0);
-		if (GameScene::getJoystick()->getKeyS())
-			res += Vec3(0, 0, 1);
-		if (GameScene::getJoystick()->getKeyD())
-			res += Vec3(1, 0, 0);
-		if (GameScene::getJoystick()->isFirstView())
+		//if(GameScene::getJoystick()&& GameScene::getCamera())
 		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
+			Vec3 res = Vec3::ZERO;
+			if (GameScene::getJoystick()->getKeyW())
+				res += Vec3(0, 0, -1);
+			if (GameScene::getJoystick()->getKeyA())
+				res += Vec3(-1, 0, 0);
+			if (GameScene::getJoystick()->getKeyS())
+				res += Vec3(0, 0, 1);
+			if (GameScene::getJoystick()->getKeyD())
+				res += Vec3(1, 0, 0);
+			if (GameScene::getJoystick()->isFirstView())
+			{
+				GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
+			}
+			else
+			{
+				//cout << GameScene::getCamera() << endl;
+				//cout << getPosition3D().length() << endl;
+				GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
+				//GameScene::getCamera()->lookAt(getPosition3D());
+				//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+			}
+			setDirection(res.getNormalized());
+			// 更正人物旋转角度
+			/*Vec3 roat = getRotation3D();
+			roat.x = roat.z = 0;
+			setRotation3D(roat);
+			syncNodeToPhysics();*/
 		}
-		else
-		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
-			//GameScene::getCamera()->lookAt(getPosition3D());
-			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
-		}
-		setDirection(res.getNormalized());
-		// 更正人物旋转角度
-		/*Vec3 roat = getRotation3D();
-		roat.x = roat.z = 0;
-		setRotation3D(roat);
-		syncNodeToPhysics();*/
 	}
 }
 
@@ -375,7 +379,7 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
-	//while (!isDie())
+	while (!isDie())
 	{
 		/*if (GameScene::getCharacterManager() == nullptr)continue;
 		static float attackTime = 0;
@@ -394,13 +398,7 @@ void EnemyCharacter::moveModule()
 			}
 			attack(minn + getPosition3D());
 			setDirection(minn.getNormalized());
-			move();
 			attackTime /= 10.f;
 		}*/
-		/*Vec3 roat = getRotation3D();
-		roat.x = roat.z = 0;
-		setRotation3D(roat);
-
-		syncNodeToPhysics();*/
 	}
 }
