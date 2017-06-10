@@ -18,7 +18,7 @@ bool CharacterManager::init()
 	// 第一步先创建缓存池
 	_cachePool.createCachePool();
 	// 第二步创建人物
-	startGame(0,1);
+	startGame(0,5);
 	//schedule(schedule_selector(CharacterManager::update), .3f);
 	return true;
 }
@@ -33,6 +33,10 @@ void CharacterManager::startGame(const int &ally, const int &enemy)
 	for (int i = 0; i < enemy; i++)
 	{
 		createCharacter(kCharacterEnemy);
+	}
+	for (auto i : _enemyCharacter)
+	{
+		i->initialization();				//登场
 	}
 }
 
@@ -57,7 +61,6 @@ void CharacterManager::createCharacter(CharacterType characterType)
 		break;
 	default:
 		auto character = _cachePool.getFromPool();	//从缓存池中取出人物
-		character->initialization();				//登场
 		_enemyCharacter.insert(character);
 		break;
 	}

@@ -28,7 +28,7 @@ public:
 	/* 获取一个对象指针 */
 	T* getFromPool();
 private:
-	Vector<T*> _cachePool;		//缓冲池
+	std::deque<T*> _cachePool;		//缓冲池
 	int _cacheSize;				//缓冲池大小
 	Node * _layer;				//缓冲池所作用的图层
 };
@@ -36,17 +36,17 @@ private:
 template<typename T>
 ObjCachePool<T>::ObjCachePool() :
 	_cacheSize(0),
-	_layer(nullptr)
+	_layer(nullptr),
+	_cachePool(std::deque<T*>())
 {
-	_cachePool.clear();
 }
 
 template<typename T>
-ObjCachePool<T>::ObjCachePool(Node * const & node, const int & size):
+ObjCachePool<T>::ObjCachePool(Node * const & node, const int & size) :
 	_cacheSize(size),
-	_layer(node)
+	_layer(node),
+	_cachePool(std::deque<T*>())
 {
-	_cachePool.clear();
 }
 
 
@@ -60,13 +60,13 @@ template<typename T>
 void ObjCachePool<T>::addToPool(T* const & t)
 {
 	/*
-	 * 添加到缓存池意味着当前对象要让玩家看不见，于是在这里设置了它的位置
-	 */
+	* 添加到缓存池意味着当前对象要让玩家看不见，于是在这里设置了它的位置
+	*/
 	t->setVisible(false);
 	t->setPosition3D(-Vec3::UNIT_Y * 10);
 	t->syncNodeToPhysics();
 
-	_cachePool.pushBack(t);
+	_cachePool.push_back(t);
 	//cout << "缓存池容量剩余：" << _cachePool.size() << endl;
 }
 
@@ -90,11 +90,11 @@ T* ObjCachePool<T>::getFromPool()
 	T* t = nullptr;
 	if (!_cachePool.empty())
 	{
-		t = _cachePool.back();
-		_cachePool.popBack();
+		t = _cachePool.front();
+		_cachePool.pop_front();
 		/*
-		 * 从缓存池中取出对象意味着该对象要被显示出来了
-		 */
+		* 从缓存池中取出对象意味着该对象要被显示出来了
+		*/
 		t->setVisible(true);
 	}
 	//cout << "成功取出一个对象："<<t<<"\t缓存池容量剩余："<<_cachePool.size() << endl;
