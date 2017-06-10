@@ -155,11 +155,18 @@ void DisplayManager::updateExperience()
 		for (int i = 0; i < 3; i++)
 		{
 			skill_list[i]->setVisible(true);
-			//skill_list[i]->setScrollBarOpacity(0);
+			skill_list[i]->setScrollBarOpacity(0);
 			skill_panel[i]->setVisible(true);
-			/*skill_list[i]->setDirection(ScrollView::Direction::HORIZONTAL);
-			skill_list[i]->scrollToBottom(1.0, true);
-			skill_list[i]->scrollToTop(10.0, true);*/
+			skill_list[i]->setDirection(ScrollView::Direction::VERTICAL);
+			skill_list[i]->scrollToBottom(5.0, true);
+			skill_list[i]->scrollToTop(5.0, true);
+		}
+		for (int i = 0; i < 3;i++)
+		{
+			skill_list[i]->scrollToBottom(5.0, true);
+			skill_list[i]->scrollToTop(5.0, true);
+			/*skill_list[i]->scrollToBottom(5.0, true);
+			skill_list[i]->scrollToTop(5.0, true);*/
 			skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
 			/*Widget* item = skill_list[i]->getCurrentFocusedWidget(true);*/
 		   // skill_list[i]->setEnabled(false);

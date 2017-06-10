@@ -84,7 +84,7 @@ void Award::applyToCharacter(Character * const & character)
 		character->addLifeValue(100.f);
 		break;
 	case kAwardEXP:
-		character->addExperience(1.f);
+		character->addExperience(10.f);
 		break;
 	case kAwardSorce:
 		character->addSorce(1.f);
