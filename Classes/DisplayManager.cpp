@@ -220,12 +220,11 @@ void DisplayManager::ListViewSorce::setColor(const Color3B &color)
 
 void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 {
-	skill_list_0->setVisible(false);
-	skill_list_1->setVisible(false);
-	skill_list_2->setVisible(false);
-	skill_panel_0->setVisible(false);
-	skill_panel_1->setVisible(false);
-	skill_panel_2->setVisible(false);
+	for (int i = 0; i < 3; i++)
+	{
+		skill_list[i]->setVisible(false);
+		skill_panel[i]->setVisible(false);
+	}
 	auto skill_list = static_cast<Image *>(pSender);
 
 }
