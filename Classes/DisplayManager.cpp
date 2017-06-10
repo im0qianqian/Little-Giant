@@ -225,7 +225,11 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 		skill_list[i]->setVisible(false);
 		skill_panel[i]->setVisible(false);
 	}
-	auto skill_list = static_cast<Image *>(pSender);
+
+	auto *touchItem = static_cast<Widget *>(pSender);
+	std::string item_name = touchItem->getName();
+	/*applyToSkill(item_name);*/
+	cout << item_name << endl;
 
 }
 //void DisplayManager::applyToSkill(std::string skill)
