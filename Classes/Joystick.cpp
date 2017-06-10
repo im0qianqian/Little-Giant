@@ -56,7 +56,7 @@ void Joystick::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos
 
 void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event)
 {
-	CCLOG("on Touches ended!!!");
+	//CCLOG("on Touches ended!!!");
 	for (auto &item : touches)
 	{
 		auto touch = item;
@@ -135,7 +135,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					// 创建光效
 					createParticle(ci.collisionPointList[0].worldPositionOnB);
 
-					CCLOG("---------------- weapon stage --------------------");
+					//CCLOG("---------------- weapon stage --------------------");
 					// 如果 A 是障碍物的话交换，最终结果： A 武器、B 障碍物
 					if (objA->Node::getTag() == kGlobalStage)
 						swap(objA, objB);
@@ -148,7 +148,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					// 创建光效
 					createParticle(ci.collisionPointList[0].worldPositionOnB);
 
-					CCLOG("---------------- weapon character --------------------");
+					//CCLOG("---------------- weapon character --------------------");
 					// 如果 A 是武器的话交换，最终结果： A 人物、B 武器
 					if (objA->Node::getTag() == kGlobalWeapon)
 						swap(objA, objB);
@@ -164,7 +164,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					// 创建光效
 					createParticle(ci.collisionPointList[0].worldPositionOnB);
 
-					CCLOG("---------------- weapon weapon --------------------");
+					//CCLOG("---------------- weapon weapon --------------------");
 					Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
 					Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
 					// 武器与武器发生碰撞
@@ -173,7 +173,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				}
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))
 				{
-					CCLOG("---------------- Award character --------------------");
+					//CCLOG("---------------- Award character --------------------");
 					// 如果 A 是武器的话交换，最终结果： A 人物、B 奖励
 					if (objA->Node::getTag() == kGlobalAward)
 						swap(objA, objB);
@@ -188,8 +188,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				}
 				if (flag)	// 仅用调试 输出标签
 				{
-					CCLOG("tag aa : %d", objA->Node::getTag());
-					CCLOG("tag bb : %d", objB->Node::getTag());
+					//CCLOG("tag aa : %d", objA->Node::getTag());
+					//CCLOG("tag bb : %d", objB->Node::getTag());
 				}
 			}
 		}
@@ -247,7 +247,7 @@ void Joystick::keyboardListen()
 	/* 键盘弹起 */
 	_listenerKeyboard->onKeyReleased = [&](EventKeyboard::KeyCode keyCode, Event *event)
 	{
-		CCLOG("Keyboard %d Released~", keyCode);
+		//CCLOG("Keyboard %d Released~", keyCode);
 		setKeyState(keyCode, false);
 	};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listenerKeyboard, this);

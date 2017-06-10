@@ -67,7 +67,7 @@ void ObjCachePool<T>::addToPool(T* const & t)
 	t->syncNodeToPhysics();
 
 	_cachePool.pushBack(t);
-	cout << "缓存池容量剩余：" << _cachePool.size() << endl;
+	//cout << "缓存池容量剩余：" << _cachePool.size() << endl;
 }
 
 template<typename T>
@@ -81,7 +81,7 @@ void ObjCachePool<T>::createCachePool()
 		_layer->addChild(t);
 		addToPool(t);
 	}
-	cout << "缓存池创建成功，大小：" << _cachePool.size() << endl;
+	//cout << "缓存池创建成功，大小：" << _cachePool.size() << endl;
 }
 
 template<typename T>
@@ -97,7 +97,7 @@ T* ObjCachePool<T>::getFromPool()
 		 */
 		t->setVisible(true);
 	}
-	cout << "成功取出一个对象："<<t<<"\t缓存池容量剩余："<<_cachePool.size() << endl;
+	//cout << "成功取出一个对象："<<t<<"\t缓存池容量剩余："<<_cachePool.size() << endl;
 	return t;
 }
 

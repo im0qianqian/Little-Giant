@@ -124,7 +124,8 @@ const std::string CHARACTER_NAME[] = {
 	u8"孤的王朝",
 	u8"别拽ni算what"
 };
-
+const std::string skill_ListName[] = { "skill_list_0", "skill_list_1", "skill_list_2" };
+const std::string skill_PanelName[] = { "skill_panel_0", "skill_panel_1", "skill_panel_2" };
 // 调试使用
 #include <iostream>
 using namespace std;

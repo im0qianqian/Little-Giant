@@ -5,6 +5,7 @@
 #include "Global.h"
 #include "ui\UIText.h"
 #include "ui\UILoadingBar.h"
+#include "Character.h"
 #include "ui\UIButton.h"
 #include "ui\UILayout.h"
 #include "ui\UIListView.h"
@@ -34,6 +35,7 @@ private:
 	/* 人物升级 显示技能选择栏 */
 	void showSkillBoard();
 	void ListViewMoveCallback(cocos2d::Ref *pSender);
+	void applyToSkill(std::string skillName);
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	LoadingBar *_experienceBar;			// 经验条
@@ -41,12 +43,8 @@ private:
 	Layout *_sorceBoard;				// 计分表
 	int _levelNum;						// 当前等级
 	float _percent;						// 当前经验条所占百分比
-	ListView* skill_list_0;
-	ListView* skill_list_1;
-	ListView* skill_list_2;
-	Label* skill_panel_0;
-	Label* skill_panel_1;
-	Label* skill_panel_2;
+	ListView* skill_list[3];
+	PageView* skill_panel[3];
 	class ListViewSorce
 	{
 	public:
@@ -63,13 +61,25 @@ private:
 		void setSorce(string const &sorce) { _sorce->setString(sorce); }
 		/* 设置颜色 */
 		void setColor(const Color3B &color);
-	private:
+	private:   
 		Text *_rank;
 		Text *_name;
 		Text *_sorce;
 	};
 	const int _scoreListSize = 6;
 	std::vector<ListViewSorce> _scoreList;	//成绩
+	/*enum skillName
+	{
+		skill_0,
+		skill_1,
+		skill_2,
+		skill_3,
+		skill_4,
+		skill_5,
+		skill_6,
+		skill_7
+	};
+	skillName skillname;*/
 };
 
 #endif

@@ -30,7 +30,7 @@ void AwardManager::createAllAward()
 			award->initialization();					//登场
 		}
 	}
-	cout << "----------> 成功刷新场上的奖励~~~~~~~~~~~~~~~~" << size<<" "<< _cachePool.getResidualSize()<< endl;
+	//cout << "----------> 成功刷新场上的奖励~~~~~~~~~~~~~~~~" << size<<" "<< _cachePool.getResidualSize()<< endl;
 }
 
 void AwardManager::update(float dt)

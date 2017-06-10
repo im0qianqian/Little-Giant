@@ -71,7 +71,7 @@ void CharacterManager::addToPool(Character * const & character)
 	_cachePool.addToPool(character);
 	//从人物列表中删除
 	_enemyCharacter.erase(character);
-	cout << "一个人物已死亡，缓冲池大小：" << _cachePool.getResidualSize() << endl;
-	cout << "场上剩余人数：" << _enemyCharacter.size() << endl;
+	/*cout << "一个人物已死亡，缓冲池大小：" << _cachePool.getResidualSize() << endl;
+	cout << "场上剩余人数：" << _enemyCharacter.size() << endl;*/
 }
 
