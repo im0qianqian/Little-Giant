@@ -8,55 +8,56 @@
 #include "ui\UILoadingBar.h"
 #include "Global.h"
 #include "physics3d\CCPhysics3D.h"
+#include <thread>
 
 USING_NS_CC;
 
 using namespace cocos2d::ui;
 
 class Weapons;
-class Character :public PhysicsSprite3D
+class Character : public PhysicsSprite3D
 {
 public:
-	virtual class Attribute
+	class Attribute final
 	{
 	public:
 		Attribute();
 		~Attribute();
 		/* 增加攻击力 */
-		virtual void addAttackDamage(const float &add);
+		void addAttackDamage(const float &add);
 		/* 增加攻击速度 */
-		virtual void addAttackSpeed(const float &add);
+		void addAttackSpeed(const float &add);
 		/* 增加移动速度 */
-		virtual void addMovingSpeed(const float &add);
+		void addMovingSpeed(const float &add);
 		/* 增加经验获取倍数 */
-		virtual void addEmpiricalAcquisition(const float &add);
+		void addEmpiricalAcquisition(const float &add);
 		/* 增加防御力 */
-		virtual void addDefensiveForce(const float &add);
+		void addDefensiveForce(const float &add);
 		/* 增加恢复能力 */
-		virtual void addRestoringAbility(const float &add);
+		void addRestoringAbility(const float &add);
 		/* 临时属性：增加视野 */
-		virtual void addView();
+		void addView();
 		/* 临时属性：增加变小 */
-		virtual void addSmall();
+		void addSmall();
 		/* 临时属性：增加磁石 */
-		virtual void addMagnet();
+		void addMagnet();
 		/* 临时属性：恢复视野 */
-		virtual void delView();
+		void delView();
 		/* 临时属性：恢复变大 */
-		virtual void delSmall();
+		void delSmall();
 		/* 临时属性：去除磁石 */
-		virtual void delMagnet();
+		void delMagnet();
 		/* 更改临时能力持续时间 */
-		virtual void setDuration(float add);
+		void setDuration(float add);
 		/* GET */
-		virtual float getAttackDamage() const { return _attackDamage; }
-		virtual float getAttackSpeed() const { return _attackSpeed; }
-		virtual float getMovingSpeed() const { return _movingSpeed; }
-		virtual float getEmpiricalAcquisition() const { return _empiricalAcquisition; }
-		virtual float getDefensiveForce() const { return _defensiveForce; }
-		virtual float getRestoringAbility() const { return _restoringAbility; }
+		float getAttackDamage() const { return _attackDamage; }
+		float getAttackSpeed() const { return _attackSpeed; }
+		float getMovingSpeed() const { return _movingSpeed; }
+		float getEmpiricalAcquisition() const { return _empiricalAcquisition; }
+		float getDefensiveForce() const { return _defensiveForce; }
+		float getRestoringAbility() const { return _restoringAbility; }
 		/* 初始化 */
-		virtual void init();
+		void init();
 	private:
 		float _attackDamage;			//攻击力加成
 		float _attackSpeed;				//攻击速度加成
@@ -69,7 +70,7 @@ public:
 		 * Small 中间位
 		 * Magnet 最高位
 		 */
-		virtual enum TemporaryType
+		enum TemporaryType
 		{
 			kTemporaryNone = 0x00,
 			kTemporaryView = 0x01,
@@ -102,7 +103,7 @@ public:
 	/* 攻击 */
 	virtual void attack(const Vec3 &pos);
 	/* 构造初始化 */
-	virtual bool init();
+	virtual bool init() override;
 	/* 人物初始化 */
 	virtual void initialization();
 	/* 与武器碰撞 */
@@ -111,14 +112,20 @@ public:
 	virtual bool isDie() const { return _isDie; }
 protected:
 	/* 移动 */
-	virtual void move(const Vec3 &pos);
+	virtual void move();
 	/* 死亡 */
 	virtual void die();
+	/* 设置人物移动方向向量 */
+	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
+	/* 获取人物移动方向向量 */
+	virtual Vec3 getDirection() { return _direction; }
+	/* 人物对象销毁时清理 */
+	virtual void cleanup() override;
 private:
 	/* 受到武器攻击 */
 	virtual void beAttacked(Weapons *const &weapon);
 	/* 与 update 有关的函数 */
-	void update(float dt);
+	virtual void update(float dt) override;
 	/* 人物移动模块 */
 	virtual void moveModule() = 0;
 	/* 检测当前状况，比如是否掉出场外 */
@@ -134,27 +141,29 @@ private:
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
 	Slider* _hpSlider;		//人物血量条
+	Vec3 _direction;		//人物移动方向向量
+	thread _intelligence;	//智能AI线程
 };
 
 class PlayerCharacter:public Character
 {
 public:
 	CREATE_FUNC(PlayerCharacter);
-	void initialization();
+	virtual void initialization() override;
 private:
 	/* 主角死亡 */
-	void die();
-	void moveModule();
+	virtual void die() override;
+	virtual void moveModule() override;
 };
 
 class EnemyCharacter :public Character
 {
 public:
 	CREATE_FUNC(EnemyCharacter);
-	void initialization();
+	virtual void initialization() override;
 private:
 	/* 其他人物死亡 */
-	void die();
-	void moveModule();
+	virtual void die() override;
+	virtual void moveModule() override;
 };
 #endif

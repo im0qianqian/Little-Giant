@@ -14,7 +14,7 @@ public:
 	StageManager();
 	~StageManager();
 	CREATE_FUNC(StageManager);
-	bool init();
+	virtual bool init() override;
 	/* 创建场景灯光 */
 	void createLight();
 	/* 创建障碍物 */
@@ -25,7 +25,7 @@ public:
 	DirectionLight* getSun()const { return _sun; }
 	PointLight* getCharacterLight() const { return _characterLight; }
 private:
-	void update(float dt);
+	virtual void update(float dt) override;
 	Stage *_ground;									//地面
 	DirectionLight *_sun;							//太阳
 	PointLight *_characterLight;					//人物小灯

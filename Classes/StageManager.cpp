@@ -89,7 +89,6 @@ void StageManager::createObstacles()
 			}
 			if (count > 1)
 			{
-				cout << i << " " << j << endl;
 				Physics3DRigidBodyDes rbDes;
 				rbDes.shape = Physics3DShape::createBox(Vec3(m*count, ELEMENT_HEIGHT, n));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");

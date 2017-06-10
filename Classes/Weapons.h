@@ -36,7 +36,7 @@ public:
 	/* 创建 */
 	CREATE_FUNC(Weapons);
 	/* 初始化属性 */
-	virtual bool init();
+	virtual bool init() override;
 	virtual void init(void * const &owner, const Vec3 &spos, const Vec3 &epos);
 	/* 杀死敌人 */
 	virtual void killCharacter(Character *const &character) const;
@@ -49,7 +49,7 @@ public:
 	/* 是否被删除 */
 	bool isDeleted() const{ return _isDeleted; }
 private:
-	void update(float dt);
+	virtual void update(float dt) override;
 	void *_owner;			//武器所属人物
 	float _power;			//攻击力
 	float _speed;			//攻击速度
