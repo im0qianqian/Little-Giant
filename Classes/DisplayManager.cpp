@@ -101,8 +101,9 @@ void DisplayManager::updateSorceList()
 {
 	// 利用场上的所有敌人set构造出一个vector
 	vector<Character*> allCharacter(GameScene::getCharacterManager()->getEnemyCharacter().begin(), GameScene::getCharacterManager()->getEnemyCharacter().end());
+	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
 	// 加入玩家本身
-	allCharacter.push_back(GameScene::getCharacterManager()->getPlayerCharacter());
+	allCharacter.push_back(myCharacter);
 	// 对其排序
 	sort(allCharacter.begin(), allCharacter.end(), [](Character * const &a, Character * const &b)
 	{
@@ -125,19 +126,19 @@ void DisplayManager::updateSorceList()
 		_scoreList[i + 1].setRank("");
 		_scoreList[i + 1].setSorce("");
 	}
-	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
-	auto myrank = find(allCharacter.begin(), allCharacter.end(), myCharacter) - allCharacter.begin();
-	if (myrank < _scoreListSize)	//如果我的排名在前五名，高亮显示
+	auto myRank = find(allCharacter.begin(), allCharacter.end(), myCharacter) - allCharacter.begin();
+	if (myRank < _scoreListSize - 1)	//如果我的排名在前五名，高亮显示
 	{
-		_scoreList[myrank + 1].setColor(Color3B::YELLOW);	//设置颜色
+		_scoreList[myRank + 1].setColor(Color3B::YELLOW);	//设置颜色
 	}
-	_scoreList[0].setName("qianqian");
-	_scoreList[0].setRank("#" + to_string(myrank + 1));
+	_scoreList[0].setName(myCharacter->getName());
+	_scoreList[0].setRank("#" + to_string(myRank + 1));
 	_scoreList[0].setSorce(to_string(myCharacter->getSorce()));
 }
 
 void DisplayManager::updateExperience()
 {
+	if (GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() == 0)_levelNum = 0;
 	int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - getLevelExperience(_levelNum);
 	int levelExperinence = getLevelExperience(_levelNum + 1) - getLevelExperience(_levelNum);
 	/*int exp = GameScene::getCharacterManager()->getPlayerCharacter()->getExperience() - (_levelnum)*(_levelnum)*(_levelnum);
@@ -219,15 +220,14 @@ void DisplayManager::ListViewSorce::setColor(const Color3B &color)
 
 void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 {
-	for (int i = 0; i < 3; i++)
-	{
-		skill_list[i]->setVisible(false);
-		skill_panel[i]->setVisible(false);
-	}
-	auto *touchItem = static_cast<Widget *>(pSender);
-	std::string item_name = touchItem->getName();
-	/*applyToSkill(item_name);*/
-	cout << item_name << endl;
+	skill_list_0->setVisible(false);
+	skill_list_1->setVisible(false);
+	skill_list_2->setVisible(false);
+	skill_panel_0->setVisible(false);
+	skill_panel_1->setVisible(false);
+	skill_panel_2->setVisible(false);
+	auto skill_list = static_cast<Image *>(pSender);
+
 }
 //void DisplayManager::applyToSkill(std::string skill)
 //{

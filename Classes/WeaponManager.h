@@ -14,7 +14,7 @@ public:
 	WeaponManager();
 	~WeaponManager();
 	CREATE_FUNC(WeaponManager);
-	virtual bool init();
+	virtual bool init() override;
 	/* 创建武器进行攻击 */
 	void createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos);
 	/* 添加一个武器对象到缓存池 */

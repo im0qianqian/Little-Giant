@@ -40,27 +40,34 @@ void Weapons::destroy()
 
 bool Weapons::init()
 {
-	initWithFile("Sprite3DTest/box.c3t");								//设置武器形状
-	setTexture("images/Icon.png");										//设置材质
+	bool flag = false;
+	do
+	{
+		if (initWithFile("Sprite3DTest/box.c3t"))								//设置武器形状
+		{
+			setTexture("images/Icon.png");										//设置材质
 
-	Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
-	rbDes.mass = 1.f;													//设置刚体质量
-	rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
+			Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
+			rbDes.mass = 1.f;													//设置刚体质量
+			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
 
-	auto obj = Physics3DRigidBody::create(&rbDes);						//创建刚体对象
+			auto obj = Physics3DRigidBody::create(&rbDes);						//创建刚体对象
 
-	_physicsComponent = Physics3DComponent::create(obj);				//利用该刚体对象创建组件
+			_physicsComponent = Physics3DComponent::create(obj);				//利用该刚体对象创建组件
 
-	addComponent(_physicsComponent);
+			addComponent(_physicsComponent);
 
-	_contentSize = getBoundingBox().size;
+			_contentSize = getBoundingBox().size;
 
-	obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
+			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
 
-	obj->setUserData(this);												// 设置用户数据为当前武器对象，碰撞检测中会使用
+			obj->setUserData(this);												// 设置用户数据为当前武器对象，碰撞检测中会使用
 
-	setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
-	return true;
+			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//应用同步
+			flag = true;
+		}
+	} while (false);
+	return flag;
 }
 
 void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
@@ -96,9 +103,9 @@ void Weapons::killCharacter(Character * const &character) const
 	// 武器的主人
 	auto *master = static_cast<Character*>(getOwner());
 	// 得到对方的所有经验值与得分（BUG BUG BUG），另外获取5个经验点
-	master->addExperience(character->getExperience()+5);
+	master->addExperience(character->getExperience() + 5);
 	// 得到对方所有的分数，另外获取5分
-	master->addSorce(character->getSorce()+5);
+	master->addSorce(character->getSorce() + 5);
 	cout << master << " 杀死了 " << character << " ，得到经验值：" << character->getExperience() << " ，得到分数：" << character->getSorce() << endl;
 }
 
@@ -120,7 +127,7 @@ void Weapons::collisionWithCharacter(Character * const & character)
 void Weapons::update(float dt)
 {
 	// 如果不在场上并且没有删除
-	if (getPositionY() < 0 && !_isDeleted)
+	if (getPositionY() < 0 && !isDeleted())
 	{
 		destroy();
 	}

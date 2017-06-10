@@ -1,14 +1,14 @@
 #include "StageManager.h"
 #include "GameScene.h"
-#include "Global.h"
 #include "cocostudio/CocoStudio.h"
+#include <fstream>
 
 StageManager::StageManager() :
 	_ground(nullptr),
 	_sun(nullptr),
-	_characterLight(nullptr),
-	_isTurnOnLight(false)
+	_characterLight(nullptr)
 {
+	memset(_map, 0, sizeof(_map));
 }
 
 StageManager::~StageManager()
@@ -24,7 +24,7 @@ bool StageManager::init()
 		createGround();
 		/* 创建障碍物 */
 		createObstacles();
-		if (_isTurnOnLight)		//如果打开了光照系统
+		if (GameScene::getGameMode() == kGameModeNight)	// 如果当前游戏属于黑夜模式
 		{
 			/* 创建灯光 */
 			createLight();
@@ -59,30 +59,20 @@ void StageManager::createLight()
 
 void StageManager::createObstacles()
 {
-	unsigned char* pBuffer = NULL;
-	Physics3DRigidBodyDes rbDes;
-	ssize_t bufferSize = 0;
-	char arr[MAPS_FILE_WIDTH + 2][MAPS_FILE_LENGTH + 2];
-	pBuffer = FileUtils::sharedFileUtils()->getFileData("maps/1.txt", "r", &bufferSize);
-	CCLOG("%ld", bufferSize);
-	CCLOG("%s", pBuffer);
-	int p = 0, q = 0;
-	bool f;
+	ifstream in("maps/1.txt");
+	ostringstream tmp;
+	tmp << in.rdbuf();
+	string pBuffer = tmp.str();
+	cout << pBuffer << endl;
+	in.close();
 	const int elementLength = WORLD_LENGTH / MAPS_FILE_LENGTH;
 	const int elementWidth = WORLD_WIDTH / MAPS_FILE_WIDTH;
-	for (int i = 0; i < bufferSize; i++)
+	cout << pBuffer.length() << endl;
+	for (int i = 0; i < MAPS_FILE_WIDTH; i++)
 	{
-		if (pBuffer[i] == '1' || pBuffer[i] == '0')
+		for (int j = 0; j < MAPS_FILE_LENGTH; j++)
 		{
-			arr[p][q] = pBuffer[i];
-			q++;
-			f = true;
-		}
-		else if (q >= MAPS_FILE_LENGTH && f == true)
-		{
-			f = false;
-			p++;
-			q = 0;
+			_map[i][j] = pBuffer[i*(MAPS_FILE_WIDTH + 1) + j] - '0';
 		}
 	}
 	int count, m, n;
@@ -92,13 +82,14 @@ void StageManager::createObstacles()
 		for (int j = 0; j < MAPS_FILE_LENGTH; j++)
 		{
 			count = 0;
-			while (arr[i][j] == '1')
+			while (_map[i][j] == 1&&j<MAPS_FILE_LENGTH)
 			{
 				count++;
 				j++;
 			}
 			if (count > 1)
 			{
+				Physics3DRigidBodyDes rbDes;
 				rbDes.shape = Physics3DShape::createBox(Vec3(m*count, ELEMENT_HEIGHT, n));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
 				pd2->setScaleX(m*count);
@@ -113,18 +104,20 @@ void StageManager::createObstacles()
 		}
 	}
 	m = 2, n = elementLength;
-	for (int i = 0; i < MAPS_FILE_WIDTH; i++)
+	for (int i = 0; i < MAPS_FILE_LENGTH; i++)
 	{
-		for (int j = 0; j < MAPS_FILE_LENGTH; j++)
+		for (int j = 0; j < MAPS_FILE_WIDTH; j++)
 		{
 			count = 0;
-			while (arr[j][i] == '1')
+			while (_map[j][i] == 1 && j<MAPS_FILE_WIDTH)
 			{
 				count++;
 				j++;
 			}
 			if (count > 1)
 			{
+				
+				Physics3DRigidBodyDes rbDes;
 				rbDes.shape = Physics3DShape::createBox(Vec3(m, ELEMENT_HEIGHT, n*count));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
 				pd2->setScaleX(m);
@@ -136,11 +129,6 @@ void StageManager::createObstacles()
 				pd2->syncNodeToPhysics();
 			}
 		}
-	}
-	if (pBuffer)
-	{
-		delete[] pBuffer;
-		pBuffer = NULL;
 	}
 }
 

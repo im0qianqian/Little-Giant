@@ -1,5 +1,5 @@
-#ifndef __LoadLayer_H__
-#define __LoadLayer_H__
+#ifndef __LOAD_LAYER_H__
+#define __LOAD_LAYER_H__
 
 #include "cocos2d.h"
 using namespace cocos2d;
@@ -13,12 +13,12 @@ public :
 	virtual bool init();
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(LoadLayer);
-	void LoadingCallback();
+	void loadingCallback();
 private:
-	ProgressTimer *timer;
-	int totalImage;
-	int loadImage;
-	Label *percentLabel;
-	Label *loadLabel;
+	ProgressTimer *_timer;
+	int _totalImage;
+	int _loadImage;
+	Label *_percentLabel;
+	Label *_loadLabel;
 };
 #endif

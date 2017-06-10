@@ -8,16 +8,17 @@
 #include "ui\UILoadingBar.h"
 #include "Global.h"
 #include "physics3d\CCPhysics3D.h"
+#include <thread>
 
 USING_NS_CC;
 
 using namespace cocos2d::ui;
 
 class Weapons;
-class Character :public PhysicsSprite3D
+class Character : public PhysicsSprite3D
 {
 public:
-	class Attribute
+	class Attribute final
 	{
 	public:
 		Attribute();
@@ -82,44 +83,56 @@ public:
 	Character();
 	~Character();
 	/* 增加/减少生命 */
-	void addLifeValue(const float &add);
+	virtual void addLifeValue(const float &add);
 	/* 增加经验值 */
-	void addExperience(const int &add);
+	virtual void addExperience(const int &add);
 	/* 增加分数 */
-	void addSorce(const int &add);
+	virtual void addSorce(const int &add);
 	/* 获取人物所属群落 */
-	int getDept() const { return _dept; }
+	virtual int getDept() const { return _dept; }
 	/* 获取当前生命值 */
-	float getLifeValue() const { return _lifeValue; }
+	virtual float getLifeValue() const { return _lifeValue; }
 	/* 获取当前经验值 */
-	int getExperience() const { return _experience; }
+	virtual int getExperience() const { return _experience; }
 	/* 获取当前得分 */
-	int getSorce() const { return _sorce; }
+	virtual int getSorce() const { return _sorce; }
 	/* 更改人物群落 */
-	void setDept(const int &dept) { _dept = dept; }
+	virtual void setDept(const int &dept) { _dept = dept; }
 	/* 获取当前人物属性 */
-	Attribute getAttribute() const { return _attribute; }
+	virtual Attribute getAttribute() const { return _attribute; }
 	/* 攻击 */
-	void attack(const Vec3 &pos);
-	virtual bool init();
-	CREATE_FUNC(Character);
+	virtual void attack(const Vec3 &pos);
+	/* 构造初始化 */
+	virtual bool init() override;
 	/* 人物初始化 */
-	void initialization();
+	virtual void initialization();
 	/* 与武器碰撞 */
-	void collisionWithWeapon(Weapons *const &weapon);
+	virtual void collisionWithWeapon(Weapons *const &weapon);
 	/* 是否死亡 */
-	bool isDie() const { return _isDie; }
+	virtual bool isDie() const { return _isDie; }
+protected:
+	/* 移动 */
+	virtual void move();
+	/* 死亡 */
+	virtual void die();
+	/* 设置人物移动方向向量 */
+	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
+	/* 获取人物移动方向向量 */
+	virtual Vec3 getDirection() { return _direction; }
+	/* 人物对象销毁时清理 */
+	virtual void cleanup() override;
 private:
 	/* 受到武器攻击 */
-	void beAttacked(Weapons *const &weapon);
-	/* 死亡 */
-	void die();
-	/* 移动 */
-	void move(const Vec3 &pos);
+	virtual void beAttacked(Weapons *const &weapon);
 	/* 与 update 有关的函数 */
-	virtual void update(float dt);
+	virtual void update(float dt) override;
+	/* 人物移动模块 */
+	virtual void moveModule() = 0;
+	/* 检测当前状况，比如是否掉出场外 */
+	virtual bool detectionStatus();
 	/* 界面显示有关，创建血量条 */
-	void createHpBar();
+	virtual void createHpBar();
+
 	int _dept;				//人物所属群落
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
@@ -128,6 +141,29 @@ private:
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
 	Slider* _hpSlider;		//人物血量条
+	Vec3 _direction;		//人物移动方向向量
+	thread _intelligence;	//智能AI线程
 };
 
+class PlayerCharacter:public Character
+{
+public:
+	CREATE_FUNC(PlayerCharacter);
+	virtual void initialization() override;
+private:
+	/* 主角死亡 */
+	virtual void die() override;
+	virtual void moveModule() override;
+};
+
+class EnemyCharacter :public Character
+{
+public:
+	CREATE_FUNC(EnemyCharacter);
+	virtual void initialization() override;
+private:
+	/* 其他人物死亡 */
+	virtual void die() override;
+	virtual void moveModule() override;
+};
 #endif
