@@ -10,7 +10,6 @@
 #include "DisplayManager.h"
 #include "Joystick.h"
 
-
 USING_NS_CC;
 //实现控制各个游戏状态
 
@@ -60,6 +59,10 @@ public:
 	static Joystick *getJoystick() { return _joystick; }
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
+	static void onExit()
+	{
+		_camera = nullptr;
+	}
 private:
 	static Camera *_camera;						//游戏摄像机(3D)
 	static GameStateType _gameState;			//游戏状态
