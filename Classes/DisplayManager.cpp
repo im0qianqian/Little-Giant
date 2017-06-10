@@ -147,12 +147,20 @@ void DisplayManager::updateExperience()
 	{
 		exp = exp - levelExperinence;
 		_levelNum++;
+		int ratio = rand() % 17 ;
+		CCLOG("%d", ratio);
+		if (ratio % 2 == 1)
+			ratio --;
+		CCLOG("%d", ratio);
 		for (int i = 0; i < 3; i++)
 		{
 			skill_list[i]->setVisible(true);
-			skill_list[i]->setScrollBarOpacity(0);
+			//skill_list[i]->setScrollBarOpacity(0);
 			skill_panel[i]->setVisible(true);
-			skill_list[i]->jumpToPercentVertical((13.0 / 15.0)*100.0);
+			/*skill_list[i]->setDirection(ScrollView::Direction::HORIZONTAL);
+			skill_list[i]->scrollToBottom(1.0, true);
+			skill_list[i]->scrollToTop(10.0, true);*/
+			skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
 			/*Widget* item = skill_list[i]->getCurrentFocusedWidget(true);*/
 		   // skill_list[i]->setEnabled(false);
 			//skill_list[i]->setPropagateTouchEvents(true);
@@ -232,28 +240,30 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 	cout << item_name << endl;
 
 }
-//void DisplayManager::applyToSkill(std::string skill)
-//{
-//	skillname = 
-//	switch (skillname)
-//	{
-//	case skill_0:
-//
-//	case skill_1:
-//
-//	case skill_2:
-//
-//	case skill_3:
-//
-//	case skill_4:
-//
-//	case skill_5:
-//		
-//	case skill_6:
-//
-//	case skill_7:
-//
-//	default:
-//		break;
-//	}
-//}
+void DisplayManager::applyToSkill(char skill)
+{
+	switch (skill-'0')
+	{
+	case 0:
+
+	case 1:
+
+	case 2:
+
+	case 3:
+
+	case 4:
+
+	case 5:
+		
+	case 6:
+
+	case 7:
+
+	case 8:
+
+
+	default:
+		break;
+	}
+}

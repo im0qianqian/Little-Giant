@@ -35,7 +35,7 @@ private:
 	/* 人物升级 显示技能选择栏 */
 	void showSkillBoard();
 	void ListViewMoveCallback(cocos2d::Ref *pSender);
-	void applyToSkill(std::string skillName);
+	void applyToSkill(char skillName);
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	LoadingBar *_experienceBar;			// 经验条
