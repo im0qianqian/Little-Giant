@@ -188,8 +188,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				}
 				if (flag)	// 仅用调试 输出标签
 				{
-					//CCLOG("tag aa : %d", objA->Node::getTag());
-					//CCLOG("tag bb : %d", objB->Node::getTag());
+					CCLOG("tag aa : %d", objA->Node::getTag());
+					CCLOG("tag bb : %d", objB->Node::getTag());
 				}
 			}
 		}

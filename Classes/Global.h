@@ -40,7 +40,7 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 #define WORLD_HEIGHT			1			//世界高度
 #define ELEMENT_HEIGHT			20			//墙的高度
 
-#define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
+#define CHARACTER_CACHE_SIZE	10			//人物对象缓存池大小
 #define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
 #define AWARD_CACHE_SIZE		50			//奖励对象缓存池大小
 

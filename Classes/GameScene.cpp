@@ -52,15 +52,15 @@ bool GameScene::init()
 		/* 操作管理 */
 		GameScene::_joystick = Joystick::create();
 		addChild(GameScene::_joystick, -1);
+		/* 武器管理 */
+		GameScene::_weaponManager = WeaponManager::create();
+		_layer3D->addChild(GameScene::_weaponManager, 2);
 		/* 人物管理 */
 		GameScene::_characterManager = CharacterManager::create();
 		_layer3D->addChild(GameScene::_characterManager, 1);
 		/* 地图管理 */
 		GameScene::_stageManager = StageManager::create();
 		_layer3D->addChild(GameScene::_stageManager, 0);
-		/* 武器管理 */
-		GameScene::_weaponManager = WeaponManager::create();
-		_layer3D->addChild(GameScene::_weaponManager, 2);
 		/* 奖励管理*/
 		GameScene::_awardManager = AwardManager::create();
 		_layer3D->addChild(GameScene::_awardManager, 3);

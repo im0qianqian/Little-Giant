@@ -145,6 +145,16 @@ void StageManager::createGround()
 	_ground->syncNodeToPhysics();
 	_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 	addChild(_ground);
+	
+	/* ÔÝ¶¨ */
+	auto sky = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "");
+	sky->setScaleX(WORLD_LENGTH);
+	sky->setScaleZ(WORLD_WIDTH);
+	sky->setPositionY(ELEMENT_HEIGHT);
+	sky->syncNodeToPhysics();
+	sky->setOpacity(0);
+	sky->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
+	addChild(sky);
 }
 
 void StageManager::update(float dt)
