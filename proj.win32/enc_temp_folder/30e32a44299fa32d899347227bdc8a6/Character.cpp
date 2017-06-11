@@ -66,8 +66,6 @@ void Character::attack(const Vec3 &pos)
 void Character::move()
 {
 	/* 获取刚体对象 */
-	(Physics3DRigidBody*)(getPhysicsObj());
-	dynamic_cast<Physics3DRigidBody*>(getPhysicsObj());
 	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
 	/* 设置线速度为人物移动速度*方向向量，Y方向保持和原来一样 */
 	s->setLinearVelocity(getAttribute().getMovingSpeed()*getDirection() + Vec3(0, s->getLinearVelocity().y, 0));
