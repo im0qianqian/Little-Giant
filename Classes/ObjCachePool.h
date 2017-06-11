@@ -81,11 +81,8 @@ void ObjCachePool<T>::addToPool(T* const & t)
 	t->setPosition3D(-Vec3::UNIT_Y * 10);
 	t->syncNodeToPhysics();
 
-	cout << "add " << t->Node::getTag() << "\t\t\t\t\t" << t << endl;
 	_lock.lock();
 	_cachePool.push_back(t);
-	if(t->Node::getTag()==2)
-		cout << "缓存池容量剩余：\t\t\t" << _cachePool.size() << endl;
 	_lock.unlock();
 }
 
@@ -102,7 +99,6 @@ void ObjCachePool<T>::createCachePool()
 		CCASSERT(t, "NULL");
 		if (t != nullptr)
 		{
-			cout << "create " << t->Node::getTag() << "\t" << t << endl;
 			_layer->addChild(t);
 			addToPool(t);
 		}
@@ -127,7 +123,6 @@ T* ObjCachePool<T>::getFromPool()
 	//CCASSERT(t, "NULL");
 	if (t != nullptr)
 	{
-		cout << "get " << t->Node::getTag() << " " << t << endl;
 		t->setVisible(true);
 		//cout << "成功取出一个对象："<<t<<"\t缓存池容量剩余："<<_cachePool.size() << endl;
 	}

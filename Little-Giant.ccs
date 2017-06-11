@@ -13,7 +13,6 @@
           <Image Name="movespeed.png" />
           <Image Name="speed.png" />
         </Folder>
-        <Image Name="20170608180504.png" />
         <Image Name="animationbuttonnormal.png" />
         <Image Name="animationbuttonpressed.png" />
         <Mesh Name="axe.c3b" />
@@ -24,8 +23,11 @@
         <Image Name="CloseNormal.png" />
         <Image Name="CyanSquare.png" />
         <Project Name="DisplayLayer.csd" Type="Layer" />
+        <Image Name="div2.jpg" />
+        <TTF Name="FZYTK.TTF" />
         <Project Name="GameScene.csd" Type="Scene" />
         <Image Name="HelloWorld.png" />
+        <Project Name="MainLayer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
         <TTF Name="Marker Felt.ttf" />
         <Mesh Name="orc.c3b" />

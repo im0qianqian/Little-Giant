@@ -17,7 +17,7 @@ Character::Character() :
 	_attribute(Attribute()),
 	_hpSlider(nullptr),
 	_direction(Vec3::ZERO),
-	_intelligence(thread())
+	_lastAttackTime(0)
 {
 	// 设置属于人物标签
 	setTag(kGlobalCharacter);
@@ -54,9 +54,13 @@ void Character::addSorce(const int &add)
 
 void Character::attack(const Vec3 &pos)
 {
-	//CCLOG("Attack success! %f %f %f", pos.x, pos.y, pos.z);
-	//CCLOG("start %f %f %f", getPosition3D().x, getPosition3D().y, getPosition3D().z);
-	GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
+	const float attackTimeInterval = 600.f / getAttribute().getAttackSpeed();		// 攻击时间间隔
+	int currentTime = GetCurrentTime();												// 获取当前时间
+	if (currentTime - _lastAttackTime >= attackTimeInterval)						//如果可以攻击
+	{
+		_lastAttackTime = currentTime;												// 更新最后一次攻击时间
+		GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
+	}
 }
 
 void Character::move()
@@ -112,12 +116,18 @@ void Character::initialization()
 	_sorce = 0;
 	_attribute.init();
 	_weaponType = kWeaponArrow;
-	_isDie = false;
 	_dept = 0;
-	_hpSlider->setPercent(_lifeValue);			//更新血量条
-
-	_intelligence = thread(&Character::moveModule, this);	//开启人物AI线程
-	_intelligence.detach();
+	_hpSlider->setPercent(_lifeValue);		//更新血量条
+	_lastAttackTime = 0;					//攻击时间间隔
+	_direction = Vec3::ZERO;				//初始行走方向
+	
+	thread([this] {							//异步更新 isDie 加锁并且启动人物AI线程
+		_threadMutex.lock();
+		_isDie = false;						//复活
+		thread(&Character::moveModule, this).detach();	//开启人物AI线程
+		_threadMutex.unlock();
+	}).detach();
+	
 
 	// 随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
@@ -130,10 +140,6 @@ void Character::collisionWithWeapon(Weapons * const & weapon)
 	// 人物受到攻击
 	beAttacked(weapon);
 	//cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;
-}
-
-void Character::cleanup()
-{
 }
 
 void Character::beAttacked(Weapons *const &weapon)
@@ -171,7 +177,7 @@ void Character::update(float dt)
 
 bool Character::detectionStatus()
 {
-	if (!isDie() && getPositionY() < -10)		// 如果人物存活并且掉出了场外
+	if (!isDie() && getPositionY() < 0)		// 如果人物存活并且掉出了场外
 	{
 		cout << this << " 人物掉出世界死亡" << endl;
 		die();								// 人物立即死亡
@@ -314,7 +320,8 @@ void PlayerCharacter::die()
 
 void PlayerCharacter::moveModule()
 {
-	while (!isDie())	//如果该对象没有被析构
+	_threadMutex.lock();
+	while (!isDie())
 	{
 		Vec3 res = Vec3::ZERO;
 		if (GameScene::getJoystick()->getKeyW())
@@ -326,7 +333,6 @@ void PlayerCharacter::moveModule()
 		if (GameScene::getJoystick()->getKeyD())
 			res += Vec3(1, 0, 0);
 		setDirection(res.getNormalized());
-
 		if (GameScene::getJoystick()->isFirstView())
 		{
 			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
@@ -338,6 +344,7 @@ void PlayerCharacter::moveModule()
 			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 	}
+	_threadMutex.unlock();
 }
 
 void EnemyCharacter::initialization()
@@ -370,10 +377,10 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
+	_threadMutex.lock();
 	while (!isDie())
 	{
 		if (GameScene::getCharacterManager() == nullptr || GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
-		this_thread::sleep_for(chrono::seconds(2));
 		Vec3 minn = Vec3::ZERO;
 		minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
 		auto other = GameScene::getCharacterManager()->getEnemyCharacter();
@@ -386,8 +393,10 @@ void EnemyCharacter::moveModule()
 				minn = (*i)->getPosition3D() - getPosition3D();
 			}
 		}
-		/*if (minn.length() < 100)
-			attack(minn + getPosition3D());*/
+		if (minn.length() < 100)
+			attack(minn + getPosition3D());
 		setDirection(minn.getNormalized());
+		this_thread::sleep_for(chrono::milliseconds(200));
 	}
+	_threadMutex.unlock();
 }

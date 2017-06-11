@@ -9,6 +9,7 @@
 #include "Global.h"
 #include "physics3d\CCPhysics3D.h"
 #include <thread>
+#include <mutex>
 
 USING_NS_CC;
 
@@ -119,8 +120,8 @@ protected:
 	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
 	/* 获取人物移动方向向量 */
 	virtual Vec3 getDirection() { return _direction; }
-	/* 人物对象销毁时清理 */
-	virtual void cleanup() override;
+	mutex _threadMutex;		//线程锁
+
 private:
 	/* 受到武器攻击 */
 	virtual void beAttacked(Weapons *const &weapon);
@@ -137,12 +138,12 @@ private:
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
 	int _sorce;				//当前得分
+	int _lastAttackTime;	//上次攻击时间
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
 	Slider* _hpSlider;		//人物血量条
 	Vec3 _direction;		//人物移动方向向量
-	thread _intelligence;	//智能AI线程
 };
 
 class PlayerCharacter:public Character

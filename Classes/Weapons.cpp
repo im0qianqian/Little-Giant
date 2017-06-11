@@ -3,7 +3,6 @@
 #include "GameScene.h"
 #include "Joystick.h"
 #include "Global.h"
-#include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 Weapons::Weapons() :
 	_owner(nullptr),
@@ -127,7 +126,7 @@ void Weapons::collisionWithCharacter(Character * const & character)
 void Weapons::update(float dt)
 {
 	// 如果不在场上并且没有删除
-	if (getPositionY() < 0 && !isDeleted())
+	if (!isDeleted() && getPositionY() < 0)
 	{
 		destroy();
 	}
