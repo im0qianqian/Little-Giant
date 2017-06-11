@@ -280,7 +280,7 @@ void Character::Attribute::init()
 {
 	_attackDamage = 1;
 	_attackSpeed = 1;
-	_movingSpeed = 50.f;
+	_movingSpeed = 20.f;
 	_empiricalAcquisition = 1;
 	_defensiveForce = 0;
 	_restoringAbility = 1;
@@ -394,8 +394,14 @@ void EnemyCharacter::moveModule()
 			}
 		}
 		if (minn.length() < 100)
+		{
 			attack(minn + getPosition3D());
-		setDirection(minn.getNormalized());
+			setDirection(minn.getNormalized());
+		}
+		else
+		{
+			setDirection(Vec3::ZERO);
+		}
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}
 	_threadMutex.unlock();
