@@ -83,17 +83,16 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 	{
 		auto touch = touches[0];
 		auto delta = touch->getDelta();
-		//std::cout << delta.x << endl;
 		if (!_isFirstView)
 		{
-			static float _angle = 0.f;
+			//static float _angle = 0.f;
 			//static float _angley = 0.f;
-			_angle -= CC_DEGREES_TO_RADIANS(delta.x);
+			//_angle -= CC_DEGREES_TO_RADIANS(delta.x);
 			//_angley -= CC_DEGREES_TO_RADIANS(delta.y);
-			Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
+			//Vec3 cam = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D();
 			//CCLOG("cam  --> %f %f %f", cam.x, cam.y, cam.z);
 			//Vec3 c = Vec3(200.0f*sinf(_angle)+ cam.x, 200.0f*sinf(_angley) + cam.y, 200.0f*cosf(_angle) + cam.z);
-			Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
+			//Vec3 c = Vec3(100.0f * sinf(_angle) + cam.x, 50.0f + cam.y, -100.0f * cosf(_angle) + cam.z);
 			//Vec3 c = camera->getPosition3D();
 			//GameScene::getCamera()->setPosition3D(c);
 			//_camera->setPosition3D(Vec3(100.0f * sinf(_angle), 50.0f, -100.0f * cosf(_angle)));

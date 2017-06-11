@@ -2,9 +2,9 @@
 #define __LOAD_LAYER_H__
 
 #include "cocos2d.h"
-using namespace cocos2d;
+USING_NS_CC;
 
-class LoadLayer:public cocos2d::Layer
+class LoadLayer:public Layer
 {
 public :
 	LoadLayer();

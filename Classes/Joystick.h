@@ -23,9 +23,6 @@ public:
 	/* 碰撞事件 */
 	std::function<void(const Physics3DCollisionInfo &ci)> onPhysics3DCollision();
 
-	/* 暂定、创建光效 */
-	void createParticle(const Vec3 &pos);
-
 	/* 是否是第一人称视角 */
 	bool isFirstView() const { return _isFirstView; }
 private:
@@ -33,10 +30,12 @@ private:
 	void keyboardListen();
 	/* 触屏监听 */
 	void touchListen();
+	/* 暂定、创建光效 */
+	void createParticle(const Vec3 &pos);
 
 	/* 设置当前键盘按键状态 */
 	void setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &state);
-	/* 鼠标三种事件 */
+	/* 触屏三种事件 */
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);

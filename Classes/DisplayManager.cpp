@@ -243,7 +243,7 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 
 	auto *touchItem = static_cast<Widget *>(pSender);
 	std::string item_name = touchItem->getName();
-	/*applyToSkill(item_name);*/
+	applyToSkill(item_name[0]);
 	cout << item_name << endl;
 
 }
@@ -268,7 +268,6 @@ void DisplayManager::applyToSkill(char skill)
 	case 7:
 
 	case 8:
-
 
 	default:
 		break;

@@ -22,9 +22,9 @@ USING_NS_CC;
 #define WORLD_HEIGHT			1			//世界高度
 #define ELEMENT_HEIGHT			20			//墙的高度
 
-#define CHARACTER_CACHE_SIZE	20			//人物对象缓存池大小
+#define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
 #define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
-#define AWARD_CACHE_SIZE		50			//奖励对象缓存池大小
+#define AWARD_CACHE_SIZE		100			//奖励对象缓存池大小
 
 #define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
 

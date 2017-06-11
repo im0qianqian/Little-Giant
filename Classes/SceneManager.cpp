@@ -2,20 +2,19 @@
 #include "GameScene.h"
 #include "Global.h"
 #include "LoadLayer.h"
+#include "MainLayer.h"
 
 /* 类静态私有变量初始化 */
 SceneManager* SceneManager::s_sceneManager = nullptr;
 Scene* SceneManager::_scene = nullptr;						//当前场景
-Layer* SceneManager::_layer = nullptr;								//当前场景图层
+Layer* SceneManager::_layer = nullptr;						//当前场景图层
 
 SceneManager::SceneManager()
 {
-
 }
 
 SceneManager::~SceneManager()
 {
-
 }
 
 bool SceneManager::init()
@@ -39,6 +38,7 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	switch (sceneType)
 	{
 	case kMenuScene:
+		_layer = MainLayer::create();
 		break;
 	case kLoadingScene:
 		_layer = LoadLayer::create();
