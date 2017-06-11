@@ -228,9 +228,9 @@ DisplayManager::ListViewSorce::ListViewSorce(Text * const & rank, Text * const &
 
 void DisplayManager::ListViewSorce::setColor(const Color3B &color)
 {
-	/*_rank->setColor(color);
+	_rank->setColor(color);
 	_name->setColor(color);
-	_sorce->setColor(color);*/
+	_sorce->setColor(color);
 }
 
 void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)

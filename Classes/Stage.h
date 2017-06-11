@@ -11,7 +11,7 @@ class Stage :public PhysicsSprite3D
 public:
 	Stage();
 	~Stage();
-	bool init();
+	virtual bool init() override;
 	static Stage* create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const std::string &texture);
 };
 #endif

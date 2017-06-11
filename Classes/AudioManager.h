@@ -10,7 +10,7 @@ class AudioManager :public Ref
 public:
 	AudioManager();
 	~AudioManager();
-	virtual bool init();
+	bool init();
 	CREATE_FUNC(AudioManager);
 };
 #endif

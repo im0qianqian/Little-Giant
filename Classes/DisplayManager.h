@@ -18,12 +18,12 @@ class DisplayManager :public Layer
 public:
 	DisplayManager();
 	~DisplayManager();
-	virtual bool init();
+	virtual bool init() override;
 	CREATE_FUNC(DisplayManager);
 	/* 游戏结束 显示积分表 */
 	void showSorceBoard();
 private:
-	void update(float dt);
+	virtual void update(float dt) override;
 	/* 更新动画效果 */
 	void updateAnimation(float dt);
 	/* 更新排行榜 */

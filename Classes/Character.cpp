@@ -98,8 +98,6 @@ bool Character::init()
 			setScale(2.f);		//设置大小
 			createHpBar();		//创建血量条
 
-			_intelligence = thread(&Character::moveModule, this);	//开启人物AI线程
-			_intelligence.detach();
 			flag = true;
 		}
 	} while (false);
@@ -117,6 +115,9 @@ void Character::initialization()
 	_isDie = false;
 	_dept = 0;
 	_hpSlider->setPercent(_lifeValue);			//更新血量条
+
+	_intelligence = thread(&Character::moveModule, this);	//开启人物AI线程
+	_intelligence.detach();
 
 	// 随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
@@ -138,7 +139,6 @@ void Character::cleanup()
 void Character::beAttacked(Weapons *const &weapon)
 {
 	// 如果武器的创建者是自己的话不掉血（自己打自己）
-	cout << weapon->getOwner() << " " << this << endl;
 	if (weapon->getOwner() == this) return;
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
 	addLifeValue(-weapon->getPower() / 1.0);
@@ -155,6 +155,7 @@ void Character::beAttacked(Weapons *const &weapon)
 
 void Character::die()
 {
+	cout << this << " 已死亡" << endl;
 	if (isDie())return;
 	_isDie = true;
 }
@@ -172,6 +173,7 @@ bool Character::detectionStatus()
 {
 	if (!isDie() && getPositionY() < -10)		// 如果人物存活并且掉出了场外
 	{
+		cout << this << " 人物掉出世界死亡" << endl;
 		die();								// 人物立即死亡
 	}
 	return !isDie();
@@ -312,41 +314,28 @@ void PlayerCharacter::die()
 
 void PlayerCharacter::moveModule()
 {
-	while (getReferenceCount() > 0)	//如果该对象没有被析构
+	while (!isDie())	//如果该对象没有被析构
 	{
-		try
-		{
-			if (!isDie())
-			{
-				Vec3 res = Vec3::ZERO;
-				if (GameScene::getJoystick()->getKeyW())
-					res += Vec3(0, 0, -1);
-				if (GameScene::getJoystick()->getKeyA())
-					res += Vec3(-1, 0, 0);
-				if (GameScene::getJoystick()->getKeyS())
-					res += Vec3(0, 0, 1);
-				if (GameScene::getJoystick()->getKeyD())
-					res += Vec3(1, 0, 0);
-				setDirection(res.getNormalized());
+		Vec3 res = Vec3::ZERO;
+		if (GameScene::getJoystick()->getKeyW())
+			res += Vec3(0, 0, -1);
+		if (GameScene::getJoystick()->getKeyA())
+			res += Vec3(-1, 0, 0);
+		if (GameScene::getJoystick()->getKeyS())
+			res += Vec3(0, 0, 1);
+		if (GameScene::getJoystick()->getKeyD())
+			res += Vec3(1, 0, 0);
+		setDirection(res.getNormalized());
 
-				if (GameScene::getCamera() != nullptr)
-				{
-					if (GameScene::getJoystick()->isFirstView())
-					{
-						GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
-					}
-					else
-					{
-						GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
-						//GameScene::getCamera()->lookAt(getPosition3D());
-						//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
-					}
-				}
-			}
-		}
-		catch (...)
+		if (GameScene::getJoystick()->isFirstView())
 		{
-			cout << "异常异常异常" << endl;
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
+		}
+		else
+		{
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
+			//GameScene::getCamera()->lookAt(getPosition3D());
+			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 	}
 }
@@ -381,27 +370,24 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
-	while (getReferenceCount() > 0)
+	while (!isDie())
 	{
-		if (!isDie())
-		{
-			if (GameScene::getCharacterManager() == nullptr || GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
-			Sleep(1000);
-			static Vec3 minn = Vec3::ZERO;
-			minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
-			auto other = GameScene::getCharacterManager()->getEnemyCharacter();
+		if (GameScene::getCharacterManager() == nullptr || GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
+		this_thread::sleep_for(chrono::seconds(2));
+		Vec3 minn = Vec3::ZERO;
+		minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
+		auto other = GameScene::getCharacterManager()->getEnemyCharacter();
 
-			int len = other.size();
-			for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
+		int len = other.size();
+		for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
+		{
+			if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
 			{
-				if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
-				{
-					minn = (*i)->getPosition3D() - getPosition3D();
-				}
+				minn = (*i)->getPosition3D() - getPosition3D();
 			}
-			if (minn.length() < 100)
-				attack(minn + getPosition3D());
-			setDirection(minn.getNormalized());
 		}
+		/*if (minn.length() < 100)
+			attack(minn + getPosition3D());*/
+		setDirection(minn.getNormalized());
 	}
 }

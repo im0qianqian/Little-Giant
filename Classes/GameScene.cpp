@@ -22,16 +22,6 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	GameScene::_camera = nullptr;
-	GameScene::_gameState = kGameStatePause;
-	GameScene::_characterManager = nullptr;
-	GameScene::_stageManager = nullptr;
-	GameScene::_weaponManager = nullptr;
-	GameScene::_awardManager = nullptr;
-	GameScene::_audioManager = nullptr;
-	GameScene::_joystick = nullptr;
-	GameScene::_displayManager = nullptr;
-	GameScene::_gameMode = kGameModeTimer;
 }
 
 bool GameScene::init()
