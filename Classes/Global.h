@@ -12,24 +12,6 @@ USING_NS_CC;
 /* 取最小值 */
 #define min(x,y) (x>y?y:x)
 
-/* 创建一个武器对象 */
-#define CREATE_WEAPON(__TYPE__) \
-static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 epos) \
-{ \
-    __TYPE__ *pRet = new(std::nothrow) __TYPE__(); \
-    if (pRet && pRet->init(owner,power,speed,spos,epos)) \
-    { \
-        pRet->autorelease(); \
-        return pRet; \
-    } \
-    else \
-    { \
-        delete pRet; \
-        pRet = nullptr; \
-        return nullptr; \
-    } \
-}
-
 /* 全局常量设置 */
 #define SCREEN_WIDTH			640			//屏幕高度
 #define SCREEN_HEIGHT			960			//屏幕宽度
@@ -40,7 +22,7 @@ static __TYPE__* create(void *owner, float power, float speed, Vec3 spos, Vec3 e
 #define WORLD_HEIGHT			1			//世界高度
 #define ELEMENT_HEIGHT			20			//墙的高度
 
-#define CHARACTER_CACHE_SIZE	10			//人物对象缓存池大小
+#define CHARACTER_CACHE_SIZE	20			//人物对象缓存池大小
 #define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
 #define AWARD_CACHE_SIZE		50			//奖励对象缓存池大小
 

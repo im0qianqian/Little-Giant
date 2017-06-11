@@ -83,7 +83,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 	{
 		auto touch = touches[0];
 		auto delta = touch->getDelta();
-		std::cout << delta.x << endl;
+		//std::cout << delta.x << endl;
 		if (!_isFirstView)
 		{
 			static float _angle = 0.f;
@@ -188,8 +188,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				}
 				if (flag)	// 仅用调试 输出标签
 				{
-					CCLOG("tag aa : %d", objA->Node::getTag());
-					CCLOG("tag bb : %d", objB->Node::getTag());
+					//CCLOG("tag aa : %d", objA->Node::getTag());
+					//CCLOG("tag bb : %d", objB->Node::getTag());
 				}
 			}
 		}

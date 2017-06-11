@@ -12,7 +12,7 @@ class Award :public PhysicsSprite3D
 public:
 	Award();
 	~Award();
-	virtual bool init();
+	virtual bool init() override;
 	/* 初始化方法 */
 	void initialization();
 	/* 创建 */

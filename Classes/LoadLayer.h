@@ -10,7 +10,7 @@ public :
 	LoadLayer();
 	~LoadLayer();
 	static cocos2d::Scene* createScene();
-	virtual bool init();
+	virtual bool init() override;
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(LoadLayer);
 	void loadingCallback();

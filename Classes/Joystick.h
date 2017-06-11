@@ -11,7 +11,7 @@ class Joystick : public Node
 public:
 	Joystick();
 	~Joystick();
-	virtual bool init();
+	virtual bool init() override;
 	CREATE_FUNC(Joystick);
 	
 	/* GET */
@@ -27,7 +27,7 @@ public:
 	void createParticle(const Vec3 &pos);
 
 	/* 是否是第一人称视角 */
-	bool isFirstView() { return _isFirstView; }
+	bool isFirstView() const { return _isFirstView; }
 private:
 	/* 键盘监听 */
 	void keyboardListen();

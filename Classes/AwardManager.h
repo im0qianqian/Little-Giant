@@ -12,14 +12,14 @@ class AwardManager :public Layer
 public:
 	AwardManager();
 	~AwardManager();
-	virtual bool init();
+	virtual bool init() override;
 	CREATE_FUNC(AwardManager);
 	/* 添加对象到缓存池 */
 	void addToPool(Award *const &award) { _cachePool.addToPool(award); }
 	/* 创建所有的奖励对象 */
 	void createAllAward();
 private:
-	void update(float dt);
+	virtual void update(float dt) override;
 	ObjCachePool<Award> _cachePool;						//缓存池
 };
 #endif

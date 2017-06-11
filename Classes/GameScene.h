@@ -34,7 +34,7 @@ public:
 	GameScene();
 	~GameScene();
 	CREATE_FUNC(GameScene);
-	virtual bool init();
+	virtual bool init() override;
 	/* 获取当前游戏状态 */
 	static GameStateType getGameState() { return _gameState; }
 	/* 更改当前游戏状态 */
@@ -59,10 +59,6 @@ public:
 	static Joystick *getJoystick() { return _joystick; }
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
-	static void onExit()
-	{
-		_camera = nullptr;
-	}
 private:
 	static Camera *_camera;						//游戏摄像机(3D)
 	static GameStateType _gameState;			//游戏状态
@@ -75,6 +71,5 @@ private:
 	static Joystick *_joystick;					//操作管理对象
 	static GameModeType _gameMode;				//游戏模式
 };
-
 
 #endif

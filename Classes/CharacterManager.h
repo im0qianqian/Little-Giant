@@ -14,7 +14,7 @@ public:
 	CharacterManager();
 	~CharacterManager();
 	CREATE_FUNC(CharacterManager);
-	bool init();
+	virtual bool init() override;
 	/* 获取玩家人物 */
 	Character* getPlayerCharacter() const { return _playerCharacter; }
 	/* 获取其他玩家 */

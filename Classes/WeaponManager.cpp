@@ -39,7 +39,7 @@ void WeaponManager::createWeapon(WeaponType weaponType, void *owner, Vec3 spos, 
 		addChild(weapon);
 	}*/
 	auto weapon = _cachePool.getFromPool();
-	cout << weapon << endl;
+	//cout << weapon << endl;
 	if (weapon != NULL)
 	{
 		CCASSERT(weapon, "NULL");
