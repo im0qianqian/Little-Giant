@@ -48,6 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("images");
 	FileUtils::getInstance()->addSearchPath("sounds");
 	FileUtils::getInstance()->addSearchPath("res");
+	FileUtils::getInstance()->addSearchPath("maps");
 
     // 从游戏菜单界面加载
 	SceneManager::getInstance()->changeScene(kGameScene);

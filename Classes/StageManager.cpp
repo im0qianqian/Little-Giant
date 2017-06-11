@@ -59,7 +59,7 @@ void StageManager::createLight()
 
 void StageManager::createObstacles()
 {
-	ifstream in("maps/1.txt");
+	ifstream in("../Resources/maps/1.txt");
 	ostringstream tmp;
 	tmp << in.rdbuf();
 	string pBuffer = tmp.str();
