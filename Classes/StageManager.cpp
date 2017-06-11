@@ -59,15 +59,12 @@ void StageManager::createLight()
 
 void StageManager::createObstacles()
 {
-	ifstream in("../Resources/maps/1.txt");
-	ostringstream tmp;
-	tmp << in.rdbuf();
-	string pBuffer = tmp.str();
+	string pBuffer = FileUtils::getInstance()->getStringFromFile("maps/1.txt");
 	cout << pBuffer << endl;
-	in.close();
+	cout << pBuffer.length() << endl;
+
 	const int elementLength = WORLD_LENGTH / MAPS_FILE_LENGTH;
 	const int elementWidth = WORLD_WIDTH / MAPS_FILE_WIDTH;
-	cout << pBuffer.length() << endl;
 	for (int i = 0; i < MAPS_FILE_WIDTH; i++)
 	{
 		for (int j = 0; j < MAPS_FILE_LENGTH; j++)
