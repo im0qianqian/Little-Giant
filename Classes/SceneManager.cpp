@@ -43,7 +43,7 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	case kLoadingScene:
 		_layer = LoadLayer::create();
 		break;
-	case kGameScene:
+	case kGameScene:   
 		_layer = GameScene::create();
 		break;
 	default:
