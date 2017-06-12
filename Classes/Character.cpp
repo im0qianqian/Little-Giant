@@ -25,6 +25,7 @@ Character::Character() :
 
 Character::~Character()
 {
+	cout << this << " 已被析构" << endl;
 }
 
 void Character::addLifeValue(const float &add)
@@ -173,8 +174,10 @@ void Character::cleanup()
 	// 设置死亡
 	_isDie = true;
 	// 加锁等待线程结束
+	cout << this<<" clean up 加锁" << endl;
 	_threadMutex.lock();
 	_threadMutex.unlock();
+	cout << this << " clean up 解锁" << endl;
 }
 
 void Character::update(float dt)
@@ -364,6 +367,7 @@ void PlayerCharacter::moveModule()
 	cout << "死亡解锁" << endl;
 	_threadMutex.unlock();
 	cout << "死亡解锁成功" << endl;
+	cout << "主角" <<this<< " 线程结束" << endl;
 }
 
 void EnemyCharacter::initialization()
@@ -424,10 +428,10 @@ void EnemyCharacter::moveModule()
 		}
 		else
 		{
-			//setDirection(Vec3::ZERO);
 			setDirection(minn.getNormalized());
 		}
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}
 	_threadMutex.unlock();
+	cout << "敌人" << this << " 线程结束" << endl;
 }

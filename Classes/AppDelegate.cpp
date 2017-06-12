@@ -51,7 +51,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("maps");
 
     // 从游戏菜单界面加载
-	SceneManager::getInstance()->changeScene(kMenuScene);
+	SceneManager::getInstance()->changeScene(kGameScene);
 
     return true;
 }
