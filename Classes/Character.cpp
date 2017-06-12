@@ -186,8 +186,8 @@ void Character::update(float dt)
 	{
 		move();
 		/* 人物保持不旋转 */
-		setRotation3D(Vec3::ZERO);
-		syncNodeToPhysics();
+		//setRotation3D(Vec3::ZERO);
+		//syncNodeToPhysics();
 	}
 }
 
@@ -204,18 +204,18 @@ bool Character::detectionStatus()
 
 void Character::createHpBar()
 {
+	auto billBoard = BillBoard::create();
 	/* 以下是血量条 */
 	_hpSlider = Slider::create();
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
 	_hpSlider->setTouchEnabled(false);
-	_hpSlider->setScaleX(.03f);
-	_hpSlider->setScaleY(.015f);
+	_hpSlider->setScale(.03f, .015f);
 	_hpSlider->setPercent(_lifeValue);
 	// 更正血量条角度
-	_hpSlider->setRotation3D(Vec3(-90, 0, 0));
 	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
-	addChild(_hpSlider);
+	billBoard->addChild(_hpSlider);
+	addChild(billBoard);
 }
 
 
