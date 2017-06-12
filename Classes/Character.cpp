@@ -25,7 +25,17 @@ Character::Character() :
 
 Character::~Character()
 {
+	// 设置死亡
+	_isDie = true;
+	// 加锁等待线程结束
+	cout << this << " clean up 加锁" << endl;
+	_threadMutex.lock();
+	cout << this << " clean up 加锁成功~" << endl;
+	cout << this << " clean up 解锁" << endl;
+	_threadMutex.unlock();
+	cout << this << " clean up 解锁成功~" << endl;
 	cout << this << " 已被析构" << endl;
+	cout << "----------------------" << endl;
 }
 
 void Character::addLifeValue(const float &add)
@@ -171,13 +181,7 @@ void Character::die()
 
 void Character::cleanup()
 {
-	// 设置死亡
-	_isDie = true;
-	// 加锁等待线程结束
-	cout << this<<" clean up 加锁" << endl;
-	_threadMutex.lock();
-	_threadMutex.unlock();
-	cout << this << " clean up 解锁" << endl;
+	
 }
 
 void Character::update(float dt)
@@ -400,6 +404,7 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
+	this_thread::sleep_for(chrono::milliseconds(2000));
 	_threadMutex.lock();
 	while (!isDie())
 	{

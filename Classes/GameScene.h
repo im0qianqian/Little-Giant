@@ -59,6 +59,8 @@ public:
 	static Joystick *getJoystick() { return _joystick; }
 	/* 获取当前层相机 */
 	static Camera *getCamera() { return _camera; }
+	/* 获取游戏起始时间 */
+	static int getStartingTime() { return _startingTime; }
 private:
 	static Camera *_camera;						//游戏摄像机(3D)
 	static GameStateType _gameState;			//游戏状态
@@ -70,6 +72,7 @@ private:
 	static DisplayManager *_displayManager;		//界面显示管理对象
 	static Joystick *_joystick;					//操作管理对象
 	static GameModeType _gameMode;				//游戏模式
+	static int _startingTime;					//游戏起始时间
 };
 
 #endif
