@@ -59,7 +59,7 @@ void StageManager::createLight()
 
 void StageManager::createObstacles()
 {
-	string pBuffer = FileUtils::getInstance()->getStringFromFile("maps/1.txt");
+	string pBuffer = FileUtils::getInstance()->getStringFromFile("maps/" + to_string(rand()%3) + ".txt");
 	cout << pBuffer << endl;
 	cout << pBuffer.length() << endl;
 

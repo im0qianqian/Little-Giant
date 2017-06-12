@@ -13,7 +13,6 @@ bool WeaponManager::init()
 {
 	// ´´½¨»º´æ³Ø
 	_cachePool.createCachePool();
-	//schedule(schedule_selector(WeaponManager::update), 1.f);
 	return true;
 }
 

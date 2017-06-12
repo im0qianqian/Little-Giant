@@ -35,12 +35,15 @@ private:
 	/* 人物升级 显示技能选择栏 */
 	void showSkillBoard();
 	void ListViewMoveCallback(cocos2d::Ref *pSender);
-	void applyToSkill(char skillName);
+	void applyToSkill(const int &skillTag);
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	LoadingBar *_experienceBar;			// 经验条
 	Button *_exitButton;				// 退出按钮
+	Button *_buttonHome;				//Home
+	Button *_buttonRestart;
 	Layout *_sorceBoard;				// 计分表
+	Text *_sorceNum;					// 最终得分
 	int _levelNum;						// 当前等级
 	float _percent;						// 当前经验条所占百分比
 	ListView* skill_list[3];

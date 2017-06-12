@@ -6,13 +6,13 @@
       <ObjectData Name="Layer" Tag="72" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="background" ActionTag="870052492" Tag="73" IconVisible="False" LeftMargin="-2473.3208" RightMargin="-2471.6792" TopMargin="-1451.0449" BottomMargin="-1451.9551" LeftEage="1948" RightEage="1948" TopEage="1169" BottomEage="1169" Scale9OriginX="1948" Scale9OriginY="1169" Scale9Width="2009" Scale9Height="1205" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="background" ActionTag="870052492" Tag="73" IconVisible="False" LeftMargin="-2473.3208" RightMargin="-2471.6792" TopMargin="-1452.0449" BottomMargin="-1450.9551" LeftEage="1948" RightEage="1948" TopEage="1169" BottomEage="1169" Scale9OriginX="1948" Scale9OriginY="1169" Scale9Width="2009" Scale9Height="1205" ctype="ImageViewObjectData">
             <Size X="5905.0000" Y="3543.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="479.1792" Y="319.5449" />
+            <Position X="479.1793" Y="320.5449" />
             <Scale ScaleX="0.1634" ScaleY="0.1817" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4991" Y="0.4993" />
+            <PrePosition X="0.4991" Y="0.5009" />
             <PreSize X="6.1510" Y="5.5359" />
             <FileData Type="Normal" Path="div2.jpg" Plist="" />
           </AbstractNodeData>
@@ -28,7 +28,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_0" ActionTag="-1888757699" Tag="74" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="249.3586" BottomMargin="330.6414" TouchEnable="True" FontSize="20" ButtonText="冒险模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_0" ActionTag="-1888757699" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="249.3586" BottomMargin="330.6414" TouchEnable="True" FontSize="20" ButtonText="冒险模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="486.1160" Y="360.6414" />
@@ -44,7 +44,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_1" ActionTag="1141924964" Tag="82" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="325.6347" BottomMargin="254.3653" TouchEnable="True" FontSize="20" ButtonText="计时模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_1" ActionTag="1141924964" Tag="1" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="325.6347" BottomMargin="254.3653" TouchEnable="True" FontSize="20" ButtonText="计时模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="486.1160" Y="284.3653" />
@@ -60,7 +60,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_2" ActionTag="-1408643828" Tag="83" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="402.1702" BottomMargin="177.8298" TouchEnable="True" FontSize="20" ButtonText="黑夜模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_2" ActionTag="-1408643828" Tag="2" IconVisible="False" LeftMargin="386.1160" RightMargin="373.8840" TopMargin="402.1702" BottomMargin="177.8298" TouchEnable="True" FontSize="20" ButtonText="黑夜模式" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="200.0000" Y="60.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="486.1160" Y="207.8298" />

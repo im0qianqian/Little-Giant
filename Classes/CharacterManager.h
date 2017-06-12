@@ -25,6 +25,7 @@ public:
 	void pauseGame();
 	/* 继续游戏 */
 	void resumeGame();
+	/* 枚举变量人物类型 */
 	enum CharacterType
 	{
 		kCharacterPlayer,						//玩家
