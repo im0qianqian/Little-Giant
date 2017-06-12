@@ -13,11 +13,10 @@ AwardManager *GameScene::_awardManager = nullptr;
 AudioManager *GameScene::_audioManager = nullptr;
 Joystick *GameScene::_joystick = nullptr;
 DisplayManager *GameScene::_displayManager = nullptr;
-GameModeType GameScene::_gameMode = kGameModeAdventure;
+GameModeType GameScene::_gameMode = kGameModeTimer;
 
 GameScene::GameScene()
 {
-
 } 
 
 GameScene::~GameScene()
