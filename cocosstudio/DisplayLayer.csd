@@ -819,14 +819,26 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleX="-0.1736" ScaleY="-0.9848" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Prompt_Label" ActionTag="-1477987331" Tag="72" IconVisible="False" LeftMargin="423.5000" RightMargin="415.5000" TopMargin="66.0000" BottomMargin="540.0000" FontSize="30" LabelText="Text Label" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="121.0000" Y="34.0000" />
+          <AbstractNodeData Name="Prompt_Label" ActionTag="-1477987331" Tag="72" IconVisible="False" LeftMargin="484.0000" RightMargin="476.0000" TopMargin="83.0000" BottomMargin="557.0000" FontSize="30" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="484.0000" Y="557.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
+            <CColor A="255" R="144" G="238" B="144" />
             <PrePosition X="0.5042" Y="0.8703" />
-            <PreSize X="0.1260" Y="0.0531" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
+            <OutlineColor A="255" R="255" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Current_Time" ActionTag="-1976389482" Tag="73" IconVisible="False" LeftMargin="57.0000" RightMargin="863.0000" TopMargin="17.5000" BottomMargin="599.5000" FontSize="20" LabelText="时间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="40.0000" Y="23.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+            <Position X="77.0000" Y="611.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.0802" Y="0.9547" />
+            <PreSize X="0.0417" Y="0.0359" />
             <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

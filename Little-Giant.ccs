@@ -15,31 +15,95 @@
           <Image Name="movespeed.png" />
           <Image Name="speed.png" />
         </Folder>
+        <Folder Name="skybox">
+          <Image Name="back.jpg" />
+          <Image Name="bottom.jpg" />
+          <Image Name="front.jpg" />
+          <Image Name="left.jpg" />
+          <Image Name="right.jpg" />
+          <File Name="SkyBox.csb" />
+          <Image Name="top.jpg" />
+        </Folder>
         <Image Name="animationbuttonnormal.png" />
         <Image Name="animationbuttonpressed.png" />
+        <Image Name="arx.png" />
         <Mesh Name="axe.c3b" />
         <Image Name="background.jpg" />
+        <File Name="BasicToon.material" />
         <Image Name="blood.png" />
         <Image Name="bloodbg.png" />
+        <Image Name="body.png" />
         <Mesh Name="boss.c3b" />
+        <Image Name="boss.png" />
         <Mesh Name="box.c3t" />
+        <Image Name="brickwork_normal-map.jpg" />
+        <Image Name="brickwork-texture.jpg" />
+        <Image Name="caustics.png" />
+        <Image Name="circle.png" />
         <Image Name="CloseNormal.png" />
+        <File Name="cube_map.frag" />
+        <File Name="cube_map.vert" />
+        <File Name="CubeMap.material" />
         <Image Name="CyanSquare.png" />
+        <Mesh Name="cylinder.c3b" />
+        <File Name="cylinder.frag" />
+        <File Name="cylinder.vert" />
         <Project Name="DisplayLayer.csd" Type="Layer" />
         <Image Name="div2.jpg" />
+        <Image Name="dragon.png" />
+        <File Name="FakeShadow.material" />
+        <Image Name="Floor.png" />
+        <File Name="fog.frag" />
+        <File Name="fog.vert" />
         <TTF Name="FZYTK.TTF" />
         <Project Name="GameScene.csd" Type="Scene" />
+        <Mesh Name="girl.c3b" />
+        <Image Name="Girl_Face.png" />
+        <Image Name="Girl_Glasses01.png" />
+        <Image Name="Girl_Hair01.png" />
+        <Image Name="Girl_Hair02.png" />
+        <Image Name="Girl_Hand.png" />
+        <Image Name="Girl_LowerBody01.png" />
+        <Image Name="Girl_LowerBody02.png" />
+        <Image Name="Girl_Shoes01.png" />
+        <Image Name="Girl_Shoes02.png" />
+        <Image Name="Girl_UpperBody01.png" />
+        <Image Name="Girl_UpperBody02.png" />
         <Image Name="HelloWorld.png" />
+        <Mesh Name="LightMapScene.c3b" />
         <Project Name="MainLayer.csd" Type="Layer" />
         <Project Name="MainScene.csd" Type="Scene" />
         <TTF Name="Marker Felt.ttf" />
+        <Mesh Name="mesh_model.c3b" />
+        <File Name="monguger.tga" />
         <Mesh Name="orc.c3b" />
+        <Mesh Name="orc.c3t" />
+        <Mesh Name="orc_jump.c3t" />
+        <File Name="outline.material" />
+        <Mesh Name="plane.c3t" />
+        <Image Name="plane.png" />
         <Mesh Name="ReskinGirl.c3b" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
+        <Image Name="shadowCircle.png" />
+        <File Name="simple_shadow.frag" />
+        <File Name="simple_shadow.vert" />
         <File Name="SkyBox.csb" />
+        <Mesh Name="sphere.c3b" />
+        <Mesh Name="sphere_bumped.c3b" />
         <Image Name="spheretex.png" />
+        <Mesh Name="teapot.c3b" />
+        <Image Name="teapot.png" />
         <Image Name="texture.png" />
+        <File Name="toon.frag" />
+        <File Name="toon.vert" />
+        <Mesh Name="tortoise.c3b" />
+        <Image Name="tortoise.png" />
         <File Name="UserCamera.csb" />
+        <File Name="UVAnimation.material" />
+        <File Name="VertexColor.frag" />
+        <File Name="VertexColor.material" />
+        <File Name="VertexColor.vert" />
+        <Image Name="Xie_01.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

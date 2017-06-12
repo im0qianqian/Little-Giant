@@ -65,6 +65,38 @@
             <Rotation3D />
             <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
           </AbstractNodeData>
+          <AbstractNodeData Name="cylinder" ActionTag="-184027875" Tag="81" CameraFlagMode="30" LightFlag="LIGHT0" ctype="Sprite3DObjectData">
+            <Size X="12.0000" Y="11.8177" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="-4.5334" Y="3.3012" Z="-17.8757" />
+            <Rotation3D />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="cylinder.c3b" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="mesh_model" ActionTag="2032929638" Tag="82" CameraFlagMode="30" LightFlag="LIGHT0" ctype="Sprite3DObjectData">
+            <Size X="576.0000" Y="785.3347" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="-17.6424" Y="17.8927" Z="-11.2604" />
+            <Rotation3D />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="mesh_model.c3b" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="sphere" ActionTag="199960532" Tag="83" CameraFlagMode="30" LightFlag="LIGHT0" ctype="Sprite3DObjectData">
+            <Size X="20.0000" Y="20.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="13.4912" Y="18.1095" Z="31.3346" />
+            <Rotation3D />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="sphere.c3b" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="tortoise" ActionTag="1820915580" Tag="84" CameraFlagMode="30" LightFlag="LIGHT0" ctype="Sprite3DObjectData">
+            <Size X="833.7104" Y="345.9072" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="-0.3084" Y="-2.0929" Z="32.0947" />
+            <Rotation3D />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="tortoise.c3b" Plist="" />
+          </AbstractNodeData>
         </Children>
         <LeftImage Type="Default" Path="Default/skybox.png" Plist="" />
         <RightImage Type="Default" Path="Default/skybox.png" Plist="" />

@@ -14,6 +14,7 @@ AudioManager *GameScene::_audioManager = nullptr;
 Joystick *GameScene::_joystick = nullptr;
 DisplayManager *GameScene::_displayManager = nullptr;
 GameModeType GameScene::_gameMode = kGameModeTimer;
+int GameScene::_startingTime = 0;
 
 GameScene::GameScene()
 {
@@ -38,21 +39,24 @@ bool GameScene::init()
 		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_WIDTH / SCREEN_HEIGHT, 1, 1000);
 		_camera->setCameraFlag(CameraFlag::USER1);
 		_layer3D->addChild(_camera);		//将3D摄像机添加进图层
+
+		/* 记录游戏开始的时间 */
+		GameScene::_startingTime = GetCurrentTime();
 		/* 操作管理 */
 		GameScene::_joystick = Joystick::create();
 		addChild(GameScene::_joystick, -1);
 		/* 武器管理 */
 		GameScene::_weaponManager = WeaponManager::create();
 		_layer3D->addChild(GameScene::_weaponManager, 2);
-		/* 人物管理 */
-		GameScene::_characterManager = CharacterManager::create();
-		_layer3D->addChild(GameScene::_characterManager, 1);
 		/* 地图管理 */
 		GameScene::_stageManager = StageManager::create();
 		_layer3D->addChild(GameScene::_stageManager, 0);
 		/* 奖励管理*/
 		GameScene::_awardManager = AwardManager::create();
 		_layer3D->addChild(GameScene::_awardManager, 3);
+		/* 人物管理 */
+		GameScene::_characterManager = CharacterManager::create();
+		_layer3D->addChild(GameScene::_characterManager, 1);
 
 		addChild(_layer3D,0);
 		

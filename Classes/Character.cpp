@@ -180,11 +180,6 @@ void Character::die()
 	_isDie = true;
 }
 
-void Character::cleanup()
-{
-	
-}
-
 void Character::update(float dt)
 {
 	if (detectionStatus())	// 如果当前状况正常(人物是否存活)
@@ -345,7 +340,7 @@ void PlayerCharacter::die()
 
 void PlayerCharacter::moveModule()
 {
-	_threadMutex.lock();
+	getThreadMutex().lock();
 	while (!isDie())
 	{
 		Vec3 res = Vec3::ZERO;
@@ -370,7 +365,7 @@ void PlayerCharacter::moveModule()
 		}
 	}
 	cout << "死亡解锁" << endl;
-	_threadMutex.unlock();
+	getThreadMutex().unlock();
 	cout << "死亡解锁成功" << endl;
 	cout << "主角" <<this<< " 线程结束" << endl;
 }
@@ -405,8 +400,7 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
-	this_thread::sleep_for(chrono::milliseconds(2000));
-	_threadMutex.lock();
+	getThreadMutex().lock();
 	while (!isDie())
 	{
 		if (GameScene::getCharacterManager() == nullptr || GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
@@ -438,6 +432,6 @@ void EnemyCharacter::moveModule()
 		}
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}
-	_threadMutex.unlock();
+	getThreadMutex().unlock();
 	cout << "敌人" << this << " 线程结束" << endl;
 }
