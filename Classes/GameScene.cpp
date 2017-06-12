@@ -13,7 +13,7 @@ AwardManager *GameScene::_awardManager = nullptr;
 AudioManager *GameScene::_audioManager = nullptr;
 Joystick *GameScene::_joystick = nullptr;
 DisplayManager *GameScene::_displayManager = nullptr;
-GameModeType GameScene::_gameMode = kGameModeTimer;
+GameModeType GameScene::_gameMode = kGameModeAdventure;
 
 GameScene::GameScene()
 {
@@ -55,13 +55,13 @@ bool GameScene::init()
 		GameScene::_awardManager = AwardManager::create();
 		_layer3D->addChild(GameScene::_awardManager, 3);
 
-		addChild(_layer3D);
+		addChild(_layer3D,0);
 		
 		setCameraMask((unsigned int)CameraFlag::USER1);	//设置当前场景只能被USER1中拍到，以上有效，以下仍然默认
 		
 		/* 界面显示*/
 		GameScene::_displayManager = DisplayManager::create();
-		addChild(GameScene::_displayManager, 4);
+		addChild(GameScene::_displayManager, 1);
 
 		//GameScene::_audioManager = AudioManager::create();
 		flag = true;

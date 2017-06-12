@@ -120,6 +120,7 @@ protected:
 	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
 	/* 获取人物移动方向向量 */
 	virtual Vec3 getDirection() { return _direction; }
+	virtual void cleanup() override;
 	mutex _threadMutex;		//线程锁
 
 private:

@@ -81,13 +81,13 @@ void Award::applyToCharacter(Character * const & character)
 	switch (_awardType)
 	{
 	case kAwardHP:
-		character->addLifeValue(100.f);
+		character->addLifeValue(10.f);
 		break;
 	case kAwardEXP:
-		character->addExperience(10.f);
+		character->addExperience(3.f);
 		break;
 	case kAwardSorce:
-		character->addSorce(1.f);
+		character->addSorce(3.f);
 		break;
 	default:
 		break;

@@ -13,9 +13,10 @@ public:
 	~MainLayer();
 	virtual bool init() override;
 	CREATE_FUNC(MainLayer);
+	void buttonCallBack(Ref * const node);
 private:
 	Node *_displayNode;		//CSB文件
-	Button *_button[3];
+	Button *_button[3];		//三个按钮
 };
 
 #endif

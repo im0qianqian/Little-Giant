@@ -66,8 +66,6 @@ void Character::attack(const Vec3 &pos)
 void Character::move()
 {
 	/* 获取刚体对象 */
-	(Physics3DRigidBody*)(getPhysicsObj());
-	dynamic_cast<Physics3DRigidBody*>(getPhysicsObj());
 	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
 	/* 设置线速度为人物移动速度*方向向量，Y方向保持和原来一样 */
 	s->setLinearVelocity(getAttribute().getMovingSpeed()*getDirection() + Vec3(0, s->getLinearVelocity().y, 0));
@@ -115,7 +113,9 @@ void Character::initialization()
 	// 初始化值
 	_lifeValue = INITIAL_LIFE_VALUE;
 	_experience = 0;
-	_sorce = 0;
+	// 如果不是计时模式，积分清空
+	if(GameScene::getGameMode()!=kGameModeTimer)
+		_sorce = 0;
 	_attribute.init();
 	_weaponType = kWeaponArrow;
 	_dept = 0;
@@ -132,7 +132,7 @@ void Character::initialization()
 	
 
 	// 随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2));
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2.0, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2.0));
 	syncNodeToPhysics();
 }
 
@@ -149,7 +149,7 @@ void Character::beAttacked(Weapons *const &weapon)
 	// 如果武器的创建者是自己的话不掉血（自己打自己）
 	if (weapon->getOwner() == this) return;
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
-	addLifeValue(-weapon->getPower() / 1.0);
+	addLifeValue(-weapon->getPower() / 10.0);
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
@@ -168,11 +168,23 @@ void Character::die()
 	_isDie = true;
 }
 
+void Character::cleanup()
+{
+	// 设置死亡
+	_isDie = true;
+	// 加锁等待线程结束
+	_threadMutex.lock();
+	_threadMutex.unlock();
+}
+
 void Character::update(float dt)
 {
 	if (detectionStatus())	// 如果当前状况正常(人物是否存活)
 	{
 		move();
+		/* 人物保持不旋转 */
+		setRotation3D(Vec3::ZERO);
+		syncNodeToPhysics();
 	}
 }
 
@@ -296,7 +308,7 @@ void PlayerCharacter::initialization()
 	// 先执行父类的初始化方法
 	Character::initialization();
 	// 随机一个姓名（可能会重复）
-	setName("qianqian");
+	setName("Little Giant");
 	// 设置群落，主角为 -1
 	setDept(-1);
 }
@@ -308,12 +320,14 @@ void PlayerCharacter::die()
 	switch (GameScene::getGameMode())
 	{
 	case kGameModeAdventure:			// 冒险模式
+		GameScene::getDisplayManager()->showSorceBoard();
 		cout << "你已死亡，游戏结束~" << endl;
 		break;
 	case kGameModeTimer:				// 计时模式
 		initialization();				// 充血复活
 		break;
 	case kGameModeNight:				// 黑夜模式
+		GameScene::getDisplayManager()->showSorceBoard();
 		cout << "你已死亡，游戏结束~" << endl;
 		break;
 	default:
@@ -326,7 +340,6 @@ void PlayerCharacter::moveModule()
 	_threadMutex.lock();
 	while (!isDie())
 	{
-		cout << GetCurrentTime() << endl;
 		Vec3 res = Vec3::ZERO;
 		if (GameScene::getJoystick()->getKeyW())
 			res += Vec3(0, 0, -1);
@@ -348,7 +361,9 @@ void PlayerCharacter::moveModule()
 			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
 	}
+	cout << "死亡解锁" << endl;
 	_threadMutex.unlock();
+	cout << "死亡解锁成功" << endl;
 }
 
 void EnemyCharacter::initialization()
@@ -397,14 +412,20 @@ void EnemyCharacter::moveModule()
 				minn = (*i)->getPosition3D() - getPosition3D();
 			}
 		}
-		if (minn.length() < 100)
+		minn.y = 0;
+		if (minn.length() < 20.0)
 		{
 			attack(minn + getPosition3D());
 			setDirection(minn.getNormalized());
+			if (minn.length() < 10.0)
+			{
+				setDirection(Vec3::ZERO);
+			}
 		}
 		else
 		{
-			setDirection(Vec3::ZERO);
+			//setDirection(Vec3::ZERO);
+			setDirection(minn.getNormalized());
 		}
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}

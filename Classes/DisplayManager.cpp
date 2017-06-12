@@ -1,6 +1,8 @@
 #include "DisplayManager.h"
 #include "Global.h"
 #include "GameScene.h"
+#include "Character.h"
+#include "SceneManager.h"
 #include "cocostudio/CocoStudio.h"
 #include "cocos2d.h"
 #include "ui\UIPageView.h"
@@ -8,12 +10,16 @@
 #include "ui\UIScrollView.h"
 #include <vector>
 #include <algorithm>
+
 DisplayManager::DisplayManager() :
 	_displayNode(nullptr),
 	_levelLabel(nullptr),
 	_experienceBar(nullptr),
 	_exitButton(nullptr),
 	_sorceBoard(nullptr),
+	_sorceNum(nullptr),
+	_buttonHome(nullptr),
+	_buttonRestart(nullptr),
 	_levelNum(0),
 	_percent(0)
 {
@@ -60,10 +66,24 @@ bool DisplayManager::init()
 		}
 		// 获取退出按钮
 		_exitButton = static_cast<Button*>(_displayNode->getChildByName("button_exit"));
+		_exitButton->addClickEventListener([](Ref *const ref)
+		{
+			SceneManager::getInstance()->changeScene(kMenuScene);
+		});
 		// 获取计分表
 		_sorceBoard = static_cast<Layout*>(_displayNode->getChildByName("SorceBoard"));
+		_sorceNum = static_cast<Text*>(_sorceBoard->getChildByName("sorce_num"));
+		_buttonHome = static_cast<Button*>(_sorceBoard->getChildByName("Button_home"));
+		_buttonHome->addClickEventListener([](Ref *const ref)
+		{
+			SceneManager::getInstance()->changeScene(kMenuScene);
+		});
+		_buttonRestart = static_cast<Button*>(_sorceBoard->getChildByName("Button_restart"));
+		_buttonRestart->addClickEventListener([](Ref *const ref)
+		{
+			SceneManager::getInstance()->changeScene(kGameScene);
+		});
 		/* 这里暂定隐藏 */
-		_exitButton->setVisible(false);
 		_sorceBoard->setVisible(false);
 		/* */
 		addChild(_displayNode);
@@ -201,6 +221,9 @@ void DisplayManager::updateExperience()
 void DisplayManager::showSorceBoard()
 {
 	_sorceBoard->setVisible(true);
+	cout << GameScene::getCharacterManager()->getPlayerCharacter()->getSorce() << endl;
+	cout << _sorceNum << endl;
+	_sorceNum->setString(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
 }
 
 void DisplayManager::showSkillBoard()
@@ -242,33 +265,42 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 	}
 
 	auto *touchItem = static_cast<Widget *>(pSender);
-	std::string item_name = touchItem->getName();
-	applyToSkill(item_name[0]);
-	cout << item_name << endl;
+	int itemTag = touchItem->getTag();
+	applyToSkill(itemTag);
 
 }
-void DisplayManager::applyToSkill(char skill)
+void DisplayManager::applyToSkill(const int &skillTag)
 {
-	switch (skill-'0')
+	auto character = GameScene::getCharacterManager()->getPlayerCharacter();
+	switch (skillTag)
 	{
 	case 0:
-
+		character->getAttribute().addAttackDamage(.1f);
+		break;
 	case 1:
-
+		character->getAttribute().addAttackSpeed(.1f);
+		break;
 	case 2:
-
+		character->getAttribute().addAttackSpeed(.1f);
+		break;
 	case 3:
-
+		character->getAttribute().addDefensiveForce(5.f);
+		break;
 	case 4:
-
+		character->getAttribute().addAttackDamage(.1f);
+		break;
 	case 5:
-		
+		character->getAttribute().addDefensiveForce(5.f);
+		break;
 	case 6:
-
+		character->getAttribute().addRestoringAbility(.1f);
+		break;
 	case 7:
-
+		character->getAttribute().addMovingSpeed(3.f);
+		break;
 	case 8:
-
+		character->getAttribute().addEmpiricalAcquisition(.5f);
+		break;
 	default:
 		break;
 	}

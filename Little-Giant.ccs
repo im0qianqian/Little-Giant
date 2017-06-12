@@ -8,7 +8,9 @@
           <Image Name="attack.png" />
           <Image Name="attacknum.png" />
           <Image Name="dart.png" />
+          <Image Name="def.png" />
           <Image Name="defensiveforce.png" />
+          <Image Name="exp.png" />
           <Image Name="lifevalue.png" />
           <Image Name="movespeed.png" />
           <Image Name="speed.png" />
@@ -20,6 +22,7 @@
         <Image Name="blood.png" />
         <Image Name="bloodbg.png" />
         <Mesh Name="boss.c3b" />
+        <Mesh Name="box.c3t" />
         <Image Name="CloseNormal.png" />
         <Image Name="CyanSquare.png" />
         <Project Name="DisplayLayer.csd" Type="Layer" />
