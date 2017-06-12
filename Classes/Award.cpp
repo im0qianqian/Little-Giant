@@ -25,7 +25,6 @@ bool Award::init()
 			Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
 			rbDes.mass = 0.f;													//设置刚体质量
 			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//刚体大小
-
 			auto obj = Physics3DRigidBody::create(&rbDes);						//创建刚体对象
 
 			_physicsComponent = Physics3DComponent::create(obj);				//利用该刚体对象创建组件

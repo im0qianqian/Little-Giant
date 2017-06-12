@@ -120,9 +120,7 @@ protected:
 	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
 	/* 获取人物移动方向向量 */
 	virtual Vec3 getDirection() { return _direction; }
-	virtual void cleanup() override;
-	mutex _threadMutex;		//线程锁
-
+	virtual mutex &getThreadMutex() { return _threadMutex; }
 private:
 	/* 受到武器攻击 */
 	virtual void beAttacked(Weapons *const &weapon);
@@ -145,6 +143,7 @@ private:
 	bool _isDie;			//人物是否死亡
 	Slider* _hpSlider;		//人物血量条
 	Vec3 _direction;		//人物移动方向向量
+	mutex _threadMutex;		//线程锁
 };
 
 class PlayerCharacter:public Character

@@ -274,38 +274,49 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 void DisplayManager::applyToSkill(const int &skillTag)
 {
 	auto character = GameScene::getCharacterManager()->getPlayerCharacter();
-	CCLOG("%s", _promptLabel->getString());
-	CCLOG("YES");
+	string prompt;
 	switch (skillTag)
 	{
 	case 0:
 		character->getAttribute().addAttackDamage(.1f);
+		prompt = u8"攻击力提升";
 		break;
 	case 1:
 		character->getAttribute().addAttackSpeed(.1f);
+		prompt = u8"攻击速度提升";
 		break;
 	case 2:
 		character->getAttribute().addAttackSpeed(.1f);
+		prompt = u8"攻击速度提升";
 		break;
 	case 3:
 		character->getAttribute().addDefensiveForce(5.f);
+		prompt = u8"防御力提升";
 		break;
 	case 4:
 		character->getAttribute().addAttackDamage(.1f);
+		prompt = u8"攻击力提升";
 		break;
 	case 5:
 		character->getAttribute().addDefensiveForce(5.f);
+		prompt = u8"防御力提升";
 		break;
 	case 6:
 		character->getAttribute().addRestoringAbility(.1f);
+		prompt = u8"恢复能力提升";
 		break;
 	case 7:
 		character->getAttribute().addMovingSpeed(3.f);
+		prompt = u8"移动速度提升";
 		break;
 	case 8:
 		character->getAttribute().addEmpiricalAcquisition(.5f);
+		prompt = u8"经验获取能力提升";
 		break;
 	default:
 		break;
 	}
+	_promptLabel->setString(prompt);
+	_promptLabel->setOpacity(0);
+	_promptLabel->runAction(Sequence::create(CCFadeIn::create(1.f), CCDelayTime::create(.5f), CCFadeOut::create(1.f), nullptr));
 }
