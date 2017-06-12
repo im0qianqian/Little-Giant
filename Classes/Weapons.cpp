@@ -102,9 +102,9 @@ void Weapons::killCharacter(Character * const &character) const
 	// 武器的主人
 	auto *master = static_cast<Character*>(getOwner());
 	// 得到对方的所有经验值与得分（BUG BUG BUG），另外获取5个经验点
-	master->addExperience(character->getExperience() + 5);
+	master->addExperience(character->getExperience() + 10);
 	// 得到对方所有的分数，另外获取5分
-	master->addSorce(character->getSorce() + 5);
+	master->addSorce(character->getSorce() + 10);
 	cout << master << " 杀死了 " << character << " ，得到经验值：" << character->getExperience() << " ，得到分数：" << character->getSorce() << endl;
 }
 

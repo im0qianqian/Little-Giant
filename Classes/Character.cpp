@@ -17,7 +17,8 @@ Character::Character() :
 	_attribute(Attribute()),
 	_hpSlider(nullptr),
 	_direction(Vec3::ZERO),
-	_lastAttackTime(0)
+	_lastAttackTime(0),
+	_topName(nullptr)
 {
 	// 设置属于人物标签
 	setTag(kGlobalCharacter);
@@ -212,9 +213,16 @@ void Character::createHpBar()
 	_hpSlider->setTouchEnabled(false);
 	_hpSlider->setScale(.03f, .015f);
 	_hpSlider->setPercent(_lifeValue);
-	// 更正血量条角度
 	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
 	billBoard->addChild(_hpSlider);
+
+	/* 以下是人物名字label */
+	TTFConfig ttfConfig("fonts/FZYTK.TTF", 25, GlyphCollection::DYNAMIC);
+	_topName = Label::createWithTTF(ttfConfig,"");
+	_topName->setScale(.02f);
+	_topName->setTextColor(Color4B::BLACK);
+	_topName->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 3);
+	billBoard->addChild(_topName);
 	addChild(billBoard);
 }
 
@@ -312,6 +320,7 @@ void PlayerCharacter::initialization()
 	Character::initialization();
 	// 随机一个姓名（可能会重复）
 	setName("Little Giant");
+	setTopName(getName());
 	// 设置群落，主角为 -1
 	setDept(-1);
 }
@@ -376,6 +385,7 @@ void EnemyCharacter::initialization()
 	Character::initialization();
 	// 随机一个姓名（可能会重复）
 	setName(CHARACTER_NAME[rand() % (sizeof(CHARACTER_NAME) / sizeof(string))]);
+	setTopName(getName());
 }
 
 void EnemyCharacter::die()

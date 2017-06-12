@@ -36,8 +36,9 @@ private:
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
 	/* 人物升级 显示技能选择栏 */
 	void showSkillBoard();
-	void ListViewMoveCallback(cocos2d::Ref *pSender);
+	/* 人物技能应用 */
 	void applyToSkill(const int &skillTag);
+
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	Text *_promptLabel;                 //提示技能加成种类
@@ -50,8 +51,8 @@ private:
 	Text *_sorceNum;					// 最终得分
 	int _levelNum;						// 当前等级
 	float _percent;						// 当前经验条所占百分比
-	ListView* skill_list[3];
-	PageView* skill_panel[3];
+	ListView* _skill_list[3];
+	PageView* _skill_panel[3];
 	class ListViewSorce
 	{
 	public:
@@ -75,18 +76,6 @@ private:
 	};
 	const int _scoreListSize = 6;
 	std::vector<ListViewSorce> _scoreList;	//成绩
-	/*enum skillName
-	{
-		skill_0,
-		skill_1,
-		skill_2,
-		skill_3,
-		skill_4,
-		skill_5,
-		skill_6,
-		skill_7
-	};
-	skillName skillname;*/
 };
 
 #endif
