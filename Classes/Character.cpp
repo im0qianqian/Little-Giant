@@ -192,7 +192,8 @@ void Character::createHpBar()
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
 	_hpSlider->setTouchEnabled(false);
-	_hpSlider->setScale(.03f);
+	_hpSlider->setScaleX(.03f);
+	_hpSlider->setScaleY(.015f);
 	_hpSlider->setPercent(_lifeValue);
 	// 更正血量条角度
 	_hpSlider->setRotation3D(Vec3(-90, 0, 0));
