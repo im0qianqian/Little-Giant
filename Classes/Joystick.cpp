@@ -51,12 +51,13 @@ void Joystick::setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &st
 
 void Joystick::onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event)
 {
-	event->stopPropagation();
+	//event->stopPropagation();
+	CCLOG("touch began");
 }
 
 void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event)
 {
-	//CCLOG("on Touches ended!!!");
+	CCLOG("on Touches ended!!!");
 	for (auto &item : touches)
 	{
 		auto touch = item;
@@ -73,7 +74,7 @@ void Joystick::onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos
 		//CCLOG("%f %f %f", getPlayerCharacter()->getPosition3D().x, getPlayerCharacter()->getPosition3D().y, getPlayerCharacter()->getPosition3D().z);
 		CCLOG("manag %f %f %f", p.x, p.y, p.z);
 		GameScene::getCharacterManager()->getPlayerCharacter()->attack(p);
-		event->stopPropagation();
+		//event->stopPropagation();
 	}
 }
 
@@ -107,7 +108,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 			GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
 		}
 	}
-	event->stopPropagation();//不传递至其他图层
+	//event->stopPropagation();//不传递至其他图层
 }
 
 
@@ -259,5 +260,6 @@ void Joystick::touchListen()
 	_listenerTouch->onTouchesEnded = CC_CALLBACK_2(Joystick::onTouchesEnded, this);
 	_listenerTouch->onTouchesBegan = CC_CALLBACK_2(Joystick::onTouchesBegan, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_listenerTouch, this);
+	cout << "touch" << endl;
 }
 

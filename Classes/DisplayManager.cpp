@@ -274,8 +274,9 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 void DisplayManager::applyToSkill(const int &skillTag)
 {
 	auto character = GameScene::getCharacterManager()->getPlayerCharacter();
-	CCLOG("%s", _promptLabel->getString());
-	CCLOG("YES");
+	cout << _promptLabel->getString() << endl;
+	string sss;
+	sss = u8"ÇÐ»»³É¹¦";
 	switch (skillTag)
 	{
 	case 0:
@@ -308,4 +309,5 @@ void DisplayManager::applyToSkill(const int &skillTag)
 	default:
 		break;
 	}
+	_promptLabel->setString(sss);
 }
