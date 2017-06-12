@@ -32,9 +32,14 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="DisplayLayer.csd" />
+<<<<<<< HEAD
           <FilePathData Path="Scene3D.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="Scene3D.csd" />
+=======
+        </OpenedDocuments>
+        <ActiveDocument Path="DisplayLayer.csd" />
+>>>>>>> origin/master
       </Value>
     </Item>
   </Properties>

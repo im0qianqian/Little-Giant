@@ -41,6 +41,7 @@ bool DisplayManager::init()
 		_promptLabel = static_cast<Text*>(_displayNode->getChildByName("Prompt_Label"));
 		// 获取其中的文本标签
 		_levelLabel = static_cast<Text*>(_displayNode->getChildByName("Level_Label"));
+		_currentTime = static_cast<Text*>(_displayNode->getChildByName("Current_Time"));
 		// 获取其中的进度条
 		_experienceBar = static_cast<LoadingBar*>(_displayNode->getChildByName("Experience_bar"));
 		// 获取成绩列表
@@ -103,6 +104,8 @@ void DisplayManager::update(float dt)
 	updateExperience();
 	// 更新成绩列表
 	updateSorceList();
+	// 更新剩余时间
+
 }
 
 void DisplayManager::updateAnimation(float dt)
@@ -218,6 +221,10 @@ void DisplayManager::updateExperience()
 	_percent = (float)(exp) / (float)(levelExperinence) * 100;
 	//CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
 	_levelLabel->setString(to_string(_levelNum));
+}
+
+void DisplayManager::updateCurrentTime()
+{
 }
 
 void DisplayManager::showSorceBoard()

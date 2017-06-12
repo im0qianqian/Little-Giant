@@ -30,6 +30,8 @@ private:
 	void updateSorceList();
 	/* 更新经验条 */
 	void updateExperience();
+	/* 更新剩余时间 */
+	void updateCurrentTime();
 	/* 获取当前等级升级所需要的经验点 */
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
 	/* 人物升级 显示技能选择栏 */
@@ -39,6 +41,7 @@ private:
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
 	Text *_promptLabel;                 //提示技能加成种类
+	Text *_currentTime;					//当前时间
 	LoadingBar *_experienceBar;			// 经验条
 	Button *_exitButton;				// 退出按钮
 	Button *_buttonHome;				//Home
