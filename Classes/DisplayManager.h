@@ -38,6 +38,7 @@ private:
 	void applyToSkill(const int &skillTag);
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
+	Text *_promptLabel;                 //提示技能加成种类
 	LoadingBar *_experienceBar;			// 经验条
 	Button *_exitButton;				// 退出按钮
 	Button *_buttonHome;				//Home

@@ -37,6 +37,8 @@ bool DisplayManager::init()
 	{
 		// 加载 csb 文件
 		_displayNode = CSLoader::createNode("res/DisplayLayer.csb");
+		//获取提示技能加成文本标签
+		_promptLabel = static_cast<Text*>(_displayNode->getChildByName("Prompt_Label"));
 		// 获取其中的文本标签
 		_levelLabel = static_cast<Text*>(_displayNode->getChildByName("Level_Label"));
 		// 获取其中的进度条
@@ -272,6 +274,8 @@ void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
 void DisplayManager::applyToSkill(const int &skillTag)
 {
 	auto character = GameScene::getCharacterManager()->getPlayerCharacter();
+	CCLOG("%s", _promptLabel->getString());
+	CCLOG("YES");
 	switch (skillTag)
 	{
 	case 0:
