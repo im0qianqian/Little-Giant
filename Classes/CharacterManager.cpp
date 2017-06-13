@@ -18,7 +18,7 @@ bool CharacterManager::init()
 	// 第一步先创建缓存池
 	_cachePool.createCachePool();
 	// 第二步创建人物
-	startGame(0,5);
+	startGame(0,0);
 	return true;
 }
 
@@ -33,6 +33,7 @@ void CharacterManager::startGame(const int &ally, const int &enemy)
 	{
 		createCharacter(kCharacterEnemy);
 	}
+	cout << "人物对象全部创建----------------------------------" << endl;
 	for (auto i : _enemyCharacter)
 	{
 		i->initialization();				//登场

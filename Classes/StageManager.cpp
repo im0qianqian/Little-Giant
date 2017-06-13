@@ -42,7 +42,7 @@ void StageManager::createLight()
 	_characterLight = PointLight::create(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D(), Color3B::WHITE, 50.f);
 	// ÉèÖÃµÆ¹âÁÁ¶È
 	_characterLight->setIntensity(.5f);
-
+	
 	// Ì«ÑôÎ§ÈÆÐý×ªµÄ°ë¾¶
 	float radius = 1000.f;
 	_sun = DirectionLight::create(Vec3::ZERO, Color3B::WHITE);
@@ -50,7 +50,7 @@ void StageManager::createLight()
 		static float angle = 0.0;
 		node->setPosition3D(Vec3(radius * cos(angle), radius * sin(angle), 0.0f));
 		dynamic_cast<DirectionLight*>(node)->setDirection(Vec3::ZERO - node->getPosition3D());
-		angle -= 0.01f;
+		angle -= 0.005f;
 	}), nullptr)));
 
 	addChild(_characterLight);

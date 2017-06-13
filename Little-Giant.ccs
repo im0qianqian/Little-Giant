@@ -38,6 +38,7 @@
         <Mesh Name="orc.c3t" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
         <Mesh Name="sphere.c3b" />
+        <Pu Name="UVAnimation.pu" />
       </RootFolder>
     </Group>
   </SolutionFolder>

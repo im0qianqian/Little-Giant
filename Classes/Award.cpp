@@ -20,7 +20,7 @@ bool Award::init()
 	bool flag = false;
 	do
 	{
-		if (initWithFile("images/2.c3b"))								//设置形状
+		if (initWithFile("Sprite3DTest/box.c3t"))								//设置形状
 		{
 			Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
 			rbDes.mass = 0.f;													//设置刚体质量
@@ -36,7 +36,7 @@ bool Award::init()
 			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
 
 			obj->setUserData(this);
-			setScale(.3f);
+			//setScale(.3f);
 
 			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//应用同步
 			flag = true;
@@ -101,13 +101,13 @@ void Award::randomType()
 	switch (_awardType)
 	{
 	case kAwardEXP:
-		//setTexture("Sprite3DTest/brickwork_normal-map.jpg");
+		setTexture("Sprite3DTest/brickwork_normal-map.jpg");
 		break;
 	case kAwardHP:
-		//setTexture("Sprite3DTest/brickwork-texture.jpg");
+		setTexture("Sprite3DTest/brickwork-texture.jpg");
 		break;
 	case kAwardSorce:
-		//setTexture("Sprite3DTest/caustics.png");
+		setTexture("Sprite3DTest/caustics.png");
 		break;
 	default:
 		break;

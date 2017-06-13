@@ -57,7 +57,6 @@ bool GameScene::init()
 		/* ½±Àø¹ÜÀí*/
 		GameScene::_awardManager = AwardManager::create();
 		_layer3D->addChild(GameScene::_awardManager, 3);
-		
 
 		addChild(_layer3D,0);
 		
