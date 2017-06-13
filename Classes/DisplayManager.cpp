@@ -214,37 +214,15 @@ void DisplayManager::showSkillBoard()
 		_skill_list[i]->setVisible(true);
 		_skill_list[i]->setScrollBarOpacity(0);
 		_skill_panel[i]->setVisible(true);
-		_skill_list[i]->setDirection(ScrollView::Direction::VERTICAL);
-		_skill_list[i]->scrollToBottom(5.0, true);
-		_skill_list[i]->scrollToTop(5.0, true);
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		_skill_list[i]->scrollToBottom(5.0, true);
-		_skill_list[i]->scrollToTop(5.0, true);
-		/*_skill_list[i]->scrollToBottom(5.0, true);
-		_skill_list[i]->scrollToTop(5.0, true);*/
 		_skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
-		/*Widget* item = _skill_list[i]->getCurrentFocusedWidget(true);*/
-		// _skill_list[i]->setEnabled(false);
-		//_skill_list[i]->setPropagateTouchEvents(true);
 		_skill_list[i]->setDirection(ScrollView::Direction::NONE);
-		//_skill_list[i]->setFocused(false);
-		//_skill_list[i]->setItemsMargin(5.0);
-		//_skill_list[i]->setClippingEnabled(true);
-		//_skill_list[i]->setFocusEnabled(false);
-		/*
-		_skill_list[i]->getTopBoundary();
-		_skill_list[i]->getCurrentFocusedWidget(true);*/
-		/*_skill_list[i]->jumpToPercentVertical(0.25);*/
-
-		//_skill_panel[i]->addClickEventListener(CC_CALLBACK_1(DisplayManager::ListViewMoveCallback, this));
 		int skillNum = _skill_list[i]->getItems().size();
 		for (size_t j = 0; j < skillNum; j++)
 		{
-			Widget* item = _skill_list[i]->getItem(j);//获取其中的某个项，然后转换成Button 进行设置操作
-													 /*Button* button = static_cast<Button*>(item->getChildByName("Title Button"));
-													 ssize_t index = _skill_list[i]->getIndex(item);*/
+			Widget* item = _skill_list[i]->getItem(j);//获取其中的某个项，然后转换成Button 进行设置操作=
 			item->addClickEventListener([this](Ref *const ref)
 			{
 				// 先隐藏三个技能面板

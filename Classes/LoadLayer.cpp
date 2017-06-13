@@ -17,10 +17,13 @@ bool LoadLayer::init()
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	Sprite *cloud = Sprite::create("cloud.png");
+	cloud->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2+65));
+	this->addChild(cloud);
 	_loadLabel = Label::create("Loading:", "arial", 30);
 	_loadLabel->setPosition(Point(visibleSize.width / 2 - 30, visibleSize.height / 2 + 30));
 	this->addChild(_loadLabel,1);
-
 	_percentLabel = Label::create("       0%", "arial", 30);
 	CCLOG("####%d %d", visibleSize.width / 2, visibleSize.height / 2);
 	_percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
@@ -31,29 +34,21 @@ bool LoadLayer::init()
 
 	CCLOG("PASS1");
 
-	_timer = ProgressTimer::create(Sprite::create("blood.png"));
+	_timer = ProgressTimer::create(Sprite::create("load.png"));
 	_timer->setType(cocos2d::ProgressTimer::Type::BAR);
 	_timer->setMidpoint(Vec2(0, 1));
 	_timer->setBarChangeRate(Vec2(1, 0));
 	_timer->setPercentage(0.0f);
-	_timer->setScaleX(2);
-	//timer->setScale(2);
+	/*_timer->setScaleX(2);*/
 	CCLOG("####%d %d", visibleSize.width / 2, visibleSize.height / 2);
 	_timer->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	this->addChild(_timer,3);
-
-	CCLOG("PASS2");
-
 	for (int i = 1; i <= 500; i++)
 	{
 		CCLOG("PASS3,%d",i);
 		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::loadingCallback,this));
 	}
-	/*for (int i = 1; i <= 500; i++)
-	{
-		CCLOG("#########" + i);
-		LoadLayer::LoadingCallback();
-	}*/
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	return true;
 
 }
@@ -76,10 +71,6 @@ void LoadLayer::loadingCallback()
 		this->removeChild(_percentLabel);
 		this->removeChild(_loadLabel);
 		CCLOG("PASS5");
-		/*Sprite *newScene = Sprite::create("background.png");
-		CCLOG("PASS6");
-		this->addChild(newScene);
-		CCLOG("PASS7");*/
 		SceneManager::getInstance()->changeScene(kGameScene);
 		CCLOG("PASS8");
 	}

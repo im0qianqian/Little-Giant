@@ -69,7 +69,7 @@ void StageManager::createObstacles()
 	{
 		for (int j = 0; j < MAPS_FILE_LENGTH; j++)
 		{
-			_map[i][j] = pBuffer[i*(MAPS_FILE_WIDTH + 1) + j] - '0';
+			_map[i][j] = pBuffer[i*(MAPS_FILE_WIDTH + 2) + j] - '0';
 		}
 	}
 	int count, m, n;
