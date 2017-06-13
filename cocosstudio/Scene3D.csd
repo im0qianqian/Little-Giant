@@ -97,6 +97,22 @@
             <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
             <FileData Type="Default" Path="Default/empty.c3t" Plist="" />
           </AbstractNodeData>
+          <AbstractNodeData Name="2" ActionTag="-1516698368" Tag="87" CameraFlagMode="30" LightFlag="LIGHT0" ctype="Sprite3DObjectData">
+            <Size X="20.1139" Y="20.1139" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="211.6422" Y="18.1817" Z="48.6196" />
+            <Rotation3D X="0.3166" Y="-0.3188" Z="-45.2030" />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="2.c3b" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="UVAnimation" ActionTag="1095859565" Tag="88" CameraFlagMode="30" ctype="Particle3DObjectData">
+            <Size X="1.0000" Y="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <Position3D X="15.3566" Y="5.0069" Z="219.5630" />
+            <Rotation3D />
+            <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
+            <FileData Type="Normal" Path="UVAnimation.pu" Plist="" />
+          </AbstractNodeData>
         </Children>
         <LeftImage Type="Default" Path="Default/skybox.png" Plist="" />
         <RightImage Type="Default" Path="Default/skybox.png" Plist="" />
