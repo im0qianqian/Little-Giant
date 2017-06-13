@@ -7,10 +7,12 @@ CharacterManager::CharacterManager():
 	_cachePool(ObjCachePool<EnemyCharacter>(this, CHARACTER_CACHE_SIZE)),
 	_enemyCharacter(set<Character*>())
 {
+	cout << "CharacterManager 构造" << endl;
 }
 
 CharacterManager::~CharacterManager()
 {
+	cout << "CharacterManager 析构" << endl;
 }
 
 bool CharacterManager::init()
@@ -18,7 +20,8 @@ bool CharacterManager::init()
 	// 第一步先创建缓存池
 	_cachePool.createCachePool();
 	// 第二步创建人物
-	startGame(0,0);
+	startGame(0,5);
+	schedule(schedule_selector(AwardManager::update), 10.f);
 	return true;
 }
 
@@ -74,5 +77,16 @@ void CharacterManager::addToPool(EnemyCharacter * const & character)
 	_enemyCharacter.erase(character);
 	/*cout << "一个人物已死亡，缓冲池大小：" << _cachePool.getResidualSize() << endl;
 	cout << "场上剩余人数：" << _enemyCharacter.size() << endl;*/
+}
+
+void CharacterManager::update(float dt)
+{
+	if (GameScene::getGameMode() != kGameModeTimer)
+	{
+		if (_enemyCharacter.size() == 0)
+		{
+			
+		}
+	}
 }
 

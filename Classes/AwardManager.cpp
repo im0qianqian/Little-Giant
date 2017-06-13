@@ -4,10 +4,12 @@
 AwardManager::AwardManager():
 	_cachePool(ObjCachePool<Award>(this,AWARD_CACHE_SIZE))
 {
+	cout << "AwardManager ¹¹Ôì" << endl;
 }
 
 AwardManager::~AwardManager()
 {
+	cout << "AwardManager Îö¹¹" << endl;
 }
 
 bool AwardManager::init()

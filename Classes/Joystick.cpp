@@ -14,10 +14,14 @@ Joystick::Joystick() :
 	_listenerTouch(nullptr),
 	_isFirstView(false)
 {
+	cout << "joystick 创建了" << endl;
 }
 
 Joystick::~Joystick()
 {
+	//GameScene::getCharacterManager()->getPlayerCharacter()->getThreadMutex().lock();
+	//GameScene::getCharacterManager()->getPlayerCharacter()->getThreadMutex().unlock();
+	cout << "joystick 销毁了" << endl;
 }
 
 bool Joystick::init()

@@ -36,6 +36,7 @@ public:
 	void createCharacter(CharacterType characterType);
 	/* 添加一个人物对象到缓存池 */
 	void addToPool(EnemyCharacter * const &character);
+	virtual void update(float dt) override;
 private:
 	Character* _playerCharacter;						//玩家人物
 	std::set <Character*> _enemyCharacter;				//其他人物

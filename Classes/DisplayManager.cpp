@@ -26,10 +26,12 @@ DisplayManager::DisplayManager() :
 	_levelNum(0),
 	_percent(0)
 {
+	cout << "DisplayManager 构造" << endl;
 }
 
 DisplayManager::~DisplayManager()
 {
+	cout << "DisplayManager 析构" << endl;
 }
 
 bool DisplayManager::init()
@@ -182,7 +184,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 300 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 25 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8"时间剩余 " + to_string(remainingTime) + "s");

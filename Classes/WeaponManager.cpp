@@ -3,10 +3,12 @@
 WeaponManager::WeaponManager():
 	_cachePool(ObjCachePool<Weapons>(this, WEAPONS_CACHE_SIZE))
 {
+	cout << "WeaponManager ¹¹Ôì" << endl;
 }
 
 WeaponManager::~WeaponManager()
 {
+	cout << "WeaponManager Îö¹¹" << endl;
 }
 
 bool WeaponManager::init()

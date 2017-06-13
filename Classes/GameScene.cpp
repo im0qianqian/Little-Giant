@@ -18,10 +18,12 @@ int GameScene::_startingTime = 0;
 
 GameScene::GameScene()
 {
-} 
+	cout << "GameScene ¹¹Ôì" << endl;
+}
 
 GameScene::~GameScene()
 {
+	cout << "GameScene Îö¹¹" << endl;
 }
 
 bool GameScene::init()
@@ -71,3 +73,4 @@ bool GameScene::init()
 	} while (false);
 	return flag;
 }
+

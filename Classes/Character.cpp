@@ -369,6 +369,11 @@ void PlayerCharacter::moveModule()
 	getThreadMutex().lock();
 	while (!isDie())
 	{
+		if (GameScene::getJoystick()->getReferenceCount() == 0 || GameScene::getCamera()->getReferenceCount() == 0 || getReferenceCount() == 0)
+		{
+			cout << "检测到某对象已被析构跳出" << endl;
+			break;
+		}
 		Vec3 res = Vec3::ZERO;
 		if (GameScene::getJoystick()->getKeyW())
 			res += Vec3(0, 0, -1);
@@ -428,10 +433,16 @@ void EnemyCharacter::die()
 void EnemyCharacter::moveModule()
 {
 	cout << this << " 线程启动" << endl;
+	this_thread::sleep_for(chrono::milliseconds(2000));
 	getThreadMutex().lock();
 	while (!isDie())
 	{
-		if (GameScene::getCharacterManager() == nullptr || GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
+		if (GameScene::getCharacterManager()->getReferenceCount() == 0)
+		{
+			cout << "CharacterManager 已被析构，跳出" << endl;
+			break;
+		}
+		if (GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
 		Vec3 minn = Vec3::ZERO;
 		minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
 		auto other = GameScene::getCharacterManager()->getEnemyCharacter();

@@ -9,10 +9,12 @@ StageManager::StageManager() :
 	_characterLight(nullptr)
 {
 	memset(_map, 0, sizeof(_map));
+	cout << "StageManager ¹¹Ôì" << endl;
 }
 
 StageManager::~StageManager()
 {
+	cout << "StageManager Îö¹¹" << endl;
 }
 
 bool StageManager::init()

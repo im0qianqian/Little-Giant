@@ -9,7 +9,6 @@ class LoadLayer:public Layer
 public :
 	LoadLayer();
 	~LoadLayer();
-	static cocos2d::Scene* createScene();
 	virtual bool init() override;
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(LoadLayer);
@@ -20,5 +19,6 @@ private:
 	int _loadImage;
 	Label *_percentLabel;
 	Label *_loadLabel;
+	Sprite *_cloud;
 };
 #endif

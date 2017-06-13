@@ -111,7 +111,7 @@
             <Position3D X="15.3566" Y="5.0069" Z="219.5630" />
             <Rotation3D />
             <Scale3D X="1.0000" Y="1.0000" Z="1.0000" />
-            <FileData Type="Normal" Path="UVAnimation.pu" Plist="" />
+            <FileData Type="Normal" Path="" Plist="" />
           </AbstractNodeData>
         </Children>
         <LeftImage Type="Default" Path="Default/skybox.png" Plist="" />

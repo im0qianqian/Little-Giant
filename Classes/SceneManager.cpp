@@ -19,6 +19,7 @@ SceneManager::~SceneManager()
 
 bool SceneManager::init()
 {
+	
 	return true;
 }
 

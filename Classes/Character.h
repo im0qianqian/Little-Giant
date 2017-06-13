@@ -114,6 +114,7 @@ public:
 	virtual void collisionWithAward(Award *const &award);
 	/* ÊÇ·ñËÀÍö */
 	virtual bool isDie() const { return _isDie; }
+	
 protected:
 	/* ÒÆ¶¯ */
 	virtual void move();
