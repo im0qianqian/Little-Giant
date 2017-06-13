@@ -144,18 +144,21 @@ void StageManager::createGround()
 	addChild(_ground);
 	
 	/* 暂定 */
-	auto sky = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/sss.jpg");
+	/*auto sky = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/sss.jpg");
 	sky->setScaleX(WORLD_LENGTH);
 	sky->setScaleZ(WORLD_WIDTH);
 	sky->setPositionY(ELEMENT_HEIGHT/2);
 	sky->setOpacity(0);
 	sky->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 	sky->syncNodeToPhysics();
-	addChild(sky);
+	addChild(sky);*/
 }
 
 void StageManager::update(float dt)
 {
-	// 人物灯光一直跟随主角
-	getCharacterLight()->setPosition3D(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+	if (GameScene::getCharacterManager()->getPlayerCharacter() != nullptr)
+	{
+		// 人物灯光一直跟随主角
+		getCharacterLight()->setPosition3D(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+	}
 }

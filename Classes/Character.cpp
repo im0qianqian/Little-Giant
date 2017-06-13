@@ -367,7 +367,7 @@ void PlayerCharacter::moveModule()
 		}
 		else
 		{
-			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
+   			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
 			//GameScene::getCamera()->lookAt(getPosition3D());
 			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
 		}
