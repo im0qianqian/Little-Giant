@@ -182,7 +182,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 300 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 20 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8" ±º‰ £”‡ " + to_string(remainingTime) + "s");

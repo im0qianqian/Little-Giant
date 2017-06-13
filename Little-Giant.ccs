@@ -15,6 +15,7 @@
           <Image Name="movespeed.png" />
           <Image Name="speed.png" />
         </Folder>
+        <Mesh Name="2.c3b" />
         <Image Name="animationbuttonnormal.png" />
         <Image Name="animationbuttonpressed.png" />
         <Image Name="arx.png" />

@@ -72,7 +72,6 @@ void Character::attack(const Vec3 &pos)
 	{
 		_lastAttackTime = currentTime;												// 更新最后一次攻击时间
 		GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
-		cout << "success" << endl;
 	}
 }
 
