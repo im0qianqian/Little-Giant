@@ -6,7 +6,7 @@
       <ObjectData Name="Layer" Tag="26" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" Alpha="204" Tag="133" IconVisible="False" LeftMargin="157.4612" RightMargin="652.5388" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_0" ActionTag="1257853302" VisibleForFrame="False" Alpha="204" Tag="133" IconVisible="False" LeftMargin="157.4612" RightMargin="652.5388" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="157.4612" Y="78.8394" />
@@ -19,7 +19,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_panel_1" ActionTag="798244313" Alpha="204" Tag="134" IconVisible="False" LeftMargin="398.6631" RightMargin="411.3369" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_1" ActionTag="798244313" VisibleForFrame="False" Alpha="204" Tag="134" IconVisible="False" LeftMargin="398.6631" RightMargin="411.3369" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="398.6631" Y="78.8394" />
@@ -32,7 +32,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_panel_2" ActionTag="1581851089" Alpha="204" Tag="135" IconVisible="False" LeftMargin="639.5890" RightMargin="170.4110" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="skill_panel_2" ActionTag="1581851089" VisibleForFrame="False" Alpha="204" Tag="135" IconVisible="False" LeftMargin="639.5890" RightMargin="170.4110" TopMargin="411.1606" BottomMargin="78.8394" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="150.0000" Y="150.0000" />
             <AnchorPoint />
             <Position X="639.5890" Y="78.8394" />
@@ -69,14 +69,14 @@
             <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_1" ActionTag="1917110651" Tag="28" IconVisible="False" LeftMargin="285.9224" RightMargin="652.0776" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="LV " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="22.0000" Y="21.0000" />
+            <Size X="30.0000" Y="20.0000" />
             <AnchorPoint ScaleX="0.7308" ScaleY="0.7200" />
             <Position X="302.0000" Y="602.1200" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3146" Y="0.9408" />
             <PreSize X="0.0229" Y="0.0328" />
-            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+            <FontResource Type="Default" Path="" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -90,15 +90,15 @@
             <PreSize X="0.2083" Y="0.0219" />
             <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="323.6664" RightMargin="628.3336" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="1" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="8.0000" Y="21.0000" />
+          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="320.9996" RightMargin="627.0004" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="0" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="10.0000" Y="20.0000" />
             <AnchorPoint ScaleX="0.6667" ScaleY="0.5208" />
             <Position X="329.0000" Y="597.9368" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3427" Y="0.9343" />
-            <PreSize X="0.0083" Y="0.0328" />
-            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+            <PreSize X="0.0125" Y="0.0328" />
+            <FontResource Type="Default" Path="" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -405,7 +405,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_list_0" ActionTag="-592420377" Tag="115" IconVisible="False" LeftMargin="649.8356" RightMargin="180.1644" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+          <AbstractNodeData Name="skill_list_0" ActionTag="-592420377" VisibleForFrame="False" Tag="115" IconVisible="False" LeftMargin="649.8356" RightMargin="180.1644" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
             <Size X="130.0000" Y="130.0000" />
             <Children>
               <AbstractNodeData Name="4" ActionTag="1964582176" Tag="4" IconVisible="False" BottomMargin="1040.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
@@ -510,7 +510,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_list_1" ActionTag="1249064928" Tag="124" IconVisible="False" LeftMargin="408.0466" RightMargin="421.9534" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+          <AbstractNodeData Name="skill_list_1" ActionTag="1249064928" VisibleForFrame="False" Tag="124" IconVisible="False" LeftMargin="408.0466" RightMargin="421.9534" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
             <Size X="130.0000" Y="130.0000" />
             <Children>
               <AbstractNodeData Name="7" ActionTag="15645380" Tag="7" IconVisible="False" BottomMargin="1040.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
@@ -543,15 +543,15 @@
                 <PreSize X="1.0000" Y="0.1111" />
                 <FileData Type="Normal" Path="skill/defensiveforce.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="1" ActionTag="-196814346" ZOrder="3" Tag="1" IconVisible="False" TopMargin="390.0000" BottomMargin="650.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="2" ActionTag="-2067272793" ZOrder="3" Tag="2" IconVisible="False" TopMargin="520.0000" BottomMargin="520.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
                 <Size X="130.0000" Y="130.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="65.0000" Y="715.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5000" Y="0.6111" />
+                <PrePosition X="0.5000" Y="0.5000" />
                 <PreSize X="1.0000" Y="0.1111" />
-                <FileData Type="Normal" Path="skill/speed.png" Plist="" />
+                <FileData Type="Normal" Path="skill/arrow.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="3" ActionTag="1433920255" ZOrder="4" Tag="3" IconVisible="False" TopMargin="520.0000" BottomMargin="520.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
                 <Size X="130.0000" Y="130.0000" />
@@ -563,7 +563,7 @@
                 <PreSize X="1.0000" Y="0.1111" />
                 <FileData Type="Normal" Path="skill/def.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="2" ActionTag="-2067272793" ZOrder="5" Tag="2" IconVisible="False" TopMargin="650.0000" BottomMargin="390.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="1" ActionTag="-196814346" ZOrder="5" Tag="1" IconVisible="False" TopMargin="650.0000" BottomMargin="390.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
                 <Size X="130.0000" Y="130.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="65.0000" Y="455.0000" />
@@ -571,7 +571,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.3889" />
                 <PreSize X="1.0000" Y="0.1111" />
-                <FileData Type="Normal" Path="skill/arrow.png" Plist="" />
+                <FileData Type="Normal" Path="skill/speed.png" Plist="" />
               </AbstractNodeData>
               <AbstractNodeData Name="0" ActionTag="917837796" ZOrder="6" IconVisible="False" TopMargin="780.0000" BottomMargin="260.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
                 <Size X="130.0000" Y="130.0000" />
@@ -615,7 +615,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="skill_list_2" ActionTag="-958433144" ZOrder="8" Tag="106" IconVisible="False" LeftMargin="169.2032" RightMargin="660.7968" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
+          <AbstractNodeData Name="skill_list_2" ActionTag="-958433144" ZOrder="8" VisibleForFrame="False" Tag="106" IconVisible="False" LeftMargin="169.2032" RightMargin="660.7968" TopMargin="421.1606" BottomMargin="88.8394" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ScrollDirectionType="0" DirectionType="Vertical" ctype="ListViewObjectData">
             <Size X="130.0000" Y="130.0000" />
             <Children>
               <AbstractNodeData Name="0" ActionTag="-567800232" IconVisible="False" BottomMargin="1040.0000" TouchEnable="True" LeftEage="25" RightEage="42" TopEage="42" BottomEage="87" Scale9OriginX="25" Scale9OriginY="42" Scale9Width="63" Scale9Height="1" ctype="ImageViewObjectData">
@@ -728,7 +728,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9465" Y="0.0472" />
             <PreSize X="0.0938" Y="0.0703" />
-            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+            <FontResource Type="Default" Path="" Plist="" />
             <TextColor A="255" R="230" G="230" B="250" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
@@ -736,42 +736,42 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="SorceBoard" ActionTag="-1744932675" Tag="151" IconVisible="False" LeftMargin="239.8246" RightMargin="220.1754" TopMargin="160.8258" BottomMargin="179.1742" ClipAble="True" BackColorAlpha="204" ComboBoxIndex="2" ColorAngle="260.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="SorceBoard" ActionTag="-1744932675" VisibleForFrame="False" Tag="151" IconVisible="False" LeftMargin="239.8246" RightMargin="220.1754" TopMargin="160.8258" BottomMargin="179.1742" ClipAble="True" BackColorAlpha="204" ComboBoxIndex="2" ColorAngle="260.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="500.0000" Y="300.0000" />
             <Children>
-              <AbstractNodeData Name="game_over" ActionTag="1682102713" Tag="152" IconVisible="False" LeftMargin="47.0553" RightMargin="282.9447" TopMargin="41.9667" BottomMargin="214.0333" FontSize="40" LabelText="Game Over" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="170.0000" Y="44.0000" />
+              <AbstractNodeData Name="game_over" ActionTag="1682102713" Tag="152" IconVisible="False" LeftMargin="47.0553" RightMargin="282.9447" TopMargin="41.9667" BottomMargin="214.0333" FontSize="40" LabelText="Game Over" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="180.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="132.0553" Y="236.0333" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2641" Y="0.7868" />
                 <PreSize X="0.3400" Y="0.1467" />
-                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <FontResource Type="Default" Path="" Plist="" />
                 <OutlineColor A="255" R="255" G="255" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
               <AbstractNodeData Name="sorce" ActionTag="-1632423610" Tag="153" IconVisible="False" LeftMargin="111.7367" RightMargin="295.2633" TopMargin="127.0552" BottomMargin="130.9448" FontSize="40" LabelText="Sorce: " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="93.0000" Y="42.0000" />
+                <Size X="140.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="158.2367" Y="151.9448" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3165" Y="0.5065" />
                 <PreSize X="0.1860" Y="0.1400" />
-                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <FontResource Type="Default" Path="" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sorce_num" ActionTag="-1279520349" Tag="155" IconVisible="False" LeftMargin="272.1109" RightMargin="136.8891" TopMargin="127.0552" BottomMargin="130.9448" FontSize="40" LabelText="10000" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="91.0000" Y="42.0000" />
+              <AbstractNodeData Name="sorce_num" ActionTag="-1279520349" Tag="155" IconVisible="False" LeftMargin="307.1109" RightMargin="171.8891" TopMargin="127.0552" BottomMargin="130.9448" FontSize="40" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="20.0000" Y="40.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="317.6109" Y="151.9448" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6352" Y="0.5065" />
-                <PreSize X="0.1820" Y="0.1400" />
-                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <PreSize X="0.0420" Y="0.1400" />
+                <FontResource Type="Default" Path="" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -783,7 +783,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2876" Y="0.2106" />
                 <PreSize X="0.3400" Y="0.2000" />
-                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <FontResource Type="Default" Path="" Plist="" />
                 <TextColor A="255" R="230" G="230" B="250" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                 <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
@@ -799,7 +799,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6922" Y="0.2106" />
                 <PreSize X="0.3400" Y="0.2000" />
-                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <FontResource Type="Default" Path="" Plist="" />
                 <TextColor A="255" R="230" G="230" B="250" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                 <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
@@ -831,14 +831,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Current_Time" ActionTag="-1976389482" Tag="73" IconVisible="False" LeftMargin="57.0000" RightMargin="863.0000" TopMargin="17.5000" BottomMargin="599.5000" FontSize="20" LabelText="时间" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="40.0000" Y="23.0000" />
+          <AbstractNodeData Name="Current_Time" ActionTag="-1976389482" Tag="73" IconVisible="False" LeftMargin="89.2091" RightMargin="870.7909" TopMargin="43.0369" BottomMargin="596.9631" FontSize="26" LabelText="" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="0.0000" Y="0.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="77.0000" Y="611.0000" />
+            <Position X="89.2091" Y="596.9631" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0802" Y="0.9547" />
-            <PreSize X="0.0417" Y="0.0359" />
+            <CColor A="255" R="255" G="165" B="0" />
+            <PrePosition X="0.0929" Y="0.9328" />
+            <PreSize X="0.0000" Y="0.0000" />
             <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

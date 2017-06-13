@@ -121,6 +121,7 @@ protected:
 	/* 获取人物移动方向向量 */
 	virtual Vec3 getDirection() { return _direction; }
 	virtual mutex &getThreadMutex() { return _threadMutex; }
+	virtual void setTopName(const string &name) { _topName->setString(name); }
 private:
 	/* 受到武器攻击 */
 	virtual void beAttacked(Weapons *const &weapon);
@@ -142,6 +143,7 @@ private:
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡
 	Slider* _hpSlider;		//人物血量条
+	Label* _topName;		//人物头顶的名字
 	Vec3 _direction;		//人物移动方向向量
 	mutex _threadMutex;		//线程锁
 };

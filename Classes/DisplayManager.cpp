@@ -20,10 +20,12 @@ DisplayManager::DisplayManager() :
 	_sorceNum(nullptr),
 	_buttonHome(nullptr),
 	_buttonRestart(nullptr),
+	_promptLabel(nullptr),
+	_currentTime(nullptr),
+	_scoreList(std::vector<ListViewSorce>()),
 	_levelNum(0),
 	_percent(0)
 {
-	_scoreList.clear();
 }
 
 DisplayManager::~DisplayManager()
@@ -37,24 +39,16 @@ bool DisplayManager::init()
 	{
 		// 加载 csb 文件
 		_displayNode = CSLoader::createNode("res/DisplayLayer.csb");
-		//获取提示技能加成文本标签
+		// 获取提示技能加成文本标签
 		_promptLabel = static_cast<Text*>(_displayNode->getChildByName("Prompt_Label"));
 		// 获取其中的文本标签
 		_levelLabel = static_cast<Text*>(_displayNode->getChildByName("Level_Label"));
+		// 获取剩余时间文本标签
 		_currentTime = static_cast<Text*>(_displayNode->getChildByName("Current_Time"));
 		// 获取其中的进度条
 		_experienceBar = static_cast<LoadingBar*>(_displayNode->getChildByName("Experience_bar"));
 		// 获取成绩列表
 		auto sorceList = static_cast<ListView*>(_displayNode->getChildByName("SorceListView"));
-		for (int i = 0; i < 3; i++)
-		{
-			/*string name = "skill_list_" + std::to_string(i);
-			CCLOG("%s", name);*/
-			skill_list[i] = static_cast<ListView*>(_displayNode->getChildByName(skill_ListName[i]));
-			skill_panel[i] = static_cast<PageView*>(_displayNode->getChildByName(skill_PanelName[i]));
-			skill_list[i]->setVisible(false);
-			skill_panel[i]->setVisible(false);
-		}
 		for (auto i = 0; i < _scoreListSize; i++)
 		{
 			auto list = static_cast<ListView*>(sorceList->getChildByName("SorceList_" + to_string(i)));
@@ -66,6 +60,12 @@ bool DisplayManager::init()
 			CCASSERT(name, "NULL");
 			CCASSERT(sorce, "NULL");
 			_scoreList.push_back(ListViewSorce(rank, name, sorce));
+		}
+		// 获取技能面板
+		for (int i = 0; i < 3; i++)
+		{
+			_skill_list[i] = static_cast<ListView*>(_displayNode->getChildByName("skill_list_" + to_string(i)));
+			_skill_panel[i] = static_cast<PageView*>(_displayNode->getChildByName("skill_panel_" + to_string(i)));
 		}
 		// 获取退出按钮
 		_exitButton = static_cast<Button*>(_displayNode->getChildByName("button_exit"));
@@ -86,8 +86,6 @@ bool DisplayManager::init()
 		{
 			SceneManager::getInstance()->changeScene(kGameScene);
 		});
-		/* 这里暂定隐藏 */
-		_sorceBoard->setVisible(false);
 		/* */
 		addChild(_displayNode);
 		// 启动定时器开始更新
@@ -104,8 +102,11 @@ void DisplayManager::update(float dt)
 	updateExperience();
 	// 更新成绩列表
 	updateSorceList();
-	// 更新剩余时间
-
+	if (GameScene::getGameMode() == kGameModeTimer)
+	{
+		// 更新剩余时间
+		updateCurrentTime();
+	}
 }
 
 void DisplayManager::updateAnimation(float dt)
@@ -171,52 +172,8 @@ void DisplayManager::updateExperience()
 	if (exp >= levelExperinence)
 	{
 		exp = exp - levelExperinence;
-		_levelNum++;
-		int ratio = rand() % 17 ;
-		CCLOG("%d", ratio);
-		if (ratio % 2 == 1)
-			ratio --;
-		CCLOG("%d", ratio);
-		for (int i = 0; i < 3; i++)
-		{
-			skill_list[i]->setVisible(true);
-			skill_list[i]->setScrollBarOpacity(0);
-			skill_panel[i]->setVisible(true);
-			skill_list[i]->setDirection(ScrollView::Direction::VERTICAL);
-			skill_list[i]->scrollToBottom(5.0, true);
-			skill_list[i]->scrollToTop(5.0, true);
-		}
-		for (int i = 0; i < 3;i++)
-		{
-			skill_list[i]->scrollToBottom(5.0, true);
-			skill_list[i]->scrollToTop(5.0, true);
-			/*skill_list[i]->scrollToBottom(5.0, true);
-			skill_list[i]->scrollToTop(5.0, true);*/
-			skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
-			/*Widget* item = skill_list[i]->getCurrentFocusedWidget(true);*/
-		   // skill_list[i]->setEnabled(false);
-			//skill_list[i]->setPropagateTouchEvents(true);
-			skill_list[i]->setDirection(ScrollView::Direction::NONE);
-			//skill_list[i]->setFocused(false);
-			//skill_list[i]->setItemsMargin(5.0);
-			//skill_list[i]->setClippingEnabled(true);
-			//skill_list[i]->setFocusEnabled(false);
-			/*
-			skill_list[i]->getTopBoundary();
-			skill_list[i]->getCurrentFocusedWidget(true);*/
-			/*skill_list[i]->jumpToPercentVertical(0.25);*/
-
-			//skill_panel[i]->addClickEventListener(CC_CALLBACK_1(DisplayManager::ListViewMoveCallback, this));
-			int skillNum=skill_list[i]->getItems().size();
-			for (size_t j = 0; j < skillNum; j++)
-			{
-				Widget* item = skill_list[i]->getItem(j);//获取其中的某个项，然后转换成Button 进行设置操作
-				/*Button* button = static_cast<Button*>(item->getChildByName("Title Button"));
-				ssize_t index = skill_list[i]->getIndex(item);*/
-				item->addClickEventListener(CC_CALLBACK_1(DisplayManager::ListViewMoveCallback, this));
-			}
-
-		}
+		_levelNum++;					// 等级++
+		showSkillBoard();				// 显示升级技能选择
 	}
 	_percent = (float)(exp) / (float)(levelExperinence) * 100;
 	//CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
@@ -225,18 +182,84 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
+	int remainingTime = 20 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
+	if (remainingTime >= 0)
+	{
+		_currentTime->setString(u8"时间剩余 " + to_string(remainingTime) + "s");
+	}
+	else
+	{
+		// 停止所有定时器
+		unscheduleAllSelectors();
+		// 显示得分面板
+		showSorceBoard();
+	}
 }
 
 void DisplayManager::showSorceBoard()
 {
 	_sorceBoard->setVisible(true);
-	cout << GameScene::getCharacterManager()->getPlayerCharacter()->getSorce() << endl;
-	cout << _sorceNum << endl;
 	_sorceNum->setString(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
 }
 
 void DisplayManager::showSkillBoard()
 {
+	int ratio = rand() % 17;
+	CCLOG("%d", ratio);
+	if (ratio % 2 == 1)
+		ratio--;
+	CCLOG("%d", ratio);
+	for (int i = 0; i < 3; i++)
+	{
+		_skill_list[i]->setVisible(true);
+		_skill_list[i]->setScrollBarOpacity(0);
+		_skill_panel[i]->setVisible(true);
+		_skill_list[i]->setDirection(ScrollView::Direction::VERTICAL);
+		_skill_list[i]->scrollToBottom(5.0, true);
+		_skill_list[i]->scrollToTop(5.0, true);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		_skill_list[i]->scrollToBottom(5.0, true);
+		_skill_list[i]->scrollToTop(5.0, true);
+		/*_skill_list[i]->scrollToBottom(5.0, true);
+		_skill_list[i]->scrollToTop(5.0, true);*/
+		_skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
+		/*Widget* item = _skill_list[i]->getCurrentFocusedWidget(true);*/
+		// _skill_list[i]->setEnabled(false);
+		//_skill_list[i]->setPropagateTouchEvents(true);
+		_skill_list[i]->setDirection(ScrollView::Direction::NONE);
+		//_skill_list[i]->setFocused(false);
+		//_skill_list[i]->setItemsMargin(5.0);
+		//_skill_list[i]->setClippingEnabled(true);
+		//_skill_list[i]->setFocusEnabled(false);
+		/*
+		_skill_list[i]->getTopBoundary();
+		_skill_list[i]->getCurrentFocusedWidget(true);*/
+		/*_skill_list[i]->jumpToPercentVertical(0.25);*/
+
+		//_skill_panel[i]->addClickEventListener(CC_CALLBACK_1(DisplayManager::ListViewMoveCallback, this));
+		int skillNum = _skill_list[i]->getItems().size();
+		for (size_t j = 0; j < skillNum; j++)
+		{
+			Widget* item = _skill_list[i]->getItem(j);//获取其中的某个项，然后转换成Button 进行设置操作
+													 /*Button* button = static_cast<Button*>(item->getChildByName("Title Button"));
+													 ssize_t index = _skill_list[i]->getIndex(item);*/
+			item->addClickEventListener([this](Ref *const ref)
+			{
+				// 先隐藏三个技能面板
+				for (int i = 0; i < 3; i++)
+				{
+					_skill_list[i]->setVisible(false);
+					_skill_panel[i]->setVisible(false);
+				}
+				// 获取技能标签
+				int itemTag = static_cast<Node*>(ref)->getTag();
+				// 应用技能
+				applyToSkill(itemTag);
+			});
+		}
+	}
 }
 
 DisplayManager::ListViewSorce::ListViewSorce() :
@@ -265,19 +288,6 @@ void DisplayManager::ListViewSorce::setColor(const Color3B &color)
 	_sorce->setColor(color);
 }
 
-void DisplayManager::ListViewMoveCallback(cocos2d::Ref *pSender)
-{
-	for (int i = 0; i < 3; i++)
-	{
-		skill_list[i]->setVisible(false);
-		skill_panel[i]->setVisible(false);
-	}
-
-	auto *touchItem = static_cast<Widget *>(pSender);
-	int itemTag = touchItem->getTag();
-	applyToSkill(itemTag);
-
-}
 void DisplayManager::applyToSkill(const int &skillTag)
 {
 	auto character = GameScene::getCharacterManager()->getPlayerCharacter();
