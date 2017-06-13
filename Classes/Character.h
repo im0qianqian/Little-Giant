@@ -16,6 +16,7 @@ USING_NS_CC;
 using namespace cocos2d::ui;
 
 class Weapons;
+class Award;
 class Character : public PhysicsSprite3D
 {
 public:
@@ -109,6 +110,8 @@ public:
 	virtual void initialization();
 	/* ÓëÎäÆ÷Åö×² */
 	virtual void collisionWithWeapon(Weapons *const &weapon);
+	/* Óë½±ÀøÅö×² */
+	virtual void collisionWithAward(Award *const &award);
 	/* ÊÇ·ñËÀÍö */
 	virtual bool isDie() const { return _isDie; }
 protected:

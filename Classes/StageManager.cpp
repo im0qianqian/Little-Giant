@@ -42,7 +42,7 @@ void StageManager::createLight()
 	_characterLight = PointLight::create(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D(), Color3B::WHITE, 50.f);
 	// ÉèÖÃµÆ¹âÁÁ¶È
 	_characterLight->setIntensity(.5f);
-
+	
 	// Ì«ÑôÎ§ÈÆÐý×ªµÄ°ë¾¶
 	float radius = 1000.f;
 	_sun = DirectionLight::create(Vec3::ZERO, Color3B::WHITE);

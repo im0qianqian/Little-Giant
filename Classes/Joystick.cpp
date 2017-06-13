@@ -126,15 +126,16 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 			if (objA != NULL && objB != NULL)
 			{
 				bool flag = true;	// 是否输出碰撞 Tag 调试使用
+				auto collisionPos = ci.collisionPointList[0].worldPositionOnB;
 
 				//判断位置合法，暂用(场外位置不考虑碰撞)
-				if (ci.collisionPointList[0].worldPositionOnB.y < 0)return;
+				if (collisionPos.y < 0)return;
 
 				if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))		//武器与障碍物碰撞
 				{
 					// 创建光效
-					createParticle(ci.collisionPointList[0].worldPositionOnB);
-
+					createParticle(collisionPos);
+					
 					//CCLOG("---------------- weapon stage --------------------");
 					// 如果 A 是障碍物的话交换，最终结果： A 武器、B 障碍物
 					if (objA->Node::getTag() == kGlobalStage)
@@ -146,7 +147,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//武器与人物碰撞
 				{
 					// 创建光效
-					createParticle(ci.collisionPointList[0].worldPositionOnB);
+					createParticle(collisionPos);
 
 					//CCLOG("---------------- weapon character --------------------");
 					// 如果 A 是武器的话交换，最终结果： A 人物、B 武器
@@ -162,7 +163,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//武器与武器碰撞
 				{
 					// 创建光效
-					createParticle(ci.collisionPointList[0].worldPositionOnB);
+					createParticle(collisionPos);
 
 					//CCLOG("---------------- weapon weapon --------------------");
 					Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
@@ -171,7 +172,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					weapon1->collisionWithWeapon(weapon2);
 					weapon2->collisionWithWeapon(weapon1);
 				}
-				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))	//人物与奖励碰撞
 				{
 					//CCLOG("---------------- Award character --------------------");
 					// 如果 A 是武器的话交换，最终结果： A 人物、B 奖励
@@ -181,6 +182,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					Character *character = dynamic_cast<Character*>(objA);
 					// 奖励与人物碰撞
 					award->collisionWithCharacter(character);
+					character->collisionWithAward(award);
 				}
 				else
 				{

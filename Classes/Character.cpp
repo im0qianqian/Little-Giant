@@ -3,7 +3,9 @@
 #include "SceneManager.h"
 #include "Joystick.h"
 #include "Weapons.h"
+#include "Award.h"
 #include "WeaponManager.h"
+#include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 USING_NS_CC;
 
@@ -154,6 +156,22 @@ void Character::collisionWithWeapon(Weapons * const & weapon)
 	// 人物受到攻击
 	beAttacked(weapon);
 	//cout << this << " 受到来自 " << weapon << " 的攻击！！！" << endl;
+}
+
+void Character::collisionWithAward(Award * const & award)
+{
+	[this]()
+	{
+		auto rootps = PUParticleSystem3D::create("images/blackHole.pu", "C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/materials/pu_mediapack_01.material");
+		rootps->setCameraMask((short int)CameraFlag::USER1);
+		rootps->setPosition3D(getPosition3D());
+		rootps->setScale(.1f);
+		GameScene::getCharacterManager()->addChild(rootps);
+		rootps->runAction(Sequence::create(CCFadeIn::create(.5f), CCDelayTime::create(1.f), CCFadeOut::create(.5f), CallFunc::create([=]() {
+			rootps->removeFromParent();
+		}), nullptr));
+		rootps->startParticleSystem();
+	}();
 }
 
 void Character::beAttacked(Weapons *const &weapon)
@@ -409,6 +427,7 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
+	cout << this << " 线程启动" << endl;
 	getThreadMutex().lock();
 	while (!isDie())
 	{
