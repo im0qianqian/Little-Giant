@@ -1,6 +1,7 @@
 #include "CharacterManager.h"
 #include "GameScene.h"
 #include "Global.h"
+#include "DisplayManager.h"
 
 CharacterManager::CharacterManager():
 	_playerCharacter(nullptr),
@@ -21,7 +22,7 @@ bool CharacterManager::init()
 	_cachePool.createCachePool();
 	// 第二步创建人物
 	startGame(0,5);
-	schedule(schedule_selector(AwardManager::update), 10.f);
+	scheduleUpdate();
 	return true;
 }
 
@@ -85,7 +86,7 @@ void CharacterManager::update(float dt)
 	{
 		if (_enemyCharacter.size() == 0)
 		{
-			
+			GameScene::getDisplayManager()->showSorceBoard();
 		}
 	}
 }

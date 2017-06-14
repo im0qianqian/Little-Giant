@@ -165,7 +165,7 @@ void Character::collisionWithAward(Award * const & award)
 		auto rootps = PUParticleSystem3D::create("images/blackHole.pu", "C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/materials/pu_mediapack_01.material");
 		rootps->setCameraMask((short int)CameraFlag::USER1);
 		rootps->setPosition3D(getPosition3D());
-		rootps->setScale(.1f);
+		rootps->setScale(.01f);
 		GameScene::getCharacterManager()->addChild(rootps);
 		rootps->runAction(Sequence::create(CCFadeIn::create(.5f), CCDelayTime::create(1.f), CCFadeOut::create(.5f), CallFunc::create([=]() {
 			rootps->removeFromParent();
