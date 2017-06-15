@@ -162,12 +162,12 @@ void Character::collisionWithAward(Award * const & award)
 {
 	[this]()
 	{
-		auto rootps = PUParticleSystem3D::create("images/blackHole.pu", "C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/materials/pu_mediapack_01.material");
+		auto rootps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/flareShield.pu");
 		rootps->setCameraMask((short int)CameraFlag::USER1);
 		rootps->setPosition3D(getPosition3D());
-		rootps->setScale(.01f);
+		rootps->setScale(.5f);
 		GameScene::getCharacterManager()->addChild(rootps);
-		rootps->runAction(Sequence::create(CCFadeIn::create(.5f), CCDelayTime::create(1.f), CCFadeOut::create(.5f), CallFunc::create([=]() {
+		rootps->runAction(Sequence::create(CCDelayTime::create(10.f), CallFunc::create([=]() {
 			rootps->removeFromParent();
 		}), nullptr));
 		rootps->startParticleSystem();

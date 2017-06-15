@@ -78,6 +78,7 @@ bool DisplayManager::init()
 		// 获取计分表
 		_sorceBoard = static_cast<Layout*>(_displayNode->getChildByName("SorceBoard"));
 		_sorceNum = static_cast<Text*>(_sorceBoard->getChildByName("sorce_num"));
+		_sorceRank = static_cast<Text*>(_sorceBoard->getChildByName("sorce_rank"));
 		_buttonHome = static_cast<Button*>(_sorceBoard->getChildByName("Button_home"));
 		_buttonHome->addClickEventListener([](Ref *const ref)
 		{
@@ -201,7 +202,8 @@ void DisplayManager::updateCurrentTime()
 void DisplayManager::showSorceBoard()
 {
 	_sorceBoard->setVisible(true);
-	_sorceNum->setString(to_string(GameScene::getCharacterManager()->getPlayerCharacter()->getSorce()));
+	_sorceNum->setString(_scoreList[0].getSorce());
+	_sorceRank->setString(_scoreList[0].getRank());
 }
 
 void DisplayManager::showSkillBoard()

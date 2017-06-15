@@ -11,8 +11,6 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="DisplayLayer.csd" />
-          <FilePathData Path="MainLayer.csd" />
-          <FilePathData Path="Scene3D.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="DisplayLayer.csd" />
       </Value>

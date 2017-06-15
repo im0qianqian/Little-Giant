@@ -41,14 +41,15 @@ private:
 
 	Node *_displayNode;					// CSB node
 	Text *_levelLabel;					// 等级
-	Text *_promptLabel;                 //提示技能加成种类
-	Text *_currentTime;					//当前时间
+	Text *_promptLabel;                 // 提示技能加成种类
+	Text *_currentTime;					// 当前时间
 	LoadingBar *_experienceBar;			// 经验条
 	Button *_exitButton;				// 退出按钮
 	Button *_buttonHome;				//Home
 	Button *_buttonRestart;
 	Layout *_sorceBoard;				// 计分表
 	Text *_sorceNum;					// 最终得分
+	Text *_sorceRank;					// 最终排名
 	int _levelNum;						// 当前等级
 	float _percent;						// 当前经验条所占百分比
 	ListView* _skill_list[3];

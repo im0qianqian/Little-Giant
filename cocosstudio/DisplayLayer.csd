@@ -68,15 +68,15 @@
             <PreSize X="0.2083" Y="0.0219" />
             <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_1" ActionTag="1917110651" Tag="28" IconVisible="False" LeftMargin="280.0760" RightMargin="649.9240" TopMargin="32.2800" BottomMargin="587.7200" FontSize="20" LabelText="LV " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="30.0000" Y="20.0000" />
+          <AbstractNodeData Name="Text_1" ActionTag="1917110651" Tag="28" IconVisible="False" LeftMargin="285.9224" RightMargin="652.0776" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="LV " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="22.0000" Y="21.0000" />
             <AnchorPoint ScaleX="0.7308" ScaleY="0.7200" />
             <Position X="302.0000" Y="602.1200" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3146" Y="0.9408" />
-            <PreSize X="0.0313" Y="0.0313" />
-            <FontResource Type="Default" Path="" Plist="" />
+            <PreSize X="0.0229" Y="0.0328" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -90,15 +90,15 @@
             <PreSize X="0.2083" Y="0.0219" />
             <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="322.3330" RightMargin="627.6670" TopMargin="32.4792" BottomMargin="587.5208" FontSize="20" LabelText="0" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="10.0000" Y="20.0000" />
+          <AbstractNodeData Name="Level_Label" ActionTag="258329341" Tag="36" IconVisible="False" LeftMargin="320.9996" RightMargin="627.0004" TopMargin="32.0000" BottomMargin="587.0000" FontSize="20" LabelText="0" HorizontalAlignmentType="HT_Right" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="12.0000" Y="21.0000" />
             <AnchorPoint ScaleX="0.6667" ScaleY="0.5208" />
             <Position X="329.0000" Y="597.9368" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.3427" Y="0.9343" />
-            <PreSize X="0.0104" Y="0.0313" />
-            <FontResource Type="Default" Path="" Plist="" />
+            <PreSize X="0.0125" Y="0.0328" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -116,6 +116,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -127,6 +128,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -138,6 +140,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -164,6 +167,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -175,6 +179,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -186,6 +191,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -212,6 +218,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -223,6 +230,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -234,6 +242,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -260,6 +269,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -271,6 +281,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -282,6 +293,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -308,6 +320,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -319,6 +332,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -330,6 +344,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -356,6 +371,7 @@
                     <CColor A="255" R="255" G="255" B="0" />
                     <PrePosition X="0.0600" Y="0.5000" />
                     <PreSize X="0.1200" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -367,6 +383,7 @@
                     <CColor A="255" R="255" G="255" B="0" />
                     <PrePosition X="0.4000" Y="0.5000" />
                     <PreSize X="0.4800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -378,6 +395,7 @@
                     <CColor A="255" R="255" G="255" B="0" />
                     <PrePosition X="0.8200" Y="0.5000" />
                     <PreSize X="0.2800" Y="0.9286" />
+                    <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -728,7 +746,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9465" Y="0.0472" />
             <PreSize X="0.0938" Y="0.0703" />
-            <FontResource Type="Default" Path="" Plist="" />
+            <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
             <TextColor A="255" R="230" G="230" B="250" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
@@ -739,41 +757,53 @@
           <AbstractNodeData Name="SorceBoard" ActionTag="-1744932675" VisibleForFrame="False" Tag="151" IconVisible="False" LeftMargin="239.8246" RightMargin="220.1754" TopMargin="160.8258" BottomMargin="179.1742" ClipAble="True" BackColorAlpha="204" ComboBoxIndex="2" ColorAngle="260.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="500.0000" Y="300.0000" />
             <Children>
-              <AbstractNodeData Name="game_over" ActionTag="1682102713" Tag="152" IconVisible="False" LeftMargin="42.0553" RightMargin="277.9447" TopMargin="43.9667" BottomMargin="216.0333" FontSize="40" LabelText="Game Over" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="180.0000" Y="40.0000" />
+              <AbstractNodeData Name="game_over" ActionTag="1682102713" Tag="152" IconVisible="False" LeftMargin="47.5553" RightMargin="283.4447" TopMargin="42.9667" BottomMargin="215.0333" FontSize="40" LabelText="Game Over" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="169.0000" Y="42.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="132.0553" Y="236.0333" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition X="0.2641" Y="0.7868" />
-                <PreSize X="0.3600" Y="0.1333" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <PreSize X="0.3380" Y="0.1400" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="255" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sorce" ActionTag="-1632423610" Tag="153" IconVisible="False" LeftMargin="88.2367" RightMargin="271.7633" TopMargin="128.0552" BottomMargin="131.9448" FontSize="40" LabelText="Sorce: " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="140.0000" Y="40.0000" />
+              <AbstractNodeData Name="sorce" ActionTag="-1632423610" Tag="153" IconVisible="False" LeftMargin="136.4025" RightMargin="295.5975" TopMargin="153.5129" BottomMargin="114.4871" FontSize="30" LabelText="Sorce: " ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="68.0000" Y="32.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="158.2367" Y="151.9448" />
+                <Position X="170.4025" Y="130.4871" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="0" B="0" />
-                <PrePosition X="0.3165" Y="0.5065" />
-                <PreSize X="0.2800" Y="0.1333" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <PrePosition X="0.3408" Y="0.4350" />
+                <PreSize X="0.1360" Y="0.1067" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="30" G="144" B="255" />
               </AbstractNodeData>
-              <AbstractNodeData Name="sorce_num" ActionTag="-1279520349" Tag="155" IconVisible="False" LeftMargin="307.6109" RightMargin="172.3891" TopMargin="128.0552" BottomMargin="131.9448" FontSize="40" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="20.0000" Y="40.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="317.6109" Y="151.9448" />
+              <AbstractNodeData Name="sorce_num" ActionTag="-1279520349" Tag="155" IconVisible="False" LeftMargin="311.4999" RightMargin="170.5001" TopMargin="152.5850" BottomMargin="113.4150" FontSize="30" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="18.0000" Y="34.0000" />
+                <AnchorPoint ScaleX="0.7676" ScaleY="0.5180" />
+                <Position X="325.3163" Y="131.0281" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="0" B="0" />
-                <PrePosition X="0.6352" Y="0.5065" />
-                <PreSize X="0.0400" Y="0.1333" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <CColor A="255" R="255" G="255" B="0" />
+                <PrePosition X="0.6506" Y="0.4368" />
+                <PreSize X="0.0360" Y="0.1133" />
+                <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="30" G="144" B="255" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="rank" ActionTag="-962949137" Tag="74" IconVisible="False" LeftMargin="136.4026" RightMargin="292.5974" TopMargin="108.3559" BottomMargin="159.6441" FontSize="30" LabelText="Rank:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="71.0000" Y="32.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position X="171.9026" Y="175.6441" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="0" B="0" />
+                <PrePosition X="0.3438" Y="0.5855" />
+                <PreSize X="0.1420" Y="0.1067" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
               <AbstractNodeData Name="Button_home" ActionTag="-958038954" Alpha="229" Tag="156" IconVisible="False" LeftMargin="58.8223" RightMargin="271.1777" TopMargin="206.8181" BottomMargin="33.1819" TouchEnable="True" FontSize="30" ButtonText="Home" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="146" Scale9Height="58" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="170.0000" Y="60.0000" />
@@ -783,7 +813,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2876" Y="0.2106" />
                 <PreSize X="0.3400" Y="0.2000" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
                 <TextColor A="255" R="230" G="230" B="250" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                 <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
@@ -799,13 +829,25 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6922" Y="0.2106" />
                 <PreSize X="0.3400" Y="0.2000" />
-                <FontResource Type="Default" Path="" Plist="" />
+                <FontResource Type="Normal" Path="Marker Felt.ttf" Plist="" />
                 <TextColor A="255" R="230" G="230" B="250" />
                 <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
                 <PressedFileData Type="Normal" Path="animationbuttonpressed.png" Plist="" />
                 <NormalFileData Type="Normal" Path="animationbuttonnormal.png" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="sorce_rank" ActionTag="3749964" Tag="75" IconVisible="False" LeftMargin="311.7823" RightMargin="170.2177" TopMargin="107.7810" BottomMargin="158.2190" FontSize="30" LabelText="0" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="18.0000" Y="34.0000" />
+                <AnchorPoint ScaleX="0.6263" ScaleY="0.6063" />
+                <Position X="323.0562" Y="178.8337" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="0" />
+                <PrePosition X="0.6461" Y="0.5961" />
+                <PreSize X="0.0360" Y="0.1133" />
+                <FontResource Type="Normal" Path="FZYTK.TTF" Plist="" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="30" G="144" B="255" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />

@@ -34,6 +34,7 @@
         <Image Name="Floor.png" />
         <TTF Name="FZYTK.TTF" />
         <Project Name="MainLayer.csd" Type="Layer" />
+        <TTF Name="Marker Felt.ttf" />
         <Mesh Name="orc.c3b" />
         <Mesh Name="orc.c3t" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
