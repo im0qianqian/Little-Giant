@@ -29,7 +29,7 @@ bool LoadLayer::init()
 	_percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
 	this->addChild(_percentLabel, 2);
 	
-	_totalImage = 500;
+	_totalImage = 300;
 	_loadImage = 0;
 
 	_timer = ProgressTimer::create(Sprite::create("load.png"));
@@ -43,10 +43,10 @@ bool LoadLayer::init()
 	_timer->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	this->addChild(_timer,3);
 
-	for (int i = 1; i <= 500; i++)
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
+	for (int i = 1; i <= _totalImage; i++)
 	{
 		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::loadingCallback,this));
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	}
 	return true;
 }

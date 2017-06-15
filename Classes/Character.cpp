@@ -162,7 +162,8 @@ void Character::collisionWithAward(Award * const & award)
 {
 	[this]()
 	{
-		auto rootps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/flareShield.pu");
+		auto rootps = PUParticleSystem3D::create("scripts/flareShield.pu");
+		if (rootps == nullptr)return;
 		rootps->setCameraMask((short int)CameraFlag::USER1);
 		rootps->setPosition3D(getPosition3D());
 		rootps->setScale(.5f);

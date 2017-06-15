@@ -205,7 +205,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 void Joystick::createParticle(const Vec3 &pos)
 {
 	/* ÎäÆ÷Åö×²Á£×ÓÌØÐ§ */
-	auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+	auto ps = PUParticleSystem3D::create("scripts/mp_hit_04.pu");
+	if (ps == nullptr)return; 
 	ps->setPosition3D(pos);
 	ps->setScale(0.05f);
 	ps->startParticleSystem();

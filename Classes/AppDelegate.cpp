@@ -46,9 +46,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	// 资源文件检索路径
     FileUtils::getInstance()->addSearchPath("fonts");
 	FileUtils::getInstance()->addSearchPath("images");
-	FileUtils::getInstance()->addSearchPath("sounds");
 	FileUtils::getInstance()->addSearchPath("res");
 	FileUtils::getInstance()->addSearchPath("maps");
+	FileUtils::getInstance()->addSearchPath("scripts");
 
     // 从游戏菜单界面加载
 	SceneManager::getInstance()->changeScene(kMenuScene);
