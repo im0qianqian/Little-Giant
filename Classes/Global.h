@@ -15,7 +15,7 @@ USING_NS_CC;
 /* 全局常量设置 */
 #define SCREEN_WIDTH			640			//屏幕高度
 #define SCREEN_HEIGHT			960			//屏幕宽度
-#define SCREEN_FORM_NAME		"Arrow.io"	//窗口标题
+#define SCREEN_FORM_NAME		"Little-Giant"	 //窗口标题
 
 #define WORLD_LENGTH			200			//世界长度
 #define WORLD_WIDTH				200			//世界宽度
