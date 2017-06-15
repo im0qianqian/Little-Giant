@@ -33,13 +33,13 @@
         <Image Name="div2.jpg" />
         <Image Name="Floor.png" />
         <TTF Name="FZYTK.TTF" />
+        <Project Name="HelpScene.csd" Type="Scene" />
         <Project Name="MainLayer.csd" Type="Layer" />
         <TTF Name="Marker Felt.ttf" />
         <Mesh Name="orc.c3b" />
         <Mesh Name="orc.c3t" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
         <Mesh Name="sphere.c3b" />
-        <Project Name="HelpScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
