@@ -3,6 +3,7 @@
 #include "Global.h"
 #include "LoadLayer.h"
 #include "MainLayer.h"
+#include "HelpLayer.h"
 
 /* 类静态私有变量初始化 */
 SceneManager* SceneManager::s_sceneManager = nullptr;
@@ -19,7 +20,6 @@ SceneManager::~SceneManager()
 
 bool SceneManager::init()
 {
-	
 	return true;
 }
 
@@ -47,12 +47,16 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	case kGameScene:   
 		_layer = GameScene::create();
 		break;
+	case kHelpScene:
+		_layer = HelpLayer::create();
+		break;
 	default:
 		break;
 	}
 	/* 设置物理世界Debug相机 */
 	_scene->setPhysics3DDebugCamera(GameScene::getCamera());
 	_scene->addChild(_layer);
+	cout << _layer << endl;
 	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{
 		Director::getInstance()->replaceScene(_scene);	//替换为当前场景

@@ -12,7 +12,8 @@ enum SceneType
 {
 	kMenuScene,		//菜单场景
 	kLoadingScene,	//加载场景
-	kGameScene		//游戏场景
+	kGameScene,		//游戏场景
+	kHelpScene      //帮助场景
 };
 
 class SceneManager:public Ref

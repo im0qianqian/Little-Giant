@@ -39,6 +39,7 @@
         <Mesh Name="orc.c3t" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
         <Mesh Name="sphere.c3b" />
+        <Project Name="HelpScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>
