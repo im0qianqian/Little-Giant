@@ -20,7 +20,7 @@ bool Award::init()
 	bool flag = false;
 	do
 	{
-		if (initWithFile("Sprite3DTest/box.c3t"))								//设置形状
+		if (initWithFile("images/3.c3b"))								//设置形状
 		{
 			Physics3DRigidBodyDes rbDes;										//定义一个三维空间刚体
 			rbDes.mass = 0.f;													//设置刚体质量
@@ -36,7 +36,9 @@ bool Award::init()
 			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// 设置碰撞后的回调函数
 
 			obj->setUserData(this);
-			//setScale(.3f);
+
+			setScale(.007f);										//大小缩放到0.007倍
+			setRotation3D(Vec3(90,0,0));							//旋转
 
 			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//应用同步
 			flag = true;
@@ -112,5 +114,4 @@ void Award::randomType()
 	default:
 		break;
 	}
-	//setTexture("images/CyanSquare.png");
 }

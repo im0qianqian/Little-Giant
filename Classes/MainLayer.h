@@ -16,7 +16,7 @@ public:
 	void buttonCallBack(Ref * const node);
 private:
 	Node *_displayNode;		//CSB文件
-	Button *_button[5];		//三个按钮
+	Button *_button[5];		//按钮
 };
 
 #endif
