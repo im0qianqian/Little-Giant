@@ -52,13 +52,12 @@ enum WeaponType
 #define u8 
 //#pragma execution_character_set("utf-8")
 const std::string CHARACTER_NAME[] = {
-	u8"一袭白衣祭故人",
+	u8"一袭白衣",
 	u8"厌生′々",
 	u8"枝上绵蛮",
-	u8"回头，已无路ゝ",
 	u8"一曲断弦╮",
 	u8"风劲角弓鸣",
-	u8"追梦少年和追光少女",
+	u8"追梦少年",
 	u8"青梅佐以酒",
 	u8"踽踽独行",
 	u8"胭脂蒅ㄋ洃",
@@ -66,7 +65,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"有些秘密不能说",
 	u8"韵华镜中池",
 	u8"蓦地一相逢",
-	u8"墨城烟柳旧人殇",
 	u8"相约丶奈何桥",
 	u8"笙歌醉梦间℃",
 	u8"←琴默千弦︶",
@@ -82,7 +80,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"有你就够了",
 	u8"帅死一条街",
 	u8"┉至尊狂魔┈",
-	u8"再装逼我就报警了",
 	u8"为你装逼为你疯",
 	u8"我这种无赖",
 	u8"狂刄星空",

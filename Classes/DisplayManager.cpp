@@ -185,7 +185,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 25 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 25 - (GetTickCount64() - GameScene::getStartingTime()) / 1000;
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8" ±º‰ £”‡ " + to_string(remainingTime) + "s");
@@ -222,7 +222,7 @@ void DisplayManager::showSkillBoard()
 	for (int i = 0; i < 3; i++)
 	{
 		_skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
-		_skill_list[i]->setDirection(ScrollView::Direction::NONE);
+		_skill_list[i]->setDirection(ui::ScrollView::Direction::NONE);
 		int skillNum = _skill_list[i]->getItems().size();
 		for (size_t j = 0; j < skillNum; j++)
 		{

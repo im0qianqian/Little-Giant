@@ -69,7 +69,7 @@ void Character::addSorce(const int &add)
 void Character::attack(const Vec3 &pos)
 {
 	const float attackTimeInterval = 600.f / getAttribute().getAttackSpeed();		// 攻击时间间隔
-	int currentTime = GetCurrentTime();												// 获取当前时间
+	int currentTime = GetTickCount64();												// 获取当前时间
 	if (currentTime - _lastAttackTime >= attackTimeInterval)						//如果可以攻击
 	{
 		_lastAttackTime = currentTime;												// 更新最后一次攻击时间
