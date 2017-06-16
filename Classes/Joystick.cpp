@@ -109,7 +109,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 			Vec3 rot = GameScene::getCamera()->getRotation3D();
 			rot.y += delta.x;
 			GameScene::getCamera()->setRotation3D(rot);
-			GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
+			//GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
 		}
 	}
 	//event->stopPropagation();//不传递至其他图层

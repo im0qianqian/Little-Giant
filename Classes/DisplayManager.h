@@ -6,6 +6,7 @@
 #include "ui\UIText.h"
 #include "ui\UILoadingBar.h"
 #include "Character.h"
+#include "Rocker.h"
 #include "ui\UIButton.h"
 #include "ui\UILayout.h"
 #include "ui\UIListView.h"
@@ -22,6 +23,8 @@ public:
 	CREATE_FUNC(DisplayManager);
 	/* 游戏结束 显示积分表 */
 	void showSorceBoard();
+	/* 获取操作杆对象指针 */
+	Rocker *getRocker() const{ return _rocker; }
 private:
 	virtual void update(float dt) override;
 	/* 更新动画效果 */
@@ -54,6 +57,7 @@ private:
 	float _percent;						// 当前经验条所占百分比
 	ListView* _skill_list[3];
 	PageView* _skill_panel[3];
+	Rocker *_rocker;					//操作杆
 	class ListViewSorce
 	{
 	public:

@@ -370,7 +370,9 @@ void PlayerCharacter::moveModule()
 	getThreadMutex().lock();
 	while (!isDie())
 	{
-		if (GameScene::getJoystick()->getReferenceCount() == 0 || GameScene::getCamera()->getReferenceCount() == 0 || getReferenceCount() == 0)
+		if (GameScene::getJoystick()->getReferenceCount() == 0 || 
+			GameScene::getCamera()->getReferenceCount() == 0 || 
+			getReferenceCount() == 0)
 		{
 			cout << "检测到某对象已被析构跳出" << endl;
 			break;
@@ -384,9 +386,17 @@ void PlayerCharacter::moveModule()
 			res += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			res += Vec3(1, 0, 0);
+		if (GameScene::getDisplayManager() != nullptr&&GameScene::getDisplayManager()->getRocker()!=nullptr)
+		{
+			Vec2 dir = GameScene::getDisplayManager()->getRocker()->getDirection();
+			res += Vec3(dir.x, 0, -dir.y);
+		}
 		setDirection(res.getNormalized());
 		if (GameScene::getJoystick()->isFirstView())
 		{
+			Vec3 po;
+			GameScene::getCamera()->getWorldToNodeTransform().getForwardVector(&po);
+			cout << po.x << " " << po.y << " " << po.z << endl;
 			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
 		}
 		else

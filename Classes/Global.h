@@ -13,8 +13,8 @@ USING_NS_CC;
 #define min(x,y) (x>y?y:x)
 
 /* 全局常量设置 */
-#define SCREEN_WIDTH			640			//屏幕高度
-#define SCREEN_HEIGHT			960			//屏幕宽度
+#define SCREEN_WIDTH			720			//屏幕高度
+#define SCREEN_HEIGHT			1280		//屏幕宽度
 #define SCREEN_FORM_NAME		"Arrow.io"	//窗口标题
 
 #define WORLD_LENGTH			200			//世界长度
@@ -103,8 +103,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"孤的王朝",
 	u8"别拽ni算what"
 };
-const std::string skill_ListName[] = { "skill_list_0", "skill_list_1", "skill_list_2" };
-const std::string skill_PanelName[] = { "skill_panel_0", "skill_panel_1", "skill_panel_2" };
 // 调试使用
 #include <iostream>
 using namespace std;

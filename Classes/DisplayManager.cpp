@@ -22,6 +22,7 @@ DisplayManager::DisplayManager() :
 	_buttonRestart(nullptr),
 	_promptLabel(nullptr),
 	_currentTime(nullptr),
+	_rocker(nullptr),
 	_scoreList(std::vector<ListViewSorce>()),
 	_levelNum(0),
 	_percent(0)
@@ -91,6 +92,9 @@ bool DisplayManager::init()
 		});
 		/* */
 		addChild(_displayNode);
+		/* 创建摇臂 */
+		_rocker = Rocker::create("images/rocker.png", "rockerBG.png", Vec2(100, 100));
+		addChild(_rocker);
 		// 启动定时器开始更新
 		schedule(schedule_selector(DisplayManager::update), .5f);
 		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);

@@ -279,6 +279,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClCompile Include="..\Classes\Joystick.cpp" />
     <ClCompile Include="..\Classes\LoadLayer.cpp" />
     <ClCompile Include="..\Classes\MainLayer.cpp" />
+    <ClCompile Include="..\Classes\Rocker.cpp" />
     <ClCompile Include="..\Classes\SceneManager.cpp" />
     <ClCompile Include="..\Classes\Stage.cpp" />
     <ClCompile Include="..\Classes\StageManager.cpp" />
@@ -301,6 +302,7 @@ xcopy /Y /Q "$(COCOS_X_ROOT)\cocos2d-x-3.10\prebuilt\win32\*.*" "$(OutDir)"
     <ClInclude Include="..\Classes\LoadLayer.h" />
     <ClInclude Include="..\Classes\MainLayer.h" />
     <ClInclude Include="..\Classes\ObjCachePool.h" />
+    <ClInclude Include="..\Classes\Rocker.h" />
     <ClInclude Include="..\Classes\SceneManager.h" />
     <ClInclude Include="..\Classes\Stage.h" />
     <ClInclude Include="..\Classes\StageManager.h" />
