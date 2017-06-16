@@ -18,7 +18,7 @@ bool HelpLayer::init()
 	do
 	{
 		// ╪сть csb нд╪Ч
-		_HelpNode = CSLoader::createNode("res/HelpScene.csb");
+		_HelpNode = CSLoader::createNode("res/HelpLayer.csb");
 		_button = static_cast<Button*>(_HelpNode->getChildByName("Button_0"));
 		_button->addClickEventListener(CC_CALLBACK_1(HelpLayer::buttonCallBack, this));
 		addChild(_HelpNode);

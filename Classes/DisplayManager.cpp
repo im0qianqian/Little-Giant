@@ -93,7 +93,7 @@ bool DisplayManager::init()
 		/* */
 		addChild(_displayNode);
 		/* 创建摇臂 */
-		_rocker = Rocker::create("images/rocker.png", "rockerBG.png", Vec2(100, 100));
+		_rocker = Rocker::create("images/rocker.png", "rockerBG.png",  Vec2(150, 150));
 		addChild(_rocker);
 		// 启动定时器开始更新
 		schedule(schedule_selector(DisplayManager::update), .5f);
@@ -189,7 +189,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 25 - (GetTickCount64() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 300 - (GetTickCount64() - GameScene::getStartingTime()) / 1000;
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8"时间剩余 " + to_string(remainingTime) + "s");
