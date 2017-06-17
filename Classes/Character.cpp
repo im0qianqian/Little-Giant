@@ -5,6 +5,7 @@
 #include "Weapons.h"
 #include "Award.h"
 #include "WeaponManager.h"
+#include "AIStateMachine.h"
 #include "Particle3D/PU/CCPUParticleSystem3D.h"
 
 USING_NS_CC;
@@ -128,7 +129,7 @@ void Character::initialization()
 	_lifeValue = INITIAL_LIFE_VALUE;
 	_experience = 0;
 	// 如果不是计时模式，积分清空
-	if(GameScene::getGameMode()!=kGameModeTimer)
+	if (GameScene::getGameMode() != kGameModeTimer)
 		_sorce = 0;
 	_attribute.init();
 	_weaponType = kWeaponArrow;
@@ -136,14 +137,14 @@ void Character::initialization()
 	_hpSlider->setPercent(_lifeValue);		//更新血量条
 	_lastAttackTime = 0;					//攻击时间间隔
 	_direction = Vec3::ZERO;				//初始行走方向
-	
+
 	thread([this] {							//异步更新 isDie 加锁并且启动人物AI线程
 		_threadMutex.lock();
 		_isDie = false;						//复活
 		thread(&Character::moveModule, this).detach();	//开启人物AI线程
 		_threadMutex.unlock();
 	}).detach();
-	
+
 
 	// 随机设置位置并同步
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2.0, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2.0));
@@ -173,6 +174,10 @@ void Character::collisionWithAward(Award * const & award)
 		}), nullptr));
 		rootps->startParticleSystem();
 	}();
+}
+
+void Character::collisionWithStage()
+{
 }
 
 void Character::beAttacked(Weapons *const &weapon)
@@ -236,7 +241,7 @@ void Character::createHpBar()
 
 	/* 以下是人物名字label */
 	TTFConfig ttfConfig("fonts/FZYTK.TTF", 25, GlyphCollection::DYNAMIC);
-	_topName = Label::createWithTTF(ttfConfig,"");
+	_topName = Label::createWithTTF(ttfConfig, "");
 	_topName->setScale(.02f);
 	_topName->setTextColor(Color4B::BLACK);
 	_topName->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 3);
@@ -370,8 +375,8 @@ void PlayerCharacter::moveModule()
 	getThreadMutex().lock();
 	while (!isDie())
 	{
-		if (GameScene::getJoystick()->getReferenceCount() == 0 || 
-			GameScene::getCamera()->getReferenceCount() == 0 || 
+		if (GameScene::getJoystick()->getReferenceCount() == 0 ||
+			GameScene::getCamera()->getReferenceCount() == 0 ||
 			getReferenceCount() == 0)
 		{
 			cout << "检测到某对象已被析构跳出" << endl;
@@ -386,7 +391,7 @@ void PlayerCharacter::moveModule()
 			res += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			res += Vec3(1, 0, 0);
-		if (GameScene::getDisplayManager() != nullptr&&GameScene::getDisplayManager()->getRocker()!=nullptr)
+		if (GameScene::getDisplayManager() != nullptr&&GameScene::getDisplayManager()->getRocker() != nullptr)
 		{
 			Vec2 dir = GameScene::getDisplayManager()->getRocker()->getDirection();
 			res += Vec3(dir.x, 0, -dir.y);
@@ -394,22 +399,25 @@ void PlayerCharacter::moveModule()
 		setDirection(res.getNormalized());
 		if (GameScene::getJoystick()->isFirstView())
 		{
-			Vec3 po;
+			/*Vec3 po;
 			GameScene::getCamera()->getWorldToNodeTransform().getForwardVector(&po);
-			cout << po.x << " " << po.y << " " << po.z << endl;
+			cout << po.x << " " << po.y << " " << po.z << endl;*/
 			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 5);
 		}
 		else
 		{
-   			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
-			//GameScene::getCamera()->lookAt(getPosition3D());
-			//GameScene::getCamera()->setPosition3D(GameScene::getCamera()->getPosition3D()+ .7*ret.getNormalized());
+			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
 		}
 	}
 	cout << "死亡解锁" << endl;
 	getThreadMutex().unlock();
 	cout << "死亡解锁成功" << endl;
-	cout << "主角" <<this<< " 线程结束" << endl;
+	cout << "主角" << this << " 线程结束" << endl;
+}
+
+EnemyCharacter::EnemyCharacter() :
+	_aiMachine(new AIStateMachine(this))
+{
 }
 
 void EnemyCharacter::initialization()
@@ -419,6 +427,14 @@ void EnemyCharacter::initialization()
 	// 随机一个姓名（可能会重复）
 	setName(CHARACTER_NAME[rand() % (sizeof(CHARACTER_NAME) / sizeof(string))]);
 	setTopName(getName());
+}
+
+void EnemyCharacter::collisionWithStage()
+{
+	Character::collisionWithStage();	//调用父类的碰撞方法
+	int x = rand() % 3 - 1;
+	int y = rand() % 3 - 1;
+	setDirection(Vec3(x, 0, y));
 }
 
 void EnemyCharacter::die()
@@ -453,35 +469,22 @@ void EnemyCharacter::moveModule()
 			cout << "CharacterManager 已被析构，跳出" << endl;
 			break;
 		}
-		if (GameScene::getCharacterManager()->getPlayerCharacter() == nullptr)continue;
-		Vec3 minn = Vec3::ZERO;
-		minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getPosition3D();
-		auto other = GameScene::getCharacterManager()->getEnemyCharacter();
-
-		int len = other.size();
-		for (std::set<Character*>::iterator i = other.begin(); i != other.end(); i++)
-		{
-			if (*i != this && ((*i)->getPosition3D() - getPosition3D()).length() < minn.length())
-			{
-				minn = (*i)->getPosition3D() - getPosition3D();
-			}
-		}
-		minn.y = 0;
-		if (minn.length() < 20.0)
-		{
-			attack(minn + getPosition3D());
-			setDirection(minn.getNormalized());
-			if (minn.length() < 10.0)
-			{
-				setDirection(Vec3::ZERO);
-			}
-		}
-		else
-		{
-			setDirection(minn.getNormalized());
-		}
+		_aiMachine->run();
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}
 	getThreadMutex().unlock();
 	cout << "敌人" << this << " 线程结束" << endl;
+}
+
+void EnemyCharacter::beAttacked(Weapons * const & weapon)
+{
+	Character::beAttacked(weapon);
+	if (getLifeValue() < INITIAL_LIFE_VALUE / 4)	//残血，转移到寻找奖励状态
+	{
+		_aiMachine->changeState(AIStateMachine::kAIStateHPLess);
+	}
+	else											//转移到复仇状态
+	{
+		_aiMachine->changeState(AIStateMachine::kAIStateBeAttack);
+	}
 }

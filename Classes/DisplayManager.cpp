@@ -281,15 +281,15 @@ void DisplayManager::applyToSkill(const int &skillTag)
 	switch (skillTag)
 	{
 	case 0:
-		character->getAttribute().addAttackDamage(.1f);
+		character->getAttribute().addAttackDamage(.5f);
 		prompt = u8"¹¥»÷Á¦ÌáÉý";
 		break;
 	case 1:
-		character->getAttribute().addAttackSpeed(.1f);
+		character->getAttribute().addAttackSpeed(.5f);
 		prompt = u8"¹¥»÷ËÙ¶ÈÌáÉý";
 		break;
 	case 2:
-		character->getAttribute().addAttackSpeed(.1f);
+		character->getAttribute().addAttackSpeed(.5f);
 		prompt = u8"¹¥»÷ËÙ¶ÈÌáÉý";
 		break;
 	case 3:
@@ -297,7 +297,7 @@ void DisplayManager::applyToSkill(const int &skillTag)
 		prompt = u8"·ÀÓùÁ¦ÌáÉý";
 		break;
 	case 4:
-		character->getAttribute().addAttackDamage(.1f);
+		character->getAttribute().addAttackDamage(.5f);
 		prompt = u8"¹¥»÷Á¦ÌáÉý";
 		break;
 	case 5:
@@ -305,7 +305,7 @@ void DisplayManager::applyToSkill(const int &skillTag)
 		prompt = u8"·ÀÓùÁ¦ÌáÉý";
 		break;
 	case 6:
-		character->getAttribute().addRestoringAbility(.1f);
+		character->getAttribute().addRestoringAbility(.5f);
 		prompt = u8"»Ö¸´ÄÜÁ¦ÌáÉý";
 		break;
 	case 7:

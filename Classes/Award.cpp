@@ -38,7 +38,7 @@ bool Award::init()
 			obj->setUserData(this);
 
 			setScale(.007f);										//大小缩放到0.007倍
-			setRotation3D(Vec3(90,0,0));							//旋转
+			setRotation3D(Vec3(90, 0, 0));							//旋转
 
 			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//应用同步
 			flag = true;
@@ -52,7 +52,7 @@ void Award::initialization()
 	_isDeleted = false;
 
 	// 取出之后随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 0, rand() % WORLD_WIDTH - WORLD_WIDTH / 2) + 2*Vec3::UNIT_Y);
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 0, rand() % WORLD_WIDTH - WORLD_WIDTH / 2) + 2 * Vec3::UNIT_Y);
 	randomType();
 
 	syncNodeToPhysics();

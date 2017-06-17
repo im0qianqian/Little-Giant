@@ -24,12 +24,18 @@ public:
 	/* GET */
 	DirectionLight* getSun()const { return _sun; }
 	PointLight* getCharacterLight() const { return _characterLight; }
+	/* 获取当前地图 */
+	void getCMap(int map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH]);
+	auto getMap() const { return _map; }
+	Stage *getGround() { return _ground; }
 private:
+	void updateMap(float dt);
 	virtual void update(float dt) override;
 	Stage *_ground;									//地面
 	DirectionLight *_sun;							//太阳
 	PointLight *_characterLight;					//人物小灯
 	int _map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//当前地图
+	int _cMap[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//地图中的人物以及奖励
 };
 
 #endif

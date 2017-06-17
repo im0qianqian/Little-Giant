@@ -19,11 +19,11 @@ void Rocker::rockerInit(const std::string & rockerImageName, const std::string &
 	//添加摇杆背景图  
 	Sprite* spRockerBG = Sprite::create(rockerBGImageName);
 	spRockerBG->setPosition(pos);
-	addChild(spRockerBG, 0, tag_rockerBG);
+	addChild(spRockerBG, 0, kRockerBG);
 	//添加摇杆上方那个可移动的图  
 	Sprite* spRocker = Sprite::create(rockerImageName);
 	spRocker->setPosition(pos);
-	addChild(spRocker, 1, tag_rocker);
+	addChild(spRocker, 1, kRocker);
 	spRocker->setOpacity(180);
 	//摇杆背景图坐标  
 	_rockerBGPosition = pos;
@@ -62,7 +62,7 @@ float Rocker::getRad(const Vec2 &pos1, const Vec2 &pos2)
 }
 Vec2 Rocker::getDirection() const
 {
-	return getChildByTag(tag_rocker)->getPosition() - _rockerBGPosition;
+	return getChildByTag(kRocker)->getPosition() - _rockerBGPosition;
 }
 //得到与角度对应的半径为r的圆上一坐标点  
 Vec2 Rocker::getAnglePosition(const float &r, const float &angle)
@@ -72,7 +72,7 @@ Vec2 Rocker::getAnglePosition(const float &r, const float &angle)
 
 bool Rocker::onTouchBegan(Touch* const &touch, Event* const &event)
 {
-	Sprite* sp = (Sprite*)getChildByTag(tag_rocker);
+	Sprite* sp = (Sprite*)getChildByTag(kRocker);
 	//得到触屏点坐标  
 	Vec2 point = touch->getLocation();
 	//判断是否点击到sp这个精灵：boundingBox()精灵大小之内的所有坐标 
@@ -89,7 +89,7 @@ void Rocker::onTouchMoved(Touch* const &touch, Event* const &event)
 	{
 		return;
 	}
-	Sprite* sp = (Sprite*)getChildByTag(tag_rocker);
+	Sprite* sp = (Sprite*)getChildByTag(kRocker);
 	Vec2 point = touch->getLocation();
 	//判断两个圆心的距离是否大于摇杆背景的半径  
 	if (sqrt(pow(point.x - _rockerBGPosition.x, 2) + pow(point.y - _rockerBGPosition.y, 2)) >= _rockerBGR)
@@ -113,8 +113,8 @@ void Rocker::onTouchEnded(Touch* const &touch, Event* const &event)
 	{
 		return;
 	}
-	Sprite* rocker = (Sprite*)getChildByTag(tag_rocker);
-	Sprite* rockerBG = (Sprite*)getChildByTag(tag_rockerBG);
+	Sprite* rocker = (Sprite*)getChildByTag(kRocker);
+	Sprite* rockerBG = (Sprite*)getChildByTag(kRockerBG);
 	rocker->stopAllActions();
 	rocker->runAction(MoveTo::create(0.08, rockerBG->getPosition()));
 	_isCanMove = false;

@@ -11,10 +11,11 @@ public:
 	//摇杆当前所指方向向量
 	Vec2 getDirection() const;
 private:
-	typedef enum {
-		tag_rocker,
-		tag_rockerBG,
-	}tagForHRocker;
+	enum rockerType
+	{
+		kRocker,
+		kRockerBG
+	};
 	CREATE_FUNC(Rocker);
 	void rockerInit(const std::string &rockerImageName, const std::string &rockerBGImageName, const Vec2 &pos);
 	//得到半径为r的圆周运动上一个角度应对应的x,y坐标  

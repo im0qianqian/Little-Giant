@@ -188,6 +188,19 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					award->collisionWithCharacter(character);
 					character->collisionWithAward(award);
 				}
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalStage, kGlobalCharacter))	//人物与墙壁碰撞
+				{
+					//CCLOG("---------------- Stage character --------------------");
+					// 如果 A 是墙壁的话交换，最终结果： A 人物、B 墙壁
+					if (objA->Node::getTag() == kGlobalStage)
+						swap(objA, objB);
+					if (objB != GameScene::getStageManager()->getGround())
+					{
+						Character *character = dynamic_cast<Character*>(objA);
+						// 奖励与人物碰撞
+						character->collisionWithStage();
+					}
+				}
 				else
 				{
 					flag = false;

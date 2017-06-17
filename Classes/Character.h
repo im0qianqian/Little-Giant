@@ -17,6 +17,7 @@ using namespace cocos2d::ui;
 
 class Weapons;
 class Award;
+class AIStateMachine;
 class Character : public PhysicsSprite3D
 {
 public:
@@ -112,23 +113,26 @@ public:
 	virtual void collisionWithWeapon(Weapons *const &weapon);
 	/* 与奖励碰撞 */
 	virtual void collisionWithAward(Award *const &award);
+	/* 与墙壁碰撞 */
+	virtual void collisionWithStage();
 	/* 是否死亡 */
 	virtual bool isDie() const { return _isDie; }
-	
+	/* 设置人物移动方向向量 */
+	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
+	/* 获取人物移动方向向量 */
+	virtual Vec3 getDirection() { return _direction; }
 protected:
 	/* 移动 */
 	virtual void move();
 	/* 死亡 */
 	virtual void die();
-	/* 设置人物移动方向向量 */
-	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
-	/* 获取人物移动方向向量 */
-	virtual Vec3 getDirection() { return _direction; }
+	/* 获取互斥锁 */
 	virtual mutex &getThreadMutex() { return _threadMutex; }
+	/* 设置人物名称 */
 	virtual void setTopName(const string &name) { _topName->setString(name); }
-private:
 	/* 受到武器攻击 */
 	virtual void beAttacked(Weapons *const &weapon);
+private:
 	/* 与 update 有关的函数 */
 	virtual void update(float dt) override;
 	/* 人物移动模块 */
@@ -166,11 +170,19 @@ private:
 class EnemyCharacter :public Character
 {
 public:
+	EnemyCharacter();
 	CREATE_FUNC(EnemyCharacter);
 	virtual void initialization() override;
+	virtual void collisionWithStage() override;
+	AIStateMachine *getAIStateMachine() { return _aiMachine; }
+protected:
+	/* AI受到攻击 */
+	virtual void beAttacked(Weapons *const &weapon) override;
 private:
 	/* 其他人物死亡 */
 	virtual void die() override;
 	virtual void moveModule() override;
+	
+	AIStateMachine *_aiMachine;	//AI系统
 };
 #endif

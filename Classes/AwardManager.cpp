@@ -2,7 +2,8 @@
 #include "Global.h"
 
 AwardManager::AwardManager():
-	_cachePool(ObjCachePool<Award>(this,AWARD_CACHE_SIZE))
+	_cachePool(ObjCachePool<Award>(this,AWARD_CACHE_SIZE)),
+	_allAward(std::set<Award*>())
 {
 	cout << "AwardManager 构造" << endl;
 }
@@ -21,6 +22,12 @@ bool AwardManager::init()
 	return true;
 }
 
+void AwardManager::addToPool(Award * const & award)
+{
+	_cachePool.addToPool(award);
+	_allAward.erase(award);
+}
+
 void AwardManager::createAllAward()
 {
 	int size = _cachePool.getResidualSize();
@@ -30,6 +37,7 @@ void AwardManager::createAllAward()
 		if (award != NULL)
 		{
 			award->initialization();					//登场
+			_allAward.insert(award);					//插入到所有奖励中
 		}
 	}
 	//cout << "----------> 成功刷新场上的奖励~~~~~~~~~~~~~~~~" << size<<" "<< _cachePool.getResidualSize()<< endl;
