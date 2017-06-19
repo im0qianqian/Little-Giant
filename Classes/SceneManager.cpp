@@ -56,7 +56,6 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	/* 设置物理世界Debug相机 */
 	_scene->setPhysics3DDebugCamera(GameScene::getCamera());
 	_scene->addChild(_layer);
-	cout << _layer << endl;
 	if (Director::getInstance()->getRunningScene())		//如果当前导演正在显示某个场景
 	{
 		Director::getInstance()->replaceScene(_scene);	//替换为当前场景

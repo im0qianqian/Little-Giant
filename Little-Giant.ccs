@@ -3,6 +3,11 @@
   <SolutionFolder>
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
+        <Folder Name="images">
+          <Image Name="animationbuttonnormal.png" />
+          <Image Name="animationbuttonpressed.png" />
+          <Image Name="mainBG.jpg" />
+        </Folder>
         <Folder Name="skill">
           <Image Name="arrow.png" />
           <Image Name="attack.png" />
@@ -33,13 +38,13 @@
         <Image Name="div2.jpg" />
         <Image Name="Floor.png" />
         <TTF Name="FZYTK.TTF" />
-        <Project Name="HelpScene.csd" Type="Scene" />
         <Project Name="MainLayer.csd" Type="Layer" />
         <TTF Name="Marker Felt.ttf" />
         <Mesh Name="orc.c3b" />
         <Mesh Name="orc.c3t" />
         <Project Name="Scene3D.csd" Type="Scene3D" />
         <Mesh Name="sphere.c3b" />
+        <Project Name="HelpLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

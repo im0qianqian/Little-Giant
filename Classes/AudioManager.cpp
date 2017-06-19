@@ -2,12 +2,10 @@
 
 AudioManager::AudioManager()
 {
-
 }
 
 AudioManager::~AudioManager()
 {
-
 }
 
 bool AudioManager::init()

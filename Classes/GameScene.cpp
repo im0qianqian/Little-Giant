@@ -43,7 +43,7 @@ bool GameScene::init()
 		_layer3D->addChild(_camera);		//将3D摄像机添加进图层
 
 		/* 记录游戏开始的时间 */
-		GameScene::_startingTime = GetCurrentTime();
+		GameScene::_startingTime = GetTickCount64();
 		/* 操作管理 */
 		GameScene::_joystick = Joystick::create();
 		addChild(GameScene::_joystick, -1);

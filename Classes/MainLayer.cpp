@@ -27,7 +27,6 @@ bool MainLayer::init()
 		addChild(_displayNode);
 		flag = true;
 	} while (false);
-	cout << flag << endl;
 	return flag;
 }
 

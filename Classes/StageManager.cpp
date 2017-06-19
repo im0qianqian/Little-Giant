@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
 #include <fstream>
+#include <thread>
 
 StageManager::StageManager() :
 	_ground(nullptr),
@@ -9,6 +10,7 @@ StageManager::StageManager() :
 	_characterLight(nullptr)
 {
 	memset(_map, 0, sizeof(_map));
+	memset(_cMap, 0, sizeof(_cMap));
 	cout << "StageManager 构造" << endl;
 }
 
@@ -33,6 +35,8 @@ bool StageManager::init()
 			/* 启动定时器更新 */
 			scheduleUpdate();
 		}
+		/* 每两秒更新一次所有人的位置 */
+		schedule(schedule_selector(StageManager::updateMap), 2.f);
 		flag = true;
 	} while (false);
 	return flag;
@@ -144,16 +148,43 @@ void StageManager::createGround()
 	_ground->syncNodeToPhysics();
 	_ground->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 	addChild(_ground);
+}
+
+void StageManager::getCMap(int map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH])
+{
+	memcpy(map, _cMap, sizeof(_cMap));
+}
+
+void StageManager::updateMap(float dt)
+{
+	//thread([this]()
+	{
+		auto multVec = [&](const Vec3 &pos)
+		{
+			Vec2 nPos = Vec2(int((pos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH), int((pos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH));
+			return &nPos;
+		};
+		memset(_cMap, 0, sizeof(_cMap));
+		auto award = GameScene::getAwardManager()->getAllAward();
+		for (auto i : award)
+		{
+			auto pos = multVec(i->getPosition3D());
+			if (pos->x < 0 || pos->x >= MAPS_FILE_WIDTH || pos->y < 0 || pos->y >= MAPS_FILE_LENGTH)continue;
+			_cMap[int(pos->x)][int(pos->y)] = kGlobalAward;
+		}
+		/* 敌人部分 */
+		auto enemy = GameScene::getCharacterManager()->getEnemyCharacter();
+		for (auto i : enemy)
+		{
+			auto pos = multVec(i->getPosition3D());
+			if (pos->x < 0 || pos->x >= MAPS_FILE_WIDTH || pos->y < 0 || pos->y >= MAPS_FILE_LENGTH)continue;
+			_cMap[int(pos->x)][int(pos->y)] = kGlobalCharacter;
+		}
+		/* 玩家部分 */
+		auto my = multVec(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
+		_cMap[int(my->x)][int(my->y)] = kGlobalCharacter;
+	}//).detach();
 	
-	/* 暂定 */
-	/*auto sky = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/sss.jpg");
-	sky->setScaleX(WORLD_LENGTH);
-	sky->setScaleZ(WORLD_WIDTH);
-	sky->setPositionY(ELEMENT_HEIGHT/2);
-	sky->setOpacity(0);
-	sky->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
-	sky->syncNodeToPhysics();
-	addChild(sky);*/
 }
 
 void StageManager::update(float dt)

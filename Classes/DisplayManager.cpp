@@ -22,6 +22,7 @@ DisplayManager::DisplayManager() :
 	_buttonRestart(nullptr),
 	_promptLabel(nullptr),
 	_currentTime(nullptr),
+	_rocker(nullptr),
 	_scoreList(std::vector<ListViewSorce>()),
 	_levelNum(0),
 	_percent(0)
@@ -91,6 +92,9 @@ bool DisplayManager::init()
 		});
 		/* */
 		addChild(_displayNode);
+		/* 创建摇臂 */
+		//_rocker = Rocker::create("images/rocker.png", "rockerBG.png",  Vec2(150, 150));
+		//addChild(_rocker);
 		// 启动定时器开始更新
 		schedule(schedule_selector(DisplayManager::update), .5f);
 		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);
@@ -185,7 +189,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 25 - (GetCurrentTime() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 500 - (GetTickCount64() - GameScene::getStartingTime()) / 1000;
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8"时间剩余 " + to_string(remainingTime) + "s");
@@ -222,7 +226,7 @@ void DisplayManager::showSkillBoard()
 	for (int i = 0; i < 3; i++)
 	{
 		_skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
-		_skill_list[i]->setDirection(ScrollView::Direction::NONE);
+		_skill_list[i]->setDirection(ui::ScrollView::Direction::NONE);
 		int skillNum = _skill_list[i]->getItems().size();
 		for (size_t j = 0; j < skillNum; j++)
 		{
@@ -277,15 +281,15 @@ void DisplayManager::applyToSkill(const int &skillTag)
 	switch (skillTag)
 	{
 	case 0:
-		character->getAttribute().addAttackDamage(.1f);
+		character->getAttribute().addAttackDamage(.5f);
 		prompt = u8"攻击力提升";
 		break;
 	case 1:
-		character->getAttribute().addAttackSpeed(.1f);
+		character->getAttribute().addAttackSpeed(.5f);
 		prompt = u8"攻击速度提升";
 		break;
 	case 2:
-		character->getAttribute().addAttackSpeed(.1f);
+		character->getAttribute().addAttackSpeed(.5f);
 		prompt = u8"攻击速度提升";
 		break;
 	case 3:
@@ -293,7 +297,7 @@ void DisplayManager::applyToSkill(const int &skillTag)
 		prompt = u8"防御力提升";
 		break;
 	case 4:
-		character->getAttribute().addAttackDamage(.1f);
+		character->getAttribute().addAttackDamage(.5f);
 		prompt = u8"攻击力提升";
 		break;
 	case 5:
@@ -301,7 +305,7 @@ void DisplayManager::applyToSkill(const int &skillTag)
 		prompt = u8"防御力提升";
 		break;
 	case 6:
-		character->getAttribute().addRestoringAbility(.1f);
+		character->getAttribute().addRestoringAbility(.5f);
 		prompt = u8"恢复能力提升";
 		break;
 	case 7:

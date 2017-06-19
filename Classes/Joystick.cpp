@@ -109,7 +109,7 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 			Vec3 rot = GameScene::getCamera()->getRotation3D();
 			rot.y += delta.x;
 			GameScene::getCamera()->setRotation3D(rot);
-			GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
+			//GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
 		}
 	}
 	//event->stopPropagation();//不传递至其他图层
@@ -188,6 +188,19 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 					award->collisionWithCharacter(character);
 					character->collisionWithAward(award);
 				}
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalStage, kGlobalCharacter))	//人物与墙壁碰撞
+				{
+					//CCLOG("---------------- Stage character --------------------");
+					// 如果 A 是墙壁的话交换，最终结果： A 人物、B 墙壁
+					if (objA->Node::getTag() == kGlobalStage)
+						swap(objA, objB);
+					if (objB != GameScene::getStageManager()->getGround())
+					{
+						Character *character = dynamic_cast<Character*>(objA);
+						// 奖励与人物碰撞
+						character->collisionWithStage();
+					}
+				}
 				else
 				{
 					flag = false;
@@ -205,7 +218,8 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 void Joystick::createParticle(const Vec3 &pos)
 {
 	/* 武器碰撞粒子特效 */
-	auto ps = PUParticleSystem3D::create("C:/Cocos/Cocos2d-x/cocos2d-x-3.10/tests/cpp-tests/Resources/Particle3D/scripts/mp_hit_04.pu");
+	auto ps = PUParticleSystem3D::create("scripts/mp_hit_04.pu");
+	if (ps == nullptr)return; 
 	ps->setPosition3D(pos);
 	ps->setScale(0.05f);
 	ps->startParticleSystem();

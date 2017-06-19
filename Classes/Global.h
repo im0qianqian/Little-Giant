@@ -13,23 +13,23 @@ USING_NS_CC;
 #define min(x,y) (x>y?y:x)
 
 /* 全局常量设置 */
-#define SCREEN_WIDTH			640			//屏幕高度
-#define SCREEN_HEIGHT			960			//屏幕宽度
-#define SCREEN_FORM_NAME		"Little-Giant"	 //窗口标题
+#define SCREEN_WIDTH			720				//屏幕高度
+#define SCREEN_HEIGHT			1280			//屏幕宽度
+#define SCREEN_FORM_NAME		"Little Giant"	//窗口标题
 
-#define WORLD_LENGTH			200			//世界长度
-#define WORLD_WIDTH				200			//世界宽度
-#define WORLD_HEIGHT			1			//世界高度
-#define ELEMENT_HEIGHT			20			//墙的高度
+#define WORLD_LENGTH			200				//世界长度
+#define WORLD_WIDTH				200				//世界宽度
+#define WORLD_HEIGHT			1				//世界高度
+#define ELEMENT_HEIGHT			20				//墙的高度
 
-#define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
-#define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
-#define AWARD_CACHE_SIZE		100			//奖励对象缓存池大小
+#define CHARACTER_CACHE_SIZE	10				//人物对象缓存池大小
+#define WEAPONS_CACHE_SIZE		30				//武器对象缓存池大小
+#define AWARD_CACHE_SIZE		100				//奖励对象缓存池大小
 
-#define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
+#define INITIAL_LIFE_VALUE		100.f			//人物初始生命值
 
-#define MAPS_FILE_LENGTH		50			//地图文件长
-#define MAPS_FILE_WIDTH			50			//地图文件宽
+#define MAPS_FILE_LENGTH		50				//地图文件长
+#define MAPS_FILE_WIDTH			50				//地图文件宽
 
 
 enum GlobalType
@@ -52,13 +52,12 @@ enum WeaponType
 #define u8 
 //#pragma execution_character_set("utf-8")
 const std::string CHARACTER_NAME[] = {
-	u8"一袭白衣祭故人",
+	u8"一袭白衣",
 	u8"厌生′々",
 	u8"枝上绵蛮",
-	u8"回头，已无路ゝ",
 	u8"一曲断弦╮",
 	u8"风劲角弓鸣",
-	u8"追梦少年和追光少女",
+	u8"追梦少年",
 	u8"青梅佐以酒",
 	u8"踽踽独行",
 	u8"胭脂蒅ㄋ洃",
@@ -66,7 +65,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"有些秘密不能说",
 	u8"韵华镜中池",
 	u8"蓦地一相逢",
-	u8"墨城烟柳旧人殇",
 	u8"相约丶奈何桥",
 	u8"笙歌醉梦间℃",
 	u8"←琴默千弦︶",
@@ -82,7 +80,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"有你就够了",
 	u8"帅死一条街",
 	u8"┉至尊狂魔┈",
-	u8"再装逼我就报警了",
 	u8"为你装逼为你疯",
 	u8"我这种无赖",
 	u8"狂刄星空",
@@ -106,8 +103,6 @@ const std::string CHARACTER_NAME[] = {
 	u8"孤的王朝",
 	u8"别拽ni算what"
 };
-const std::string skill_ListName[] = { "skill_list_0", "skill_list_1", "skill_list_2" };
-const std::string skill_PanelName[] = { "skill_panel_0", "skill_panel_1", "skill_panel_2" };
 // 调试使用
 #include <iostream>
 using namespace std;
