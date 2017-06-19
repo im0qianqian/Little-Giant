@@ -13,23 +13,23 @@ USING_NS_CC;
 #define min(x,y) (x>y?y:x)
 
 /* 全局常量设置 */
-#define SCREEN_WIDTH			720			//屏幕高度
-#define SCREEN_HEIGHT			1280		//屏幕宽度
-#define SCREEN_FORM_NAME		"Arrow.io"	//窗口标题
+#define SCREEN_WIDTH			720				//屏幕高度
+#define SCREEN_HEIGHT			1280			//屏幕宽度
+#define SCREEN_FORM_NAME		"Little Giant"	//窗口标题
 
-#define WORLD_LENGTH			200			//世界长度
-#define WORLD_WIDTH				200			//世界宽度
-#define WORLD_HEIGHT			1			//世界高度
-#define ELEMENT_HEIGHT			20			//墙的高度
+#define WORLD_LENGTH			200				//世界长度
+#define WORLD_WIDTH				200				//世界宽度
+#define WORLD_HEIGHT			1				//世界高度
+#define ELEMENT_HEIGHT			20				//墙的高度
 
-#define CHARACTER_CACHE_SIZE	50			//人物对象缓存池大小
-#define WEAPONS_CACHE_SIZE		100			//武器对象缓存池大小
-#define AWARD_CACHE_SIZE		100			//奖励对象缓存池大小
+#define CHARACTER_CACHE_SIZE	10				//人物对象缓存池大小
+#define WEAPONS_CACHE_SIZE		30				//武器对象缓存池大小
+#define AWARD_CACHE_SIZE		100				//奖励对象缓存池大小
 
-#define INITIAL_LIFE_VALUE		100.f		//人物初始生命值
+#define INITIAL_LIFE_VALUE		100.f			//人物初始生命值
 
-#define MAPS_FILE_LENGTH		50			//地图文件长
-#define MAPS_FILE_WIDTH			50			//地图文件宽
+#define MAPS_FILE_LENGTH		50				//地图文件长
+#define MAPS_FILE_WIDTH			50				//地图文件宽
 
 
 enum GlobalType

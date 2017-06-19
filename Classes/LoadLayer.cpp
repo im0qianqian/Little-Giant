@@ -17,7 +17,6 @@ bool LoadLayer::init()
 		return false;
 	}
 	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	_cloud = Sprite::create("images/cloud.png");
 	_cloud->setPosition(Point(visibleSize.width / 2, visibleSize.height / 2+65));
@@ -25,8 +24,8 @@ bool LoadLayer::init()
 	_loadLabel = Label::create("Loading:", "arial", 30);
 	_loadLabel->setPosition(Point(visibleSize.width / 2 - 30, visibleSize.height / 2 + 30));
 	this->addChild(_loadLabel,1);
-	_percentLabel = Label::create("       0%", "arial", 30);
-	_percentLabel->setPosition(Point(visibleSize.width / 2 + 35, visibleSize.height / 2 + 30));
+	_percentLabel = Label::create("0%", "arial", 30);
+	_percentLabel->setPosition(Point(visibleSize.width / 2 + 65, visibleSize.height / 2 + 30));
 	this->addChild(_percentLabel, 2);
 	
 	_totalImage = 300;
@@ -35,15 +34,14 @@ bool LoadLayer::init()
 	_timer = ProgressTimer::create(Sprite::create("load.png"));
 
 	_timer->setType(cocos2d::ProgressTimer::Type::BAR);
-	_timer->setMidpoint(Vec2(0, 1));
-	_timer->setBarChangeRate(Vec2(1, 0));
+	_timer->setMidpoint(Vec2(0, 1));    //设置起始位置
+	_timer->setBarChangeRate(Vec2(1, 0));	//设置方向
 	_timer->setPercentage(0.0f);
 
 	_timer->setScaleX(1.5f);
 	_timer->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	this->addChild(_timer,3);
-
-	Director::getInstance()->getTextureCache()->removeUnusedTextures();
+	Director::getInstance()->getTextureCache()->removeAllTextures();
 	for (int i = 1; i <= _totalImage; i++)
 	{
 		Director::getInstance()->getTextureCache()->addImageAsync("HelloWorld.png", CC_CALLBACK_0(LoadLayer::loadingCallback,this));
@@ -58,7 +56,7 @@ void LoadLayer::loadingCallback()
 	float newPercent = 100 - ((float)_totalImage - (float)_loadImage) / ((float)_totalImage / 100);
 	_timer->setPercentage(newPercent);
 	char buf_str[16];
-	sprintf(buf_str, "       %d%%", (int)(((float)_loadImage) / (float)_totalImage * 100));
+	sprintf(buf_str, "%d%%", (int)(((float)_loadImage) / (float)_totalImage * 100));
 	_percentLabel->setString(buf_str);
 	if (_loadImage == _totalImage)
 	{
@@ -66,4 +64,3 @@ void LoadLayer::loadingCallback()
 		SceneManager::getInstance()->changeScene(kGameScene);
 	}
 }
-

@@ -102,7 +102,7 @@ public:
 	/* 更改人物群落 */
 	virtual void setDept(const int &dept) { _dept = dept; }
 	/* 获取当前人物属性 */
-	virtual Attribute getAttribute() const { return _attribute; }
+	virtual Attribute &getAttribute() { return _attribute; }
 	/* 攻击 */
 	virtual void attack(const Vec3 &pos);
 	/* 构造初始化 */

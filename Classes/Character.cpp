@@ -391,11 +391,11 @@ void PlayerCharacter::moveModule()
 			res += Vec3(0, 0, 1);
 		if (GameScene::getJoystick()->getKeyD())
 			res += Vec3(1, 0, 0);
-		if (GameScene::getDisplayManager() != nullptr&&GameScene::getDisplayManager()->getRocker() != nullptr)
+		/*if (GameScene::getDisplayManager() != nullptr&&GameScene::getDisplayManager()->getRocker() != nullptr)
 		{
 			Vec2 dir = GameScene::getDisplayManager()->getRocker()->getDirection();
 			res += Vec3(dir.x, 0, -dir.y);
-		}
+		}*/
 		setDirection(res.getNormalized());
 		if (GameScene::getJoystick()->isFirstView())
 		{
@@ -460,8 +460,8 @@ void EnemyCharacter::die()
 void EnemyCharacter::moveModule()
 {
 	cout << this << " Ïß³ÌÆô¶¯" << endl;
-	this_thread::sleep_for(chrono::milliseconds(2000));
 	getThreadMutex().lock();
+	this_thread::sleep_for(chrono::milliseconds(2000));
 	while (!isDie())
 	{
 		if (GameScene::getCharacterManager()->getReferenceCount() == 0)
