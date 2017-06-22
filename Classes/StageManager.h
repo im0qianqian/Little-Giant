@@ -26,7 +26,7 @@ public:
 	PointLight* getCharacterLight() const { return _characterLight; }
 	/* 获取当前地图 */
 	void getCMap(int map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH]);
-	auto getMap() const { return _map; }
+	const int(*getMap())[50] { return _map; }
 	Stage *getGround() { return _ground; }
 private:
 	void updateMap(float dt);

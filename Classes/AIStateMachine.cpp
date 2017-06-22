@@ -2,7 +2,7 @@
 #include "Character.h"
 #include "GameScene.h"
 
-AIStateMachine::AIStateMachine():
+AIStateMachine::AIStateMachine() :
 	_aiStatePatrol(nullptr),
 	_aiStateBeAttack(nullptr),
 	_aiStateHPLess(nullptr),
@@ -46,13 +46,13 @@ void AIStateMachine::changeState(const aiState & state)
 	}
 }
 
-AIState::AIState():
+AIState::AIState() :
 	_character(nullptr),
 	_globalType(kGlobalCharacter)
 {
 }
 
-AIState::AIState(Character * const & character):
+AIState::AIState(Character * const & character) :
 	_character(character),
 	_globalType(kGlobalCharacter)
 {
@@ -73,8 +73,8 @@ void AIState::findPath()
 	GameScene::getStageManager()->getCMap(cMap);
 	struct node
 	{
-		node(){}
-		node(const int &x,const int &y,const directionType &d):
+		node() {}
+		node(const int &x, const int &y, const directionType &d) :
 			_x(x),
 			_y(y),
 			_direction(d)
@@ -84,18 +84,19 @@ void AIState::findPath()
 	};
 	/* 以下暂定BFS ，以后优化为A* */
 	const int mv[4][2] = { {-1,0},{1,0},{0,-1},{0,1} };
+	CCASSERT(_character, "NULL");
 	Vec3 cPos = _character->getPosition3D();
 	Vec2 pos = Vec2(int((cPos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH), int((cPos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH));
 	auto judPos = [&](shared_ptr<node> const &n)		//判断点是否在地图内
 	{
-		if (n->_x < 0 || n->_x >= MAPS_FILE_WIDTH || n->_y < 0 || n->_y >= WORLD_LENGTH|| map[n->_x][n->_y]!=0)
+		if (n->_x < 0 || n->_x >= MAPS_FILE_WIDTH || n->_y < 0 || n->_y >= WORLD_LENGTH || map[n->_x][n->_y] != 0)
 			return false;
 		return true;
 	};
 	queue<shared_ptr<node>> que;
 	for (int i = 0; i < 4; i++)		//初始四个方向
 	{
-		shared_ptr<node> n(new node(pos.x+mv[i][0], pos.y + mv[i][1], directionType(i)));
+		shared_ptr<node> n(new node(pos.x + mv[i][0], pos.y + mv[i][1], directionType(i)));
 		if (judPos(n))
 		{
 			isVisted[n->_x][n->_y] = true;
@@ -142,7 +143,7 @@ void AIState::findPath()
 		for (int i = 0; i < 4; i++)
 		{
 			shared_ptr<node> n(new node(p->_x + mv[i][0], p->_y + mv[i][1], p->_direction));
-			if (judPos(n)&&!isVisted[n->_x][n->_y])
+			if (judPos(n) && !isVisted[n->_x][n->_y])
 			{
 				que.push(n);
 				isVisted[n->_x][n->_y] = true;
@@ -155,7 +156,7 @@ AIStatePatrol::AIStatePatrol()
 {
 }
 
-AIStatePatrol::AIStatePatrol(Character * const & character):
+AIStatePatrol::AIStatePatrol(Character * const & character) :
 	AIState(character)
 {
 }
@@ -165,14 +166,19 @@ void AIStatePatrol::run()
 	//cout << "转移到巡逻状态" << endl;
 	findPath();
 	static int tot = 0;
-	if (abs(tot++) % 2==1)	//随机转移状态
+	auto enemy = dynamic_cast<EnemyCharacter*>(getCharacter());
+	if (enemy != nullptr)	//如果转型成功
 	{
-		/* 状态机转移到寻找敌人进行攻击 */
-		dynamic_cast<EnemyCharacter*>(getCharacter())->getAIStateMachine()->changeState(AIStateMachine::kAIStateBeAttack);
-	}
-	else
-	{
-		dynamic_cast<EnemyCharacter*>(getCharacter())->getAIStateMachine()->changeState(AIStateMachine::kAIStateHPLess);
+		if (abs(tot++) % 2 == 1)	//随机转移状态
+		{
+			/* 状态机转移到寻找敌人进行攻击 */
+			enemy->getAIStateMachine()->changeState(AIStateMachine::kAIStateBeAttack);
+		}
+		else
+		{
+			/* 状态机转移到寻找奖励补充血量 */
+			enemy->getAIStateMachine()->changeState(AIStateMachine::kAIStateHPLess);
+		}
 	}
 }
 
