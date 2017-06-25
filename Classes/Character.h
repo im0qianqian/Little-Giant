@@ -146,7 +146,7 @@ private:
 	float _lifeValue;		//人物生命值
 	int _experience;		//当前已有经验
 	int _sorce;				//当前得分
-	int _lastAttackTime;	//上次攻击时间
+	unsigned int _lastAttackTime;	//上次攻击时间
 	WeaponType _weaponType;	//武器类型
 	Attribute _attribute;	//属性加成
 	bool _isDie;			//人物是否死亡

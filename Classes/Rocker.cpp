@@ -28,7 +28,7 @@ void Rocker::rockerInit(const std::string & rockerImageName, const std::string &
 	//摇杆背景图坐标  
 	_rockerBGPosition = pos;
 	//摇杆背景图半径  
-	_rockerBGR = spRockerBG->getContentSize().width*0.5;
+	_rockerBGR = spRockerBG->getContentSize().width*0.5f;
 	// 绑定监听事件
 	_listener = EventListenerTouchOneByOne::create();
 	_listener->onTouchBegan = CC_CALLBACK_2(Rocker::onTouchBegan, this);
@@ -76,7 +76,7 @@ bool Rocker::onTouchBegan(Touch* const &touch, Event* const &event)
 	//得到触屏点坐标  
 	Vec2 point = touch->getLocation();
 	//判断是否点击到sp这个精灵：boundingBox()精灵大小之内的所有坐标 
-	if (sp->boundingBox().containsPoint(point))
+	if (sp->getBoundingBox().containsPoint(point))
 	{
 		_isCanMove = true;
 	}
@@ -97,7 +97,7 @@ void Rocker::onTouchMoved(Touch* const &touch, Event* const &event)
 		//得到触点与摇杆背景圆心形成的角度  
 		float angle = getRad(_rockerBGPosition, point);
 		//确保小圆运动范围在背景圆内
-		sp->setPosition(ccpAdd(getAnglePosition(_rockerBGR, angle), ccp(_rockerBGPosition.x, _rockerBGPosition.y)));
+		sp->setPosition(getAnglePosition(_rockerBGR, angle)+ Vec2(_rockerBGPosition.x, _rockerBGPosition.y));
 	}
 	else {
 		//触点在背景圆内则跟随触点运动  
@@ -116,7 +116,7 @@ void Rocker::onTouchEnded(Touch* const &touch, Event* const &event)
 	Sprite* rocker = (Sprite*)getChildByTag(kRocker);
 	Sprite* rockerBG = (Sprite*)getChildByTag(kRockerBG);
 	rocker->stopAllActions();
-	rocker->runAction(MoveTo::create(0.08, rockerBG->getPosition()));
+	rocker->runAction(MoveTo::create(0.08f, rockerBG->getPosition()));
 	_isCanMove = false;
 	// 操作不传向其他图层
 	event->stopPropagation();

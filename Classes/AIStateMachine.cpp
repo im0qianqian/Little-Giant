@@ -86,7 +86,7 @@ void AIState::findPath()
 	const int mv[4][2] = { {-1,0},{1,0},{0,-1},{0,1} };
 	CCASSERT(_character, "NULL");
 	Vec3 cPos = _character->getPosition3D();
-	Vec2 pos = Vec2(int((cPos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH), int((cPos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH));
+	Vec2 pos = Vec2(int((cPos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH)*1.f, int((cPos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH)*1.f);
 	auto judPos = [&](shared_ptr<node> const &n)		//判断点是否在地图内
 	{
 		if (n->_x < 0 || n->_x >= MAPS_FILE_WIDTH || n->_y < 0 || n->_y >= WORLD_LENGTH || map[n->_x][n->_y] != 0)
@@ -96,7 +96,7 @@ void AIState::findPath()
 	queue<shared_ptr<node>> que;
 	for (int i = 0; i < 4; i++)		//初始四个方向
 	{
-		shared_ptr<node> n(new node(pos.x + mv[i][0], pos.y + mv[i][1], directionType(i)));
+		shared_ptr<node> n(new node(int(pos.x + mv[i][0]), int(pos.y + mv[i][1]), directionType(i)));
 		if (judPos(n))
 		{
 			isVisted[n->_x][n->_y] = true;

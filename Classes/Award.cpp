@@ -52,7 +52,7 @@ void Award::initialization()
 	_isDeleted = false;
 
 	// 取出之后随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2, 0, rand() % WORLD_WIDTH - WORLD_WIDTH / 2) + 2 * Vec3::UNIT_Y);
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2*1.f, 0.f, rand() % WORLD_WIDTH - WORLD_WIDTH / 2*1.f) + 2 * Vec3::UNIT_Y);
 	randomType();
 
 	syncNodeToPhysics();
@@ -86,10 +86,10 @@ void Award::applyToCharacter(Character * const & character)
 		character->addLifeValue(10.f);
 		break;
 	case kAwardEXP:
-		character->addExperience(3.f);
+		character->addExperience(3);
 		break;
 	case kAwardSorce:
-		character->addSorce(3.f);
+		character->addSorce(3);
 		break;
 	default:
 		break;

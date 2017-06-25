@@ -189,7 +189,7 @@ void DisplayManager::updateExperience()
 
 void DisplayManager::updateCurrentTime()
 {
-	int remainingTime = 500 - (GetTickCount64() - GameScene::getStartingTime()) / 1000;
+	int remainingTime = 10 - int((GetTickCount64() - GameScene::getStartingTime()) / 1000);
 	if (remainingTime >= 0)
 	{
 		_currentTime->setString(u8"时间剩余 " + to_string(remainingTime) + "s");
@@ -197,7 +197,7 @@ void DisplayManager::updateCurrentTime()
 	else
 	{
 		// 停止所有定时器
-		unscheduleAllSelectors();
+		unscheduleAllCallbacks();
 		// 显示得分面板
 		showSorceBoard();
 	}
@@ -225,10 +225,10 @@ void DisplayManager::showSkillBoard()
 	}
 	for (int i = 0; i < 3; i++)
 	{
-		_skill_list[i]->jumpToPercentVertical((ratio / 16.0)*100.0);
+		_skill_list[i]->jumpToPercentVertical((ratio / 16.f)*100.f);
 		_skill_list[i]->setDirection(ui::ScrollView::Direction::NONE);
 		int skillNum = _skill_list[i]->getItems().size();
-		for (size_t j = 0; j < skillNum; j++)
+		for (int j = 0; j < skillNum; j++)
 		{
 			Widget* item = _skill_list[i]->getItem(j);//获取其中的某个项，然后转换成Button 进行设置操作=
 			item->addClickEventListener([this](Ref *const ref)

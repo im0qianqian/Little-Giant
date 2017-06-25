@@ -93,12 +93,12 @@ void StageManager::createObstacles()
 			if (count > 1)
 			{
 				Physics3DRigidBodyDes rbDes;
-				rbDes.shape = Physics3DShape::createBox(Vec3(m*count, ELEMENT_HEIGHT, n));
+				rbDes.shape = Physics3DShape::createBox(Vec3(m*count*1.f, ELEMENT_HEIGHT*1.f, n*1.f));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
-				pd2->setScaleX(m*count);
-				pd2->setScaleY(ELEMENT_HEIGHT);
-				pd2->setScaleZ(n);
-				pd2->setPosition3D(Vec3((j)*elementLength - (count + 1)*elementLength / 2 - WORLD_LENGTH / 2, ELEMENT_HEIGHT / 2, i*elementWidth - WORLD_WIDTH / 2));
+				pd2->setScaleX(m*count*1.f);
+				pd2->setScaleY(ELEMENT_HEIGHT*1.f);
+				pd2->setScaleZ(n*1.f);
+				pd2->setPosition3D(Vec3((j)*elementLength - (count + 1)*elementLength / 2 - WORLD_LENGTH / 2*1.f, ELEMENT_HEIGHT / 2*1.f, i*elementWidth - WORLD_WIDTH / 2*1.f));
 				addChild(pd2);
 				pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 				pd2->syncNodeToPhysics();
@@ -121,12 +121,12 @@ void StageManager::createObstacles()
 			{
 				
 				Physics3DRigidBodyDes rbDes;
-				rbDes.shape = Physics3DShape::createBox(Vec3(m, ELEMENT_HEIGHT, n*count));
+				rbDes.shape = Physics3DShape::createBox(Vec3(m*1.f, ELEMENT_HEIGHT*1.f, n*count*1.f));
 				auto pd2 = Stage::create(&rbDes, "Sprite3DTest/box.c3t", "images/CyanSquare.png");
-				pd2->setScaleX(m);
-				pd2->setScaleY(ELEMENT_HEIGHT);
-				pd2->setScaleZ(n*count);
-				pd2->setPosition3D(Vec3(i*elementWidth - WORLD_LENGTH / 2, ELEMENT_HEIGHT / 2, j*elementLength - (count + 1)*elementLength / 2 - WORLD_WIDTH / 2));
+				pd2->setScaleX(m*1.f);
+				pd2->setScaleY(ELEMENT_HEIGHT*1.f);
+				pd2->setScaleZ(n*count*1.f);
+				pd2->setPosition3D(Vec3(i*elementWidth - WORLD_LENGTH / 2*1.f, ELEMENT_HEIGHT / 2*1.f, j*elementLength - (count + 1)*elementLength / 2 - WORLD_WIDTH / 2*1.f));
 				addChild(pd2);
 				pd2->setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);
 				pd2->syncNodeToPhysics();
@@ -161,28 +161,27 @@ void StageManager::updateMap(float dt)
 	{
 		auto multVec = [&](const Vec3 &pos)
 		{
-			Vec2 nPos = Vec2(int((pos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH), int((pos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH));
-			return &nPos;
+			return Vec2(int((pos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH)*1.f, int((pos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH)*1.f);
 		};
 		memset(_cMap, 0, sizeof(_cMap));
 		auto award = GameScene::getAwardManager()->getAllAward();
 		for (auto i : award)
 		{
 			auto pos = multVec(i->getPosition3D());
-			if (pos->x < 0 || pos->x >= MAPS_FILE_WIDTH || pos->y < 0 || pos->y >= MAPS_FILE_LENGTH)continue;
-			_cMap[int(pos->x)][int(pos->y)] = kGlobalAward;
+			if (pos.x < 0 || pos.x >= MAPS_FILE_WIDTH || pos.y < 0 || pos.y >= MAPS_FILE_LENGTH)continue;
+			_cMap[int(pos.x)][int(pos.y)] = kGlobalAward;
 		}
 		/* 敌人部分 */
 		auto enemy = GameScene::getCharacterManager()->getEnemyCharacter();
 		for (auto i : enemy)
 		{
 			auto pos = multVec(i->getPosition3D());
-			if (pos->x < 0 || pos->x >= MAPS_FILE_WIDTH || pos->y < 0 || pos->y >= MAPS_FILE_LENGTH)continue;
-			_cMap[int(pos->x)][int(pos->y)] = kGlobalCharacter;
+			if (pos.x < 0 || pos.x >= MAPS_FILE_WIDTH || pos.y < 0 || pos.y >= MAPS_FILE_LENGTH)continue;
+			_cMap[int(pos.x)][int(pos.y)] = kGlobalCharacter;
 		}
 		/* 玩家部分 */
 		auto my = multVec(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
-		_cMap[int(my->x)][int(my->y)] = kGlobalCharacter;
+		_cMap[int(my.x)][int(my.y)] = kGlobalCharacter;
 	}//).detach();
 	
 }

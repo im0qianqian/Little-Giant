@@ -54,12 +54,12 @@ void Character::addLifeValue(const float &add)
 		// 减血时减掉防御力所抵消的伤害
 		_lifeValue += min(add + getAttribute().getDefensiveForce(), 0);
 	}
-	_hpSlider->setPercent(_lifeValue);			//更新血量条
+	_hpSlider->setPercent(int(_lifeValue));			//更新血量条
 }
 
 void Character::addExperience(const int &add)
 {
-	_experience += add*getAttribute().getEmpiricalAcquisition();
+	_experience += int(add*getAttribute().getEmpiricalAcquisition());
 }
 
 void Character::addSorce(const int &add)
@@ -70,10 +70,10 @@ void Character::addSorce(const int &add)
 void Character::attack(const Vec3 &pos)
 {
 	const float attackTimeInterval = 600.f / getAttribute().getAttackSpeed();		// 攻击时间间隔
-	int currentTime = GetTickCount64();												// 获取当前时间
+	auto currentTime = GetTickCount64();												// 获取当前时间
 	if (currentTime - _lastAttackTime >= attackTimeInterval)						//如果可以攻击
 	{
-		_lastAttackTime = currentTime;												// 更新最后一次攻击时间
+		_lastAttackTime = unsigned int(currentTime);												// 更新最后一次攻击时间
 		GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 	}
 }
@@ -134,7 +134,7 @@ void Character::initialization()
 	_attribute.init();
 	_weaponType = kWeaponArrow;
 	_dept = 0;
-	_hpSlider->setPercent(_lifeValue);		//更新血量条
+	_hpSlider->setPercent(int(_lifeValue));		//更新血量条
 	_lastAttackTime = 0;					//攻击时间间隔
 	_direction = Vec3::ZERO;				//初始行走方向
 
@@ -147,7 +147,7 @@ void Character::initialization()
 
 
 	// 随机设置位置并同步
-	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2.0, WORLD_HEIGHT, rand() % WORLD_WIDTH - WORLD_WIDTH / 2.0));
+	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2.f, WORLD_HEIGHT*1.f, rand() % WORLD_WIDTH - WORLD_WIDTH / 2.f));
 	syncNodeToPhysics();
 }
 
@@ -185,7 +185,7 @@ void Character::beAttacked(Weapons *const &weapon)
 	// 如果武器的创建者是自己的话不掉血（自己打自己）
 	if (weapon->getOwner() == this) return;
 	//受到攻击先掉血,掉血量等于武器攻击力-自身防御力
-	addLifeValue(-weapon->getPower() / 10.0);
+	addLifeValue(-weapon->getPower() / 10.f);
 
 	// 如果血量小于0，则死亡
 	if (getLifeValue() <= 0)
@@ -235,7 +235,7 @@ void Character::createHpBar()
 	_hpSlider->loadProgressBarTexture("images/blood.png");
 	_hpSlider->setTouchEnabled(false);
 	_hpSlider->setScale(.03f, .015f);
-	_hpSlider->setPercent(_lifeValue);
+	_hpSlider->setPercent(int(_lifeValue));
 	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
 	billBoard->addChild(_hpSlider);
 
@@ -434,7 +434,7 @@ void EnemyCharacter::collisionWithStage()
 	Character::collisionWithStage();	//调用父类的碰撞方法
 	int x = rand() % 3 - 1;
 	int y = rand() % 3 - 1;
-	setDirection(Vec3(x, 0, y));
+	setDirection(Vec3(x*1.f, 0.f, y*1.f));
 }
 
 void EnemyCharacter::die()
