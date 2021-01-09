@@ -1,5 +1,20 @@
 # Little-Giant
 
+**UPD 2021.01.09：**适配 cocos2d-x 3.17.2
+
+****
+
+## 食用教程
+
+1. 在 [cocos2d-x 官网](https://www.cocos.com/cocos2dx)下载 3.17.2 版本
+2. 解压并进入 cocos2d-x 的 `tools\cocos2d-console\bin` 目录
+3. 执行 `cocos new Little-Giant -d /your_path -l cpp`，创建新项目于 `/your_path` 路径中
+4. `git@github.com:im0qianqian/Little-Giant.git`，或下载本项目
+5. 将 `/your_path` 中的 `cocos2d` 目录移至本项目内
+6. 打开 `proj.win32/Little-Giant.sln` 编译并执行
+
+---
+
 ## 项目概述
 
 **游戏名称：** 进击的小巨人
