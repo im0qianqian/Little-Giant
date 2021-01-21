@@ -1,4 +1,4 @@
-#include "Joystick.h"
+ï»¿#include "Joystick.h"
 #include "SceneManager.h"
 #include "GameScene.h"
 #include "Global.h"
@@ -14,14 +14,14 @@ Joystick::Joystick() :
 	_listenerTouch(nullptr),
 	_isFirstView(false)
 {
-	cout << "joystick ´´½¨ÁË" << endl;
+	cout << "joystick åˆ›å»ºäº†" << endl;
 }
 
 Joystick::~Joystick()
 {
 	//GameScene::getCharacterManager()->getPlayerCharacter()->getThreadMutex().lock();
 	//GameScene::getCharacterManager()->getPlayerCharacter()->getThreadMutex().unlock();
-	cout << "joystick Ïú»ÙÁË" << endl;
+	cout << "joystick é”€æ¯äº†" << endl;
 }
 
 bool Joystick::init()
@@ -105,14 +105,14 @@ void Joystick::onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos
 		}
 		else
 		{
-			// µÚÒ»ÈË³ÆÊÓ½Ç
+			// ç¬¬ä¸€äººç§°è§†è§’
 			Vec3 rot = GameScene::getCamera()->getRotation3D();
 			rot.y += delta.x;
 			GameScene::getCamera()->setRotation3D(rot);
 			//GameScene::getCharacterManager()->getPlayerCharacter()->setRotation3D(rot);
 		}
 	}
-	//event->stopPropagation();//²»´«µİÖÁÆäËûÍ¼²ã
+	//event->stopPropagation();//ä¸ä¼ é€’è‡³å…¶ä»–å›¾å±‚
 }
 
 
@@ -122,82 +122,82 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 	return [&](const Physics3DCollisionInfo&ci)
 	{
 		if (!ci.collisionPointList.empty()) {
-			/* »ñÈ¡Á½¸öÅö×²¶ÔÏó */
+			/* è·å–ä¸¤ä¸ªç¢°æ’å¯¹è±¡ */
 			auto *objA = static_cast<Node*>(ci.objA->getUserData());
 			auto *objB = static_cast<Node*>(ci.objB->getUserData());
 			//CCASSERT(objA, "OBJ A NULL");
 			//CCASSERT(objB, "OBJ B NULL");
 			if (objA != NULL && objB != NULL)
 			{
-				bool flag = true;	// ÊÇ·ñÊä³öÅö×² Tag µ÷ÊÔÊ¹ÓÃ
+				bool flag = true;	// æ˜¯å¦è¾“å‡ºç¢°æ’ Tag è°ƒè¯•ä½¿ç”¨
 				auto collisionPos = ci.collisionPointList[0].worldPositionOnB;
 
-				//ÅĞ¶ÏÎ»ÖÃºÏ·¨£¬ÔİÓÃ(³¡ÍâÎ»ÖÃ²»¿¼ÂÇÅö×²)
+				//åˆ¤æ–­ä½ç½®åˆæ³•ï¼Œæš‚ç”¨(åœºå¤–ä½ç½®ä¸è€ƒè™‘ç¢°æ’)
 				if (collisionPos.y < 0)return;
 
-				if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))		//ÎäÆ÷ÓëÕÏ°­ÎïÅö×²
+				if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalStage))		//æ­¦å™¨ä¸éšœç¢ç‰©ç¢°æ’
 				{
-					// ´´½¨¹âĞ§
+					// åˆ›å»ºå…‰æ•ˆ
 					createParticle(collisionPos);
 					
 					//CCLOG("---------------- weapon stage --------------------");
-					// Èç¹û A ÊÇÕÏ°­ÎïµÄ»°½»»»£¬×îÖÕ½á¹û£º A ÎäÆ÷¡¢B ÕÏ°­Îï
+					// å¦‚æœ A æ˜¯éšœç¢ç‰©çš„è¯äº¤æ¢ï¼Œæœ€ç»ˆç»“æœï¼š A æ­¦å™¨ã€B éšœç¢ç‰©
 					if (objA->Node::getTag() == kGlobalStage)
 						swap(objA, objB);
-					// ÓëÕÏ°­ÎïÅö×²
+					// ä¸éšœç¢ç‰©ç¢°æ’
 					Weapons *weapon = dynamic_cast<Weapons*>(objA);
 					weapon->collisionWithStage();
 				}
-				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//ÎäÆ÷ÓëÈËÎïÅö×²
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalCharacter))	//æ­¦å™¨ä¸äººç‰©ç¢°æ’
 				{
-					// ´´½¨¹âĞ§
+					// åˆ›å»ºå…‰æ•ˆ
 					createParticle(collisionPos);
 
 					//CCLOG("---------------- weapon character --------------------");
-					// Èç¹û A ÊÇÎäÆ÷µÄ»°½»»»£¬×îÖÕ½á¹û£º A ÈËÎï¡¢B ÎäÆ÷
+					// å¦‚æœ A æ˜¯æ­¦å™¨çš„è¯äº¤æ¢ï¼Œæœ€ç»ˆç»“æœï¼š A äººç‰©ã€B æ­¦å™¨
 					if (objA->Node::getTag() == kGlobalWeapon)
 						swap(objA, objB);
 					Weapons *weapon = dynamic_cast<Weapons*>(objB);
 					Character *character = dynamic_cast<Character*>(objA);
-					// ÈËÎïÓëÎäÆ÷·¢ÉúÅö×²
+					// äººç‰©ä¸æ­¦å™¨å‘ç”Ÿç¢°æ’
 					character->collisionWithWeapon(weapon);
-					// ÎäÆ÷ÓëÈËÎï·¢ÉúÅö×²
+					// æ­¦å™¨ä¸äººç‰©å‘ç”Ÿç¢°æ’
 					weapon->collisionWithCharacter(character);
 				}
-				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//ÎäÆ÷ÓëÎäÆ÷Åö×²
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalWeapon, kGlobalWeapon))	//æ­¦å™¨ä¸æ­¦å™¨ç¢°æ’
 				{
-					// ´´½¨¹âĞ§
+					// åˆ›å»ºå…‰æ•ˆ
 					createParticle(collisionPos);
 
 					//CCLOG("---------------- weapon weapon --------------------");
 					Weapons *weapon1 = dynamic_cast<Weapons*>(objA);
 					Weapons *weapon2 = dynamic_cast<Weapons*>(objB);
-					// ÎäÆ÷ÓëÎäÆ÷·¢ÉúÅö×²
+					// æ­¦å™¨ä¸æ­¦å™¨å‘ç”Ÿç¢°æ’
 					weapon1->collisionWithWeapon(weapon2);
 					weapon2->collisionWithWeapon(weapon1);
 				}
-				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))	//ÈËÎïÓë½±ÀøÅö×²
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalAward, kGlobalCharacter))	//äººç‰©ä¸å¥–åŠ±ç¢°æ’
 				{
 					//CCLOG("---------------- Award character --------------------");
-					// Èç¹û A ÊÇÎäÆ÷µÄ»°½»»»£¬×îÖÕ½á¹û£º A ÈËÎï¡¢B ½±Àø
+					// å¦‚æœ A æ˜¯æ­¦å™¨çš„è¯äº¤æ¢ï¼Œæœ€ç»ˆç»“æœï¼š A äººç‰©ã€B å¥–åŠ±
 					if (objA->Node::getTag() == kGlobalAward)
 						swap(objA, objB);
 					Award * award = dynamic_cast<Award*>(objB);
 					Character *character = dynamic_cast<Character*>(objA);
-					// ½±ÀøÓëÈËÎïÅö×²
+					// å¥–åŠ±ä¸äººç‰©ç¢°æ’
 					award->collisionWithCharacter(character);
 					character->collisionWithAward(award);
 				}
-				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalStage, kGlobalCharacter))	//ÈËÎïÓëÇ½±ÚÅö×²
+				else if (gObjectEqual(objA->Node::getTag(), objB->Node::getTag(), kGlobalStage, kGlobalCharacter))	//äººç‰©ä¸å¢™å£ç¢°æ’
 				{
 					//CCLOG("---------------- Stage character --------------------");
-					// Èç¹û A ÊÇÇ½±ÚµÄ»°½»»»£¬×îÖÕ½á¹û£º A ÈËÎï¡¢B Ç½±Ú
+					// å¦‚æœ A æ˜¯å¢™å£çš„è¯äº¤æ¢ï¼Œæœ€ç»ˆç»“æœï¼š A äººç‰©ã€B å¢™å£
 					if (objA->Node::getTag() == kGlobalStage)
 						swap(objA, objB);
 					if (objB != GameScene::getStageManager()->getGround())
 					{
 						Character *character = dynamic_cast<Character*>(objA);
-						// ½±ÀøÓëÈËÎïÅö×²
+						// å¥–åŠ±ä¸äººç‰©ç¢°æ’
 						character->collisionWithStage();
 					}
 				}
@@ -205,7 +205,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 				{
 					flag = false;
 				}
-				if (flag)	// ½öÓÃµ÷ÊÔ Êä³ö±êÇ©
+				if (flag)	// ä»…ç”¨è°ƒè¯• è¾“å‡ºæ ‡ç­¾
 				{
 					//CCLOG("tag aa : %d", objA->Node::getTag());
 					//CCLOG("tag bb : %d", objB->Node::getTag());
@@ -217,7 +217,7 @@ std::function<void(const Physics3DCollisionInfo&ci)> Joystick::onPhysics3DCollis
 
 void Joystick::createParticle(const Vec3 &pos)
 {
-	/* ÎäÆ÷Åö×²Á£×ÓÌØĞ§ */
+	/* æ­¦å™¨ç¢°æ’ç²’å­ç‰¹æ•ˆ */
 	auto ps = PUParticleSystem3D::create("scripts/mp_hit_04.pu");
 	if (ps == nullptr)return; 
 	ps->setPosition3D(pos);
@@ -232,25 +232,25 @@ void Joystick::createParticle(const Vec3 &pos)
 
 void Joystick::keyboardListen()
 {
-	/* ´´½¨¼üÅÌ¼àÌıÆ÷ */
+	/* åˆ›å»ºé”®ç›˜ç›‘å¬å™¨ */
 	_listenerKeyboard = EventListenerKeyboard::create();
-	/* ¼üÅÌ±»°´ÏÂ */
+	/* é”®ç›˜è¢«æŒ‰ä¸‹ */
 	_listenerKeyboard->onKeyPressed = [&](EventKeyboard::KeyCode keyCode, Event *event)
 	{
 		setKeyState(keyCode, true);
-		/* ·½±ãµ÷ÊÔ ÉèÖÃ Debug Ä£Ê½*/
+		/* æ–¹ä¾¿è°ƒè¯• è®¾ç½® Debug æ¨¡å¼*/
 		if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
 		{
 			if (SceneManager::getScene()->getPhysics3DWorld()->isDebugDrawEnabled())
 				SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(false);
 			else SceneManager::getScene()->getPhysics3DWorld()->setDebugDrawEnable(true);
 		}
-		else if (keyCode == EventKeyboard::KeyCode::KEY_Q)	//ÊÓ½Ç±ä»»
+		else if (keyCode == EventKeyboard::KeyCode::KEY_Q)	//è§†è§’å˜æ¢
 		{
 			_isFirstView = !_isFirstView;
 			if (_isFirstView)
 			{
-				/* µÚÒ»ÈË³ÆÊÓ½ÇÊ±Ïà»úÒª±£³ÖË®Æ½·½Ïò */
+				/* ç¬¬ä¸€äººç§°è§†è§’æ—¶ç›¸æœºè¦ä¿æŒæ°´å¹³æ–¹å‘ */
 				Vec3 pos = GameScene::getCamera()->getRotation3D();
 				pos.x = pos.z = 0;
 				GameScene::getCamera()->setRotation3D(pos);
@@ -264,7 +264,7 @@ void Joystick::keyboardListen()
 		/* ----------------------- */
 		log("Keyboard %d Pressed~", keyCode);
 	};
-	/* ¼üÅÌµ¯Æğ */
+	/* é”®ç›˜å¼¹èµ· */
 	_listenerKeyboard->onKeyReleased = [&](EventKeyboard::KeyCode keyCode, Event *event)
 	{
 		//CCLOG("Keyboard %d Released~", keyCode);

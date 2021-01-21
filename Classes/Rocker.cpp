@@ -1,4 +1,4 @@
-#include "Rocker.h"
+ï»¿#include "Rocker.h"
 #include "Global.h"
 
 Rocker * Rocker::create(const std::string & rockerImageName, const std::string & rockerBGImageName, const Vec2 & pos)
@@ -16,20 +16,20 @@ Rocker * Rocker::create(const std::string & rockerImageName, const std::string &
 
 void Rocker::rockerInit(const std::string & rockerImageName, const std::string & rockerBGImageName, const Vec2 & pos)
 {
-	//Ìí¼ÓÒ¡¸Ë±³¾°Í¼  
+	//æ·»åŠ æ‘‡æ†èƒŒæ™¯å›¾  
 	Sprite* spRockerBG = Sprite::create(rockerBGImageName);
 	spRockerBG->setPosition(pos);
 	addChild(spRockerBG, 0, kRockerBG);
-	//Ìí¼ÓÒ¡¸ËÉÏ·½ÄÇ¸ö¿ÉÒÆ¶¯µÄÍ¼  
+	//æ·»åŠ æ‘‡æ†ä¸Šæ–¹é‚£ä¸ªå¯ç§»åŠ¨çš„å›¾  
 	Sprite* spRocker = Sprite::create(rockerImageName);
 	spRocker->setPosition(pos);
 	addChild(spRocker, 1, kRocker);
 	spRocker->setOpacity(180);
-	//Ò¡¸Ë±³¾°Í¼×ø±ê  
+	//æ‘‡æ†èƒŒæ™¯å›¾åæ ‡  
 	_rockerBGPosition = pos;
-	//Ò¡¸Ë±³¾°Í¼°ë¾¶  
+	//æ‘‡æ†èƒŒæ™¯å›¾åŠå¾„  
 	_rockerBGR = spRockerBG->getContentSize().width*0.5f;
-	// °ó¶¨¼àÌıÊÂ¼ş
+	// ç»‘å®šç›‘å¬äº‹ä»¶
 	_listener = EventListenerTouchOneByOne::create();
 	_listener->onTouchBegan = CC_CALLBACK_2(Rocker::onTouchBegan, this);
 	_listener->onTouchMoved = CC_CALLBACK_2(Rocker::onTouchMoved, this);
@@ -37,23 +37,23 @@ void Rocker::rockerInit(const std::string & rockerImageName, const std::string &
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(_listener, this);
 }
 
-//µÃµ½Á½×ø±êµÄ½Ç¶ÈÖµ  
+//å¾—åˆ°ä¸¤åæ ‡çš„è§’åº¦å€¼  
 float Rocker::getRad(const Vec2 &pos1, const Vec2 &pos2)
 {
-	//µÃµ½Á½µãµÄ×ø±êx,y×ø±êÖµ  
+	//å¾—åˆ°ä¸¤ç‚¹çš„åæ ‡x,yåæ ‡å€¼  
 	float px1 = pos1.x;
 	float py1 = pos1.y;
 	float px2 = pos2.x;
 	float py2 = pos2.y;
-	//Çó³öÁ½±ß³¤¶È  
+	//æ±‚å‡ºä¸¤è¾¹é•¿åº¦  
 	float x = px2 - px1;
 	float y = py1 - py2;
-	//¿ª·½   Óë  ¼¸´Î·½ ¹«Ê½  
+	//å¼€æ–¹   ä¸  å‡ æ¬¡æ–¹ å…¬å¼  
 	float xie = sqrt(pow(x, 2) + pow(y, 2));
 	float cos = x / xie;
-	//·´ÓàÏÒ¶¨Àí£¬ÖªµÀÁ½±ß³¤Çó½Ç¶È£ºcos = ÁÚ±ß/Ğ±±ß  
+	//åä½™å¼¦å®šç†ï¼ŒçŸ¥é“ä¸¤è¾¹é•¿æ±‚è§’åº¦ï¼šcos = é‚»è¾¹/æ–œè¾¹  
 	float rad = acos(cos);
-	//µ±´¥ÆÁY×ø±ê <Ò¡¸ËµÄY×ø±êÊ±£¬È¡·´Öµ  
+	//å½“è§¦å±Yåæ ‡ <æ‘‡æ†çš„Yåæ ‡æ—¶ï¼Œå–åå€¼  
 	if (py1 > py2)
 	{
 		rad = -rad;
@@ -64,7 +64,7 @@ Vec2 Rocker::getDirection() const
 {
 	return getChildByTag(kRocker)->getPosition() - _rockerBGPosition;
 }
-//µÃµ½Óë½Ç¶È¶ÔÓ¦µÄ°ë¾¶ÎªrµÄÔ²ÉÏÒ»×ø±êµã  
+//å¾—åˆ°ä¸è§’åº¦å¯¹åº”çš„åŠå¾„ä¸ºrçš„åœ†ä¸Šä¸€åæ ‡ç‚¹  
 Vec2 Rocker::getAnglePosition(const float &r, const float &angle)
 {
 	return Vec2(r*cos(angle), r*sin(angle));
@@ -73,9 +73,9 @@ Vec2 Rocker::getAnglePosition(const float &r, const float &angle)
 bool Rocker::onTouchBegan(Touch* const &touch, Event* const &event)
 {
 	Sprite* sp = (Sprite*)getChildByTag(kRocker);
-	//µÃµ½´¥ÆÁµã×ø±ê  
+	//å¾—åˆ°è§¦å±ç‚¹åæ ‡  
 	Vec2 point = touch->getLocation();
-	//ÅĞ¶ÏÊÇ·ñµã»÷µ½spÕâ¸ö¾«Áé£ºboundingBox()¾«Áé´óĞ¡Ö®ÄÚµÄËùÓĞ×ø±ê 
+	//åˆ¤æ–­æ˜¯å¦ç‚¹å‡»åˆ°spè¿™ä¸ªç²¾çµï¼šboundingBox()ç²¾çµå¤§å°ä¹‹å†…çš„æ‰€æœ‰åæ ‡ 
 	if (sp->getBoundingBox().containsPoint(point))
 	{
 		_isCanMove = true;
@@ -91,19 +91,19 @@ void Rocker::onTouchMoved(Touch* const &touch, Event* const &event)
 	}
 	Sprite* sp = (Sprite*)getChildByTag(kRocker);
 	Vec2 point = touch->getLocation();
-	//ÅĞ¶ÏÁ½¸öÔ²ĞÄµÄ¾àÀëÊÇ·ñ´óÓÚÒ¡¸Ë±³¾°µÄ°ë¾¶  
+	//åˆ¤æ–­ä¸¤ä¸ªåœ†å¿ƒçš„è·ç¦»æ˜¯å¦å¤§äºæ‘‡æ†èƒŒæ™¯çš„åŠå¾„  
 	if (sqrt(pow(point.x - _rockerBGPosition.x, 2) + pow(point.y - _rockerBGPosition.y, 2)) >= _rockerBGR)
 	{
-		//µÃµ½´¥µãÓëÒ¡¸Ë±³¾°Ô²ĞÄĞÎ³ÉµÄ½Ç¶È  
+		//å¾—åˆ°è§¦ç‚¹ä¸æ‘‡æ†èƒŒæ™¯åœ†å¿ƒå½¢æˆçš„è§’åº¦  
 		float angle = getRad(_rockerBGPosition, point);
-		//È·±£Ğ¡Ô²ÔË¶¯·¶Î§ÔÚ±³¾°Ô²ÄÚ
+		//ç¡®ä¿å°åœ†è¿åŠ¨èŒƒå›´åœ¨èƒŒæ™¯åœ†å†…
 		sp->setPosition(getAnglePosition(_rockerBGR, angle)+ Vec2(_rockerBGPosition.x, _rockerBGPosition.y));
 	}
 	else {
-		//´¥µãÔÚ±³¾°Ô²ÄÚÔò¸úËæ´¥µãÔË¶¯  
+		//è§¦ç‚¹åœ¨èƒŒæ™¯åœ†å†…åˆ™è·Ÿéšè§¦ç‚¹è¿åŠ¨  
 		sp->setPosition(point);
 	}
-	// ²Ù×÷²»´«ÏòÆäËûÍ¼²ã
+	// æ“ä½œä¸ä¼ å‘å…¶ä»–å›¾å±‚
 	event->stopPropagation();
 }
 
@@ -118,6 +118,6 @@ void Rocker::onTouchEnded(Touch* const &touch, Event* const &event)
 	rocker->stopAllActions();
 	rocker->runAction(MoveTo::create(0.08f, rockerBG->getPosition()));
 	_isCanMove = false;
-	// ²Ù×÷²»´«ÏòÆäËûÍ¼²ã
+	// æ“ä½œä¸ä¼ å‘å…¶ä»–å›¾å±‚
 	event->stopPropagation();
 }

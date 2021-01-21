@@ -1,4 +1,4 @@
-#ifndef __JOYSTICK_H__
+ï»¿#ifndef __JOYSTICK_H__
 #define __JOYSTICK_H__
 
 #include "cocos2d.h"
@@ -20,34 +20,34 @@ public:
 	bool getKeyS() const { return _keyS; }
 	bool getKeyD() const { return _keyD; }
 
-	/* Åö×²ÊÂ¼ş */
+	/* ç¢°æ’äº‹ä»¶ */
 	std::function<void(const Physics3DCollisionInfo &ci)> onPhysics3DCollision();
 
-	/* ÊÇ·ñÊÇµÚÒ»ÈË³ÆÊÓ½Ç */
+	/* æ˜¯å¦æ˜¯ç¬¬ä¸€äººç§°è§†è§’ */
 	bool isFirstView() const { return _isFirstView; }
 private:
-	/* ¼üÅÌ¼àÌı */
+	/* é”®ç›˜ç›‘å¬ */
 	void keyboardListen();
-	/* ´¥ÆÁ¼àÌı */
+	/* è§¦å±ç›‘å¬ */
 	void touchListen();
-	/* Ôİ¶¨¡¢´´½¨¹âĞ§ */
+	/* æš‚å®šã€åˆ›å»ºå…‰æ•ˆ */
 	void createParticle(const Vec3 &pos);
 
-	/* ÉèÖÃµ±Ç°¼üÅÌ°´¼ü×´Ì¬ */
+	/* è®¾ç½®å½“å‰é”®ç›˜æŒ‰é”®çŠ¶æ€ */
 	void setKeyState(const EventKeyboard::KeyCode &keyCode, const bool &state);
-	/* ´¥ÆÁÈıÖÖÊÂ¼ş */
+	/* è§¦å±ä¸‰ç§äº‹ä»¶ */
 	void onTouchesBegan(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesEnded(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 	void onTouchesMoved(const std::vector<cocos2d::Touch*>& touches, cocos2d::Event  *event);
 
-	/* Ò»Ğ©°´¼ü */
+	/* ä¸€äº›æŒ‰é”® */
 	bool _keyW;
 	bool _keyA;
 	bool _keyS;
 	bool _keyD;
-	bool _isFirstView;								//ÊÇ·ñÎªµÚÒ»ÈË³ÆÊÓ½Ç
-	EventListenerTouchAllAtOnce* _listenerTouch;	//´¥¿Ø¼àÌıÆ÷
-	EventListenerKeyboard* _listenerKeyboard;	//¼üÅÌ¼àÌıÆ÷
+	bool _isFirstView;								//æ˜¯å¦ä¸ºç¬¬ä¸€äººç§°è§†è§’
+	EventListenerTouchAllAtOnce* _listenerTouch;	//è§¦æ§ç›‘å¬å™¨
+	EventListenerKeyboard* _listenerKeyboard;	//é”®ç›˜ç›‘å¬å™¨
 };
 
 #endif

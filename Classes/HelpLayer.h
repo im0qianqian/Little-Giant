@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #ifndef __HELP_LAYER_H__
 #define __HELP_LAYER_H__
 

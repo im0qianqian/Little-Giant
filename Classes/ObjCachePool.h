@@ -1,4 +1,4 @@
-#ifndef __OBJ_CACHE_POOL_H__
+ï»¿#ifndef __OBJ_CACHE_POOL_H__
 #define __OBJ_CACHE_POOL_H__
 
 #include "cocos2d.h"
@@ -14,27 +14,27 @@ public:
 	ObjCachePool(const ObjCachePool<T> &x);
 	ObjCachePool(Node *const &node, const int &size);
 	~ObjCachePool();
-	/* Ìí¼ÓÒ»¸ö¶ÔÏóµ½»º´æ³Ø */
+	/* æ·»åŠ ä¸€ä¸ªå¯¹è±¡åˆ°ç¼“å­˜æ±  */
 	void addToPool(T* const &t);
-	/* ´´½¨»º´æ³Ø */
+	/* åˆ›å»ºç¼“å­˜æ±  */
 	void createCachePool();
-	/* ÉèÖÃ»º´æ³Ø´óĞ¡ */
+	/* è®¾ç½®ç¼“å­˜æ± å¤§å° */
 	void setCacheSize(const int &size) { _cacheSize = size; }
-	/* »ñÈ¡»º´æ³Ø´óĞ¡ */
+	/* è·å–ç¼“å­˜æ± å¤§å° */
 	int getCacheSize() { return _cacheSize; }
-	/* ÉèÖÃÍ¼²ã */
+	/* è®¾ç½®å›¾å±‚ */
 	void setLayer(Node *const &node) { _layer = node; }
-	/* »ñÈ¡µ±Ç°Í¼²ã */
+	/* è·å–å½“å‰å›¾å±‚ */
 	void getLayer() { return _layer; }
-	/* »ñÈ¡»º´æ³ØÊ£ÓàÈİÁ¿ */
+	/* è·å–ç¼“å­˜æ± å‰©ä½™å®¹é‡ */
 	int getResidualSize() { return _cachePool.size(); }
-	/* »ñÈ¡Ò»¸ö¶ÔÏóÖ¸Õë */
+	/* è·å–ä¸€ä¸ªå¯¹è±¡æŒ‡é’ˆ */
 	T* getFromPool();
 private:
-	std::deque<T* > _cachePool;	//»º³å³Ø
-	mutex _lock;				//Í¬²½Ëø
-	int _cacheSize;				//»º³å³Ø´óĞ¡
-	Node * _layer;				//»º³å³ØËù×÷ÓÃµÄÍ¼²ã
+	std::deque<T* > _cachePool;	//ç¼“å†²æ± 
+	mutex _lock;				//åŒæ­¥é”
+	int _cacheSize;				//ç¼“å†²æ± å¤§å°
+	Node * _layer;				//ç¼“å†²æ± æ‰€ä½œç”¨çš„å›¾å±‚
 };
 
 template<typename T>
@@ -49,7 +49,7 @@ ObjCachePool<T>::ObjCachePool() :
 template<typename T>
 ObjCachePool<T>::ObjCachePool(const ObjCachePool<T>& x)
 {
-	/* ¿½±´¹¹Ôìº¯Êı£¬Ö±½Ó´«Öµ£¬Ôİ¶¨ */
+	/* æ‹·è´æ„é€ å‡½æ•°ï¼Œç›´æ¥ä¼ å€¼ï¼Œæš‚å®š */
 	_cachePool = x._cachePool;
 	_lock = x._lock;
 	_cacheSize = x._cacheSize;
@@ -75,7 +75,7 @@ void ObjCachePool<T>::addToPool(T* const & t)
 {
 	if (t == nullptr)return;
 	/*
-	* Ìí¼Óµ½»º´æ³ØÒâÎ¶×Åµ±Ç°¶ÔÏóÒªÈÃÍæ¼Ò¿´²»¼û£¬ÓÚÊÇÔÚÕâÀïÉèÖÃÁËËüµÄÎ»ÖÃ
+	* æ·»åŠ åˆ°ç¼“å­˜æ± æ„å‘³ç€å½“å‰å¯¹è±¡è¦è®©ç©å®¶çœ‹ä¸è§ï¼Œäºæ˜¯åœ¨è¿™é‡Œè®¾ç½®äº†å®ƒçš„ä½ç½®
 	*/
 	t->setVisible(false);
 	t->setPosition3D(-Vec3::UNIT_Y * 10);
@@ -89,7 +89,7 @@ void ObjCachePool<T>::addToPool(T* const & t)
 template<typename T>
 void ObjCachePool<T>::createCachePool()
 {
-	//»º´æ³ØÇå¿Õ
+	//ç¼“å­˜æ± æ¸…ç©º
 	_lock.lock();
 	_cachePool.clear();
 	_lock.unlock();
@@ -103,7 +103,7 @@ void ObjCachePool<T>::createCachePool()
 			addToPool(t);
 		}
 	}
-	//cout << "»º´æ³Ø´´½¨³É¹¦£¬´óĞ¡£º" << _cachePool.size() << endl;
+	//cout << "ç¼“å­˜æ± åˆ›å»ºæˆåŠŸï¼Œå¤§å°ï¼š" << _cachePool.size() << endl;
 }
 
 template<typename T>
@@ -118,13 +118,13 @@ T* ObjCachePool<T>::getFromPool()
 	}
 	_lock.unlock();
 	/*
-	* ´Ó»º´æ³ØÖĞÈ¡³ö¶ÔÏóÒâÎ¶×Å¸Ã¶ÔÏóÒª±»ÏÔÊ¾³öÀ´ÁË
+	* ä»ç¼“å­˜æ± ä¸­å–å‡ºå¯¹è±¡æ„å‘³ç€è¯¥å¯¹è±¡è¦è¢«æ˜¾ç¤ºå‡ºæ¥äº†
 	*/
 	//CCASSERT(t, "NULL");
 	if (t != nullptr)
 	{
 		t->setVisible(true);
-		//cout << "³É¹¦È¡³öÒ»¸ö¶ÔÏó£º"<<t<<"\t»º´æ³ØÈİÁ¿Ê£Óà£º"<<_cachePool.size() << endl;
+		//cout << "æˆåŠŸå–å‡ºä¸€ä¸ªå¯¹è±¡ï¼š"<<t<<"\tç¼“å­˜æ± å®¹é‡å‰©ä½™ï¼š"<<_cachePool.size() << endl;
 	}
 	return t;
 }

@@ -1,23 +1,23 @@
-#include "AwardManager.h"
+ï»¿#include "AwardManager.h"
 #include "Global.h"
 
 AwardManager::AwardManager():
 	_cachePool(ObjCachePool<Award>(this,AWARD_CACHE_SIZE)),
 	_allAward(std::set<Award*>())
 {
-	cout << "AwardManager ¹¹Ôì" << endl;
+	cout << "AwardManager æ„é€ " << endl;
 }
 
 AwardManager::~AwardManager()
 {
-	cout << "AwardManager Îö¹¹" << endl;
+	cout << "AwardManager ææ„" << endl;
 }
 
 bool AwardManager::init()
 {
-	// µÚÒ»²½ÏÈ´´½¨»º´æ³Ø
+	// ç¬¬ä¸€æ­¥å…ˆåˆ›å»ºç¼“å­˜æ± 
 	_cachePool.createCachePool();
-	// Ã¿¸ô10s²¹³äÒ»ÏÂ³¡ÉÏµÄ½±ÀøÊıÄ¿
+	// æ¯éš”10sè¡¥å……ä¸€ä¸‹åœºä¸Šçš„å¥–åŠ±æ•°ç›®
 	schedule(schedule_selector(AwardManager::update), 10.f);
 	return true;
 }
@@ -33,18 +33,18 @@ void AwardManager::createAllAward()
 	int size = _cachePool.getResidualSize();
 	for (auto i = 0; i < size; i++)
 	{
-		auto award = _cachePool.getFromPool();			//´Ó»º´æ³ØÖĞÈ¡³ö½±Àø
+		auto award = _cachePool.getFromPool();			//ä»ç¼“å­˜æ± ä¸­å–å‡ºå¥–åŠ±
 		if (award != NULL)
 		{
-			award->initialization();					//µÇ³¡
-			_allAward.insert(award);					//²åÈëµ½ËùÓĞ½±ÀøÖĞ
+			award->initialization();					//ç™»åœº
+			_allAward.insert(award);					//æ’å…¥åˆ°æ‰€æœ‰å¥–åŠ±ä¸­
 		}
 	}
-	//cout << "----------> ³É¹¦Ë¢ĞÂ³¡ÉÏµÄ½±Àø~~~~~~~~~~~~~~~~" << size<<" "<< _cachePool.getResidualSize()<< endl;
+	//cout << "----------> æˆåŠŸåˆ·æ–°åœºä¸Šçš„å¥–åŠ±~~~~~~~~~~~~~~~~" << size<<" "<< _cachePool.getResidualSize()<< endl;
 }
 
 void AwardManager::update(float dt)
 {
-	//´´½¨½±Àø
+	//åˆ›å»ºå¥–åŠ±
 	createAllAward();
 }

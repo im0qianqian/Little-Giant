@@ -1,4 +1,4 @@
-//½ÇÉ«Àà£º±£³ÖÍæ¼ÒµÄ¸÷ÏîÓÎÏ·ÊôĞÔ
+ï»¿//è§’è‰²ç±»ï¼šä¿æŒç©å®¶çš„å„é¡¹æ¸¸æˆå±æ€§
 
 #ifndef __Character_H__
 #define __Character_H__
@@ -26,31 +26,31 @@ public:
 	public:
 		Attribute();
 		~Attribute();
-		/* Ôö¼Ó¹¥»÷Á¦ */
+		/* å¢åŠ æ”»å‡»åŠ› */
 		void addAttackDamage(const float &add);
-		/* Ôö¼Ó¹¥»÷ËÙ¶È */
+		/* å¢åŠ æ”»å‡»é€Ÿåº¦ */
 		void addAttackSpeed(const float &add);
-		/* Ôö¼ÓÒÆ¶¯ËÙ¶È */
+		/* å¢åŠ ç§»åŠ¨é€Ÿåº¦ */
 		void addMovingSpeed(const float &add);
-		/* Ôö¼Ó¾­Ñé»ñÈ¡±¶Êı */
+		/* å¢åŠ ç»éªŒè·å–å€æ•° */
 		void addEmpiricalAcquisition(const float &add);
-		/* Ôö¼Ó·ÀÓùÁ¦ */
+		/* å¢åŠ é˜²å¾¡åŠ› */
 		void addDefensiveForce(const float &add);
-		/* Ôö¼Ó»Ö¸´ÄÜÁ¦ */
+		/* å¢åŠ æ¢å¤èƒ½åŠ› */
 		void addRestoringAbility(const float &add);
-		/* ÁÙÊ±ÊôĞÔ£ºÔö¼ÓÊÓÒ° */
+		/* ä¸´æ—¶å±æ€§ï¼šå¢åŠ è§†é‡ */
 		void addView();
-		/* ÁÙÊ±ÊôĞÔ£ºÔö¼Ó±äĞ¡ */
+		/* ä¸´æ—¶å±æ€§ï¼šå¢åŠ å˜å° */
 		void addSmall();
-		/* ÁÙÊ±ÊôĞÔ£ºÔö¼Ó´ÅÊ¯ */
+		/* ä¸´æ—¶å±æ€§ï¼šå¢åŠ ç£çŸ³ */
 		void addMagnet();
-		/* ÁÙÊ±ÊôĞÔ£º»Ö¸´ÊÓÒ° */
+		/* ä¸´æ—¶å±æ€§ï¼šæ¢å¤è§†é‡ */
 		void delView();
-		/* ÁÙÊ±ÊôĞÔ£º»Ö¸´±ä´ó */
+		/* ä¸´æ—¶å±æ€§ï¼šæ¢å¤å˜å¤§ */
 		void delSmall();
-		/* ÁÙÊ±ÊôĞÔ£ºÈ¥³ı´ÅÊ¯ */
+		/* ä¸´æ—¶å±æ€§ï¼šå»é™¤ç£çŸ³ */
 		void delMagnet();
-		/* ¸ü¸ÄÁÙÊ±ÄÜÁ¦³ÖĞøÊ±¼ä */
+		/* æ›´æ”¹ä¸´æ—¶èƒ½åŠ›æŒç»­æ—¶é—´ */
 		void setDuration(float add);
 		/* GET */
 		float getAttackDamage() const { return _attackDamage; }
@@ -59,19 +59,19 @@ public:
 		float getEmpiricalAcquisition() const { return _empiricalAcquisition; }
 		float getDefensiveForce() const { return _defensiveForce; }
 		float getRestoringAbility() const { return _restoringAbility; }
-		/* ³õÊ¼»¯ */
+		/* åˆå§‹åŒ– */
 		void init();
 	private:
-		float _attackDamage;			//¹¥»÷Á¦¼Ó³É
-		float _attackSpeed;				//¹¥»÷ËÙ¶È¼Ó³É
-		float _movingSpeed;				//ÒÆ¶¯ËÙ¶È¼Ó³É
-		float _empiricalAcquisition;	//¾­Ñé»ñÈ¡¼Ó³É
-		float _defensiveForce;			//·ÀÓùÁ¦¼Ó³É
-		float _restoringAbility;		//»Ö¸´ÄÜÁ¦¼Ó³É
+		float _attackDamage;			//æ”»å‡»åŠ›åŠ æˆ
+		float _attackSpeed;				//æ”»å‡»é€Ÿåº¦åŠ æˆ
+		float _movingSpeed;				//ç§»åŠ¨é€Ÿåº¦åŠ æˆ
+		float _empiricalAcquisition;	//ç»éªŒè·å–åŠ æˆ
+		float _defensiveForce;			//é˜²å¾¡åŠ›åŠ æˆ
+		float _restoringAbility;		//æ¢å¤èƒ½åŠ›åŠ æˆ
 		/*
-		 * View ×îµÍÎ»
-		 * Small ÖĞ¼äÎ»
-		 * Magnet ×î¸ßÎ»
+		 * View æœ€ä½ä½
+		 * Small ä¸­é—´ä½
+		 * Magnet æœ€é«˜ä½
 		 */
 		enum TemporaryType
 		{
@@ -80,80 +80,80 @@ public:
 			kTemporarySmall = 0x02,
 			kTemporaryMagnet = 0x04
 		};
-		short int _temporary;			//ÁÙÊ±ÊôĞÔÀàĞÍ
-		float _duration;				//ÁÙÊ±ÄÜÁ¦³ÖĞøÊ±¼ä
+		short int _temporary;			//ä¸´æ—¶å±æ€§ç±»å‹
+		float _duration;				//ä¸´æ—¶èƒ½åŠ›æŒç»­æ—¶é—´
 	};
 	Character();
 	~Character();
-	/* Ôö¼Ó/¼õÉÙÉúÃü */
+	/* å¢åŠ /å‡å°‘ç”Ÿå‘½ */
 	virtual void addLifeValue(const float &add);
-	/* Ôö¼Ó¾­ÑéÖµ */
+	/* å¢åŠ ç»éªŒå€¼ */
 	virtual void addExperience(const int &add);
-	/* Ôö¼Ó·ÖÊı */
+	/* å¢åŠ åˆ†æ•° */
 	virtual void addSorce(const int &add);
-	/* »ñÈ¡ÈËÎïËùÊôÈºÂä */
+	/* è·å–äººç‰©æ‰€å±ç¾¤è½ */
 	virtual int getDept() const { return _dept; }
-	/* »ñÈ¡µ±Ç°ÉúÃüÖµ */
+	/* è·å–å½“å‰ç”Ÿå‘½å€¼ */
 	virtual float getLifeValue() const { return _lifeValue; }
-	/* »ñÈ¡µ±Ç°¾­ÑéÖµ */
+	/* è·å–å½“å‰ç»éªŒå€¼ */
 	virtual int getExperience() const { return _experience; }
-	/* »ñÈ¡µ±Ç°µÃ·Ö */
+	/* è·å–å½“å‰å¾—åˆ† */
 	virtual int getSorce() const { return _sorce; }
-	/* ¸ü¸ÄÈËÎïÈºÂä */
+	/* æ›´æ”¹äººç‰©ç¾¤è½ */
 	virtual void setDept(const int &dept) { _dept = dept; }
-	/* »ñÈ¡µ±Ç°ÈËÎïÊôĞÔ */
+	/* è·å–å½“å‰äººç‰©å±æ€§ */
 	virtual Attribute &getAttribute() { return _attribute; }
-	/* ¹¥»÷ */
+	/* æ”»å‡» */
 	virtual void attack(const Vec3 &pos);
-	/* ¹¹Ôì³õÊ¼»¯ */
+	/* æ„é€ åˆå§‹åŒ– */
 	virtual bool init() override;
-	/* ÈËÎï³õÊ¼»¯ */
+	/* äººç‰©åˆå§‹åŒ– */
 	virtual void initialization();
-	/* ÓëÎäÆ÷Åö×² */
+	/* ä¸æ­¦å™¨ç¢°æ’ */
 	virtual void collisionWithWeapon(Weapons *const &weapon);
-	/* Óë½±ÀøÅö×² */
+	/* ä¸å¥–åŠ±ç¢°æ’ */
 	virtual void collisionWithAward(Award *const &award);
-	/* ÓëÇ½±ÚÅö×² */
+	/* ä¸å¢™å£ç¢°æ’ */
 	virtual void collisionWithStage();
-	/* ÊÇ·ñËÀÍö */
+	/* æ˜¯å¦æ­»äº¡ */
 	virtual bool isDie() const { return _isDie; }
-	/* ÉèÖÃÈËÎïÒÆ¶¯·½ÏòÏòÁ¿ */
+	/* è®¾ç½®äººç‰©ç§»åŠ¨æ–¹å‘å‘é‡ */
 	virtual void setDirection(const Vec3 &direction) { _direction = direction; }
-	/* »ñÈ¡ÈËÎïÒÆ¶¯·½ÏòÏòÁ¿ */
+	/* è·å–äººç‰©ç§»åŠ¨æ–¹å‘å‘é‡ */
 	virtual Vec3 getDirection() { return _direction; }
 protected:
-	/* ÒÆ¶¯ */
+	/* ç§»åŠ¨ */
 	virtual void move();
-	/* ËÀÍö */
+	/* æ­»äº¡ */
 	virtual void die();
-	/* »ñÈ¡»¥³âËø */
+	/* è·å–äº’æ–¥é” */
 	virtual mutex &getThreadMutex() { return _threadMutex; }
-	/* ÉèÖÃÈËÎïÃû³Æ */
+	/* è®¾ç½®äººç‰©åç§° */
 	virtual void setTopName(const string &name) { _topName->setString(name); }
-	/* ÊÜµ½ÎäÆ÷¹¥»÷ */
+	/* å—åˆ°æ­¦å™¨æ”»å‡» */
 	virtual void beAttacked(Weapons *const &weapon);
 private:
-	/* Óë update ÓĞ¹ØµÄº¯Êı */
+	/* ä¸ update æœ‰å…³çš„å‡½æ•° */
 	virtual void update(float dt) override;
-	/* ÈËÎïÒÆ¶¯Ä£¿é */
+	/* äººç‰©ç§»åŠ¨æ¨¡å— */
 	virtual void moveModule() = 0;
-	/* ¼ì²âµ±Ç°×´¿ö£¬±ÈÈçÊÇ·ñµô³ö³¡Íâ */
+	/* æ£€æµ‹å½“å‰çŠ¶å†µï¼Œæ¯”å¦‚æ˜¯å¦æ‰å‡ºåœºå¤– */
 	virtual bool detectionStatus();
-	/* ½çÃæÏÔÊ¾ÓĞ¹Ø£¬´´½¨ÑªÁ¿Ìõ */
+	/* ç•Œé¢æ˜¾ç¤ºæœ‰å…³ï¼Œåˆ›å»ºè¡€é‡æ¡ */
 	virtual void createHpBar();
 
-	int _dept;				//ÈËÎïËùÊôÈºÂä
-	float _lifeValue;		//ÈËÎïÉúÃüÖµ
-	int _experience;		//µ±Ç°ÒÑÓĞ¾­Ñé
-	int _sorce;				//µ±Ç°µÃ·Ö
-	unsigned int _lastAttackTime;	//ÉÏ´Î¹¥»÷Ê±¼ä
-	WeaponType _weaponType;	//ÎäÆ÷ÀàĞÍ
-	Attribute _attribute;	//ÊôĞÔ¼Ó³É
-	bool _isDie;			//ÈËÎïÊÇ·ñËÀÍö
-	Slider* _hpSlider;		//ÈËÎïÑªÁ¿Ìõ
-	Label* _topName;		//ÈËÎïÍ·¶¥µÄÃû×Ö
-	Vec3 _direction;		//ÈËÎïÒÆ¶¯·½ÏòÏòÁ¿
-	mutex _threadMutex;		//Ïß³ÌËø
+	int _dept;				//äººç‰©æ‰€å±ç¾¤è½
+	float _lifeValue;		//äººç‰©ç”Ÿå‘½å€¼
+	int _experience;		//å½“å‰å·²æœ‰ç»éªŒ
+	int _sorce;				//å½“å‰å¾—åˆ†
+	unsigned int _lastAttackTime;	//ä¸Šæ¬¡æ”»å‡»æ—¶é—´
+	WeaponType _weaponType;	//æ­¦å™¨ç±»å‹
+	Attribute _attribute;	//å±æ€§åŠ æˆ
+	bool _isDie;			//äººç‰©æ˜¯å¦æ­»äº¡
+	Slider* _hpSlider;		//äººç‰©è¡€é‡æ¡
+	Label* _topName;		//äººç‰©å¤´é¡¶çš„åå­—
+	Vec3 _direction;		//äººç‰©ç§»åŠ¨æ–¹å‘å‘é‡
+	mutex _threadMutex;		//çº¿ç¨‹é”
 };
 
 class PlayerCharacter:public Character
@@ -162,7 +162,7 @@ public:
 	CREATE_FUNC(PlayerCharacter);
 	virtual void initialization() override;
 private:
-	/* Ö÷½ÇËÀÍö */
+	/* ä¸»è§’æ­»äº¡ */
 	virtual void die() override;
 	virtual void moveModule() override;
 };
@@ -176,13 +176,13 @@ public:
 	virtual void collisionWithStage() override;
 	AIStateMachine *getAIStateMachine() { return _aiMachine; }
 protected:
-	/* AIÊÜµ½¹¥»÷ */
+	/* AIå—åˆ°æ”»å‡» */
 	virtual void beAttacked(Weapons *const &weapon) override;
 private:
-	/* ÆäËûÈËÎïËÀÍö */
+	/* å…¶ä»–äººç‰©æ­»äº¡ */
 	virtual void die() override;
 	virtual void moveModule() override;
 	
-	AIStateMachine *_aiMachine;	//AIÏµÍ³
+	AIStateMachine *_aiMachine;	//AIç³»ç»Ÿ
 };
 #endif

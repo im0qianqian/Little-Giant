@@ -1,4 +1,4 @@
-#ifndef __DISPLAY_MANAGER_H__
+ï»¿#ifndef __DISPLAY_MANAGER_H__
 #define __DISPLAY_MANAGER_H__
 
 #include "cocos2d.h"
@@ -21,43 +21,43 @@ public:
 	~DisplayManager();
 	virtual bool init() override;
 	CREATE_FUNC(DisplayManager);
-	/* ÓÎÏ·½áÊø ÏÔÊ¾»ı·Ö±í */
+	/* æ¸¸æˆç»“æŸ æ˜¾ç¤ºç§¯åˆ†è¡¨ */
 	void showSorceBoard();
-	/* »ñÈ¡²Ù×÷¸Ë¶ÔÏóÖ¸Õë */
+	/* è·å–æ“ä½œæ†å¯¹è±¡æŒ‡é’ˆ */
 	Rocker *getRocker() const{ return _rocker; }
 private:
 	virtual void update(float dt) override;
-	/* ¸üĞÂ¶¯»­Ğ§¹û */
+	/* æ›´æ–°åŠ¨ç”»æ•ˆæœ */
 	void updateAnimation(float dt);
-	/* ¸üĞÂÅÅĞĞ°ñ */
+	/* æ›´æ–°æ’è¡Œæ¦œ */
 	void updateSorceList();
-	/* ¸üĞÂ¾­ÑéÌõ */
+	/* æ›´æ–°ç»éªŒæ¡ */
 	void updateExperience();
-	/* ¸üĞÂÊ£ÓàÊ±¼ä */
+	/* æ›´æ–°å‰©ä½™æ—¶é—´ */
 	void updateCurrentTime();
-	/* »ñÈ¡µ±Ç°µÈ¼¶Éı¼¶ËùĞèÒªµÄ¾­Ñéµã */
+	/* è·å–å½“å‰ç­‰çº§å‡çº§æ‰€éœ€è¦çš„ç»éªŒç‚¹ */
 	int getLevelExperience(int const &levelNum){ return levelNum*levelNum*levelNum+6*levelNum; }
-	/* ÈËÎïÉı¼¶ ÏÔÊ¾¼¼ÄÜÑ¡ÔñÀ¸ */
+	/* äººç‰©å‡çº§ æ˜¾ç¤ºæŠ€èƒ½é€‰æ‹©æ  */
 	void showSkillBoard();
-	/* ÈËÎï¼¼ÄÜÓ¦ÓÃ */
+	/* äººç‰©æŠ€èƒ½åº”ç”¨ */
 	void applyToSkill(const int &skillTag);
 
 	Node *_displayNode;					// CSB node
-	Text *_levelLabel;					// µÈ¼¶
-	Text *_promptLabel;                 // ÌáÊ¾¼¼ÄÜ¼Ó³ÉÖÖÀà
-	Text *_currentTime;					// µ±Ç°Ê±¼ä
-	LoadingBar *_experienceBar;			// ¾­ÑéÌõ
-	Button *_exitButton;				// ÍË³ö°´Å¥
+	Text *_levelLabel;					// ç­‰çº§
+	Text *_promptLabel;                 // æç¤ºæŠ€èƒ½åŠ æˆç§ç±»
+	Text *_currentTime;					// å½“å‰æ—¶é—´
+	LoadingBar *_experienceBar;			// ç»éªŒæ¡
+	Button *_exitButton;				// é€€å‡ºæŒ‰é’®
 	Button *_buttonHome;				//Home
 	Button *_buttonRestart;
-	Layout *_sorceBoard;				// ¼Æ·Ö±í
-	Text *_sorceNum;					// ×îÖÕµÃ·Ö
-	Text *_sorceRank;					// ×îÖÕÅÅÃû
-	int _levelNum;						// µ±Ç°µÈ¼¶
-	float _percent;						// µ±Ç°¾­ÑéÌõËùÕ¼°Ù·Ö±È
+	Layout *_sorceBoard;				// è®¡åˆ†è¡¨
+	Text *_sorceNum;					// æœ€ç»ˆå¾—åˆ†
+	Text *_sorceRank;					// æœ€ç»ˆæ’å
+	int _levelNum;						// å½“å‰ç­‰çº§
+	float _percent;						// å½“å‰ç»éªŒæ¡æ‰€å ç™¾åˆ†æ¯”
 	ListView* _skill_list[3];
 	PageView* _skill_panel[3];
-	Rocker *_rocker;					//²Ù×÷¸Ë
+	Rocker *_rocker;					//æ“ä½œæ†
 	class ListViewSorce
 	{
 	public:
@@ -72,7 +72,7 @@ private:
 		void setRank(string const &rank) { _rank->setString(rank); }
 		void setName(string const &name) { _name->setString(name); }
 		void setSorce(string const &sorce) { _sorce->setString(sorce); }
-		/* ÉèÖÃÑÕÉ« */
+		/* è®¾ç½®é¢œè‰² */
 		void setColor(const Color3B &color);
 	private:   
 		Text *_rank;
@@ -80,7 +80,7 @@ private:
 		Text *_sorce;
 	};
 	const int _scoreListSize = 6;
-	std::vector<ListViewSorce> _scoreList;	//³É¼¨
+	std::vector<ListViewSorce> _scoreList;	//æˆç»©
 };
 
 #endif

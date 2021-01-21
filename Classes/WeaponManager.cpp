@@ -1,19 +1,19 @@
-#include "WeaponManager.h"
+ï»¿#include "WeaponManager.h"
 
 WeaponManager::WeaponManager():
 	_cachePool(ObjCachePool<Weapons>(this, WEAPONS_CACHE_SIZE))
 {
-	cout << "WeaponManager ¹¹Ôì" << endl;
+	cout << "WeaponManager æž„é€ " << endl;
 }
 
 WeaponManager::~WeaponManager()
 {
-	cout << "WeaponManager Îö¹¹" << endl;
+	cout << "WeaponManager æžæž„" << endl;
 }
 
 bool WeaponManager::init()
 {
-	// ´´½¨»º´æ³Ø
+	// åˆ›å»ºç¼“å­˜æ± 
 	_cachePool.createCachePool();
 	return true;
 }

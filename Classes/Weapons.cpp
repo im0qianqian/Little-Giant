@@ -1,4 +1,4 @@
-#include "Weapons.h"
+ï»¿#include "Weapons.h"
 #include "Character.h"
 #include "GameScene.h"
 #include "Joystick.h"
@@ -12,7 +12,7 @@ Weapons::Weapons() :
 	_epos(Vec3::ZERO),
 	_isDeleted(true)
 {
-	// ÎäÆ÷±êÇ©
+	// æ­¦å™¨æ ‡ç­¾
 	setTag(kGlobalWeapon);
 }
 
@@ -22,18 +22,18 @@ Weapons::~Weapons()
 }
 
 /*
- * ÒòÎªÎäÆ÷¶ÔÏóÔÚ´Ó¸¸ÀàÍ¼²ãÖĞÉ¾³ıµÄÊ±ºòĞ´³É removeFromParent() ×ÜÊÇ»á³öÏÖÄÚ´æ³åÍ»£¬
- * ËùÒÔÏÈĞ´³É°ÑÎäÆ÷¶ÔÏóÒÆ¶¯µ½¿´²»µ½µÄµØ·½Æ­Æ­Íæ¼ÒµÄÑÛ¾¦
- * ÎäÆ÷ÓëµØÃæµÈÕÏ°­ÎïÅö×²
+ * å› ä¸ºæ­¦å™¨å¯¹è±¡åœ¨ä»çˆ¶ç±»å›¾å±‚ä¸­åˆ é™¤çš„æ—¶å€™å†™æˆ removeFromParent() æ€»æ˜¯ä¼šå‡ºç°å†…å­˜å†²çªï¼Œ
+ * æ‰€ä»¥å…ˆå†™æˆæŠŠæ­¦å™¨å¯¹è±¡ç§»åŠ¨åˆ°çœ‹ä¸åˆ°çš„åœ°æ–¹éª—éª—ç©å®¶çš„çœ¼ç›
+ * æ­¦å™¨ä¸åœ°é¢ç­‰éšœç¢ç‰©ç¢°æ’
  */
 
 void Weapons::destroy()
 {
-	// Èç¹ûÒÑ¾­±»É¾³ıÔò²»ĞèÒªÖØĞÂÌí¼Ó
+	// å¦‚æœå·²ç»è¢«åˆ é™¤åˆ™ä¸éœ€è¦é‡æ–°æ·»åŠ 
 	if (_isDeleted)return;
-	// É¾³ıÔªËØ
+	// åˆ é™¤å…ƒç´ 
 	_isDeleted = true;
-	// Ìí¼Óµ½»º´æ³Ø
+	// æ·»åŠ åˆ°ç¼“å­˜æ± 
 	GameScene::getWeaponManager()->addToPool(this);
 }
 
@@ -42,27 +42,27 @@ bool Weapons::init()
 	bool flag = false;
 	do
 	{
-		if (initWithFile("Sprite3DTest/box.c3t"))								//ÉèÖÃÎäÆ÷ĞÎ×´
+		if (initWithFile("Sprite3DTest/box.c3t"))								//è®¾ç½®æ­¦å™¨å½¢çŠ¶
 		{
-			setTexture("images/Icon.png");										//ÉèÖÃ²ÄÖÊ
+			setTexture("images/Icon.png");										//è®¾ç½®æè´¨
 
-			Physics3DRigidBodyDes rbDes;										//¶¨ÒåÒ»¸öÈıÎ¬¿Õ¼ä¸ÕÌå
-			rbDes.mass = 1.f;													//ÉèÖÃ¸ÕÌåÖÊÁ¿
-			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//¸ÕÌå´óĞ¡
+			Physics3DRigidBodyDes rbDes;										//å®šä¹‰ä¸€ä¸ªä¸‰ç»´ç©ºé—´åˆšä½“
+			rbDes.mass = 1.f;													//è®¾ç½®åˆšä½“è´¨é‡
+			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//åˆšä½“å¤§å°
 
-			auto obj = Physics3DRigidBody::create(&rbDes);						//´´½¨¸ÕÌå¶ÔÏó
+			auto obj = Physics3DRigidBody::create(&rbDes);						//åˆ›å»ºåˆšä½“å¯¹è±¡
 
-			_physicsComponent = Physics3DComponent::create(obj);				//ÀûÓÃ¸Ã¸ÕÌå¶ÔÏó´´½¨×é¼ş
+			_physicsComponent = Physics3DComponent::create(obj);				//åˆ©ç”¨è¯¥åˆšä½“å¯¹è±¡åˆ›å»ºç»„ä»¶
 
 			addComponent(_physicsComponent);
 
 			_contentSize = getBoundingBox().size;
 
-			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// ÉèÖÃÅö×²ºóµÄ»Øµ÷º¯Êı
+			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// è®¾ç½®ç¢°æ’åçš„å›è°ƒå‡½æ•°
 
-			obj->setUserData(this);												// ÉèÖÃÓÃ»§Êı¾İÎªµ±Ç°ÎäÆ÷¶ÔÏó£¬Åö×²¼ì²âÖĞ»áÊ¹ÓÃ
+			obj->setUserData(this);												// è®¾ç½®ç”¨æˆ·æ•°æ®ä¸ºå½“å‰æ­¦å™¨å¯¹è±¡ï¼Œç¢°æ’æ£€æµ‹ä¸­ä¼šä½¿ç”¨
 
-			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//Ó¦ÓÃÍ¬²½
+			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//åº”ç”¨åŒæ­¥
 			flag = true;
 		}
 	} while (false);
@@ -71,7 +71,7 @@ bool Weapons::init()
 
 void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 {
-	// Ê×ÏÈÉèÖÃ²¿·ÖÊôĞÔ
+	// é¦–å…ˆè®¾ç½®éƒ¨åˆ†å±æ€§
 	setOwner(owner);
 	setSpos(spos);
 	setEpos(epos);
@@ -79,33 +79,33 @@ void Weapons::init(void * const & owner, const Vec3 & spos, const Vec3 & epos)
 	setSpeed(100.f * static_cast<Character*>(owner)->getAttribute().getAttackSpeed());
 	_isDeleted = false;
 
-	Vec3 linearVel = getEpos() - getSpos();								//¼ÆËã¹¥»÷·½ÏòµÄÏòÁ¿
-	//linearVel.y = 0;													//ÑØË®Æ½·½Ïò´ò³ö
-	linearVel.normalize();												//µ¥Î»»¯ÏòÁ¿
-	Vec3 pos = getSpos() + 2 * linearVel + Vec3::UNIT_Y;				//ÎäÆ÷ÆğÊ¼×ø±ê
-	setPosition3D(pos);													//ÉèÖÃÎäÆ÷ÆğÊ¼×ø±ê
-	setScale(0.5f);														//ÉèÖÃËõ·Å´óĞ¡
-	linearVel *= getSpeed();											//ËÙ¶ÈÏòÁ¿
+	Vec3 linearVel = getEpos() - getSpos();								//è®¡ç®—æ”»å‡»æ–¹å‘çš„å‘é‡
+	//linearVel.y = 0;													//æ²¿æ°´å¹³æ–¹å‘æ‰“å‡º
+	linearVel.normalize();												//å•ä½åŒ–å‘é‡
+	Vec3 pos = getSpos() + 2 * linearVel + Vec3::UNIT_Y;				//æ­¦å™¨èµ·å§‹åæ ‡
+	setPosition3D(pos);													//è®¾ç½®æ­¦å™¨èµ·å§‹åæ ‡
+	setScale(0.5f);														//è®¾ç½®ç¼©æ”¾å¤§å°
+	linearVel *= getSpeed();											//é€Ÿåº¦å‘é‡
 
-	auto obj = static_cast<Physics3DRigidBody*>(getPhysicsObj());		//»ñÈ¡¸ÕÌå¶ÔÏó
-	obj->setLinearVelocity(linearVel);									//ÉèÖÃÏßËÙ¶È
-	obj->setLinearFactor(Vec3::ONE);									//ÉèÖÃÏßĞÔÒò×Ó
-	obj->setAngularVelocity(Vec3::ZERO);								//ÉèÖÃ½ÇËÙ¶È
-	obj->setCcdMotionThreshold(0.5f);									//ÉèÖÃÔË¶¯ãĞÖµ
-	obj->setCcdSweptSphereRadius(0.4f);									//ÉèÖÃÉ¨ÃèÇò°ë¾¶
+	auto obj = static_cast<Physics3DRigidBody*>(getPhysicsObj());		//è·å–åˆšä½“å¯¹è±¡
+	obj->setLinearVelocity(linearVel);									//è®¾ç½®çº¿é€Ÿåº¦
+	obj->setLinearFactor(Vec3::ONE);									//è®¾ç½®çº¿æ€§å› å­
+	obj->setAngularVelocity(Vec3::ZERO);								//è®¾ç½®è§’é€Ÿåº¦
+	obj->setCcdMotionThreshold(0.5f);									//è®¾ç½®è¿åŠ¨é˜ˆå€¼
+	obj->setCcdSweptSphereRadius(0.4f);									//è®¾ç½®æ‰«æçƒåŠå¾„
 
-	syncNodeToPhysics();												//Í¬²½ÖÁÎïÀíÊÀ½ç
+	syncNodeToPhysics();												//åŒæ­¥è‡³ç‰©ç†ä¸–ç•Œ
 }
 
 void Weapons::killCharacter(Character * const &character) const
 {
-	// ÎäÆ÷µÄÖ÷ÈË
+	// æ­¦å™¨çš„ä¸»äºº
 	auto *master = static_cast<Character*>(getOwner());
-	// µÃµ½¶Ô·½µÄËùÓĞ¾­ÑéÖµÓëµÃ·Ö£¨BUG BUG BUG£©£¬ÁíÍâ»ñÈ¡5¸ö¾­Ñéµã
+	// å¾—åˆ°å¯¹æ–¹çš„æ‰€æœ‰ç»éªŒå€¼ä¸å¾—åˆ†ï¼ˆBUG BUG BUGï¼‰ï¼Œå¦å¤–è·å–5ä¸ªç»éªŒç‚¹
 	master->addExperience(character->getExperience() + 10);
-	// µÃµ½¶Ô·½ËùÓĞµÄ·ÖÊı£¬ÁíÍâ»ñÈ¡5·Ö
+	// å¾—åˆ°å¯¹æ–¹æ‰€æœ‰çš„åˆ†æ•°ï¼Œå¦å¤–è·å–5åˆ†
 	master->addSorce(character->getSorce() + 10);
-	cout << master << " É±ËÀÁË " << character << " £¬µÃµ½¾­ÑéÖµ£º" << character->getExperience() << " £¬µÃµ½·ÖÊı£º" << character->getSorce() << endl;
+	cout << master << " æ€æ­»äº† " << character << " ï¼Œå¾—åˆ°ç»éªŒå€¼ï¼š" << character->getExperience() << " ï¼Œå¾—åˆ°åˆ†æ•°ï¼š" << character->getSorce() << endl;
 }
 
 void Weapons::collisionWithStage()
@@ -125,7 +125,7 @@ void Weapons::collisionWithCharacter(Character * const & character)
 
 void Weapons::update(float dt)
 {
-	// Èç¹û²»ÔÚ³¡ÉÏ²¢ÇÒÃ»ÓĞÉ¾³ı
+	// å¦‚æœä¸åœ¨åœºä¸Šå¹¶ä¸”æ²¡æœ‰åˆ é™¤
 	if (!isDeleted() && getPositionY() < 0)
 	{
 		destroy();

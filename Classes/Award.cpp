@@ -1,4 +1,4 @@
-#include "Award.h"
+ï»¿#include "Award.h"
 #include "GameScene.h"
 #include "Joystick.h"
 #include "Global.h"
@@ -7,7 +7,7 @@ Award::Award() :
 	_isDeleted(true),
 	_awardType(AwardType::kAwardEXP)
 {
-	// ÎäÆ÷±êÇ©
+	// æ­¦å™¨æ ‡ç­¾
 	setTag(kGlobalAward);
 }
 
@@ -20,27 +20,27 @@ bool Award::init()
 	bool flag = false;
 	do
 	{
-		if (initWithFile("images/3.c3b"))								//ÉèÖÃĞÎ×´
+		if (initWithFile("images/3.c3b"))								//è®¾ç½®å½¢çŠ¶
 		{
-			Physics3DRigidBodyDes rbDes;										//¶¨ÒåÒ»¸öÈıÎ¬¿Õ¼ä¸ÕÌå
-			rbDes.mass = 0.f;													//ÉèÖÃ¸ÕÌåÖÊÁ¿
-			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//¸ÕÌå´óĞ¡
-			auto obj = Physics3DRigidBody::create(&rbDes);						//´´½¨¸ÕÌå¶ÔÏó
+			Physics3DRigidBodyDes rbDes;										//å®šä¹‰ä¸€ä¸ªä¸‰ç»´ç©ºé—´åˆšä½“
+			rbDes.mass = 0.f;													//è®¾ç½®åˆšä½“è´¨é‡
+			rbDes.shape = Physics3DShape::createBox(Vec3(0.5f, 0.5f, 0.5f));	//åˆšä½“å¤§å°
+			auto obj = Physics3DRigidBody::create(&rbDes);						//åˆ›å»ºåˆšä½“å¯¹è±¡
 
-			_physicsComponent = Physics3DComponent::create(obj);				//ÀûÓÃ¸Ã¸ÕÌå¶ÔÏó´´½¨×é¼ş
+			_physicsComponent = Physics3DComponent::create(obj);				//åˆ©ç”¨è¯¥åˆšä½“å¯¹è±¡åˆ›å»ºç»„ä»¶
 
 			addComponent(_physicsComponent);
 
 			_contentSize = getBoundingBox().size;
 
-			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// ÉèÖÃÅö×²ºóµÄ»Øµ÷º¯Êı
+			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// è®¾ç½®ç¢°æ’åçš„å›è°ƒå‡½æ•°
 
 			obj->setUserData(this);
 
-			setScale(.007f);										//´óĞ¡Ëõ·Åµ½0.007±¶
-			setRotation3D(Vec3(90, 0, 0));							//Ğı×ª
+			setScale(.007f);										//å¤§å°ç¼©æ”¾åˆ°0.007å€
+			setRotation3D(Vec3(90, 0, 0));							//æ—‹è½¬
 
-			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//Ó¦ÓÃÍ¬²½
+			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::NONE);	//åº”ç”¨åŒæ­¥
 			flag = true;
 		}
 	} while (false);
@@ -51,7 +51,7 @@ void Award::initialization()
 {
 	_isDeleted = false;
 
-	// È¡³öÖ®ºóËæ»úÉèÖÃÎ»ÖÃ²¢Í¬²½
+	// å–å‡ºä¹‹åéšæœºè®¾ç½®ä½ç½®å¹¶åŒæ­¥
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2*1.f, 0.f, rand() % WORLD_WIDTH - WORLD_WIDTH / 2*1.f) + 2 * Vec3::UNIT_Y);
 	randomType();
 
@@ -60,21 +60,21 @@ void Award::initialization()
 
 void Award::destroy()
 {
-	// Èç¹ûÒÑ¾­±»É¾³ıÔò²»ĞèÒªÖØĞÂÌí¼Ó
+	// å¦‚æœå·²ç»è¢«åˆ é™¤åˆ™ä¸éœ€è¦é‡æ–°æ·»åŠ 
 	if (_isDeleted)return;
-	// É¾³ıÔªËØ
+	// åˆ é™¤å…ƒç´ 
 	_isDeleted = true;
-	// Ìí¼Óµ½»º´æ³Ø
+	// æ·»åŠ åˆ°ç¼“å­˜æ± 
 	GameScene::getAwardManager()->addToPool(this);
 }
 
 void Award::collisionWithCharacter(Character * const & character)
 {
-	// Èç¹û½±ÀøÒÑ¾­¸øÁË±ğÈË¾Í²»ÄÜÔÙ¸øÁË£¬Èç¹û¶Ô·½ËÀÍöµÄ»°Ò²²»ÄÜ±»µÃµ½
+	// å¦‚æœå¥–åŠ±å·²ç»ç»™äº†åˆ«äººå°±ä¸èƒ½å†ç»™äº†ï¼Œå¦‚æœå¯¹æ–¹æ­»äº¡çš„è¯ä¹Ÿä¸èƒ½è¢«å¾—åˆ°
 	if (isDeleted() || character->isDie())return;
-	// ½«½±Àø¸øÈËÎï
+	// å°†å¥–åŠ±ç»™äººç‰©
 	applyToCharacter(character);
-	// ×ÔÉíÏú»Ù
+	// è‡ªèº«é”€æ¯
 	destroy();
 }
 
@@ -98,7 +98,7 @@ void Award::applyToCharacter(Character * const & character)
 
 void Award::randomType()
 {
-	/* Ëæ»úÈ·¶¨½±ÀøÀàĞÍ */
+	/* éšæœºç¡®å®šå¥–åŠ±ç±»å‹ */
 	_awardType = AwardType(rand() % 3);
 	switch (_awardType)
 	{

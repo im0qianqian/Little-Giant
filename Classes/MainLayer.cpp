@@ -1,4 +1,4 @@
-#include "MainLayer.h"
+О╩©#include "MainLayer.h"
 #include "Global.h"
 #include "GameScene.h"
 #include "SceneManager.h"
@@ -17,7 +17,7 @@ bool MainLayer::init()
 	bool flag = false;
 	do
 	{
-		// ╪сть csb нд╪Ч
+		// Е┼═Х╫╫ csb Ф√┤Д╩╤
 		_displayNode = CSLoader::createNode("res/MainLayer.csb");
 		for (auto i = 0; i < 5; i++)
 		{

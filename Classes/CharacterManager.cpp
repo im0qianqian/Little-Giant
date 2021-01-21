@@ -1,4 +1,4 @@
-#include "CharacterManager.h"
+ï»¿#include "CharacterManager.h"
 #include "GameScene.h"
 #include "Global.h"
 #include "DisplayManager.h"
@@ -8,19 +8,19 @@ CharacterManager::CharacterManager():
 	_cachePool(ObjCachePool<EnemyCharacter>(this, CHARACTER_CACHE_SIZE)),
 	_enemyCharacter(set<Character*>())
 {
-	cout << "CharacterManager ¹¹Ôì" << endl;
+	cout << "CharacterManager æ„é€ " << endl;
 }
 
 CharacterManager::~CharacterManager()
 {
-	cout << "CharacterManager Îö¹¹" << endl;
+	cout << "CharacterManager ææ„" << endl;
 }
 
 bool CharacterManager::init()
 {
-	// µÚÒ»²½ÏÈ´´½¨»º´æ³Ø
+	// ç¬¬ä¸€æ­¥å…ˆåˆ›å»ºç¼“å­˜æ± 
 	_cachePool.createCachePool();
-	// µÚ¶ş²½´´½¨ÈËÎï
+	// ç¬¬äºŒæ­¥åˆ›å»ºäººç‰©
 	startGame(0,10);
 	scheduleUpdate();
 	return true;
@@ -37,10 +37,10 @@ void CharacterManager::startGame(const int &ally, const int &enemy)
 	{
 		createCharacter(kCharacterEnemy);
 	}
-	cout << "ÈËÎï¶ÔÏóÈ«²¿´´½¨----------------------------------" << endl;
+	cout << "äººç‰©å¯¹è±¡å…¨éƒ¨åˆ›å»º----------------------------------" << endl;
 	for (auto i : _enemyCharacter)
 	{
-		i->initialization();				//µÇ³¡
+		i->initialization();				//ç™»åœº
 	}
 }
 
@@ -64,7 +64,7 @@ void CharacterManager::createCharacter(CharacterType characterType)
 		addChild(_playerCharacter);
 		break;
 	default:
-		auto character = _cachePool.getFromPool();	//´Ó»º´æ³ØÖĞÈ¡³öÈËÎï
+		auto character = _cachePool.getFromPool();	//ä»ç¼“å­˜æ± ä¸­å–å‡ºäººç‰©
 		_enemyCharacter.insert(character);
 		break;
 	}
@@ -72,12 +72,12 @@ void CharacterManager::createCharacter(CharacterType characterType)
 
 void CharacterManager::addToPool(EnemyCharacter * const & character)
 {
-	//¼ÓÈë»º´æ³ØËµÃ÷µ±Ç°ÈËÎïÒÑËÀÍö
+	//åŠ å…¥ç¼“å­˜æ± è¯´æ˜å½“å‰äººç‰©å·²æ­»äº¡
 	_cachePool.addToPool(character);
-	//´ÓÈËÎïÁĞ±íÖĞÉ¾³ı
+	//ä»äººç‰©åˆ—è¡¨ä¸­åˆ é™¤
 	_enemyCharacter.erase(character);
-	/*cout << "Ò»¸öÈËÎïÒÑËÀÍö£¬»º³å³Ø´óĞ¡£º" << _cachePool.getResidualSize() << endl;
-	cout << "³¡ÉÏÊ£ÓàÈËÊı£º" << _enemyCharacter.size() << endl;*/
+	/*cout << "ä¸€ä¸ªäººç‰©å·²æ­»äº¡ï¼Œç¼“å†²æ± å¤§å°ï¼š" << _cachePool.getResidualSize() << endl;
+	cout << "åœºä¸Šå‰©ä½™äººæ•°ï¼š" << _enemyCharacter.size() << endl;*/
 }
 
 void CharacterManager::update(float dt)

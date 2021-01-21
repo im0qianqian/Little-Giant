@@ -1,4 +1,4 @@
-#ifndef __STAGE_MANAGER_H__
+ï»¿#ifndef __STAGE_MANAGER_H__
 #define __STAGE_MANAGER_H__
 
 #include "cocos2d.h"
@@ -15,27 +15,27 @@ public:
 	~StageManager();
 	CREATE_FUNC(StageManager);
 	virtual bool init() override;
-	/* ´´½¨³¡¾°µÆ¹â */
+	/* åˆ›å»ºåœºæ™¯ç¯å…‰ */
 	void createLight();
-	/* ´´½¨ÕÏ°­Îï */
+	/* åˆ›å»ºéšœç¢ç‰© */
 	void createObstacles();
-	/* ´´½¨µØÃæ */
+	/* åˆ›å»ºåœ°é¢ */
 	void createGround();
 	/* GET */
 	DirectionLight* getSun()const { return _sun; }
 	PointLight* getCharacterLight() const { return _characterLight; }
-	/* »ñÈ¡µ±Ç°µØÍ¼ */
+	/* è·å–å½“å‰åœ°å›¾ */
 	void getCMap(int map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH]);
 	const int(*getMap())[50] { return _map; }
 	Stage *getGround() { return _ground; }
 private:
 	void updateMap(float dt);
 	virtual void update(float dt) override;
-	Stage *_ground;									//µØÃæ
-	DirectionLight *_sun;							//Ì«Ñô
-	PointLight *_characterLight;					//ÈËÎïĞ¡µÆ
-	int _map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//µ±Ç°µØÍ¼
-	int _cMap[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//µØÍ¼ÖĞµÄÈËÎïÒÔ¼°½±Àø
+	Stage *_ground;									//åœ°é¢
+	DirectionLight *_sun;							//å¤ªé˜³
+	PointLight *_characterLight;					//äººç‰©å°ç¯
+	int _map[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//å½“å‰åœ°å›¾
+	int _cMap[MAPS_FILE_WIDTH][MAPS_FILE_LENGTH];	//åœ°å›¾ä¸­çš„äººç‰©ä»¥åŠå¥–åŠ±
 };
 
 #endif

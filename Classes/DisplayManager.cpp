@@ -1,4 +1,4 @@
-#include "DisplayManager.h"
+ï»¿#include "DisplayManager.h"
 #include "Global.h"
 #include "GameScene.h"
 #include "Character.h"
@@ -27,12 +27,12 @@ DisplayManager::DisplayManager() :
 	_levelNum(0),
 	_percent(0)
 {
-	cout << "DisplayManager ¹¹Ôì" << endl;
+	cout << "DisplayManager æ„é€ " << endl;
 }
 
 DisplayManager::~DisplayManager()
 {
-	cout << "DisplayManager Îö¹¹" << endl;
+	cout << "DisplayManager ææ„" << endl;
 }
 
 bool DisplayManager::init()
@@ -40,17 +40,17 @@ bool DisplayManager::init()
 	bool flag = false;
 	do
 	{
-		// ¼ÓÔØ csb ÎÄ¼ş
+		// åŠ è½½ csb æ–‡ä»¶
 		_displayNode = CSLoader::createNode("res/DisplayLayer.csb");
-		// »ñÈ¡ÌáÊ¾¼¼ÄÜ¼Ó³ÉÎÄ±¾±êÇ©
+		// è·å–æç¤ºæŠ€èƒ½åŠ æˆæ–‡æœ¬æ ‡ç­¾
 		_promptLabel = static_cast<Text*>(_displayNode->getChildByName("Prompt_Label"));
-		// »ñÈ¡ÆäÖĞµÄÎÄ±¾±êÇ©
+		// è·å–å…¶ä¸­çš„æ–‡æœ¬æ ‡ç­¾
 		_levelLabel = static_cast<Text*>(_displayNode->getChildByName("Level_Label"));
-		// »ñÈ¡Ê£ÓàÊ±¼äÎÄ±¾±êÇ©
+		// è·å–å‰©ä½™æ—¶é—´æ–‡æœ¬æ ‡ç­¾
 		_currentTime = static_cast<Text*>(_displayNode->getChildByName("Current_Time"));
-		// »ñÈ¡ÆäÖĞµÄ½ø¶ÈÌõ
+		// è·å–å…¶ä¸­çš„è¿›åº¦æ¡
 		_experienceBar = static_cast<LoadingBar*>(_displayNode->getChildByName("Experience_bar"));
-		// »ñÈ¡³É¼¨ÁĞ±í
+		// è·å–æˆç»©åˆ—è¡¨
 		auto sorceList = static_cast<ListView*>(_displayNode->getChildByName("SorceListView"));
 		for (auto i = 0; i < _scoreListSize; i++)
 		{
@@ -64,19 +64,19 @@ bool DisplayManager::init()
 			CCASSERT(sorce, "NULL");
 			_scoreList.push_back(ListViewSorce(rank, name, sorce));
 		}
-		// »ñÈ¡¼¼ÄÜÃæ°å
+		// è·å–æŠ€èƒ½é¢æ¿
 		for (int i = 0; i < 3; i++)
 		{
 			_skill_list[i] = static_cast<ListView*>(_displayNode->getChildByName("skill_list_" + to_string(i)));
 			_skill_panel[i] = static_cast<PageView*>(_displayNode->getChildByName("skill_panel_" + to_string(i)));
 		}
-		// »ñÈ¡ÍË³ö°´Å¥
+		// è·å–é€€å‡ºæŒ‰é’®
 		_exitButton = static_cast<Button*>(_displayNode->getChildByName("button_exit"));
 		_exitButton->addClickEventListener([](Ref *const ref)
 		{
 			SceneManager::getInstance()->changeScene(kMenuScene);
 		});
-		// »ñÈ¡¼Æ·Ö±í
+		// è·å–è®¡åˆ†è¡¨
 		_sorceBoard = static_cast<Layout*>(_displayNode->getChildByName("SorceBoard"));
 		_sorceNum = static_cast<Text*>(_sorceBoard->getChildByName("sorce_num"));
 		_sorceRank = static_cast<Text*>(_sorceBoard->getChildByName("sorce_rank"));
@@ -92,10 +92,10 @@ bool DisplayManager::init()
 		});
 		/* */
 		addChild(_displayNode);
-		/* ´´½¨Ò¡±Û */
+		/* åˆ›å»ºæ‘‡è‡‚ */
 		//_rocker = Rocker::create("images/rocker.png", "rockerBG.png",  Vec2(150, 150));
 		//addChild(_rocker);
-		// Æô¶¯¶¨Ê±Æ÷¿ªÊ¼¸üĞÂ
+		// å¯åŠ¨å®šæ—¶å™¨å¼€å§‹æ›´æ–°
 		schedule(schedule_selector(DisplayManager::update), .5f);
 		schedule(schedule_selector(DisplayManager::updateAnimation), .02f);
 		flag = true;
@@ -105,13 +105,13 @@ bool DisplayManager::init()
 
 void DisplayManager::update(float dt)
 {
-	// ¸üĞÂ¾­ÑéÖµ
+	// æ›´æ–°ç»éªŒå€¼
 	updateExperience();
-	// ¸üĞÂ³É¼¨ÁĞ±í
+	// æ›´æ–°æˆç»©åˆ—è¡¨
 	updateSorceList();
 	if (GameScene::getGameMode() == kGameModeTimer)
 	{
-		// ¸üĞÂÊ£ÓàÊ±¼ä
+		// æ›´æ–°å‰©ä½™æ—¶é—´
 		updateCurrentTime();
 	}
 }
@@ -132,21 +132,21 @@ void DisplayManager::updateAnimation(float dt)
 
 void DisplayManager::updateSorceList()
 {
-	// ÀûÓÃ³¡ÉÏµÄËùÓĞµĞÈËset¹¹Ôì³öÒ»¸övector
+	// åˆ©ç”¨åœºä¸Šçš„æ‰€æœ‰æ•Œäººsetæ„é€ å‡ºä¸€ä¸ªvector
 	vector<Character*> allCharacter(GameScene::getCharacterManager()->getEnemyCharacter().begin(), GameScene::getCharacterManager()->getEnemyCharacter().end());
 	auto myCharacter = GameScene::getCharacterManager()->getPlayerCharacter();
-	// ¼ÓÈëÍæ¼Ò±¾Éí
+	// åŠ å…¥ç©å®¶æœ¬èº«
 	allCharacter.push_back(myCharacter);
-	// ¶ÔÆäÅÅĞò
+	// å¯¹å…¶æ’åº
 	sort(allCharacter.begin(), allCharacter.end(), [](Character * const &a, Character * const &b)
 	{
 		return a->getSorce() > b->getSorce();
 	});
-	CCASSERT(_scoreList.size() >= _scoreListSize, "ÁĞ±íÌ«Ğ¡");
-	// »ñÈ¡µ±Ç°³¡ÉÏÈËÊı
+	CCASSERT(_scoreList.size() >= _scoreListSize, "åˆ—è¡¨å¤ªå°");
+	// è·å–å½“å‰åœºä¸Šäººæ•°
 	int size = allCharacter.size();
 	int i;
-	for (i = 0; i < size && i < _scoreListSize - 1; i++)	// i Ğ¡ÓÚÈËÊı²¢ÇÒĞ¡ÓÚ5
+	for (i = 0; i < size && i < _scoreListSize - 1; i++)	// i å°äºäººæ•°å¹¶ä¸”å°äº5
 	{
 		_scoreList[i + 1].setName(allCharacter[i]->getName());
 		_scoreList[i + 1].setRank("#" + to_string(i + 1));
@@ -160,9 +160,9 @@ void DisplayManager::updateSorceList()
 		_scoreList[i + 1].setSorce("");
 	}
 	auto myRank = find(allCharacter.begin(), allCharacter.end(), myCharacter) - allCharacter.begin();
-	if (myRank < _scoreListSize - 1)	//Èç¹ûÎÒµÄÅÅÃûÔÚÇ°ÎåÃû£¬¸ßÁÁÏÔÊ¾
+	if (myRank < _scoreListSize - 1)	//å¦‚æœæˆ‘çš„æ’ååœ¨å‰äº”åï¼Œé«˜äº®æ˜¾ç¤º
 	{
-		_scoreList[myRank + 1].setColor(Color3B::YELLOW);	//ÉèÖÃÑÕÉ«
+		_scoreList[myRank + 1].setColor(Color3B::YELLOW);	//è®¾ç½®é¢œè‰²
 	}
 	_scoreList[0].setName(myCharacter->getName());
 	_scoreList[0].setRank("#" + to_string(myRank + 1));
@@ -179,8 +179,8 @@ void DisplayManager::updateExperience()
 	if (exp >= levelExperinence)
 	{
 		exp = exp - levelExperinence;
-		_levelNum++;					// µÈ¼¶++
-		showSkillBoard();				// ÏÔÊ¾Éı¼¶¼¼ÄÜÑ¡Ôñ
+		_levelNum++;					// ç­‰çº§++
+		showSkillBoard();				// æ˜¾ç¤ºå‡çº§æŠ€èƒ½é€‰æ‹©
 	}
 	_percent = (float)(exp) / (float)(levelExperinence) * 100;
 	//CCLOG("***************%d %d %f", exp, levelExperinence, _percent);
@@ -192,13 +192,13 @@ void DisplayManager::updateCurrentTime()
 	int remainingTime = 500 - int((GetTickCount64() - GameScene::getStartingTime()) / 1000);
 	if (remainingTime >= 0)
 	{
-		_currentTime->setString(u8"Ê±¼äÊ£Óà " + to_string(remainingTime) + "s");
+		_currentTime->setString(u8"æ—¶é—´å‰©ä½™ " + to_string(remainingTime) + "s");
 	}
 	else
 	{
-		// Í£Ö¹ËùÓĞ¶¨Ê±Æ÷
+		// åœæ­¢æ‰€æœ‰å®šæ—¶å™¨
 		unscheduleAllCallbacks();
-		// ÏÔÊ¾µÃ·ÖÃæ°å
+		// æ˜¾ç¤ºå¾—åˆ†é¢æ¿
 		showSorceBoard();
 	}
 }
@@ -230,18 +230,18 @@ void DisplayManager::showSkillBoard()
 		int skillNum = _skill_list[i]->getItems().size();
 		for (int j = 0; j < skillNum; j++)
 		{
-			Widget* item = _skill_list[i]->getItem(j);//»ñÈ¡ÆäÖĞµÄÄ³¸öÏî£¬È»ºó×ª»»³ÉButton ½øĞĞÉèÖÃ²Ù×÷=
+			Widget* item = _skill_list[i]->getItem(j);//è·å–å…¶ä¸­çš„æŸä¸ªé¡¹ï¼Œç„¶åè½¬æ¢æˆButton è¿›è¡Œè®¾ç½®æ“ä½œ=
 			item->addClickEventListener([this](Ref *const ref)
 			{
-				// ÏÈÒş²ØÈı¸ö¼¼ÄÜÃæ°å
+				// å…ˆéšè—ä¸‰ä¸ªæŠ€èƒ½é¢æ¿
 				for (int i = 0; i < 3; i++)
 				{
 					_skill_list[i]->setVisible(false);
 					_skill_panel[i]->setVisible(false);
 				}
-				// »ñÈ¡¼¼ÄÜ±êÇ©
+				// è·å–æŠ€èƒ½æ ‡ç­¾
 				int itemTag = static_cast<Node*>(ref)->getTag();
-				// Ó¦ÓÃ¼¼ÄÜ
+				// åº”ç”¨æŠ€èƒ½
 				applyToSkill(itemTag);
 			});
 		}
@@ -282,39 +282,39 @@ void DisplayManager::applyToSkill(const int &skillTag)
 	{
 	case 0:
 		character->getAttribute().addAttackDamage(.5f);
-		prompt = u8"¹¥»÷Á¦ÌáÉı";
+		prompt = u8"æ”»å‡»åŠ›æå‡";
 		break;
 	case 1:
 		character->getAttribute().addAttackSpeed(.5f);
-		prompt = u8"¹¥»÷ËÙ¶ÈÌáÉı";
+		prompt = u8"æ”»å‡»é€Ÿåº¦æå‡";
 		break;
 	case 2:
 		character->getAttribute().addAttackSpeed(.5f);
-		prompt = u8"¹¥»÷ËÙ¶ÈÌáÉı";
+		prompt = u8"æ”»å‡»é€Ÿåº¦æå‡";
 		break;
 	case 3:
 		character->getAttribute().addDefensiveForce(5.f);
-		prompt = u8"·ÀÓùÁ¦ÌáÉı";
+		prompt = u8"é˜²å¾¡åŠ›æå‡";
 		break;
 	case 4:
 		character->getAttribute().addAttackDamage(.5f);
-		prompt = u8"¹¥»÷Á¦ÌáÉı";
+		prompt = u8"æ”»å‡»åŠ›æå‡";
 		break;
 	case 5:
 		character->getAttribute().addDefensiveForce(5.f);
-		prompt = u8"·ÀÓùÁ¦ÌáÉı";
+		prompt = u8"é˜²å¾¡åŠ›æå‡";
 		break;
 	case 6:
 		character->getAttribute().addRestoringAbility(.5f);
-		prompt = u8"»Ö¸´ÄÜÁ¦ÌáÉı";
+		prompt = u8"æ¢å¤èƒ½åŠ›æå‡";
 		break;
 	case 7:
 		character->getAttribute().addMovingSpeed(3.f);
-		prompt = u8"ÒÆ¶¯ËÙ¶ÈÌáÉı";
+		prompt = u8"ç§»åŠ¨é€Ÿåº¦æå‡";
 		break;
 	case 8:
 		character->getAttribute().addEmpiricalAcquisition(.5f);
-		prompt = u8"¾­Ñé»ñÈ¡ÄÜÁ¦ÌáÉı";
+		prompt = u8"ç»éªŒè·å–èƒ½åŠ›æå‡";
 		break;
 	default:
 		break;

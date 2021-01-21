@@ -1,14 +1,14 @@
-#include "SceneManager.h"
+ï»¿#include "SceneManager.h"
 #include "GameScene.h"
 #include "Global.h"
 #include "LoadLayer.h"
 #include "MainLayer.h"
 #include "HelpLayer.h"
 
-/* Àà¾²Ì¬Ë½ÓĞ±äÁ¿³õÊ¼»¯ */
+/* ç±»é™æ€ç§æœ‰å˜é‡åˆå§‹åŒ– */
 SceneManager* SceneManager::s_sceneManager = nullptr;
-Scene* SceneManager::_scene = nullptr;						//µ±Ç°³¡¾°
-Layer* SceneManager::_layer = nullptr;						//µ±Ç°³¡¾°Í¼²ã
+Scene* SceneManager::_scene = nullptr;						//å½“å‰åœºæ™¯
+Layer* SceneManager::_layer = nullptr;						//å½“å‰åœºæ™¯å›¾å±‚
 
 SceneManager::SceneManager()
 {
@@ -53,15 +53,15 @@ void SceneManager::changeScene(const SceneType &sceneType)
 	default:
 		break;
 	}
-	/* ÉèÖÃÎïÀíÊÀ½çDebugÏà»ú */
+	/* è®¾ç½®ç‰©ç†ä¸–ç•ŒDebugç›¸æœº */
 	_scene->setPhysics3DDebugCamera(GameScene::getCamera());
 	_scene->addChild(_layer);
-	if (Director::getInstance()->getRunningScene())		//Èç¹ûµ±Ç°µ¼ÑİÕıÔÚÏÔÊ¾Ä³¸ö³¡¾°
+	if (Director::getInstance()->getRunningScene())		//å¦‚æœå½“å‰å¯¼æ¼”æ­£åœ¨æ˜¾ç¤ºæŸä¸ªåœºæ™¯
 	{
-		Director::getInstance()->replaceScene(_scene);	//Ìæ»»Îªµ±Ç°³¡¾°
+		Director::getInstance()->replaceScene(_scene);	//æ›¿æ¢ä¸ºå½“å‰åœºæ™¯
 	}
 	else
 	{
-		Director::getInstance()->runWithScene(_scene);	//·ñÔòÖ±½ÓÏÔÊ¾µ±Ç°³¡¾°
+		Director::getInstance()->runWithScene(_scene);	//å¦åˆ™ç›´æ¥æ˜¾ç¤ºå½“å‰åœºæ™¯
 	}
 }

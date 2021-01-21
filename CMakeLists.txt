@@ -25,7 +25,7 @@
 
 cmake_minimum_required(VERSION 3.6)
 
-set(APP_NAME Little-Giant)
+set(APP_NAME Little_iant)
 
 project(${APP_NAME})
 
@@ -48,12 +48,48 @@ endif()
 
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
-     Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
+        Classes/AIStateMachine.cpp
+        Classes/AppDelegate.cpp
+        Classes/AudioManager.cpp
+        Classes/Award.cpp
+        Classes/AwardManager.cpp
+        Classes/Character.cpp
+        Classes/CharacterManager.cpp
+        Classes/DisplayManager.cpp
+        Classes/GameScene.cpp
+        Classes/Global.cpp
+        Classes/HelpLayer.cpp
+        Classes/Joystick.cpp
+        Classes/LoadLayer.cpp
+        Classes/MainLayer.cpp
+        Classes/Rocker.cpp
+        Classes/Stage.cpp
+        Classes/SceneManager.cpp
+        Classes/StageManager.cpp
+        Classes/Weapons.cpp
+        Classes/WeaponManager.cpp
      )
 list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
+        Classes/AIStateMachine.h
+        Classes/AppDelegate.h
+        Classes/AudioManager.h
+        Classes/Award.h
+        Classes/AwardManager.h
+        Classes/Character.h
+        Classes/CharacterManager.h
+        Classes/DisplayManager.h
+        Classes/GameScene.h
+        Classes/Global.h
+        Classes/HelpLayer.h
+        Classes/Joystick.h
+        Classes/LoadLayer.h
+        Classes/MainLayer.h
+        Classes/Rocker.h
+        Classes/Stage.h
+        Classes/SceneManager.h
+        Classes/StageManager.h
+        Classes/Weapons.h
+        Classes/WeaponManager.h
      )
 
 if(ANDROID)

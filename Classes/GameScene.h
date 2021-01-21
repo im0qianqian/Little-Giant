@@ -1,4 +1,4 @@
-#ifndef __GAME_SCENE_H__
+ï»¿#ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
 #include "cocos2d.h"
@@ -11,21 +11,21 @@
 #include "Joystick.h"
 
 USING_NS_CC;
-//ÊµÏÖ¿ØÖÆ¸÷¸öÓÎÏ·×´Ì¬
+//å®ç°æ§åˆ¶å„ä¸ªæ¸¸æˆçŠ¶æ€
 
-enum GameStateType	// ÓÎÏ·×´Ì¬
+enum GameStateType	// æ¸¸æˆçŠ¶æ€
 {
-	kGameStateRuning,	//ÓÎÏ·½øĞĞ
-	kGameStatePause,	//ÓÎÏ·ÔİÍ£
-	kGameStateWin,		//ÓÎÏ·Ê¤Àû
-	kGameStateFail		//ÓÎÏ·Ê§°Ü
+	kGameStateRuning,	//æ¸¸æˆè¿›è¡Œ
+	kGameStatePause,	//æ¸¸æˆæš‚åœ
+	kGameStateWin,		//æ¸¸æˆèƒœåˆ©
+	kGameStateFail		//æ¸¸æˆå¤±è´¥
 };
 
-enum GameModeType	// ÓÎÏ·Ä£Ê½
+enum GameModeType	// æ¸¸æˆæ¨¡å¼
 {
-	kGameModeAdventure,		// Ã°ÏÕÄ£Ê½£¨ËÀÍö½áÊø£©
-	kGameModeTimer,			// ¼ÆÊ±Ä£Ê½£¨Ê±¼äµ½½áÊø£©
-	kGameModeNight			// ºÚÒ¹Ä£Ê½£¨ËÀÍö½áÊø£©
+	kGameModeAdventure,		// å†’é™©æ¨¡å¼ï¼ˆæ­»äº¡ç»“æŸï¼‰
+	kGameModeTimer,			// è®¡æ—¶æ¨¡å¼ï¼ˆæ—¶é—´åˆ°ç»“æŸï¼‰
+	kGameModeNight			// é»‘å¤œæ¨¡å¼ï¼ˆæ­»äº¡ç»“æŸï¼‰
 };
 
 class GameScene :public Layer
@@ -35,44 +35,44 @@ public:
 	~GameScene();
 	CREATE_FUNC(GameScene);
 	virtual bool init() override;
-	/* »ñÈ¡µ±Ç°ÓÎÏ·×´Ì¬ */
+	/* è·å–å½“å‰æ¸¸æˆçŠ¶æ€ */
 	static GameStateType getGameState() { return _gameState; }
-	/* ¸ü¸Äµ±Ç°ÓÎÏ·×´Ì¬ */
+	/* æ›´æ”¹å½“å‰æ¸¸æˆçŠ¶æ€ */
 	static void setGameState(const GameStateType &gameState) { _gameState = gameState; }
-	/* »ñÈ¡µ±Ç°ÓÎÏ·Ä£Ê½ */
+	/* è·å–å½“å‰æ¸¸æˆæ¨¡å¼ */
 	static GameModeType getGameMode() { return _gameMode; }
-	/* ¸ü¸Äµ±Ç°ÓÎÏ·Ä£Ê½ */
+	/* æ›´æ”¹å½“å‰æ¸¸æˆæ¨¡å¼ */
 	static void setGameMode(const GameModeType &gameMode) { _gameMode = gameMode; }
-	/* »ñÈ¡ÈËÎï¹ÜÀí¶ÔÏó */
+	/* è·å–äººç‰©ç®¡ç†å¯¹è±¡ */
 	static CharacterManager* getCharacterManager() { return _characterManager; }
-	/* »ñÈ¡µØÍ¼¹ÜÀí¶ÔÏó */
+	/* è·å–åœ°å›¾ç®¡ç†å¯¹è±¡ */
 	static StageManager* getStageManager() { return _stageManager; }
-	/* »ñÈ¡ÎäÆ÷¹ÜÀí¶ÔÏó */
+	/* è·å–æ­¦å™¨ç®¡ç†å¯¹è±¡ */
 	static WeaponManager* getWeaponManager() { return _weaponManager; }
-	/* »ñÈ¡½±Àø¹ÜÀí¶ÔÏó */
+	/* è·å–å¥–åŠ±ç®¡ç†å¯¹è±¡ */
 	static AwardManager *getAwardManager() { return _awardManager; }
-	/* »ñÈ¡ÉùÒô¹ÜÀí¶ÔÏó */
+	/* è·å–å£°éŸ³ç®¡ç†å¯¹è±¡ */
 	static AudioManager *getAudioManager() { return _audioManager; }
-	/* »ñÈ¡½çÃæ¹ÜÀí¶ÔÏó */
+	/* è·å–ç•Œé¢ç®¡ç†å¯¹è±¡ */
 	static DisplayManager *getDisplayManager() { return _displayManager; }
-	/* »ñÈ¡²Ù×÷¹ÜÀí¶ÔÏó */
+	/* è·å–æ“ä½œç®¡ç†å¯¹è±¡ */
 	static Joystick *getJoystick() { return _joystick; }
-	/* »ñÈ¡µ±Ç°²ãÏà»ú */
+	/* è·å–å½“å‰å±‚ç›¸æœº */
 	static Camera *getCamera() { return _camera; }
-	/* »ñÈ¡ÓÎÏ·ÆğÊ¼Ê±¼ä */
+	/* è·å–æ¸¸æˆèµ·å§‹æ—¶é—´ */
 	static unsigned int getStartingTime() { return _startingTime; }
 private:
-	static Camera *_camera;						//ÓÎÏ·ÉãÏñ»ú(3D)
-	static GameStateType _gameState;			//ÓÎÏ·×´Ì¬
-	static CharacterManager *_characterManager;	//ÈËÎï¹ÜÀí¶ÔÏó
-	static StageManager *_stageManager;			//µØÍ¼¹ÜÀí¶ÔÏó
-	static WeaponManager *_weaponManager;		//ÎäÆ÷¹ÜÀí¶ÔÏó
-	static AwardManager *_awardManager;			//½±Àø¹ÜÀí¶ÔÏó
-	static AudioManager *_audioManager;			//ÉùÒô¹ÜÀí¶ÔÏó
-	static DisplayManager *_displayManager;		//½çÃæÏÔÊ¾¹ÜÀí¶ÔÏó
-	static Joystick *_joystick;					//²Ù×÷¹ÜÀí¶ÔÏó
-	static GameModeType _gameMode;				//ÓÎÏ·Ä£Ê½
-	static unsigned int _startingTime;			//ÓÎÏ·ÆğÊ¼Ê±¼ä
+	static Camera *_camera;						//æ¸¸æˆæ‘„åƒæœº(3D)
+	static GameStateType _gameState;			//æ¸¸æˆçŠ¶æ€
+	static CharacterManager *_characterManager;	//äººç‰©ç®¡ç†å¯¹è±¡
+	static StageManager *_stageManager;			//åœ°å›¾ç®¡ç†å¯¹è±¡
+	static WeaponManager *_weaponManager;		//æ­¦å™¨ç®¡ç†å¯¹è±¡
+	static AwardManager *_awardManager;			//å¥–åŠ±ç®¡ç†å¯¹è±¡
+	static AudioManager *_audioManager;			//å£°éŸ³ç®¡ç†å¯¹è±¡
+	static DisplayManager *_displayManager;		//ç•Œé¢æ˜¾ç¤ºç®¡ç†å¯¹è±¡
+	static Joystick *_joystick;					//æ“ä½œç®¡ç†å¯¹è±¡
+	static GameModeType _gameMode;				//æ¸¸æˆæ¨¡å¼
+	static unsigned int _startingTime;			//æ¸¸æˆèµ·å§‹æ—¶é—´
 };
 
 #endif

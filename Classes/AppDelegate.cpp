@@ -1,4 +1,4 @@
-#include "AppDelegate.h"
+ï»¿#include "AppDelegate.h"
 #include "GameScene.h"
 #include "SceneManager.h"
 #include "Global.h"
@@ -76,14 +76,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 	register_all_packages();
 
-	// ×ÊÔ´ÎÄ¼þ¼ìË÷Â·¾¶
+	// èµ„æºæ–‡ä»¶æ£€ç´¢è·¯å¾„
 	FileUtils::getInstance()->addSearchPath("fonts");
 	FileUtils::getInstance()->addSearchPath("images");
 	FileUtils::getInstance()->addSearchPath("res");
 	FileUtils::getInstance()->addSearchPath("maps");
 	FileUtils::getInstance()->addSearchPath("scripts");
 
-	// ´ÓÓÎÏ·²Ëµ¥½çÃæ¼ÓÔØ
+	// ä»Žæ¸¸æˆèœå•ç•Œé¢åŠ è½½
 	SceneManager::getInstance()->changeScene(kMenuScene);
 
 	return true;

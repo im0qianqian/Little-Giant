@@ -1,4 +1,4 @@
-#ifndef __ROCKER_H__
+ï»¿#ifndef __ROCKER_H__
 #define __ROCKER_H__
 
 #include "cocos2d.h"
@@ -8,7 +8,7 @@ class Rocker : public Node
 {
 public:
 	static Rocker* create(const std::string &rockerImageName, const std::string &rockerBGImageName, const Vec2 &pos);
-	//Ò¡¸Ëµ±Ç°ËùÖ¸·½ÏòÏòÁ¿
+	//æ‘‡æ†å½“å‰æ‰€æŒ‡æ–¹å‘å‘é‡
 	Vec2 getDirection() const;
 private:
 	enum rockerType
@@ -18,21 +18,21 @@ private:
 	};
 	CREATE_FUNC(Rocker);
 	void rockerInit(const std::string &rockerImageName, const std::string &rockerBGImageName, const Vec2 &pos);
-	//µÃµ½°ë¾¶ÎªrµÄÔ²ÖÜÔË¶¯ÉÏÒ»¸ö½Ç¶ÈÓ¦¶ÔÓ¦µÄx,y×ø±ê  
+	//å¾—åˆ°åŠå¾„ä¸ºrçš„åœ†å‘¨è¿åŠ¨ä¸Šä¸€ä¸ªè§’åº¦åº”å¯¹åº”çš„x,yåæ ‡  
 	Vec2 getAnglePosition(const float &r, const float &angle);
-	//´¥ÆÁÊÂ¼ş  
+	//è§¦å±äº‹ä»¶  
 	virtual bool onTouchBegan(Touch* const &touch, Event* const &event);
 	virtual void onTouchMoved(Touch* const &touch, Event* const &event);
 	virtual void onTouchEnded(Touch* const &touch, Event* const &event);
-	//µÃµ½Ò¡¸ËÓëÓÃ»§´¥ÆÁµãµÄ½Ç¶È  
+	//å¾—åˆ°æ‘‡æ†ä¸ç”¨æˆ·è§¦å±ç‚¹çš„è§’åº¦  
 	float getRad(const Vec2 &pos1, const Vec2 &pos2);
-	//Ò¡¸Ë±³¾°µÄ×ø±ê  
+	//æ‘‡æ†èƒŒæ™¯çš„åæ ‡  
 	Vec2 _rockerBGPosition;
-	//Ò¡¸Ë±³¾°µÄ°ë¾¶
+	//æ‘‡æ†èƒŒæ™¯çš„åŠå¾„
 	float _rockerBGR;
-	//ÊÇ·ñ¿É²Ù×÷Ò¡¸Ë
+	//æ˜¯å¦å¯æ“ä½œæ‘‡æ†
 	bool _isCanMove;
-	//¼àÌıÆ÷
+	//ç›‘å¬å™¨
 	EventListenerTouchOneByOne* _listener;
 };
 #endif

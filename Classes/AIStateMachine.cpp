@@ -1,4 +1,4 @@
-#include "AIStateMachine.h"
+ï»¿#include "AIStateMachine.h"
 #include "Character.h"
 #include "GameScene.h"
 
@@ -10,9 +10,9 @@ AIStateMachine::AIStateMachine() :
 {
 }
 
-AIStateMachine::AIStateMachine(Character * const & character)
+AIStateMachine::AIStateMachine(Character* const& character)
 {
-	/* ´´½¨ÈıÖÖ×´Ì¬ */
+	/* åˆ›å»ºä¸‰ç§çŠ¶æ€ */
 	_aiStatePatrol = new AIStatePatrol(character);
 	_aiStateBeAttack = new AIStateBeAttack(character);
 	_aiStateHPLess = new AIStateHPLess(character);
@@ -28,7 +28,7 @@ void AIStateMachine::run()
 	_aiState->run();
 }
 
-void AIStateMachine::changeState(const aiState & state)
+void AIStateMachine::changeState(const aiState& state)
 {
 	switch (state)
 	{
@@ -52,7 +52,7 @@ AIState::AIState() :
 {
 }
 
-AIState::AIState(Character * const & character) :
+AIState::AIState(Character* const& character) :
 	_character(character),
 	_globalType(kGlobalCharacter)
 {
@@ -74,7 +74,7 @@ void AIState::findPath()
 	struct node
 	{
 		node() {}
-		node(const int &x, const int &y, const directionType &d) :
+		node(const int& x, const int& y, const directionType& d) :
 			_x(x),
 			_y(y),
 			_direction(d)
@@ -82,19 +82,19 @@ void AIState::findPath()
 		int _x, _y;
 		directionType _direction;
 	};
-	/* ÒÔÏÂÔİ¶¨BFS £¬ÒÔºóÓÅ»¯ÎªA* */
+	/* ä»¥ä¸‹æš‚å®šBFS ï¼Œä»¥åä¼˜åŒ–ä¸ºA* */
 	const int mv[4][2] = { {-1,0},{1,0},{0,-1},{0,1} };
 	CCASSERT(_character, "NULL");
 	Vec3 cPos = _character->getPosition3D();
-	Vec2 pos = Vec2(int((cPos.z + WORLD_WIDTH / 2)*MAPS_FILE_WIDTH / WORLD_WIDTH)*1.f, int((cPos.x + WORLD_LENGTH / 2)*MAPS_FILE_LENGTH / WORLD_LENGTH)*1.f);
-	auto judPos = [&](shared_ptr<node> const &n)		//ÅĞ¶ÏµãÊÇ·ñÔÚµØÍ¼ÄÚ
+	Vec2 pos = Vec2(int((cPos.z + WORLD_WIDTH / 2) * MAPS_FILE_WIDTH / WORLD_WIDTH) * 1.f, int((cPos.x + WORLD_LENGTH / 2) * MAPS_FILE_LENGTH / WORLD_LENGTH) * 1.f);
+	auto judPos = [&](shared_ptr<node> const& n)		//åˆ¤æ–­ç‚¹æ˜¯å¦åœ¨åœ°å›¾å†…
 	{
 		if (n->_x < 0 || n->_x >= MAPS_FILE_WIDTH || n->_y < 0 || n->_y >= WORLD_LENGTH || map[n->_x][n->_y] != 0)
 			return false;
 		return true;
 	};
 	queue<shared_ptr<node>> que;
-	for (int i = 0; i < 4; i++)		//³õÊ¼ËÄ¸ö·½Ïò
+	for (int i = 0; i < 4; i++)		//åˆå§‹å››ä¸ªæ–¹å‘
 	{
 		shared_ptr<node> n(new node(int(pos.x + mv[i][0]), int(pos.y + mv[i][1]), directionType(i)));
 		if (judPos(n))
@@ -107,7 +107,7 @@ void AIState::findPath()
 	{
 		auto p = que.front();
 		que.pop();
-		if (cMap[p->_x][p->_y] == int(_globalType))	// Èç¹ûµÈÓÚµ±Ç°ÕıÔÚÑ°ÕÒµÄ¶ÔÏó
+		if (cMap[p->_x][p->_y] == int(_globalType))	// å¦‚æœç­‰äºå½“å‰æ­£åœ¨å¯»æ‰¾çš„å¯¹è±¡
 		{
 			/*cout << "----------------> "<<p->_direction << endl;
 			for (int i = 0; i < MAPS_FILE_WIDTH; i++)
@@ -156,27 +156,27 @@ AIStatePatrol::AIStatePatrol()
 {
 }
 
-AIStatePatrol::AIStatePatrol(Character * const & character) :
+AIStatePatrol::AIStatePatrol(Character* const& character) :
 	AIState(character)
 {
 }
 
 void AIStatePatrol::run()
 {
-	//cout << "×ªÒÆµ½Ñ²Âß×´Ì¬" << endl;
+	//cout << "è½¬ç§»åˆ°å·¡é€»çŠ¶æ€" << endl;
 	findPath();
 	static int tot = 0;
 	auto enemy = dynamic_cast<EnemyCharacter*>(getCharacter());
-	if (enemy != nullptr)	//Èç¹û×ªĞÍ³É¹¦
+	if (enemy != nullptr)	//å¦‚æœè½¬å‹æˆåŠŸ
 	{
-		if (abs(tot++) % 2 == 1)	//Ëæ»ú×ªÒÆ×´Ì¬
+		if (abs(tot++) % 2 == 1)	//éšæœºè½¬ç§»çŠ¶æ€
 		{
-			/* ×´Ì¬»ú×ªÒÆµ½Ñ°ÕÒµĞÈË½øĞĞ¹¥»÷ */
+			/* çŠ¶æ€æœºè½¬ç§»åˆ°å¯»æ‰¾æ•Œäººè¿›è¡Œæ”»å‡» */
 			enemy->getAIStateMachine()->changeState(AIStateMachine::kAIStateBeAttack);
 		}
 		else
 		{
-			/* ×´Ì¬»ú×ªÒÆµ½Ñ°ÕÒ½±Àø²¹³äÑªÁ¿ */
+			/* çŠ¶æ€æœºè½¬ç§»åˆ°å¯»æ‰¾å¥–åŠ±è¡¥å……è¡€é‡ */
 			enemy->getAIStateMachine()->changeState(AIStateMachine::kAIStateHPLess);
 		}
 	}
@@ -186,14 +186,14 @@ AIStateBeAttack::AIStateBeAttack()
 {
 }
 
-AIStateBeAttack::AIStateBeAttack(Character * const & character) :
+AIStateBeAttack::AIStateBeAttack(Character* const& character) :
 	AIState(character)
 {
 }
 
 void AIStateBeAttack::run()
 {
-	//cout << "×ªÒÆµ½¹¥»÷×´Ì¬" << endl;
+	//cout << "è½¬ç§»åˆ°æ”»å‡»çŠ¶æ€" << endl;
 	Vec3 minn = Vec3::ZERO;
 	minn = GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D() - getCharacter()->getPosition3D();
 	auto other = GameScene::getCharacterManager()->getEnemyCharacter();
@@ -207,7 +207,7 @@ void AIStateBeAttack::run()
 		}
 	}
 	minn.y = 0;
-	if (minn.length() < 20.0)	//ÕÒµ½µĞÈË
+	if (minn.length() < 20.0)	//æ‰¾åˆ°æ•Œäºº
 	{
 		getCharacter()->attack(minn + getCharacter()->getPosition3D());
 		getCharacter()->setDirection(minn.getNormalized());
@@ -218,8 +218,8 @@ void AIStateBeAttack::run()
 	}
 	else
 	{
-		setGlobalType(kGlobalCharacter);	//Ã»ÓĞÕÒµ½µĞÈË£¬Ñ²Âß½øĞĞÑ°ÕÒµĞÈË
-		//·ñÔò×ªÒÆµ½Ñ²Âß×´Ì¬
+		setGlobalType(kGlobalCharacter);	//æ²¡æœ‰æ‰¾åˆ°æ•Œäººï¼Œå·¡é€»è¿›è¡Œå¯»æ‰¾æ•Œäºº
+		//å¦åˆ™è½¬ç§»åˆ°å·¡é€»çŠ¶æ€
 		dynamic_cast<EnemyCharacter*>(getCharacter())->getAIStateMachine()->changeState(AIStateMachine::kAIStatePatrol);
 	}
 }
@@ -228,15 +228,15 @@ AIStateHPLess::AIStateHPLess()
 {
 }
 
-AIStateHPLess::AIStateHPLess(Character * const & character) :
+AIStateHPLess::AIStateHPLess(Character* const& character) :
 	AIState(character)
 {
 }
 
 void AIStateHPLess::run()
 {
-	//cout << "×ªÒÆµ½²ĞÑª×´Ì¬" << endl;
-	Vec3 minn = Vec3::ONE*(1 << 10);
+	//cout << "è½¬ç§»åˆ°æ®‹è¡€çŠ¶æ€" << endl;
+	Vec3 minn = Vec3::ONE * (1 << 10);
 	auto allAward = GameScene::getAwardManager()->getAllAward();
 	for (auto i : allAward)
 	{
@@ -246,13 +246,13 @@ void AIStateHPLess::run()
 		}
 	}
 	minn.y = 0;
-	if (minn.length() < 20)				//ÕÒµ½½±Àø
+	if (minn.length() < 20)				//æ‰¾åˆ°å¥–åŠ±
 	{
 		getCharacter()->setDirection(minn.getNormalized());
 	}
-	else								//·ñÔò×ªÒÆµ½Ñ²Âß×´Ì¬
+	else								//å¦åˆ™è½¬ç§»åˆ°å·¡é€»çŠ¶æ€
 	{
-		setGlobalType(kGlobalAward);	//²ĞÑª£¬¼´Ê¹Ñ²ÂßÒ²ÒªÑ°ÕÒ½±Àø
+		setGlobalType(kGlobalAward);	//æ®‹è¡€ï¼Œå³ä½¿å·¡é€»ä¹Ÿè¦å¯»æ‰¾å¥–åŠ±
 		dynamic_cast<EnemyCharacter*>(getCharacter())->getAIStateMachine()->changeState(AIStateMachine::kAIStatePatrol);
 	}
 }

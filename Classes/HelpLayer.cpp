@@ -1,4 +1,4 @@
-#include "HelpLayer.h"
+ï»¿#include "HelpLayer.h"
 #include "Global.h"
 #include "GameScene.h"
 #include "SceneManager.h"
@@ -17,7 +17,7 @@ bool HelpLayer::init()
 	bool flag = false;
 	do
 	{
-		// ¼ÓÔØ csb ÎÄ¼þ
+		// åŠ è½½ csb æ–‡ä»¶
 		_HelpNode = CSLoader::createNode("res/HelpLayer.csb");
 		_button = static_cast<Button*>(_HelpNode->getChildByName("Button_0"));
 		_button->addClickEventListener(CC_CALLBACK_1(HelpLayer::buttonCallBack, this));

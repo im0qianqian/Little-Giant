@@ -1,4 +1,4 @@
-#ifndef __AI_STATE_MACHINE_H__
+ï»¿#ifndef __AI_STATE_MACHINE_H__
 #define __AI_STATE_MACHINE_H__
 
 #include "cocos2d.h"
@@ -17,8 +17,8 @@ protected:
 	Character *getCharacter() { return _character; }
 	void setGlobalType(const GlobalType &globalType) { _globalType = globalType; }
 private:
-	Character *_character;		// µ±Ç°ÈËÎï
-	GlobalType _globalType;		// ¶ÔÏóÀàĞÍ
+	Character *_character;		// å½“å‰äººç‰©
+	GlobalType _globalType;		// å¯¹è±¡ç±»å‹
 };
 
 class AIStatePatrol :public AIState
@@ -60,9 +60,9 @@ public:
 	}aiState;
 	void changeState(const aiState &state);
 private:
-	AIState *_aiState;					//µ±Ç°×´Ì¬
-	AIStatePatrol *_aiStatePatrol;		//Ñ²Âß×´Ì¬
-	AIStateBeAttack *_aiStateBeAttack;	//ÊÜµ½¹¥»÷×´Ì¬
-	AIStateHPLess *_aiStateHPLess;		//ÑªÁ¿²»×ã×´Ì¬
+	AIState *_aiState;					//å½“å‰çŠ¶æ€
+	AIStatePatrol *_aiStatePatrol;		//å·¡é€»çŠ¶æ€
+	AIStateBeAttack *_aiStateBeAttack;	//å—åˆ°æ”»å‡»çŠ¶æ€
+	AIStateHPLess *_aiStateHPLess;		//è¡€é‡ä¸è¶³çŠ¶æ€
 };
 #endif

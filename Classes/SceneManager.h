@@ -1,4 +1,4 @@
-//ÊµÏÖ³¡¾°Ö®¼äµÄ¹ÜÀíÓëÇĞ»»
+ï»¿//å®ç°åœºæ™¯ä¹‹é—´çš„ç®¡ç†ä¸åˆ‡æ¢
 
 #ifndef __SCENE_MANAGER_H__
 #define __SCENE_MANAGER_H__
@@ -10,10 +10,10 @@ USING_NS_CC;
 
 enum SceneType
 {
-	kMenuScene,		//²Ëµ¥³¡¾°
-	kLoadingScene,	//¼ÓÔØ³¡¾°
-	kGameScene,		//ÓÎÏ·³¡¾°
-	kHelpScene      //°ïÖú³¡¾°
+	kMenuScene,		//èœå•åœºæ™¯
+	kLoadingScene,	//åŠ è½½åœºæ™¯
+	kGameScene,		//æ¸¸æˆåœºæ™¯
+	kHelpScene      //å¸®åŠ©åœºæ™¯
 };
 
 class SceneManager:public Ref
@@ -23,18 +23,18 @@ public:
 	~SceneManager();
 	bool init();
 	CREATE_FUNC(SceneManager);
-	/* »ñÈ¡µ±Ç°³¡¾°¹ÜÀíÕß */
+	/* è·å–å½“å‰åœºæ™¯ç®¡ç†è€… */
 	static SceneManager* getInstance();
-	/* ÇĞ»»³¡¾° */
+	/* åˆ‡æ¢åœºæ™¯ */
 	void changeScene(const SceneType &sceneType);
-	/* »ñÈ¡µ±Ç°³¡¾° */
+	/* è·å–å½“å‰åœºæ™¯ */
 	static Scene* getScene() { return _scene; }
-	/* »ñÈ¡µ±Ç°Í¼²ã */
+	/* è·å–å½“å‰å›¾å±‚ */
 	static Layer* getLayer() { return _layer; }
 private:
-	static Scene* _scene;						//µ±Ç°³¡¾°
-	static Layer* _layer;						//µ±Ç°³¡¾°Í¼²ã
-	static SceneManager* s_sceneManager;		//³¡¾°¹ÜÀíÕß¶ÔÏó
+	static Scene* _scene;						//å½“å‰åœºæ™¯
+	static Layer* _layer;						//å½“å‰åœºæ™¯å›¾å±‚
+	static SceneManager* s_sceneManager;		//åœºæ™¯ç®¡ç†è€…å¯¹è±¡
 };
 
 #endif

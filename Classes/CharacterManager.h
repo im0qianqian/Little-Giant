@@ -1,4 +1,4 @@
-#ifndef __CHARACTER_MANAGER_H__
+ï»¿#ifndef __CHARACTER_MANAGER_H__
 #define __CHARACTER_MANAGER_H__
 
 #include "cocos2d.h"
@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-/* Íæ¼Ò¹ÜÀíÀà */
+/* ç©å®¶ç®¡ç†ç±» */
 class CharacterManager :public Layer
 {
 public:
@@ -15,31 +15,31 @@ public:
 	~CharacterManager();
 	CREATE_FUNC(CharacterManager);
 	virtual bool init() override;
-	/* »ñÈ¡Íæ¼ÒÈËÎï */
+	/* è·å–ç©å®¶äººç‰© */
 	Character* getPlayerCharacter() const { return _playerCharacter; }
-	/* »ñÈ¡ÆäËûÍæ¼Ò */
+	/* è·å–å…¶ä»–ç©å®¶ */
 	std::set <Character*> &getEnemyCharacter() { return _enemyCharacter; }
-	/* ¿ªÊ¼ÓÎÏ· ´´½¨ÃËÓÑÊıÁ¿ + µĞÈËÊıÁ¿ */
+	/* å¼€å§‹æ¸¸æˆ åˆ›å»ºç›Ÿå‹æ•°é‡ + æ•Œäººæ•°é‡ */
 	void startGame(const int &ally,const int &enemy);
-	/* ÔİÍ£ÓÎÏ· */
+	/* æš‚åœæ¸¸æˆ */
 	void pauseGame();
-	/* ¼ÌĞøÓÎÏ· */
+	/* ç»§ç»­æ¸¸æˆ */
 	void resumeGame();
-	/* Ã¶¾Ù±äÁ¿ÈËÎïÀàĞÍ */
+	/* æšä¸¾å˜é‡äººç‰©ç±»å‹ */
 	enum CharacterType
 	{
-		kCharacterPlayer,						//Íæ¼Ò
-		kCharacterAlly,							//ÃËÓÑ
-		kCharacterEnemy							//µĞÈË
+		kCharacterPlayer,						//ç©å®¶
+		kCharacterAlly,							//ç›Ÿå‹
+		kCharacterEnemy							//æ•Œäºº
 	};
-	/* ´´½¨ÈËÎï */
+	/* åˆ›å»ºäººç‰© */
 	void createCharacter(CharacterType characterType);
-	/* Ìí¼ÓÒ»¸öÈËÎï¶ÔÏóµ½»º´æ³Ø */
+	/* æ·»åŠ ä¸€ä¸ªäººç‰©å¯¹è±¡åˆ°ç¼“å­˜æ±  */
 	void addToPool(EnemyCharacter * const &character);
 	virtual void update(float dt) override;
 private:
-	Character* _playerCharacter;						//Íæ¼ÒÈËÎï
-	std::set <Character*> _enemyCharacter;				//ÆäËûÈËÎï
-	ObjCachePool<EnemyCharacter> _cachePool;			//»º´æ³Ø
+	Character* _playerCharacter;						//ç©å®¶äººç‰©
+	std::set <Character*> _enemyCharacter;				//å…¶ä»–äººç‰©
+	ObjCachePool<EnemyCharacter> _cachePool;			//ç¼“å­˜æ± 
 };
 #endif // __CHARACTER_MANAGER_H__

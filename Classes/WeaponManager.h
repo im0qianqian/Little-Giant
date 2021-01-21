@@ -1,4 +1,4 @@
-#ifndef __WEAPON_MANAGER_H__
+ï»¿#ifndef __WEAPON_MANAGER_H__
 #define __WEAPON_MANAGER_H__
 
 #include "cocos2d.h"
@@ -15,9 +15,9 @@ public:
 	~WeaponManager();
 	CREATE_FUNC(WeaponManager);
 	virtual bool init() override;
-	/* ´´½¨ÎäÆ÷½øÐÐ¹¥»÷ */
+	/* åˆ›å»ºæ­¦å™¨è¿›è¡Œæ”»å‡» */
 	void createWeapon(WeaponType weaponType, void *owner, Vec3 spos, Vec3 epos);
-	/* Ìí¼ÓÒ»¸öÎäÆ÷¶ÔÏóµ½»º´æ³Ø */
+	/* æ·»åŠ ä¸€ä¸ªæ­¦å™¨å¯¹è±¡åˆ°ç¼“å­˜æ±  */
 	void addToPool(Weapons * const &weapon) { _cachePool.addToPool(weapon); }
 private:
 	ObjCachePool<Weapons> _cachePool;

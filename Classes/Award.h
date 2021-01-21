@@ -1,4 +1,4 @@
-#ifndef __AWARD_H__
+ï»¿#ifndef __AWARD_H__
 #define __AWARD_H__
 
 #include "cocos2d.h"
@@ -13,13 +13,13 @@ public:
 	Award();
 	~Award();
 	virtual bool init() override;
-	/* ³õÊ¼»¯·½·¨ */
+	/* åˆå§‹åŒ–æ–¹æ³• */
 	void initialization();
-	/* ´´½¨ */
+	/* åˆ›å»º */
 	CREATE_FUNC(Award);
-	/* ÓëÈËÎïÅö×² */
+	/* ä¸äººç‰©ç¢°æ’ */
 	void collisionWithCharacter(Character *const &character);
-	/* ÊÇ·ñ±»É¾³ı */
+	/* æ˜¯å¦è¢«åˆ é™¤ */
 	bool isDeleted() const { return _isDeleted; }
 private:
 	enum AwardType
@@ -28,14 +28,14 @@ private:
 		kAwardEXP,
 		kAwardSorce
 	};
-	/* Ïú»Ù */
+	/* é”€æ¯ */
 	void destroy();
-	/* ½«½±ÀøÓ¦ÓÃÓÚÈËÎï */
+	/* å°†å¥–åŠ±åº”ç”¨äºäººç‰© */
 	void applyToCharacter(Character *const &character);
-	/* Ëæ»úÉú³É½±ÀøÀàĞÍ */
+	/* éšæœºç”Ÿæˆå¥–åŠ±ç±»å‹ */
 	void randomType();
 
-	AwardType _awardType;	//½±ÀøÀàĞÍ
-	bool _isDeleted;		//ÊÇ·ñ±»É¾³ı
+	AwardType _awardType;	//å¥–åŠ±ç±»å‹
+	bool _isDeleted;		//æ˜¯å¦è¢«åˆ é™¤
 };
 #endif

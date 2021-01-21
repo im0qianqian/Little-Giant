@@ -1,4 +1,4 @@
-#include "StageManager.h"
+Ôªø#include "StageManager.h"
 #include "GameScene.h"
 #include "cocostudio/CocoStudio.h"
 #include <fstream>
@@ -11,12 +11,12 @@ StageManager::StageManager() :
 {
 	memset(_map, 0, sizeof(_map));
 	memset(_cMap, 0, sizeof(_cMap));
-	cout << "StageManager ππ‘Ï" << endl;
+	cout << "StageManager ÊûÑÈÄ†" << endl;
 }
 
 StageManager::~StageManager()
 {
-	cout << "StageManager Œˆππ" << endl;
+	cout << "StageManager ÊûêÊûÑ" << endl;
 }
 
 bool StageManager::init()
@@ -24,18 +24,18 @@ bool StageManager::init()
 	bool flag = false;
 	do
 	{
-		/* ¥¥Ω®µÿ√Ê */
+		/* ÂàõÂª∫Âú∞Èù¢ */
 		createGround();
-		/* ¥¥Ω®’œ∞≠ŒÔ */
+		/* ÂàõÂª∫ÈöúÁ¢çÁâ© */
 		createObstacles();
-		if (GameScene::getGameMode() == kGameModeNight)	// »Áπ˚µ±«∞”Œœ∑ Ù”⁄∫⁄“πƒ£ Ω
+		if (GameScene::getGameMode() == kGameModeNight)	// Â¶ÇÊûúÂΩìÂâçÊ∏∏ÊàèÂ±û‰∫éÈªëÂ§úÊ®°Âºè
 		{
-			/* ¥¥Ω®µ∆π‚ */
+			/* ÂàõÂª∫ÁÅØÂÖâ */
 			createLight();
-			/* ∆Ù∂Ø∂® ±∆˜∏¸–¬ */
+			/* ÂêØÂä®ÂÆöÊó∂Âô®Êõ¥Êñ∞ */
 			scheduleUpdate();
 		}
-		/* √ø¡Ω√Î∏¸–¬“ª¥ŒÀ˘”–»ÀµƒŒª÷√ */
+		/* ÊØè‰∏§ÁßíÊõ¥Êñ∞‰∏ÄÊ¨°ÊâÄÊúâ‰∫∫ÁöÑ‰ΩçÁΩÆ */
 		schedule(schedule_selector(StageManager::updateMap), 2.f);
 		flag = true;
 	} while (false);
@@ -44,12 +44,12 @@ bool StageManager::init()
 
 void StageManager::createLight()
 {
-	// »ÀŒÔ–°µ∆
+	// ‰∫∫Áâ©Â∞èÁÅØ
 	_characterLight = PointLight::create(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D(), Color3B::WHITE, 50.f);
-	// …Ë÷√µ∆π‚¡¡∂»
+	// ËÆæÁΩÆÁÅØÂÖâ‰∫ÆÂ∫¶
 	_characterLight->setIntensity(.5f);
 	
-	// Ã´—ÙŒß»∆–˝◊™µƒ∞Îæ∂
+	// Â§™Èò≥Âõ¥ÁªïÊóãËΩ¨ÁöÑÂçäÂæÑ
 	float radius = 1000.f;
 	_sun = DirectionLight::create(Vec3::ZERO, Color3B::WHITE);
 	_sun->runAction(RepeatForever::create(Sequence::create(CallFuncN::create([radius](Node *node) {
@@ -137,7 +137,7 @@ void StageManager::createObstacles()
 
 void StageManager::createGround()
 {
-	//¥¥Ω®µÿ√Ê
+	//ÂàõÂª∫Âú∞Èù¢
 	Physics3DRigidBodyDes rbDes;
 	rbDes.mass = 0.0f;
 	rbDes.shape = Physics3DShape::createBox(Vec3(WORLD_LENGTH, WORLD_HEIGHT, WORLD_WIDTH));
@@ -171,7 +171,7 @@ void StageManager::updateMap(float dt)
 			if (pos.x < 0 || pos.x >= MAPS_FILE_WIDTH || pos.y < 0 || pos.y >= MAPS_FILE_LENGTH)continue;
 			_cMap[int(pos.x)][int(pos.y)] = kGlobalAward;
 		}
-		/* µ–»À≤ø∑÷ */
+		/* Êïå‰∫∫ÈÉ®ÂàÜ */
 		auto enemy = GameScene::getCharacterManager()->getEnemyCharacter();
 		for (auto i : enemy)
 		{
@@ -179,7 +179,7 @@ void StageManager::updateMap(float dt)
 			if (pos.x < 0 || pos.x >= MAPS_FILE_WIDTH || pos.y < 0 || pos.y >= MAPS_FILE_LENGTH)continue;
 			_cMap[int(pos.x)][int(pos.y)] = kGlobalCharacter;
 		}
-		/* ÕÊº“≤ø∑÷ */
+		/* Áé©ÂÆ∂ÈÉ®ÂàÜ */
 		auto my = multVec(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 		_cMap[int(my.x)][int(my.y)] = kGlobalCharacter;
 	}//).detach();
@@ -190,7 +190,7 @@ void StageManager::update(float dt)
 {
 	if (GameScene::getCharacterManager()->getPlayerCharacter() != nullptr)
 	{
-		// »ÀŒÔµ∆π‚“ª÷±∏˙ÀÊ÷˜Ω«
+		// ‰∫∫Áâ©ÁÅØÂÖâ‰∏ÄÁõ¥Ë∑üÈöè‰∏ªËßí
 		getCharacterLight()->setPosition3D(GameScene::getCharacterManager()->getPlayerCharacter()->getPosition3D());
 	}
 }

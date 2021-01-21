@@ -1,4 +1,4 @@
-#ifndef __MAIN_LAYER_H__
+ï»¿#ifndef __MAIN_LAYER_H__
 #define __MAIN_LAYER_H__
 
 #include "cocos2d.h"
@@ -15,8 +15,8 @@ public:
 	CREATE_FUNC(MainLayer);
 	void buttonCallBack(Ref * const node);
 private:
-	Node *_displayNode;		//CSBÎÄ¼þ
-	Button *_button[5];		//°´Å¥
+	Node *_displayNode;		//CSBæ–‡ä»¶
+	Button *_button[5];		//æŒ‰é’®
 };
 
 #endif

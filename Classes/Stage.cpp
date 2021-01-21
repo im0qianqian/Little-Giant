@@ -1,9 +1,9 @@
-#include "Stage.h"
+ï»¿#include "Stage.h"
 #include "Global.h"
 
 Stage::Stage()
 {
-	// ÉèÖÃ±êÇ©Îª¹ÌÌåÊôÐÔ
+	// è®¾ç½®æ ‡ç­¾ä¸ºå›ºä½“å±žæ€§
 	setTag(kGlobalStage);
 }
 
@@ -23,7 +23,7 @@ Stage* Stage::create(Physics3DRigidBodyDes *rbDes, const std::string &ptr, const
 	if (ret && ret->initWithFile(ptr) && ret->init())
 	{
 		auto obj = Physics3DRigidBody::create(rbDes);
-		// ÉèÖÃ±êÇ©Îªµ±Ç°¹ÌÌå¶ÔÏóÖ¸Õë£¬ÒòÎªÔÚÅö×²¼ì²âÖÐÐèÒªÊ¹ÓÃ
+		// è®¾ç½®æ ‡ç­¾ä¸ºå½“å‰å›ºä½“å¯¹è±¡æŒ‡é’ˆï¼Œå› ä¸ºåœ¨ç¢°æ’žæ£€æµ‹ä¸­éœ€è¦ä½¿ç”¨
 		obj->setUserData(ret);
 		ret->_physicsComponent = Physics3DComponent::create(obj);
 		ret->addComponent(ret->_physicsComponent);

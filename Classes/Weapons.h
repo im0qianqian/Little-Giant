@@ -1,4 +1,4 @@
-//ÊµÏÖ¸÷ÀàÎäÆ÷µÄÉú³ÉÓë¿ØÖÆ
+ï»¿//å®ç°å„ç±»æ­¦å™¨çš„ç”Ÿæˆä¸æ§åˆ¶
 
 #ifndef __WEAPONS_H__
 #define __WEAPONS_H__
@@ -8,22 +8,22 @@
 
 USING_NS_CC;
 
-/* ÀàÉùÃ÷£¬²»ÄÜÒıÈëÄÇ¸öÍ·ÎÄ¼ş£¬·ñÔò»áÔì³ÉÎŞÏŞÒıÈë */
+/* ç±»å£°æ˜ï¼Œä¸èƒ½å¼•å…¥é‚£ä¸ªå¤´æ–‡ä»¶ï¼Œå¦åˆ™ä¼šé€ æˆæ— é™å¼•å…¥ */
 class Character;
 class Weapons : public PhysicsSprite3D
 {
 public:
 	Weapons();
 	~Weapons();
-	/* »ñÈ¡ÎäÆ÷ËùÊôÈËÎï */
+	/* è·å–æ­¦å™¨æ‰€å±äººç‰© */
 	virtual void* getOwner() const { return _owner; }
-	/* »ñÈ¡¹¥»÷Á¦ */
+	/* è·å–æ”»å‡»åŠ› */
 	virtual float getPower() const { return _power; }
-	/* »ñÈ¡¹¥»÷ËÙ¶È */
+	/* è·å–æ”»å‡»é€Ÿåº¦ */
 	virtual float getSpeed() const { return _speed; }
-	/* »ñÈ¡ÆğÊ¼µã×ø±ê */
+	/* è·å–èµ·å§‹ç‚¹åæ ‡ */
 	virtual Vec3 getSpos() const { return _spos; }
-	/* »ñÈ¡Ä¿±êµã×ø±ê */
+	/* è·å–ç›®æ ‡ç‚¹åæ ‡ */
 	virtual Vec3 getEpos() const { return _epos; }
 	/* SET */
 	virtual void setOwner(void * const &owner) { _owner = owner; }
@@ -31,31 +31,31 @@ public:
 	virtual void setSpeed(const float &speed) { _speed = speed; }
 	virtual void setSpos(const Vec3 &spos) { _spos = spos; }
 	virtual void setEpos(const Vec3 &epos) { _epos = epos; }
-	/* Ïú»Ù */
+	/* é”€æ¯ */
 	virtual void destroy();
-	/* ´´½¨ */
+	/* åˆ›å»º */
 	CREATE_FUNC(Weapons);
-	/* ³õÊ¼»¯ÊôĞÔ */
+	/* åˆå§‹åŒ–å±æ€§ */
 	virtual bool init() override;
 	virtual void init(void * const &owner, const Vec3 &spos, const Vec3 &epos);
-	/* É±ËÀµĞÈË */
+	/* æ€æ­»æ•Œäºº */
 	virtual void killCharacter(Character *const &character) const;
-	/* Óë³¡¾°Åö×² */
+	/* ä¸åœºæ™¯ç¢°æ’ */
 	virtual void collisionWithStage();
-	/* ÓëÎäÆ÷Åö×² */
+	/* ä¸æ­¦å™¨ç¢°æ’ */
 	virtual void collisionWithWeapon(Weapons *const &weapon);
-	/* ÓëÈËÎïÅö×² */
+	/* ä¸äººç‰©ç¢°æ’ */
 	virtual void collisionWithCharacter(Character *const &character);
-	/* ÊÇ·ñ±»É¾³ı */
+	/* æ˜¯å¦è¢«åˆ é™¤ */
 	bool isDeleted() const{ return _isDeleted; }
 private:
 	virtual void update(float dt) override;
-	void *_owner;			//ÎäÆ÷ËùÊôÈËÎï
-	float _power;			//¹¥»÷Á¦
-	float _speed;			//¹¥»÷ËÙ¶È
-	Vec3 _spos;				//¹¥»÷ÆğÊ¼µã×ø±ê
-	Vec3 _epos;				//¹¥»÷µã×ø±ê
-	bool _isDeleted;		//ÊÇ·ñÒÑ¾­±»É¾³ı£¨ÊÇ·ñ´æÔÚÓÚ»º´æ³ØÖĞ£©
+	void *_owner;			//æ­¦å™¨æ‰€å±äººç‰©
+	float _power;			//æ”»å‡»åŠ›
+	float _speed;			//æ”»å‡»é€Ÿåº¦
+	Vec3 _spos;				//æ”»å‡»èµ·å§‹ç‚¹åæ ‡
+	Vec3 _epos;				//æ”»å‡»ç‚¹åæ ‡
+	bool _isDeleted;		//æ˜¯å¦å·²ç»è¢«åˆ é™¤ï¼ˆæ˜¯å¦å­˜åœ¨äºç¼“å­˜æ± ä¸­ï¼‰
 };
 
 class Arrow :public Weapons

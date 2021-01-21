@@ -1,9 +1,9 @@
-#include "GameScene.h"
+ï»¿#include "GameScene.h"
 #include "Global.h"
 
 USING_NS_CC;
 
-/* Àà¾²Ì¬Ë½ÓĞ±äÁ¿³õÊ¼»¯ */
+/* ç±»é™æ€ç§æœ‰å˜é‡åˆå§‹åŒ– */
 Camera *GameScene::_camera = nullptr;
 GameStateType GameScene::_gameState = kGameStatePause;
 CharacterManager *GameScene::_characterManager = nullptr;
@@ -18,12 +18,12 @@ unsigned int GameScene::_startingTime = 0;
 
 GameScene::GameScene()
 {
-	cout << "GameScene ¹¹Ôì" << endl;
+	cout << "GameScene æ„é€ " << endl;
 }
 
 GameScene::~GameScene()
 {
-	cout << "GameScene Îö¹¹" << endl;
+	cout << "GameScene ææ„" << endl;
 }
 
 bool GameScene::init()
@@ -31,40 +31,40 @@ bool GameScene::init()
 	bool flag = false;
 	do
 	{
-		/* ³õÊ¼»¯Ê±¼äÖÖ×Ó */
+		/* åˆå§‹åŒ–æ—¶é—´ç§å­ */
 		srand((unsigned)time(NULL));
-		/* ÓÎÏ·×´Ì¬ */
+		/* æ¸¸æˆçŠ¶æ€ */
 		GameScene::_gameState = kGameStateRuning;
 
-		auto _layer3D = Layer::create();	//ĞÂ½¨Ò»¸öÍ¼²ãÓÃÀ´ÏÔÊ¾3D²¿·Ö
-		/* ÉãÏñ»ú */
+		auto _layer3D = Layer::create();	//æ–°å»ºä¸€ä¸ªå›¾å±‚ç”¨æ¥æ˜¾ç¤º3Déƒ¨åˆ†
+		/* æ‘„åƒæœº */
 		GameScene::_camera = Camera::createPerspective(60, (GLfloat)SCREEN_WIDTH / SCREEN_HEIGHT, 1, 1000);
 		_camera->setCameraFlag(CameraFlag::USER1);
-		_layer3D->addChild(_camera);		//½«3DÉãÏñ»úÌí¼Ó½øÍ¼²ã
+		_layer3D->addChild(_camera);		//å°†3Dæ‘„åƒæœºæ·»åŠ è¿›å›¾å±‚
 
-		/* ¼ÇÂ¼ÓÎÏ·¿ªÊ¼µÄÊ±¼ä */
+		/* è®°å½•æ¸¸æˆå¼€å§‹çš„æ—¶é—´ */
 		GameScene::_startingTime = unsigned int(GetTickCount64());
-		/* ²Ù×÷¹ÜÀí */
+		/* æ“ä½œç®¡ç† */
 		GameScene::_joystick = Joystick::create();
 		addChild(GameScene::_joystick, -1);
-		/* ÎäÆ÷¹ÜÀí */
+		/* æ­¦å™¨ç®¡ç† */
 		GameScene::_weaponManager = WeaponManager::create();
 		_layer3D->addChild(GameScene::_weaponManager, 2);
-		/* ÈËÎï¹ÜÀí */
+		/* äººç‰©ç®¡ç† */
 		GameScene::_characterManager = CharacterManager::create();
 		_layer3D->addChild(GameScene::_characterManager, 1);
-		/* µØÍ¼¹ÜÀí */
+		/* åœ°å›¾ç®¡ç† */
 		GameScene::_stageManager = StageManager::create();
 		_layer3D->addChild(GameScene::_stageManager, 0);
-		/* ½±Àø¹ÜÀí*/
+		/* å¥–åŠ±ç®¡ç†*/
 		GameScene::_awardManager = AwardManager::create();
 		_layer3D->addChild(GameScene::_awardManager, 3);
 
 		addChild(_layer3D,0);
 		
-		setCameraMask((unsigned int)CameraFlag::USER1);	//ÉèÖÃµ±Ç°³¡¾°Ö»ÄÜ±»USER1ÖĞÅÄµ½£¬ÒÔÉÏÓĞĞ§£¬ÒÔÏÂÈÔÈ»Ä¬ÈÏ
+		setCameraMask((unsigned int)CameraFlag::USER1);	//è®¾ç½®å½“å‰åœºæ™¯åªèƒ½è¢«USER1ä¸­æ‹åˆ°ï¼Œä»¥ä¸Šæœ‰æ•ˆï¼Œä»¥ä¸‹ä»ç„¶é»˜è®¤
 		
-		/* ½çÃæÏÔÊ¾*/
+		/* ç•Œé¢æ˜¾ç¤º*/
 		GameScene::_displayManager = DisplayManager::create();
 		addChild(GameScene::_displayManager, 1);
 

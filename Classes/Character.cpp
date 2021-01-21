@@ -1,4 +1,4 @@
-#include "Character.h"
+ï»¿#include "Character.h"
 #include "GameScene.h"
 #include "SceneManager.h"
 #include "Joystick.h"
@@ -23,22 +23,22 @@ Character::Character() :
 	_lastAttackTime(0),
 	_topName(nullptr)
 {
-	// ÉèÖÃÊôÓÚÈËÎï±êÇ©
+	// è®¾ç½®å±äºäººç‰©æ ‡ç­¾
 	setTag(kGlobalCharacter);
 }
 
 Character::~Character()
 {
-	// ÉèÖÃËÀÍö
+	// è®¾ç½®æ­»äº¡
 	_isDie = true;
-	// ¼ÓËøµÈ´ıÏß³Ì½áÊø
-	cout << this << " clean up ¼ÓËø" << endl;
+	// åŠ é”ç­‰å¾…çº¿ç¨‹ç»“æŸ
+	cout << this << " clean up åŠ é”" << endl;
 	_threadMutex.lock();
-	cout << this << " clean up ¼ÓËø³É¹¦~" << endl;
-	cout << this << " clean up ½âËø" << endl;
+	cout << this << " clean up åŠ é”æˆåŠŸ~" << endl;
+	cout << this << " clean up è§£é”" << endl;
 	_threadMutex.unlock();
-	cout << this << " clean up ½âËø³É¹¦~" << endl;
-	cout << this << " ÒÑ±»Îö¹¹" << endl;
+	cout << this << " clean up è§£é”æˆåŠŸ~" << endl;
+	cout << this << " å·²è¢«ææ„" << endl;
 	cout << "----------------------" << endl;
 }
 
@@ -46,15 +46,15 @@ void Character::addLifeValue(const float &add)
 {
 	if (add >= 0)
 	{
-		// ¼ÓÑªÊ±Ôö¼Ó»Ö¸´ÄÜÁ¦¼Ó³É
+		// åŠ è¡€æ—¶å¢åŠ æ¢å¤èƒ½åŠ›åŠ æˆ
 		_lifeValue += min(INITIAL_LIFE_VALUE, add*getAttribute().getRestoringAbility());
 	}
 	else
 	{
-		// ¼õÑªÊ±¼õµô·ÀÓùÁ¦ËùµÖÏûµÄÉËº¦
+		// å‡è¡€æ—¶å‡æ‰é˜²å¾¡åŠ›æ‰€æŠµæ¶ˆçš„ä¼¤å®³
 		_lifeValue += min(add + getAttribute().getDefensiveForce(), 0);
 	}
-	_hpSlider->setPercent(int(_lifeValue));			//¸üĞÂÑªÁ¿Ìõ
+	_hpSlider->setPercent(int(_lifeValue));			//æ›´æ–°è¡€é‡æ¡
 }
 
 void Character::addExperience(const int &add)
@@ -69,20 +69,20 @@ void Character::addSorce(const int &add)
 
 void Character::attack(const Vec3 &pos)
 {
-	const float attackTimeInterval = 600.f / getAttribute().getAttackSpeed();		// ¹¥»÷Ê±¼ä¼ä¸ô
-	auto currentTime = GetTickCount64();												// »ñÈ¡µ±Ç°Ê±¼ä
-	if (currentTime - _lastAttackTime >= attackTimeInterval)						//Èç¹û¿ÉÒÔ¹¥»÷
+	const float attackTimeInterval = 600.f / getAttribute().getAttackSpeed();		// æ”»å‡»æ—¶é—´é—´éš”
+	auto currentTime = GetTickCount64();												// è·å–å½“å‰æ—¶é—´
+	if (currentTime - _lastAttackTime >= attackTimeInterval)						//å¦‚æœå¯ä»¥æ”»å‡»
 	{
-		_lastAttackTime = unsigned int(currentTime);												// ¸üĞÂ×îºóÒ»´Î¹¥»÷Ê±¼ä
+		_lastAttackTime = unsigned int(currentTime);												// æ›´æ–°æœ€åä¸€æ¬¡æ”»å‡»æ—¶é—´
 		GameScene::getWeaponManager()->createWeapon(kWeaponArrow, this, getPosition3D(), pos);
 	}
 }
 
 void Character::move()
 {
-	/* »ñÈ¡¸ÕÌå¶ÔÏó */
+	/* è·å–åˆšä½“å¯¹è±¡ */
 	auto s = static_cast<Physics3DRigidBody*>(getPhysicsObj());
-	/* ÉèÖÃÏßËÙ¶ÈÎªÈËÎïÒÆ¶¯ËÙ¶È*·½ÏòÏòÁ¿£¬Y·½Ïò±£³ÖºÍÔ­À´Ò»Ñù */
+	/* è®¾ç½®çº¿é€Ÿåº¦ä¸ºäººç‰©ç§»åŠ¨é€Ÿåº¦*æ–¹å‘å‘é‡ï¼ŒYæ–¹å‘ä¿æŒå’ŒåŸæ¥ä¸€æ · */
 	s->setLinearVelocity(getAttribute().getMovingSpeed()*getDirection() + Vec3(0, s->getLinearVelocity().y, 0));
 }
 
@@ -91,14 +91,14 @@ bool Character::init()
 	bool flag = false;
 	do
 	{
-		/* ÒÔÏÂÊÇ³õÊ¼»¯²¿·Ö */
+		/* ä»¥ä¸‹æ˜¯åˆå§‹åŒ–éƒ¨åˆ† */
 		if (initWithFile("Sprite3DTest/box.c3t"))
 		{
 			setTexture("images/Icon.png");
 
 			Physics3DRigidBodyDes des;
-			des.mass = 50.f;			//Ôİ¶¨£¬ÈËÎïÖÊÁ¿ÉèÖÃÎª50
-			des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//¸ÕÌå´óĞ¡
+			des.mass = 50.f;			//æš‚å®šï¼Œäººç‰©è´¨é‡è®¾ç½®ä¸º50
+			des.shape = Physics3DShape::createBox(Vec3(2.0f, 2.0f, 2.0f));	//åˆšä½“å¤§å°
 
 			auto obj = Physics3DRigidBody::create(&des);
 
@@ -108,14 +108,14 @@ bool Character::init()
 
 			_contentSize = getBoundingBox().size;
 
-			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// ÉèÖÃÅö×²ºóµÄ»Øµ÷º¯Êı
+			obj->setCollisionCallback(GameScene::getJoystick()->onPhysics3DCollision());	// è®¾ç½®ç¢°æ’åçš„å›è°ƒå‡½æ•°
 
 			obj->setUserData(this);
 
-			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//Ó¦ÓÃÍ¬²½
+			setSyncFlag(Physics3DComponent::PhysicsSyncFlag::PHYSICS_TO_NODE);	//åº”ç”¨åŒæ­¥
 
-			setScale(2.f);		//ÉèÖÃ´óĞ¡
-			createHpBar();		//´´½¨ÑªÁ¿Ìõ
+			setScale(2.f);		//è®¾ç½®å¤§å°
+			createHpBar();		//åˆ›å»ºè¡€é‡æ¡
 
 			flag = true;
 		}
@@ -125,38 +125,38 @@ bool Character::init()
 
 void Character::initialization()
 {
-	// ³õÊ¼»¯Öµ
+	// åˆå§‹åŒ–å€¼
 	_lifeValue = INITIAL_LIFE_VALUE;
 	_experience = 0;
-	// Èç¹û²»ÊÇ¼ÆÊ±Ä£Ê½£¬»ı·ÖÇå¿Õ
+	// å¦‚æœä¸æ˜¯è®¡æ—¶æ¨¡å¼ï¼Œç§¯åˆ†æ¸…ç©º
 	if (GameScene::getGameMode() != kGameModeTimer)
 		_sorce = 0;
 	_attribute.init();
 	_weaponType = kWeaponArrow;
 	_dept = 0;
-	_hpSlider->setPercent(int(_lifeValue));		//¸üĞÂÑªÁ¿Ìõ
-	_lastAttackTime = 0;					//¹¥»÷Ê±¼ä¼ä¸ô
-	_direction = Vec3::ZERO;				//³õÊ¼ĞĞ×ß·½Ïò
+	_hpSlider->setPercent(int(_lifeValue));		//æ›´æ–°è¡€é‡æ¡
+	_lastAttackTime = 0;					//æ”»å‡»æ—¶é—´é—´éš”
+	_direction = Vec3::ZERO;				//åˆå§‹è¡Œèµ°æ–¹å‘
 
-	thread([this] {							//Òì²½¸üĞÂ isDie ¼ÓËø²¢ÇÒÆô¶¯ÈËÎïAIÏß³Ì
+	thread([this] {							//å¼‚æ­¥æ›´æ–° isDie åŠ é”å¹¶ä¸”å¯åŠ¨äººç‰©AIçº¿ç¨‹
 		_threadMutex.lock();
-		_isDie = false;						//¸´»î
-		thread(&Character::moveModule, this).detach();	//¿ªÆôÈËÎïAIÏß³Ì
+		_isDie = false;						//å¤æ´»
+		thread(&Character::moveModule, this).detach();	//å¼€å¯äººç‰©AIçº¿ç¨‹
 		_threadMutex.unlock();
 	}).detach();
 
 
-	// Ëæ»úÉèÖÃÎ»ÖÃ²¢Í¬²½
+	// éšæœºè®¾ç½®ä½ç½®å¹¶åŒæ­¥
 	setPosition3D(Vec3(rand() % WORLD_LENGTH - WORLD_LENGTH / 2.f, WORLD_HEIGHT*1.f, rand() % WORLD_WIDTH - WORLD_WIDTH / 2.f));
 	syncNodeToPhysics();
 }
 
 void Character::collisionWithWeapon(Weapons * const & weapon)
 {
-	if (isDie() || weapon->isDeleted())return;	// Èç¹ûÄ³·½ÒÑ¾­²»´æÔÚ
-	// ÈËÎïÊÜµ½¹¥»÷
+	if (isDie() || weapon->isDeleted())return;	// å¦‚æœæŸæ–¹å·²ç»ä¸å­˜åœ¨
+	// äººç‰©å—åˆ°æ”»å‡»
 	beAttacked(weapon);
-	//cout << this << " ÊÜµ½À´×Ô " << weapon << " µÄ¹¥»÷£¡£¡£¡" << endl;
+	//cout << this << " å—åˆ°æ¥è‡ª " << weapon << " çš„æ”»å‡»ï¼ï¼ï¼" << endl;
 }
 
 void Character::collisionWithAward(Award * const & award)
@@ -182,34 +182,34 @@ void Character::collisionWithStage()
 
 void Character::beAttacked(Weapons *const &weapon)
 {
-	// Èç¹ûÎäÆ÷µÄ´´½¨ÕßÊÇ×Ô¼ºµÄ»°²»µôÑª£¨×Ô¼º´ò×Ô¼º£©
+	// å¦‚æœæ­¦å™¨çš„åˆ›å»ºè€…æ˜¯è‡ªå·±çš„è¯ä¸æ‰è¡€ï¼ˆè‡ªå·±æ‰“è‡ªå·±ï¼‰
 	if (weapon->getOwner() == this) return;
-	//ÊÜµ½¹¥»÷ÏÈµôÑª,µôÑªÁ¿µÈÓÚÎäÆ÷¹¥»÷Á¦-×ÔÉí·ÀÓùÁ¦
+	//å—åˆ°æ”»å‡»å…ˆæ‰è¡€,æ‰è¡€é‡ç­‰äºæ­¦å™¨æ”»å‡»åŠ›-è‡ªèº«é˜²å¾¡åŠ›
 	addLifeValue(-weapon->getPower() / 10.f);
 
-	// Èç¹ûÑªÁ¿Ğ¡ÓÚ0£¬ÔòËÀÍö
+	// å¦‚æœè¡€é‡å°äº0ï¼Œåˆ™æ­»äº¡
 	if (getLifeValue() <= 0)
 	{
-		/* ÎäÆ÷³É¹¦É±ËÀµĞÈË */
+		/* æ­¦å™¨æˆåŠŸæ€æ­»æ•Œäºº */
 		weapon->killCharacter(this);
-		/* ×ÔÉíËÀÍö */
+		/* è‡ªèº«æ­»äº¡ */
 		die();
 	}
 }
 
 void Character::die()
 {
-	cout << this << " ÒÑËÀÍö" << endl;
+	cout << this << " å·²æ­»äº¡" << endl;
 	if (isDie())return;
 	_isDie = true;
 }
 
 void Character::update(float dt)
 {
-	if (detectionStatus())	// Èç¹ûµ±Ç°×´¿öÕı³£(ÈËÎïÊÇ·ñ´æ»î)
+	if (detectionStatus())	// å¦‚æœå½“å‰çŠ¶å†µæ­£å¸¸(äººç‰©æ˜¯å¦å­˜æ´»)
 	{
 		move();
-		/* ÈËÎï±£³Ö²»Ğı×ª */
+		/* äººç‰©ä¿æŒä¸æ—‹è½¬ */
 		//setRotation3D(Vec3::ZERO);
 		//syncNodeToPhysics();
 	}
@@ -218,10 +218,10 @@ void Character::update(float dt)
 
 bool Character::detectionStatus()
 {
-	if (!isDie() && getPositionY() < 0)		// Èç¹ûÈËÎï´æ»î²¢ÇÒµô³öÁË³¡Íâ
+	if (!isDie() && getPositionY() < 0)		// å¦‚æœäººç‰©å­˜æ´»å¹¶ä¸”æ‰å‡ºäº†åœºå¤–
 	{
-		cout << this << " ÈËÎïµô³öÊÀ½çËÀÍö" << endl;
-		die();								// ÈËÎïÁ¢¼´ËÀÍö
+		cout << this << " äººç‰©æ‰å‡ºä¸–ç•Œæ­»äº¡" << endl;
+		die();								// äººç‰©ç«‹å³æ­»äº¡
 	}
 	return !isDie();
 }
@@ -229,7 +229,7 @@ bool Character::detectionStatus()
 void Character::createHpBar()
 {
 	auto billBoard = BillBoard::create();
-	/* ÒÔÏÂÊÇÑªÁ¿Ìõ */
+	/* ä»¥ä¸‹æ˜¯è¡€é‡æ¡ */
 	_hpSlider = Slider::create();
 	_hpSlider->loadBarTexture("images/bloodbg.png");
 	_hpSlider->loadProgressBarTexture("images/blood.png");
@@ -239,7 +239,7 @@ void Character::createHpBar()
 	_hpSlider->setPosition3D(getPosition3D() + Vec3::UNIT_Y * 2);
 	billBoard->addChild(_hpSlider);
 
-	/* ÒÔÏÂÊÇÈËÎïÃû×Ölabel */
+	/* ä»¥ä¸‹æ˜¯äººç‰©åå­—label */
 	TTFConfig ttfConfig("fonts/FZYTK.TTF", 25, GlyphCollection::DYNAMIC);
 	_topName = Label::createWithTTF(ttfConfig, "");
 	_topName->setScale(.02f);
@@ -252,7 +252,7 @@ void Character::createHpBar()
 
 Character::Attribute::Attribute()
 {
-	init();		// Ö±½ÓÖ´ĞĞ³õÊ¼»¯º¯Êı
+	init();		// ç›´æ¥æ‰§è¡Œåˆå§‹åŒ–å‡½æ•°
 }
 
 Character::Attribute::~Attribute()
@@ -339,12 +339,12 @@ void Character::Attribute::init()
 
 void PlayerCharacter::initialization()
 {
-	// ÏÈÖ´ĞĞ¸¸ÀàµÄ³õÊ¼»¯·½·¨
+	// å…ˆæ‰§è¡Œçˆ¶ç±»çš„åˆå§‹åŒ–æ–¹æ³•
 	Character::initialization();
-	// Ëæ»úÒ»¸öĞÕÃû£¨¿ÉÄÜ»áÖØ¸´£©
+	// éšæœºä¸€ä¸ªå§“åï¼ˆå¯èƒ½ä¼šé‡å¤ï¼‰
 	setName("Little Giant");
 	setTopName(getName());
-	// ÉèÖÃÈºÂä£¬Ö÷½ÇÎª -1
+	// è®¾ç½®ç¾¤è½ï¼Œä¸»è§’ä¸º -1
 	setDept(-1);
 }
 
@@ -354,16 +354,16 @@ void PlayerCharacter::die()
 
 	switch (GameScene::getGameMode())
 	{
-	case kGameModeAdventure:			// Ã°ÏÕÄ£Ê½
+	case kGameModeAdventure:			// å†’é™©æ¨¡å¼
 		GameScene::getDisplayManager()->showSorceBoard();
-		cout << "ÄãÒÑËÀÍö£¬ÓÎÏ·½áÊø~" << endl;
+		cout << "ä½ å·²æ­»äº¡ï¼Œæ¸¸æˆç»“æŸ~" << endl;
 		break;
-	case kGameModeTimer:				// ¼ÆÊ±Ä£Ê½
-		initialization();				// ³äÑª¸´»î
+	case kGameModeTimer:				// è®¡æ—¶æ¨¡å¼
+		initialization();				// å……è¡€å¤æ´»
 		break;
-	case kGameModeNight:				// ºÚÒ¹Ä£Ê½
+	case kGameModeNight:				// é»‘å¤œæ¨¡å¼
 		GameScene::getDisplayManager()->showSorceBoard();
-		cout << "ÄãÒÑËÀÍö£¬ÓÎÏ·½áÊø~" << endl;
+		cout << "ä½ å·²æ­»äº¡ï¼Œæ¸¸æˆç»“æŸ~" << endl;
 		break;
 	default:
 		break;
@@ -379,7 +379,7 @@ void PlayerCharacter::moveModule()
 			GameScene::getCamera()->getReferenceCount() == 0 ||
 			getReferenceCount() == 0)
 		{
-			cout << "¼ì²âµ½Ä³¶ÔÏóÒÑ±»Îö¹¹Ìø³ö" << endl;
+			cout << "æ£€æµ‹åˆ°æŸå¯¹è±¡å·²è¢«ææ„è·³å‡º" << endl;
 			break;
 		}
 		Vec3 res = Vec3::ZERO;
@@ -409,10 +409,10 @@ void PlayerCharacter::moveModule()
 			GameScene::getCamera()->setPosition3D(getPosition3D() + Vec3(0, 50, 20));
 		}
 	}
-	cout << "ËÀÍö½âËø" << endl;
+	cout << "æ­»äº¡è§£é”" << endl;
 	getThreadMutex().unlock();
-	cout << "ËÀÍö½âËø³É¹¦" << endl;
-	cout << "Ö÷½Ç" << this << " Ïß³Ì½áÊø" << endl;
+	cout << "æ­»äº¡è§£é”æˆåŠŸ" << endl;
+	cout << "ä¸»è§’" << this << " çº¿ç¨‹ç»“æŸ" << endl;
 }
 
 EnemyCharacter::EnemyCharacter() :
@@ -422,16 +422,16 @@ EnemyCharacter::EnemyCharacter() :
 
 void EnemyCharacter::initialization()
 {
-	// ÏÈÖ´ĞĞ¸¸ÀàµÄ³õÊ¼»¯·½·¨
+	// å…ˆæ‰§è¡Œçˆ¶ç±»çš„åˆå§‹åŒ–æ–¹æ³•
 	Character::initialization();
-	// Ëæ»úÒ»¸öĞÕÃû£¨¿ÉÄÜ»áÖØ¸´£©
+	// éšæœºä¸€ä¸ªå§“åï¼ˆå¯èƒ½ä¼šé‡å¤ï¼‰
 	setName(CHARACTER_NAME[rand() % (sizeof(CHARACTER_NAME) / sizeof(string))]);
 	setTopName(getName());
 }
 
 void EnemyCharacter::collisionWithStage()
 {
-	Character::collisionWithStage();	//µ÷ÓÃ¸¸ÀàµÄÅö×²·½·¨
+	Character::collisionWithStage();	//è°ƒç”¨çˆ¶ç±»çš„ç¢°æ’æ–¹æ³•
 	int x = rand() % 3 - 1;
 	int y = rand() % 3 - 1;
 	setDirection(Vec3(x*1.f, 0.f, y*1.f));
@@ -443,13 +443,13 @@ void EnemyCharacter::die()
 
 	switch (GameScene::getGameMode())
 	{
-	case kGameModeAdventure:			// Ã°ÏÕÄ£Ê½
+	case kGameModeAdventure:			// å†’é™©æ¨¡å¼
 		GameScene::getCharacterManager()->addToPool(this);
 		break;
-	case kGameModeTimer:				// ¼ÆÊ±Ä£Ê½
-		initialization();				// ³äÑª¸´»î
+	case kGameModeTimer:				// è®¡æ—¶æ¨¡å¼
+		initialization();				// å……è¡€å¤æ´»
 		break;
-	case kGameModeNight:				// ºÚÒ¹Ä£Ê½
+	case kGameModeNight:				// é»‘å¤œæ¨¡å¼
 		GameScene::getCharacterManager()->addToPool(this);
 		break;
 	default:
@@ -459,31 +459,31 @@ void EnemyCharacter::die()
 
 void EnemyCharacter::moveModule()
 {
-	cout << this << " Ïß³ÌÆô¶¯" << endl;
+	cout << this << " çº¿ç¨‹å¯åŠ¨" << endl;
 	getThreadMutex().lock();
 	this_thread::sleep_for(chrono::milliseconds(2000));
 	while (!isDie())
 	{
 		if (GameScene::getCharacterManager()->getReferenceCount() == 0)
 		{
-			cout << "CharacterManager ÒÑ±»Îö¹¹£¬Ìø³ö" << endl;
+			cout << "CharacterManager å·²è¢«ææ„ï¼Œè·³å‡º" << endl;
 			break;
 		}
 		_aiMachine->run();
 		this_thread::sleep_for(chrono::milliseconds(200));
 	}
 	getThreadMutex().unlock();
-	cout << "µĞÈË" << this << " Ïß³Ì½áÊø" << endl;
+	cout << "æ•Œäºº" << this << " çº¿ç¨‹ç»“æŸ" << endl;
 }
 
 void EnemyCharacter::beAttacked(Weapons * const & weapon)
 {
 	Character::beAttacked(weapon);
-	if (getLifeValue() < INITIAL_LIFE_VALUE / 4)	//²ĞÑª£¬×ªÒÆµ½Ñ°ÕÒ½±Àø×´Ì¬
+	if (getLifeValue() < INITIAL_LIFE_VALUE / 4)	//æ®‹è¡€ï¼Œè½¬ç§»åˆ°å¯»æ‰¾å¥–åŠ±çŠ¶æ€
 	{
 		_aiMachine->changeState(AIStateMachine::kAIStateHPLess);
 	}
-	else											//×ªÒÆµ½¸´³ğ×´Ì¬
+	else											//è½¬ç§»åˆ°å¤ä»‡çŠ¶æ€
 	{
 		_aiMachine->changeState(AIStateMachine::kAIStateBeAttack);
 	}

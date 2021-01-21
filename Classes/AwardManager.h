@@ -1,4 +1,4 @@
-#ifndef __AWARD_MANAGER_H__
+ï»¿#ifndef __AWARD_MANAGER_H__
 #define __AWARD_MANAGER_H__
 
 #include "cocos2d.h"
@@ -14,15 +14,15 @@ public:
 	~AwardManager();
 	virtual bool init() override;
 	CREATE_FUNC(AwardManager);
-	/* Ìí¼Ó¶ÔÏóµ½»º´æ³Ø */
+	/* æ·»åŠ å¯¹è±¡åˆ°ç¼“å­˜æ±  */
 	void addToPool(Award *const &award);
-	/* »ñÈ¡ËùÓĞ½±Àø¶ÔÏó */
+	/* è·å–æ‰€æœ‰å¥–åŠ±å¯¹è±¡ */
 	std::set<Award*> &getAllAward() { return _allAward; }
 private:
-	/* ´´½¨ËùÓĞµÄ½±Àø¶ÔÏó */
+	/* åˆ›å»ºæ‰€æœ‰çš„å¥–åŠ±å¯¹è±¡ */
 	void createAllAward();
 	virtual void update(float dt) override;
-	std::set<Award*> _allAward;							//ËùÓĞ½±Àø
-	ObjCachePool<Award> _cachePool;						//»º´æ³Ø
+	std::set<Award*> _allAward;							//æ‰€æœ‰å¥–åŠ±
+	ObjCachePool<Award> _cachePool;						//ç¼“å­˜æ± 
 };
 #endif

@@ -1,4 +1,4 @@
-#include "LoadLayer.h"
+ï»¿#include "LoadLayer.h"
 #include "SceneManager.h"
 #include "Global.h"
 LoadLayer::LoadLayer()
@@ -34,8 +34,8 @@ bool LoadLayer::init()
 	_timer = ProgressTimer::create(Sprite::create("load.png"));
 
 	_timer->setType(cocos2d::ProgressTimer::Type::BAR);
-	_timer->setMidpoint(Vec2(0, 1));    //ÉèÖÃÆðÊ¼Î»ÖÃ
-	_timer->setBarChangeRate(Vec2(1, 0));	//ÉèÖÃ·½Ïò
+	_timer->setMidpoint(Vec2(0, 1));    //è®¾ç½®èµ·å§‹ä½ç½®
+	_timer->setBarChangeRate(Vec2(1, 0));	//è®¾ç½®æ–¹å‘
 	_timer->setPercentage(0.0f);
 
 	_timer->setScaleX(1.5f);
